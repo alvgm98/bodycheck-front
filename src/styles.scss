@@ -1,1 +1,202 @@
-/* You can add global styles to this file, and also import other style files */
+/* ANGULAR MATERIAL CUSTOM THEME */
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$bodycheck-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$spring-green-palette,
+  ),
+  typography: (
+    brand-family: 'DM Sans',
+    bold-weight: 900,
+    regular-weight: 400,
+  ),
+  density: (
+    scale: -1,
+  )
+));
+
+:root {
+  @include mat.all-component-themes($bodycheck-theme);
+}
+
+/* FONTS */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'satoshi';
+
+@import 'colors';
+
+* {
+  font-family: "Satoshi-Regular", sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: "Raleway", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: $background-color;
+
+  display: flex;
+  flex-direction: column;
+}
+
+app-root {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/********** BUTTONS **********/
+button {
+  font-family: "DM Sans", sans-serif;
+
+  box-sizing: border-box;
+  cursor: pointer;
+
+  height: 45px;
+  border: 2px solid $primary-color;
+  border-radius: 15px;
+  padding-inline: 18px;
+
+  background-color: inherit;
+  font-size: 16px;
+  font-weight: bold;
+
+  transition: .4s;
+}
+
+.flat-button {
+  background-color: $primary-color;
+  color: $white;
+}
+
+.stroked-button {
+  color: $primary-color;
+}
+
+.flat-button:hover {
+  border-color: $primary-color-700;
+  background-color: $primary-color-700;
+}
+
+.stroked-button:hover {
+  // border-color: $background-color;
+  background-color: $background-color;
+}
+
+/********** INPUTS **********/
+.input-group input {
+  box-sizing: border-box;
+  height: 45px;
+  width: 100%;
+
+  border: 0;
+  border-bottom: 2px solid $primary-color;
+  border-radius: 15px 15px 0 0;
+  outline: none;
+  padding-top: 15px;
+  padding-inline: 18px;
+
+  font-size: 16px;
+  background-color: $white;
+  color: $black;
+
+  transition: 300ms;
+}
+
+.input-group {
+  position: relative;
+  width: 100%;
+}
+
+.input-group .placeholder {
+  position: absolute;
+  top: 14px;
+  left: 19px;
+
+  font-size: 16px;
+  color: $black;
+
+  transition: 300ms;
+  pointer-events: none;
+}
+
+.input-group input:focus + .placeholder,
+.input-group input:not(:placeholder-shown) + .placeholder  {
+  top: 1px;
+
+  color: $primary-color;
+  font-size: 12px;
+}
+
+.input-border-group input {
+  box-sizing: border-box;
+  height: 45px;
+  width: 100%;
+
+  border: 1px solid $white;
+  border-bottom: 2px solid $primary-color;
+  border-radius: 15px 15px 0 0;
+  outline: none;
+  padding: 10px 18px 0 18px;
+
+  font-size: 16px;
+  background-color: $white;
+  color: $black;
+
+  transition: 300ms;
+}
+
+.input-border-group {
+  position: relative;
+  width: 100%;
+}
+
+.input-border-group .placeholder {
+  position: absolute;
+  top: 14px;
+  left: 19px;
+
+  font-size: 16px;
+  color: $black;
+
+  transition: 300ms;
+  pointer-events: none;
+}
+
+.input-border-group input:focus {
+  border: 1px solid $primary-color;
+  border-bottom: 2px solid $primary-color;
+}
+
+.input-border-group input:focus + .placeholder,
+.input-border-group input:not(:placeholder-shown) + .placeholder  {
+  top: -11px;
+  left: 15px;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  padding: 2px 10px;
+  font-size: 12px;
+  background-color: $white;
+}

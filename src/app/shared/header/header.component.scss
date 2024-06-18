@@ -1,0 +1,26 @@
+@import 'colors';
+
+header {
+  padding: 15px 20px;
+  background-color: $white;
+  border-bottom: 1px solid $primary-color;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+header > h3 {
+  flex: 1;
+  margin: 0;
+  font-size: 35px;
+  color: $primary-color;
+  text-align: center;
+}
+
+.auth {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
