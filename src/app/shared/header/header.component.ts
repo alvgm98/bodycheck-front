@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { LoginComponent } from '../../auth/login/login.component';
 
 
@@ -11,18 +11,43 @@ import { LoginComponent } from '../../auth/login/login.component';
 })
 export class HeaderComponent {
 
+  constructor(private el: ElementRef) { }
+
   showLogin: boolean = false;
   showRegister: boolean = false;
 
   toggleShowLogin() {
-    this.showLogin = !this.showLogin;
+    // Si se encuentra abierto lo cerramos
+    if (this.showLogin) {
+      this.closeLogin();
+      return;
+    }
+
+    // TODO cerrar registro si esta abierto
+
+    this.showLogin = true;
   }
   toggleShowRegister() {
-    this.showRegister = !this.showRegister;
+
+    // TODO cerrar registro si esta abierto
+
+    if (this.showLogin) {
+      this.closeLogin();
+    }
+
+    this.showRegister = true;
   }
 
-  closeModals() {
-    this.showLogin = false;
-    this.showRegister = false;
+  closeLogin() {
+    const modalCorner = this.el.nativeElement.querySelector(".modal-corner")
+    modalCorner.style.display = "none" // Elimino la esquina del modal ya que durante la animación se superpone
+
+    const loginModal = this.el.nativeElement.querySelector("#login-modal");
+    loginModal.classList.remove("pop-in");
+    loginModal.classList.add("pop-out");
+
+    setTimeout(() => {
+      this.showLogin = false;
+    }, 300)
   }
 }
