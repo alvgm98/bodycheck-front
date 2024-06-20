@@ -43,7 +43,7 @@ export class HeaderComponent {
     modalCorner.style.display = "none" // Elimino la esquina del modal ya que durante la animación se superpone
 
     const loginModal = this.el.nativeElement.querySelector("#login-modal");
-    loginModal.classList.remove("pop-in");
+    loginModal.classList.remove("pop-in-login");
     loginModal.classList.add("pop-out");
 
     setTimeout(() => {

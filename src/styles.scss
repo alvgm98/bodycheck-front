@@ -4,20 +4,15 @@
 
 @include mat.core();
 
-$bodycheck-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$spring-green-palette,
-  ),
-  typography: (
-    brand-family: 'DM Sans',
-    bold-weight: 900,
-    regular-weight: 400,
-  ),
-  density: (
-    scale: -1,
-  )
-));
+$bodycheck-theme: mat.define-theme((color: (theme-type: light,
+        primary: mat.$spring-green-palette,
+      ),
+      typography: (brand-family: 'DM Sans',
+        bold-weight: 900,
+        regular-weight: 400,
+      ),
+      density: (scale: -1,
+      )));
 
 :root {
   @include mat.all-component-themes($bodycheck-theme);
@@ -34,7 +29,9 @@ $bodycheck-theme: mat.define-theme((
   font-family: "Satoshi-Regular", sans-serif;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: "Raleway", sans-serif;
 }
 
@@ -141,8 +138,8 @@ button {
   pointer-events: none;
 }
 
-.input-group input:focus + .placeholder,
-.input-group input:not(:placeholder-shown) + .placeholder  {
+.input-group input:focus+.placeholder,
+.input-group input:not(:placeholder-shown)+.placeholder {
   top: 1px;
 
   color: $primary-color;
@@ -189,8 +186,8 @@ button {
   border-bottom: 2px solid $primary-color;
 }
 
-.input-border-group input:focus + .placeholder,
-.input-border-group input:not(:placeholder-shown) + .placeholder  {
+.input-border-group input:focus+.placeholder,
+.input-border-group input:not(:placeholder-shown)+.placeholder {
   top: -11px;
   left: 15px;
   color: $primary-color;
@@ -213,14 +210,9 @@ button {
 }
 
 /********** MODAL ANIMATIONS **********/
-.pop-in {
+.pop-in-login {
   animation: pop-in-login-modal 0.3s forwards;
 }
-
-.pop-out {
-  animation: pop-out-login-modal 0.3s forwards;
-}
-
 @keyframes pop-in-login-modal {
   0% {
     height: 100px;
@@ -231,8 +223,12 @@ button {
   }
 }
 
-@keyframes pop-out-login-modal {
+.pop-out {
+  animation: pop-out-modal 0.3s forwards;
+}
+@keyframes pop-out-modal {
   100% {
     scale: 0;
   }
 }
+
