@@ -1,0 +1,83 @@
+@import 'colors';
+
+.login-modal {
+  box-sizing: border-box;
+  position: absolute;
+  top: 55px;
+  left: 50%;
+
+  border-radius: 30px 30px 0 0;
+  padding-inline: 40px;
+
+  height: 250px;
+  width: 300px;
+
+  background-color: $background-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.login-modal::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  z-index: -2;
+
+  width: 100%;
+  height: 100%;
+
+  border: 1px solid $primary-color;
+  border-bottom: 3px solid $primary-color;
+  border-radius: 30px 30px 0 0;
+}
+
+.login-modal::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 35px;
+  z-index: -1;
+
+  width: 30px;
+  height: 30px;
+
+  border: 1px solid $primary-color;
+  background-color: $background-color;
+
+  transform: rotate(45deg);
+
+}
+
+.x-button {
+  position: absolute;
+  top: 0;
+  left: calc(100% - 50px);
+
+  border: 0;
+  width: 50px;
+
+  background-color: transparent;
+  font-family: "Satoshi-Bold", sans-serif;
+  font-size: 20px;
+  color: $primary-color;
+
+}
+
+.login-password {
+  margin-top: 10px;
+}
+
+.modal-overlay {
+  z-index: -1;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+

@@ -1,1 +1,13 @@
-<p>login works!</p>
+<div class="login-modal">
+  <button class="x-button" (click)="closeModal()">X</button>
+  <div class="input-border-group">
+    <input placeholder=" " type="email" />
+    <label for="email" class="placeholder">Email</label>
+  </div>
+  <div class="input-border-group login-password">
+    <input placeholder=" " type="password" />
+    <label for="password" class="placeholder">Contraseña</label>
+  </div>
+  <button class="flat-button">Iniciar Sesión</button>
+  <div class="modal-overlay" (click)="closeModal()"></div>
+</div>

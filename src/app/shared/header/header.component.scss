@@ -1,7 +1,12 @@
 @import 'colors';
 
 header {
-  padding: 15px 20px;
+  position: fixed;
+  z-index: 1;
+
+  box-sizing: border-box;
+  height: 80px;
+  width: 100%;
   background-color: $white;
   border-bottom: 1px solid $primary-color;
 
@@ -19,8 +24,13 @@ header > h3 {
 }
 
 .auth {
+  position: relative;
+
   flex: 1;
   display: flex;
   justify-content: center;
-  gap: 10px;
+}
+
+.auth button:first-child {
+  margin-right: 10px;
 }

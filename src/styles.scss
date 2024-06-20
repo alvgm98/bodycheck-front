@@ -200,3 +200,47 @@ button {
   font-size: 12px;
   background-color: $white;
 }
+
+/********** MODALS **********/
+/* .modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  // background-color: #00000060;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.modal {
+  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  // background-color: #00000060;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body {
+  border-bottom: 3px solid $primary-color;
+  border-radius: 30px 30px 0 0;
+  padding: 50px;
+
+  background-color: $background-color;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}

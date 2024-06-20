@@ -2,6 +2,9 @@
   <h3>BODYCHECK</h3>
   <div class="auth">
     <button class="flat-button">Registrarse</button>
-    <button class="stroked-button">Iniciar Sesión</button>
+    <button class="stroked-button" (click)="toggleShowLogin()">Iniciar Sesión</button>
+    @if (showLogin) {
+      <app-login (closeModalEvent)="closeModals()" />
+    }
   </div>
 </header>

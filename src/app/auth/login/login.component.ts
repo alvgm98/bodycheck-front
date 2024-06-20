@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -8,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+
+  @Output() closeModalEvent = new EventEmitter<void>();
+  closeModal() {
+    this.closeModalEvent.emit();
+  }
 
 }
