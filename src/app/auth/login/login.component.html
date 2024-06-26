@@ -1,26 +1,29 @@
 <form [formGroup]="loginForm" (submit)="login()" id="login-modal" class="pop-in-login">
   <div class="modal-corner"></div>
+
   <div class="input-border-group">
     <input formControlName="username" placeholder=" " type="email" />
     <label class="placeholder">Email</label>
     @if (username.invalid && (username.dirty || username.touched)) {
       @if (username.errors?.['required']) {
-        <div class="invalid-field">Inserte el email.</div>
+        <div class="invalid-field">Introduce el email.</div>
       }
       @if (username.errors?.['email']) {
         <div class="invalid-field">Email no válido.</div>
       }
     }
   </div>
+
   <div class="input-border-group login-password">
     <input formControlName="password" placeholder=" " type="password" />
     <label class="placeholder">Contraseña</label>
     @if (password.invalid && (password.dirty || password.touched)) {
       @if (password.errors?.['required']) {
-        <div class="invalid-field">Inserte la contraseña.</div>
+        <div class="invalid-field">Introduce la contraseña.</div>
       }
     }
   </div>
+
   <button class="flat-button">Iniciar Sesión</button>
 </form>
 <div class="modal-overlay" (click)="closeModal()"></div>
