@@ -7,9 +7,8 @@
   left: calc(50% - 200px);
 
   border-radius: 30px;
-  padding: 20px 30px;
+  padding: 5px 5px;
 
-  height: 220px;
   width: 500px;
 
   background-color: $primary-color;
@@ -23,6 +22,9 @@
     box-sizing: border-box;
 
     width: 100%;
+    border: 2px solid $white;
+    border-radius: 30px;
+    padding: 20px;
 
     display: flex;
     flex-direction: column;
