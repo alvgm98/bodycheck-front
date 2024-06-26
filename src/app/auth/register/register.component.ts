@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -9,4 +9,8 @@ import { Component } from '@angular/core';
 })
 export class RegisterComponent {
 
+  @Output() closeModalEvent = new EventEmitter<void>();
+  closeModal() {
+    this.closeModalEvent.emit();
+  }
 }

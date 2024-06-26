@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-login',

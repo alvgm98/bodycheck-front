@@ -1,1 +1,29 @@
-<p>register works!</p>
+<section id="register-modal" class="pop-in-register">
+  <div class="modal-corner"></div>
+  <form action="">
+    <div class="form-row">
+      <div class="input-border-group">
+        <input placeholder=" " type="text" name="firstName" />
+        <label for="firstName" class="placeholder">Nombre</label>
+      </div>
+      <div class="input-border-group">
+        <input placeholder=" " type="text" name="lastName" />
+        <label for="lastName" class="placeholder">Apellidos</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="input-border-group">
+        <input placeholder=" " type="email" name="username" />
+        <label for="email" class="placeholder">Email</label>
+      </div>
+      <div class="input-border-group">
+        <input placeholder=" " type="password" name="password" />
+        <label for="password" class="placeholder">Contraseña</label>
+      </div>
+    </div>
+    <button class="stroked-button">Registrarse</button>
+  </form>
+</section>
+<div class="modal-overlay" (click)="closeModal()"></div>
+
+

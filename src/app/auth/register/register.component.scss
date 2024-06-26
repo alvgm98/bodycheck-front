@@ -1,0 +1,62 @@
+@import 'colors';
+
+#register-modal {
+  box-sizing: border-box;
+  position: absolute;
+  top: 55px;
+  left: calc(50% - 200px);
+
+  border-radius: 30px;
+  padding: 20px 30px;
+
+  height: 220px;
+  width: 500px;
+
+  background-color: $primary-color;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  form {
+    box-sizing: border-box;
+
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+
+    .form-row {
+      width: 100%;
+      display: flex;
+      gap: 10px
+    }
+
+    input {
+      border: 0;
+    }
+  }
+
+  .wave-divider-bottom svg {
+    height: 100px;
+  }
+}
+
+.modal-corner {
+  position: absolute;
+  top: -3px;
+  left: 85px;
+  z-index: -1;
+
+  width: 30px;
+  height: 30px;
+
+  background-color: $primary-color;
+
+  transform: rotate(45deg);
+
+}
