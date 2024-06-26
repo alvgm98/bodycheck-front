@@ -201,6 +201,24 @@ button:focus-visible {
   background-color: $white;
 }
 
+/* VALIDACIONES */
+
+.ng-invalid:not(form).ng-touched {
+  border: 1px solid $error-color;
+  border-bottom: 2px solid $error-color;
+
+  ~.placeholder {
+    color: $error-color;
+    border-color: $error-color;
+  }
+}
+
+.invalid-field {
+  margin-top: 5px;
+  margin-bottom: -10px;
+  color: $error-color;
+}
+
 /********** MODAL ANIMATIONS **********/
 .modal-overlay {
   z-index: -1;
