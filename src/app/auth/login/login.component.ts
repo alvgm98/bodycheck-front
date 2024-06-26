@@ -13,27 +13,27 @@ export class LoginComponent {
   constructor(private fb: FormBuilder) { }
 
   /* Validaciones del formulario */
-  loginFrom = this.fb.group({
+  loginForm = this.fb.group({
     username: ["", [Validators.required, Validators.email]],
     password: ["", [Validators.required]],
   })
 
   get username() {
-    return this.loginFrom.controls.username;
+    return this.loginForm.controls.username;
   }
 
   get password() {
-    return this.loginFrom.controls.password;
+    return this.loginForm.controls.password;
   }
 
   login() {
-    if (!this.loginFrom.valid) {
-      this.loginFrom.markAllAsTouched();
-      this.loginFrom.get("password")!.reset();
+    if (!this.loginForm.valid) {
+      this.loginForm.markAllAsTouched();
+      this.loginForm.get("password")!.reset();
       return;
     }
 
-    this.loginFrom.reset();
+    this.loginForm.reset();
     // TODO redirigir al programa
   }
 
