@@ -1,29 +1,31 @@
 <section id="register-modal" class="pop-in-register">
   <div class="modal-corner"></div>
-  <form action="">
+  <form [formGroup]="registerForm" (submit)="register()">
     <div class="form-row">
+      <!-- First Name -->
       <div class="input-border-group">
-        <input placeholder=" " type="text" name="firstName" />
-        <label for="firstName" class="placeholder">Nombre</label>
+        <input formControlName="firstName" placeholder=" " type="text" />
+        <label class="placeholder">Nombre*</label>
       </div>
+      <!-- Last Name -->
       <div class="input-border-group">
-        <input placeholder=" " type="text" name="lastName" />
-        <label for="lastName" class="placeholder">Apellidos</label>
+        <input formControlName="lastName" placeholder=" " type="text" />
+        <label class="placeholder">Apellidos*</label>
       </div>
     </div>
     <div class="form-row">
+      <!-- Email -->
       <div class="input-border-group">
-        <input placeholder=" " type="email" name="username" />
-        <label for="email" class="placeholder">Email</label>
+        <input formControlName="username" placeholder=" " type="email" />
+        <label class="placeholder">Email*</label>
       </div>
+      <!-- Password -->
       <div class="input-border-group">
-        <input placeholder=" " type="password" name="password" />
-        <label for="password" class="placeholder">Contraseña</label>
+        <input formControlName="password" placeholder=" " type="password" />
+        <label class="placeholder">Contraseña*</label>
       </div>
     </div>
     <button class="stroked-button">Registrarse</button>
   </form>
 </section>
 <div class="modal-overlay" (click)="closeModal()"></div>
-
-

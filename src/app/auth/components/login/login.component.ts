@@ -17,11 +17,9 @@ export class LoginComponent {
     username: ["", [Validators.required, Validators.email]],
     password: ["", [Validators.required]],
   })
-
   get username() {
     return this.loginForm.controls.username;
   }
-
   get password() {
     return this.loginForm.controls.password;
   }
