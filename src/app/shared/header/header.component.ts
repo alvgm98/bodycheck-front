@@ -1,6 +1,6 @@
 import { Component, ElementRef } from '@angular/core';
-import { LoginComponent } from '../../auth/login/login.component';
-import { RegisterComponent } from '../../auth/register/register.component';
+import { LoginComponent } from '../../auth/components/login/login.component';
+import { RegisterComponent } from '../../auth/components/register/register.component';
 
 
 @Component({
