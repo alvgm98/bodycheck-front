@@ -1,6 +1,8 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { LoginComponent } from '../../auth/components/login/login.component';
 import { RegisterComponent } from '../../auth/components/register/register.component';
+import { LoginService } from '../../auth/services/login.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,13 +12,36 @@ import { RegisterComponent } from '../../auth/components/register/register.compo
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
-
-  constructor(private el: ElementRef) { }
+export class HeaderComponent implements OnInit, OnDestroy {
 
   showLogin: boolean = false;
   showRegister: boolean = false;
+  isUserLogged: boolean = false;
 
+  private loginSubscription!: Subscription;
+
+  constructor(
+    private el: ElementRef,
+    private loginService: LoginService
+  ) { }
+
+  ngOnInit(): void {
+    this.loginSubscription = this.loginService.isUserLogged.subscribe(
+      (isLogged: boolean) => {
+        this.isUserLogged = isLogged;
+      })
+  }
+  ngOnDestroy(): void {
+    if (this.loginSubscription) {
+      this.loginSubscription.unsubscribe();
+    }
+  }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  /* MANEJO DE MODALES */
   toggleShowLogin() {
     // Si se encuentra abierto lo cerramos
     if (this.showLogin) {
@@ -27,11 +52,10 @@ export class HeaderComponent {
     if (this.showRegister) {
       this.closeRegister();
     }
-
     this.showLogin = true;
   }
   toggleShowRegister() {
-
+    // Si se encuentra abierto lo cerramos
     if (this.showRegister) {
       this.closeRegister();
       return;
@@ -40,7 +64,6 @@ export class HeaderComponent {
     if (this.showLogin) {
       this.closeLogin();
     }
-
     this.showRegister = true;
   }
 
@@ -56,7 +79,6 @@ export class HeaderComponent {
       this.showLogin = false;
     }, 300)
   }
-
   closeRegister() {
     const registerModal = this.el.nativeElement.querySelector("#register-modal");
     registerModal.classList.remove("pop-in-register");

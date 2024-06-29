@@ -1,13 +1,21 @@
 <header>
   <h3>BODYCHECK</h3>
-  <div class="auth">
-    <button class="flat-button" (click)="toggleShowRegister()">Registrarse</button>
-    <button class="stroked-button" (click)="toggleShowLogin()">Iniciar Sesión</button>
-    @if (showLogin) {
-      <app-login (closeModalEvent)="closeLogin()" />
-    }
-    @if (showRegister) {
-      <app-register (closeModalEvent)="closeRegister()" />
-    }
-  </div>
+
+  @if (!isUserLogged) {
+    <div class="auth">
+      <button class="flat-button" (click)="toggleShowRegister()">Registrarse</button>
+      <button class="stroked-button" (click)="toggleShowLogin()">Iniciar Sesión</button>
+      @if (showLogin) {
+        <app-login (closeModalEvent)="closeLogin()" />
+      }
+      @if (showRegister) {
+        <app-register (closeModalEvent)="closeRegister()" />
+      }
+    </div>
+  } @else {
+    <div class="auth">
+      <button class="stroked-button" (click)="logout()">Cerrar Sesión</button>
+    </div>
+  }
+
 </header>
