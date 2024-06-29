@@ -22,11 +22,11 @@
         <div class="invalid-field">Introduce la contraseña.</div>
       }
     }
-  </div>
 
-  @if (this.loginError.length > 0) {
-    <p class="error">{{ this.loginError }}</p>
-  }
+    @if (this.loginError.length > 0) {
+      <p class="error">{{ this.loginError }}</p>
+    }
+  </div>
 
   <button class="flat-button">Iniciar Sesión</button>
 </form>

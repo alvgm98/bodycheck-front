@@ -14,8 +14,8 @@ export class LoginComponent {
 
   loginError: string = '';
   private errorMessages: { [key: number]: string } = {
-    0: 'Ha ocurrido un error, intentelo de nuevo más tarde!',
-    401: 'Email o Contraseña incorrectos',
+    0: 'Ha ocurrido un error. Intentalo de nuevo más tarde!',
+    401: 'Email o Contraseña incorrectos.',
   };
 
   constructor(
@@ -42,11 +42,9 @@ export class LoginComponent {
     }
 
     this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
-      next: () => {
-        this.closeModal();
-      },
+      next: () => this.closeModal(),
       error: (error) => {
-        this.loginError = this.errorMessages[error.status] || 'Error desconocido, intentelo de nuevo más tarde!';
+        this.loginError = this.errorMessages[error.status] || 'Error desconocido. Intentalo de nuevo más tarde!';
         console.error(error);
       }
     });
