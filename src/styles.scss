@@ -219,6 +219,10 @@ button:focus-visible {
   color: $error-color;
 }
 
+.error {
+  color: $error-color;
+}
+
 /********** MODAL ANIMATIONS **********/
 .modal-overlay {
   z-index: -1;

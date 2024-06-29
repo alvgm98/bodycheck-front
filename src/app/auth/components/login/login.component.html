@@ -24,6 +24,10 @@
     }
   </div>
 
+  @if (this.loginError.length > 0) {
+    <p class="error">{{ this.loginError }}</p>
+  }
+
   <button class="flat-button">Iniciar Sesión</button>
 </form>
 <div class="modal-overlay" (click)="closeModal()"></div>

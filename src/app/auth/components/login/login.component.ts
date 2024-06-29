@@ -2,7 +2,6 @@ import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { LoginRequest } from '../../models/login-request';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +12,18 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  loginError: string = '';
+  private errorMessages: { [key: number]: string } = {
+    0: 'Ha ocurrido un error, intentelo de nuevo más tarde!',
+    401: 'Email o Contraseña incorrectos',
+  };
+
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService
   ) { }
 
-  /* Validaciones del formulario */
+  /* Formulario */
   loginForm = this.fb.group({
     username: ["", [Validators.required, Validators.email]],
     password: ["", [Validators.required]],
@@ -36,8 +41,15 @@ export class LoginComponent {
       return;
     }
 
-    this.loginService.login(this.loginForm.value as LoginRequest);
-    this.closeModal();
+    this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
+      next: () => {
+        this.closeModal();
+      },
+      error: (error) => {
+        this.loginError = this.errorMessages[error.status] || 'Error desconocido, intentelo de nuevo más tarde!';
+        console.error(error);
+      }
+    });
   }
 
   /* Lógica de cerrar el modal */

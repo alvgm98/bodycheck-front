@@ -1,9 +1,11 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { LoginRequest } from '../models/login-request';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment.development';
+import { AuthReponse } from '../models/auth-reponse';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,7 @@ import { Router } from '@angular/router';
 export class LoginService {
 
   private TOKEN_KEY = 'token';
+  private USER_KEY = 'user';
 
   isUserLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -24,16 +27,24 @@ export class LoginService {
   }
 
   login(credentials: LoginRequest) {
-
-    // TODO. comprobar las credenciales en el backend y recibir el token
-
-    this.cookieService.set(this.TOKEN_KEY, "prueba", undefined, "/");
-    this.isUserLogged.next(true);
-    this.router.navigateByUrl("app");
+    return this.http.post<AuthReponse>(environment.apiAuthUrl + "login", credentials).pipe(
+      tap(response => {
+        // Guardamos el token y el user en las cookies
+        this.cookieService.set(this.TOKEN_KEY, response.token);
+        this.cookieService.set(this.USER_KEY, JSON.stringify(response.user));
+        // Marcamos como loggeado y redirigimos a '/app'
+        this.isUserLogged.next(true);
+        this.router.navigateByUrl("app");
+      }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    )
   }
 
   logout() {
     this.cookieService.delete(this.TOKEN_KEY);
+    this.cookieService.delete(this.USER_KEY);
     this.isUserLogged.next(false);
     this.router.navigateByUrl("");
   }
