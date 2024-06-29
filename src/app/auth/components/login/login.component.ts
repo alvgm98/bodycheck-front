@@ -1,5 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login.service';
+import { LoginRequest } from '../../models/login-request';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class LoginComponent {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+  ) { }
 
   /* Validaciones del formulario */
   loginForm = this.fb.group({
@@ -27,12 +34,12 @@ export class LoginComponent {
   login() {
     if (!this.loginForm.valid) {
       this.loginForm.markAllAsTouched();
-      this.loginForm.get("password")!.reset();
       return;
     }
 
-    this.loginForm.reset();
-    // TODO redirigir al programa
+    this.loginService.login(this.loginForm.value as LoginRequest);
+    this.router.navigateByUrl("app");
+    this.closeModal();
   }
 
   /* Lógica de cerrar el modal */
