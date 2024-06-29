@@ -3,6 +3,7 @@ import { LoginRequest } from '../models/login-request';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class LoginService {
 
   constructor(
     private http: HttpClient,
+    private router: Router,
     private cookieService: CookieService
   ) {
     const token = this.cookieService.get(this.TOKEN_KEY);
@@ -27,10 +29,12 @@ export class LoginService {
 
     this.cookieService.set(this.TOKEN_KEY, "prueba", undefined, "/");
     this.isUserLogged.next(true);
+    this.router.navigateByUrl("app");
   }
 
   logout() {
     this.cookieService.delete(this.TOKEN_KEY);
     this.isUserLogged.next(false);
+    this.router.navigateByUrl("");
   }
 }

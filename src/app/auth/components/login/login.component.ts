@@ -15,8 +15,7 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService,
-    private router: Router
+    private loginService: LoginService
   ) { }
 
   /* Validaciones del formulario */
@@ -38,7 +37,6 @@ export class LoginComponent {
     }
 
     this.loginService.login(this.loginForm.value as LoginRequest);
-    this.router.navigateByUrl("app");
     this.closeModal();
   }
 
@@ -47,5 +45,4 @@ export class LoginComponent {
   closeModal() {
     this.closeModalEvent.emit();
   }
-
 }
