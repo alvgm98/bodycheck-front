@@ -15,12 +15,24 @@ header {
   align-items: center;
 }
 
-header > h3 {
+.title {
   flex: 1;
-  margin: 0;
-  font-size: 35px;
-  color: $primary-color;
-  text-align: center;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    height: 35px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 35px;
+    color: $primary-color;
+    text-align: center;
+  }
 }
 
 .auth {
