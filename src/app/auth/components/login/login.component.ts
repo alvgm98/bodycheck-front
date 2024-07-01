@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LoginService } from '../../services/login.service';
+import { AuthService } from '../../services/auth.service';
 import { LoginRequest } from '../../models/login-request';
 
 @Component({
@@ -20,7 +20,7 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService
+    private authService: AuthService
   ) { }
 
   /* Formulario */
@@ -41,7 +41,7 @@ export class LoginComponent {
       return;
     }
 
-    this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
+    this.authService.login(this.loginForm.value as LoginRequest).subscribe({
       next: () => this.closeModal(),
       error: (error) => {
         this.loginError = this.errorMessages[error.status] || 'Error desconocido. Intentalo de nuevo más tarde!';

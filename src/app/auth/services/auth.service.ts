@@ -6,11 +6,12 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment.development';
 import { AuthReponse } from '../models/auth-reponse';
+import { RegisterRequest } from '../models/register-request';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
 
   private TOKEN_KEY = 'token';
   private USER_KEY = 'user';
@@ -47,5 +48,28 @@ export class LoginService {
     this.cookieService.delete(this.USER_KEY);
     this.isUserLogged.next(false);
     this.router.navigateByUrl("");
+  }
+
+  register(userData: RegisterRequest) {
+    if (userData.username != userData.username2) {
+      return throwError(() => "Los emails no coinciden.");
+    }
+    if (userData.password != userData.password2) {
+      return throwError(() => "Las contraseñas no coinciden.");
+    }
+
+    return this.http.post<AuthReponse>(environment.apiAuthUrl + "register", userData).pipe(
+      tap(response => {
+        // Guardamos el token y el user en las cookies
+        this.cookieService.set(this.TOKEN_KEY, response.token);
+        this.cookieService.set(this.USER_KEY, JSON.stringify(response.user));
+        // Marcamos como loggeado y redirigimos a '/app'
+        this.isUserLogged.next(true);
+        this.router.navigateByUrl("app");
+      }),
+      catchError(error => {
+        return throwError(() => error);
+      })
+    )
   }
 }

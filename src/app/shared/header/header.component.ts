@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { LoginComponent } from '../../auth/components/login/login.component';
 import { RegisterComponent } from '../../auth/components/register/register.component';
-import { LoginService } from '../../auth/services/login.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { Subscription } from 'rxjs';
 
 
@@ -22,11 +22,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private el: ElementRef,
-    private loginService: LoginService
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.loginSubscription = this.loginService.isUserLogged.subscribe(
+    this.loginSubscription = this.authService.isUserLogged.subscribe(
       (isLogged: boolean) => {
         this.isUserLogged = isLogged;
       })
@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.loginService.logout();
+    this.authService.logout();
   }
 
   /* MANEJO DE MODALES */
