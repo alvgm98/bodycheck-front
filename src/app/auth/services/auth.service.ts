@@ -51,13 +51,6 @@ export class AuthService {
   }
 
   register(userData: RegisterRequest) {
-    if (userData.username != userData.username2) {
-      return throwError(() => "Los emails no coinciden.");
-    }
-    if (userData.password != userData.password2) {
-      return throwError(() => "Las contraseñas no coinciden.");
-    }
-
     return this.http.post<AuthReponse>(environment.apiAuthUrl + "register", userData).pipe(
       tap(response => {
         // Guardamos el token y el user en las cookies
