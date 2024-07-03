@@ -1,6 +1,6 @@
 <section id="hero">
   @if (showRegister) {
-    <app-register />
+    <app-register [usernameInput]="username" />
   }
   <article id="welcome">
     <div class="title">
@@ -10,10 +10,10 @@
     <h1>Aplicación web para dietistas y nutricionistas</h1>
     <h2>Monitorea y optimiza el progreso de tus clientes</h2>
     <p>Gestiona las medidas antropométricas de tus clientes con facilidad<br>y visualiza su evolución a través de gráficos avanzados.</p>
-    <form>
+    <form [formGroup]="welcomeForm" (submit)="showRegisterFromWelcome()">
       <div class="input-border-group">
-        <input placeholder=" " type="email"/>
-        <label for="email" class="placeholder">Email</label>
+        <input formControlName="username" placeholder=" " type="email"/>
+        <label class="placeholder">Email</label>
       </div>
       <button class="flat-button">Registrate Gratis</button>
     </form>
