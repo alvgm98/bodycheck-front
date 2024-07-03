@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { RegisterRequest } from '../../models/register-request';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,17 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class RegisterComponent {
 
-  constructor(private fb: FormBuilder) { }
+  /* Errores recibidos del backend */
+  registerError: string = '';
+  private errorMessages: { [key: number]: string } = {
+    0: 'Ha ocurrido un error. Intentalo de nuevo más tarde!',
+    409: 'Ya existe una cuenta con este email.',
+  };
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) { }
 
   /* Validaciones del formulario */
   registerForm = this.fb.group({
@@ -39,8 +51,15 @@ export class RegisterComponent {
       return;
     }
 
-    this.registerForm.reset();
-    // TODO registrar usuario
+    this.authService.register(this.registerForm.value as RegisterRequest).subscribe({
+      next: () => {
+        this.closeModal();
+        this.registerForm.reset();
+      },
+      error: (error) => {
+        this.registerError = this.errorMessages[error.status] || "Error: " + error.status;
+      }
+    })
   }
 
   /* Lógica de cerrar el modal */

@@ -12,6 +12,7 @@ import { LoginRequest } from '../../models/login-request';
 })
 export class LoginComponent {
 
+  /* Errores recibidos del backend */
   loginError: string = '';
   private errorMessages: { [key: number]: string } = {
     0: 'Ha ocurrido un error. Intentalo de nuevo más tarde!',
@@ -44,7 +45,7 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value as LoginRequest).subscribe({
       next: () => this.closeModal(),
       error: (error) => {
-        this.loginError = this.errorMessages[error.status] || 'Error desconocido. Intentalo de nuevo más tarde!';
+        this.loginError = this.errorMessages[error.status] || "Error: " + error.status;
         console.error(error);
       }
     });
