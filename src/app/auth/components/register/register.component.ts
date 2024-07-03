@@ -28,8 +28,10 @@ export class RegisterComponent {
   registerForm = this.fb.group({
     firstName: ["", [Validators.required]],
     lastName: ["", [Validators.required]],
+    phone: ["", [Validators.required]],
     username: ["", [Validators.required, Validators.email]],
     password: ["", [Validators.required]],
+    password2: ["", [Validators.required]],
   })
   get firstName() {
     return this.registerForm.controls.firstName;
@@ -37,11 +39,17 @@ export class RegisterComponent {
   get lastName() {
     return this.registerForm.controls.lastName;
   }
+  get phone() {
+    return this.registerForm.controls.phone;
+  }
   get username() {
     return this.registerForm.controls.username;
   }
   get password() {
     return this.registerForm.controls.password;
+  }
+  get password2() {
+    return this.registerForm.controls.password2;
   }
 
   register() {

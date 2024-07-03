@@ -249,16 +249,21 @@ button:focus-visible {
 }
 
 .pop-in-register {
-  animation: pop-in-register-modal 0.3s;
+  animation: pop-in-register-modal 1s forwards;
 }
 @keyframes pop-in-register-modal {
   0% {
-    transform: scaleY(0) translateY(-70%);
+    transform: translateX(-100dvw);
   }
-
   100% {
-    transform: scaleY(1) translateY(0);
+    transform: translateX(0);
   }
+ /* 0% {
+    transform: translateY(-100dvh);
+  }
+  100% {
+    transform: translateY(0);
+  } */
 }
 
 .pop-out {

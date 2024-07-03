@@ -1,5 +1,6 @@
-<section id="register-modal" class="pop-in-register">
-  <div class="modal-corner"></div>
+<article id="register-modal" class="pop-in-register">
+  <h3>Registro</h3>
+  <p>Crear una nueva cuenta</p>
   <form [formGroup]="registerForm" (submit)="register()">
     <div class="form-row">
       <!-- First Name -->
@@ -13,19 +14,26 @@
         <label class="placeholder">Apellidos*</label>
       </div>
     </div>
-    <div class="form-row">
-      <!-- Email -->
-      <div class="input-border-group">
-        <input formControlName="username" placeholder=" " type="email" />
-        <label class="placeholder">Email*</label>
-      </div>
-      <!-- Password -->
-      <div class="input-border-group">
-        <input formControlName="password" placeholder=" " type="password" />
-        <label class="placeholder">Contraseña*</label>
-      </div>
+    <!-- Telefono -->
+    <div class="input-border-group">
+      <input formControlName="phone" placeholder=" " type="text" />
+      <label class="placeholder">Teléfono*</label>
     </div>
-    <button class="stroked-button">Registrarse</button>
+    <!-- Email -->
+    <div class="input-border-group">
+      <input formControlName="username" placeholder=" " type="email" />
+      <label class="placeholder">Email*</label>
+    </div>
+    <!-- Password -->
+    <div class="input-border-group">
+      <input formControlName="password" placeholder=" " type="password" />
+      <label class="placeholder">Contraseña*</label>
+    </div>
+    <!-- Password2 -->
+    <div class="input-border-group">
+      <input formControlName="password2" placeholder=" " type="password" />
+      <label class="placeholder">Repite Contraseña*</label>
+    </div>
+    <button class="flat-button">Registrarse</button>
   </form>
-</section>
-<div class="modal-overlay" (click)="closeModal()"></div>
+</article>

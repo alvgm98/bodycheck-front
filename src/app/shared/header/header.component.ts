@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { LoginComponent } from '../../auth/components/login/login.component';
-import { RegisterComponent } from '../../auth/components/register/register.component';
 import { AuthService } from '../../auth/services/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -8,7 +7,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [LoginComponent, RegisterComponent],
+  imports: [LoginComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
