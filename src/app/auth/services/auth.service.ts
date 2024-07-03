@@ -17,6 +17,7 @@ export class AuthService {
   private USER_KEY = 'user';
 
   isUserLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  showRegister: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private http: HttpClient,

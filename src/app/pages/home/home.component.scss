@@ -10,8 +10,9 @@
 
 #hero {
   position: relative;
+  overflow: hidden;
 
-  width: 50%;
+  width: 100%;
   height: 80dvh;
   // margin-top: 250px;
   margin-bottom: 8dvh;
@@ -24,8 +25,8 @@
   justify-content: center;
 }
 
-#hero .welcome {
-  width: 100%;
+#hero #welcome {
+  width: 50%;
 
   display: flex;
   flex-direction: column;

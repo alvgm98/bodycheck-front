@@ -247,6 +247,14 @@ button:focus-visible {
     height: 250px;
   }
 }
+.pop-out-login {
+  animation: pop-out-login-modal 0.3s forwards;
+}
+@keyframes pop-out-login-modal {
+  100% {
+    scale: 0;
+  }
+}
 
 .pop-in-register {
   animation: pop-in-register-modal 1s forwards;
@@ -258,20 +266,33 @@ button:focus-visible {
   100% {
     transform: translateX(0);
   }
- /* 0% {
-    transform: translateY(-100dvh);
+}
+.pop-out-register {
+  animation: pop-out-register-modal 1s forwards;
+}
+@keyframes pop-out-register-modal {
+  to {
+    transform: translateX(-100dvw);
   }
-  100% {
-    transform: translateY(0);
-  } */
 }
 
-.pop-out {
-  animation: pop-out-modal 0.3s forwards;
+.pop-in-welcome {
+  animation: pop-in-welcome-modal 1s forwards;
 }
-@keyframes pop-out-modal {
-  100% {
-    scale: 0;
+@keyframes pop-in-welcome-modal {
+  from {
+    transform: translateX(100dvw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.pop-out-welcome {
+  animation: pop-out-welcome-modal 1s forwards;
+}
+@keyframes pop-out-welcome-modal {
+  to {
+    transform: translateX(100dvw);
   }
 }
 

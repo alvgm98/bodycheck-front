@@ -14,10 +14,12 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   showLogin: boolean = false;
-  showRegister: boolean = false;
-  isUserLogged: boolean = false;
 
-  private loginSubscription!: Subscription;
+  showRegister: boolean = false;
+  private showRegisterSubscription!: Subscription;
+
+  isUserLogged: boolean = false;
+  private isUserLoggedSubscription!: Subscription;
 
   constructor(
     private el: ElementRef,
@@ -25,14 +27,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.loginSubscription = this.authService.isUserLogged.subscribe(
+    this.isUserLoggedSubscription = this.authService.isUserLogged.subscribe(
       (isLogged: boolean) => {
         this.isUserLogged = isLogged;
-      })
+      }
+    )
+    this.showRegisterSubscription = this.authService.showRegister.subscribe(
+      (isRegisterShown: boolean) => {
+        this.showRegister = isRegisterShown;
+      }
+    )
   }
   ngOnDestroy(): void {
-    if (this.loginSubscription) {
-      this.loginSubscription.unsubscribe();
+    if (this.isUserLoggedSubscription) {
+      this.isUserLoggedSubscription.unsubscribe();
+    }
+    if (this.showRegisterSubscription) {
+      this.showRegisterSubscription.unsubscribe();
     }
   }
 
@@ -63,28 +74,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.showLogin) {
       this.closeLogin();
     }
-    this.showRegister = true;
+    this.authService.showRegister.next(true);
   }
 
   closeLogin() {
-    const modalCorner = this.el.nativeElement.querySelector(".modal-corner")
+    const modalCorner = this.el.nativeElement.querySelector(".modal-corner");
     modalCorner.style.display = "none" // Elimino la esquina del modal ya que durante la animación se superpone
 
     const loginModal = this.el.nativeElement.querySelector("#login-modal");
     loginModal.classList.remove("pop-in-login");
-    loginModal.classList.add("pop-out");
+    loginModal.classList.add("pop-out-login");
 
     setTimeout(() => {
       this.showLogin = false;
     }, 300)
   }
   closeRegister() {
-    const registerModal = this.el.nativeElement.querySelector("#register-modal");
-    registerModal.classList.remove("pop-in-register");
-    registerModal.classList.add("pop-out");
-
-    setTimeout(() => {
-      this.showRegister = false;
-    }, 300)
+    this.authService.showRegister.next(false);
   }
 }
