@@ -2,11 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { RegisterRequest } from '../../models/register-request';
+import { passwordsMatchValidator, passwordStrengthValidator } from '../../validators/password.validator';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -38,8 +40,10 @@ export class RegisterComponent implements OnInit {
     lastName: ["", [Validators.required]],
     phone: ["", [Validators.required]],
     username: ["", [Validators.required, Validators.email]],
-    password: ["", [Validators.required]],
+    password: ["", [Validators.required, passwordStrengthValidator()]],
     password2: ["", [Validators.required]],
+  }, {
+    validators: passwordsMatchValidator('password', 'password2')
   })
   get firstName() {
     return this.registerForm.controls.firstName;
@@ -61,9 +65,11 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    console.log(this.password);
+    console.log(this.password2);
+
     if (!this.registerForm.valid) {
       this.registerForm.markAllAsTouched();
-      this.registerForm.get("password")!.reset();
       return;
     }
 

@@ -1,39 +1,111 @@
 <article id="register-modal" class="pop-in-register">
   <h3>Registro</h3>
-  <p>Crear una nueva cuenta</p>
+  <!-- <p>Crear una nueva cuenta</p> -->
   <form [formGroup]="registerForm" (submit)="register()">
     <div class="form-row">
       <!-- First Name -->
       <div class="input-border-group">
         <input formControlName="firstName" placeholder=" " type="text" />
         <label class="placeholder">Nombre*</label>
+        @if (firstName.invalid && (firstName.dirty || firstName.touched)) {
+          @if (firstName.errors?.['required']) {
+            <div class="invalid-field">Introduce tu nombre.</div>
+          }
+        }
       </div>
       <!-- Last Name -->
       <div class="input-border-group">
         <input formControlName="lastName" placeholder=" " type="text" />
-        <label class="placeholder">Apellidos*</label>
+        <label class="placeholder">Apellido*</label>
+        @if (firstName.invalid && (firstName.dirty || firstName.touched)) {
+          @if (firstName.errors?.['required']) {
+            <div class="invalid-field">Introduce tu apellido.</div>
+          }
+        }
       </div>
     </div>
+
     <!-- Telefono -->
     <div class="input-border-group">
       <input formControlName="phone" placeholder=" " type="text" />
       <label class="placeholder">Teléfono*</label>
     </div>
+
     <!-- Email -->
     <div class="input-border-group">
       <input formControlName="username" placeholder=" " type="email" />
       <label class="placeholder">Email*</label>
+      @if (username.invalid && (username.dirty || username.touched)) {
+        @if (username.errors?.['required']) {
+          <div class="invalid-field">Introduce el email.</div>
+        }
+        @if (username.errors?.['email']) {
+          <div class="invalid-field">Email no válido.</div>
+        }
+      }
     </div>
+
     <!-- Password -->
     <div class="input-border-group">
       <input formControlName="password" placeholder=" " type="password" />
       <label class="placeholder">Contraseña*</label>
+      @if (password.invalid && (password.dirty || password.touched)) {
+        @if (password.errors?.['required']) {
+          <div class="invalid-field">Introduce la contraseña.</div>
+        }
+      }
     </div>
+
     <!-- Password2 -->
     <div class="input-border-group">
       <input formControlName="password2" placeholder=" " type="password" />
-      <label class="placeholder">Repite Contraseña*</label>
+      <label class="placeholder">Confirma Contraseña*</label>
+      @if (password2.invalid && (password2.dirty || password2.touched)) {
+        @if (password2.errors?.['required']) {
+          <div class="invalid-field last-invalid-field">Confirma la contraseña.</div>
+        }
+        @if (password2.errors?.['passwordsMatch']) {
+          <div class="invalid-field last-invalid-field">Las contraseñas no coinciden.</div>
+        }
+      }
     </div>
+
     <button class="flat-button">Registrarse</button>
+
+    <!-- Password Security -->
+    @if (password.value != '') {
+      <div
+        class="password-security pop-in-password-security"
+        [ngClass]="{'insecure-password': password.errors != null}"
+      >
+        @if (password.errors != null) {
+          <h5 class="unfulfilled-condition">Contraseña Insegura</h5>
+        } @else {
+          <h5 class="fulfilled-condition">Contraseña Segura</h5>
+        }
+        <ul class="password-requireds">
+          <li [ngClass]="password.errors?.['upperCase'] ? 'unfulfilled-condition' : 'fulfilled-condition'">
+            <i class="fa-solid" [ngClass]="password.errors?.['upperCase'] ? 'fa-xmark' : 'fa-check'">
+            </i>Contiene una mayúscula.
+          </li>
+          <li [ngClass]="password.errors?.['lowerCase'] ? 'unfulfilled-condition' : 'fulfilled-condition'">
+            <i class="fa-solid" [ngClass]="password.errors?.['lowerCase'] ? 'fa-xmark' : 'fa-check'">
+            </i>Contiene una minúscula.
+          </li>
+          <li [ngClass]="password.errors?.['numeric'] ? 'unfulfilled-condition' : 'fulfilled-condition'">
+            <i class="fa-solid" [ngClass]="password.errors?.['numeric'] ? 'fa-xmark' : 'fa-check'">
+            </i>Contiene una dígito.
+          </li>
+          <li [ngClass]="password.errors?.['specialChar'] ? 'unfulfilled-condition' : 'fulfilled-condition'">
+            <i class="fa-solid" [ngClass]="password.errors?.['specialChar'] ? 'fa-xmark' : 'fa-check'">
+            </i>Contiene un carácter especial.
+          </li>
+          <li [ngClass]="password.errors?.['minLength'] ? 'unfulfilled-condition' : 'fulfilled-condition'">
+            <i class="fa-solid" [ngClass]="password.errors?.['minLength'] ? 'fa-xmark' : 'fa-check'">
+            </i>Contiene mínimo 8 caráceteres.
+          </li>
+        </ul>
+    </div>
+    }
   </form>
 </article>
