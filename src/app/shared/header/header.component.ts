@@ -90,6 +90,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }, 300)
   }
   closeRegister() {
-    this.authService.showRegister.next(false);
+    if (this.showRegister) {
+      this.authService.showRegister.next(false);
+    }
   }
 }
