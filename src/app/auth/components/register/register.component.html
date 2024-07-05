@@ -1,4 +1,5 @@
 <article id="register-modal" class="pop-in-register">
+  <i (click)="closeModal()" class="close-register fa-solid fa-xmark"></i>
   <h3>Registro</h3>
   <!-- <p>Crear una nueva cuenta</p> -->
   <form [formGroup]="registerForm" (submit)="register()">

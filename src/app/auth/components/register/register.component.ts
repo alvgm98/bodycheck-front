@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { RegisterRequest } from '../../models/register-request';
@@ -84,9 +84,7 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  /* Lógica de cerrar el modal */
-  @Output() closeModalEvent = new EventEmitter<void>();
   closeModal() {
-    this.closeModalEvent.emit();
+    this.authService.showRegister.next(false);
   }
 }
