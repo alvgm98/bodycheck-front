@@ -26,7 +26,7 @@ export function passwordStrengthValidator(): ValidatorFn {
       errors.numeric = 'La contraseña debe contener al menos un dígito.';
     }
 
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+    const hasSpecialChar = /[!¡¿@#€$%^&*()~/,?.·":{}|<>=]/.test(value);
     if (!hasSpecialChar) {
       errors.specialChar = 'La contraseña debe contener al menos un carácter especial.';
     }

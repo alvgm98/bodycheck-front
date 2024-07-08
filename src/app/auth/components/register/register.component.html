@@ -18,8 +18,8 @@
       <div class="input-border-group">
         <input formControlName="lastName" placeholder=" " type="text" />
         <label class="placeholder">Apellido*</label>
-        @if (firstName.invalid && (firstName.dirty || firstName.touched)) {
-          @if (firstName.errors?.['required']) {
+        @if (lastName.invalid && (lastName.dirty || lastName.touched)) {
+          @if (lastName.errors?.['required']) {
             <div class="invalid-field">Introduce tu apellido.</div>
           }
         }
@@ -30,6 +30,11 @@
     <div class="input-border-group">
       <input formControlName="phone" placeholder=" " type="text" />
       <label class="placeholder">Teléfono*</label>
+      @if (phone.invalid && (phone.dirty || phone.touched)) {
+        @if (phone.errors?.['required']) {
+          <div class="invalid-field">Introduce tu teléfono de trabajo.</div>
+        }
+      }
     </div>
 
     <!-- Email -->
