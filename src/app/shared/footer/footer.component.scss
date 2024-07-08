@@ -1,3 +1,17 @@
-.spacer {
-  flex: 1 1 auto;
+@import 'colors';
+
+footer {
+  border-top: 1px solid $primary-color;
+
+  height: 60px;
+  background-color: $white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h4 {
+    font-size: 20px;
+    margin: 0;
+  }
 }
