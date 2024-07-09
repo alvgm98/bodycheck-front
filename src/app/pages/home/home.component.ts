@@ -3,11 +3,12 @@ import { RegisterComponent } from '../../auth/components/register/register.compo
 import { AuthService } from '../../auth/services/auth.service';
 import { Subscription } from 'rxjs';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from '../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RegisterComponent, ReactiveFormsModule],
+  imports: [RegisterComponent, ReactiveFormsModule, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

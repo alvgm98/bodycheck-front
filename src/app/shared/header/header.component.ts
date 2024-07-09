@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { LoginComponent } from '../../auth/components/login/login.component';
 import { AuthService } from '../../auth/services/auth.service';
 import { Subscription } from 'rxjs';
@@ -20,6 +20,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isUserLogged: boolean = false;
   private isUserLoggedSubscription!: Subscription;
+
+  @Output() scrollToTop = new EventEmitter<void>();
 
   constructor(
     private el: ElementRef,
@@ -93,5 +95,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.showRegister) {
       this.authService.showRegister.next(false);
     }
+  }
+
+  clickTitle() {
+    this.closeRegister();
+    this.scrollToTop.emit();
   }
 }
