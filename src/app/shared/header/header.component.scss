@@ -16,7 +16,6 @@ header {
 }
 
 .title {
-  flex: 1;
   text-decoration: none;
 
   display: flex;
@@ -38,7 +37,6 @@ header {
 .auth {
   position: relative;
 
-  flex: 1;
   display: flex;
   justify-content: center;
 }
