@@ -31,9 +31,12 @@ export class AuthService {
   login(credentials: LoginRequest) {
     return this.http.post<AuthReponse>(environment.apiAuthUrl + "login", credentials).pipe(
       tap(response => {
+        // Establecemos 1 dia a la expiracion de las cookies
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 1);
         // Guardamos el token y el user en las cookies
-        this.cookieService.set(this.TOKEN_KEY, response.token);
-        this.cookieService.set(this.USER_KEY, JSON.stringify(response.user));
+        this.cookieService.set(this.TOKEN_KEY, response.token, expirationDate);
+        this.cookieService.set(this.USER_KEY, JSON.stringify(response.user), expirationDate);
         // Marcamos como loggeado y redirigimos a '/app'
         this.isUserLogged.next(true);
         this.router.navigateByUrl("app");
