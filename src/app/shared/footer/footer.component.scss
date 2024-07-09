@@ -1,6 +1,7 @@
 @import 'colors';
 
 footer {
+  box-sizing: border-box;
   border-top: 1px solid $primary-color;
 
   height: 60px;

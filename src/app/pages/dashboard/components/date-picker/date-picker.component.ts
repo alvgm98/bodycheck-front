@@ -13,5 +13,5 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerComponent {
-  selected = model<Date>(new Date);
+  selected = model<Date>(new Date());
 }
