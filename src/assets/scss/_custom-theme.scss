@@ -1,0 +1,51 @@
+:root {
+  /* CARD */
+  --mdc-elevated-card-container-color: #f0fdf9;
+  --mdc-elevated-card-container-elevation: 0;
+  --mdc-elevated-card-container-shape: 0;
+
+  /* DATEPICKER */
+  --mat-datepicker-calendar-date-selected-state-text-color: #f0fdf9;
+  --mat-datepicker-calendar-date-selected-state-background-color: #109d8a;
+  --mat-datepicker-calendar-date-today-selected-state-outline-color: #109d8a;
+  --mat-datepicker-calendar-date-focus-state-background-color: #109d8a35;
+  --mat-datepicker-calendar-date-hover-state-background-color: #109d8a35;
+  --mat-datepicker-calendar-date-in-overlap-range-selected-state-background-color: #506352;
+  --mat-datepicker-calendar-body-label-text-color: #144d46;
+  --mat-datepicker-calendar-period-button-text-color: #144d46;
+  --mat-datepicker-calendar-period-button-icon-color: #144d46;
+  --mat-datepicker-calendar-header-text-color: #144d46;
+  --mat-datepicker-calendar-date-today-outline-color: #109d8a;
+  --mat-datepicker-calendar-date-text-color: #144d46;
+  --mat-datepicker-calendar-date-preview-state-outline-color: #109d8a;
+  --mat-datepicker-range-input-separator-color: #144d46;
+  --mat-datepicker-calendar-container-text-color: #144d46;
+  // Button seleccionar año
+  --mat-text-button-state-layer-color: #109d8a;
+  --mat-text-button-hover-state-layer-opacity: 0.10;
+  --mat-text-button-focus-state-layer-opacity: 0.10;
+  // Flechas
+  --mdc-icon-button-icon-color: #144d46;
+  --mat-icon-button-state-layer-color: #109d8a;
+  --mat-icon-button-hover-state-layer-opacity: 0.10;
+  --mat-icon-button-focus-state-layer-opacity: 0.10;
+}
+
+/* DATEPICKER */
+.mat-calendar-header {
+  padding: 0px 8px 0 8px !important;
+}
+.mat-calendar-controls {
+  margin: 4% calc(4.7142857143% - 16px) !important;
+}
+.mat-calendar-body-label {
+  padding-top: 5% !important;
+  padding-bottom: 5% !important;
+}
+.mat-calendar-body-cell-container {
+  padding-top: 4% !important;
+  padding-bottom: 6% !important;
+}
+.mat-calendar-body-cell-content {
+  height: 75% !important;
+}

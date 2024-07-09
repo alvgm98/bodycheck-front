@@ -24,6 +24,7 @@ $bodycheck-theme: mat.define-theme((color: (theme-type: light,
 @import 'satoshi';
 
 @import 'colors';
+@import 'custom-theme';
 
 * {
   font-family: "Satoshi-Regular", sans-serif;
