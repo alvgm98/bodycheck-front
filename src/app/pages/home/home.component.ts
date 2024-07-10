@@ -1,7 +1,6 @@
-import { Component, effect, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, effect, ElementRef } from '@angular/core';
 import { RegisterComponent } from '../../auth/components/register/register.component';
 import { AuthService } from '../../auth/services/auth.service';
-import { Subscription } from 'rxjs';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from '../../shared/footer/footer.component';
 

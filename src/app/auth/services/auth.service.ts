@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { LoginRequest } from '../models/login-request';
-import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ export class AuthService {
   private TOKEN_KEY = 'token';
   private USER_KEY = 'user';
 
-  isUserLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isUserLogged = signal(false);
   showRegister = signal(false);
 
   constructor(
@@ -24,8 +24,12 @@ export class AuthService {
     private router: Router,
     private cookieService: CookieService
   ) {
+    this.checkLoginStatus();
+  }
+
+  checkLoginStatus() {
     const token = this.cookieService.get(this.TOKEN_KEY);
-    this.isUserLogged = new BehaviorSubject<boolean>(token != null && token != ''); // Debe compararse con '' ya que esta version de CookieService al no encontrar la cookie la iguala a '' en vez de (null | undefined)
+    this.isUserLogged.set(token != null && token != ''); // Debe compararse con '' ya que esta version de CookieService al no encontrar la cookie la iguala a '' en vez de (null | undefined)
   }
 
   login(credentials: LoginRequest) {
@@ -38,7 +42,7 @@ export class AuthService {
         this.cookieService.set(this.TOKEN_KEY, response.token, expirationDate);
         this.cookieService.set(this.USER_KEY, JSON.stringify(response.user), expirationDate);
         // Marcamos como loggeado y redirigimos a '/app'
-        this.isUserLogged.next(true);
+        this.isUserLogged.set(true);
         this.router.navigateByUrl("app");
       }),
       catchError(error => {
@@ -50,7 +54,7 @@ export class AuthService {
   logout() {
     this.cookieService.delete(this.TOKEN_KEY);
     this.cookieService.delete(this.USER_KEY);
-    this.isUserLogged.next(false);
+    this.isUserLogged.set(false);
     this.router.navigateByUrl("");
   }
 
@@ -61,7 +65,7 @@ export class AuthService {
         this.cookieService.set(this.TOKEN_KEY, response.token);
         this.cookieService.set(this.USER_KEY, JSON.stringify(response.user));
         // Marcamos como loggeado y redirigimos a '/app'
-        this.isUserLogged.next(true);
+        this.isUserLogged.set(true);
         this.router.navigateByUrl("app");
       }),
       catchError(error => {

@@ -1,7 +1,6 @@
-import { Component, effect, ElementRef, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, effect, ElementRef, EventEmitter, Output } from '@angular/core';
 import { LoginComponent } from '../../auth/components/login/login.component';
 import { AuthService } from '../../auth/services/auth.service';
-import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -11,13 +10,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent {
 
   showLogin: boolean = false;
   showRegister: boolean = false;
-
   isUserLogged: boolean = false;
-  private isUserLoggedSubscription!: Subscription;
 
   @Output() scrollToTop = new EventEmitter<void>();
 
@@ -25,20 +22,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private el: ElementRef,
     private authService: AuthService
   ) {
-    effect(() => this.showRegister = authService.showRegister())
-  }
-
-  ngOnInit(): void {
-    this.isUserLoggedSubscription = this.authService.isUserLogged.subscribe(
-      (isLogged: boolean) => {
-        this.isUserLogged = isLogged;
-      }
-    )
-  }
-  ngOnDestroy(): void {
-    if (this.isUserLoggedSubscription) {
-      this.isUserLoggedSubscription.unsubscribe();
-    }
+    effect(() => this.showRegister = authService.showRegister());
+    effect(() => this.isUserLogged = authService.isUserLogged());
   }
 
   logout() {
