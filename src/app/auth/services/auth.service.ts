@@ -33,7 +33,7 @@ export class AuthService {
       tap(response => {
         // Establecemos 1 semana de expiracion a las cookies
         const expirationDate = new Date();
-        expirationDate.setDate(expirationDate.getDate() + 7);
+        expirationDate.setDate(expirationDate.getDate() + 6);
         // Guardamos el token y el user en las cookies
         this.cookieService.set(this.TOKEN_KEY, response.token, expirationDate);
         this.cookieService.set(this.USER_KEY, JSON.stringify(response.user), expirationDate);
