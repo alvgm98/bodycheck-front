@@ -85,6 +85,6 @@ export class RegisterComponent implements OnInit {
   }
 
   closeModal() {
-    this.authService.showRegister.next(false);
+    this.authService.showRegister.set(false);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, effect, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { RegisterComponent } from '../../auth/components/register/register.component';
 import { AuthService } from '../../auth/services/auth.service';
 import { Subscription } from 'rxjs';
@@ -12,33 +12,23 @@ import { FooterComponent } from '../../shared/footer/footer.component';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent {
 
   showRegister: boolean = false;
-  private showRegisterSubscription!: Subscription;
 
   constructor(
     private el: ElementRef,
     private fb: FormBuilder,
     private authService: AuthService
-  ) { }
-
-  ngOnInit(): void {
-    this.authService.showRegister.subscribe(
-      (showRegister: boolean) => {
-        if (showRegister) {
-          this.showRegisterFn();
-        }
-        if (!showRegister && this.showRegister) {
-          this.hideRegister();
-        }
+  ) {
+    effect(() => {
+      if (authService.showRegister()) {
+        this.showRegisterFn()
       }
-    )
-  }
-  ngOnDestroy(): void {
-    if (this.showRegisterSubscription) {
-      this.showRegisterSubscription.unsubscribe();
-    }
+      if (!authService.showRegister() && this.showRegister) {
+        this.hideRegister();
+      }
+    })
   }
 
   /* Mostrar y Ocultar Formulario de Registro */
@@ -50,7 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.showRegister = true;
   }
   showRegisterFromWelcome() { // Necesario para poder actualizar estado de showRegister desde Home
-    this.authService.showRegister.next(true);
+    this.authService.showRegister.set(true);
   }
   hideRegister() {
     const registerModal = this.el.nativeElement.querySelector("#register-modal");

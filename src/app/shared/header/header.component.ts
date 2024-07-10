@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, effect, ElementRef, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { LoginComponent } from '../../auth/components/login/login.component';
 import { AuthService } from '../../auth/services/auth.service';
 import { Subscription } from 'rxjs';
@@ -14,9 +14,7 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   showLogin: boolean = false;
-
   showRegister: boolean = false;
-  private showRegisterSubscription!: Subscription;
 
   isUserLogged: boolean = false;
   private isUserLoggedSubscription!: Subscription;
@@ -26,7 +24,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private el: ElementRef,
     private authService: AuthService
-  ) { }
+  ) {
+    effect(() => this.showRegister = authService.showRegister())
+  }
 
   ngOnInit(): void {
     this.isUserLoggedSubscription = this.authService.isUserLogged.subscribe(
@@ -34,18 +34,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isUserLogged = isLogged;
       }
     )
-    this.showRegisterSubscription = this.authService.showRegister.subscribe(
-      (isRegisterShown: boolean) => {
-        this.showRegister = isRegisterShown;
-      }
-    )
   }
   ngOnDestroy(): void {
     if (this.isUserLoggedSubscription) {
       this.isUserLoggedSubscription.unsubscribe();
-    }
-    if (this.showRegisterSubscription) {
-      this.showRegisterSubscription.unsubscribe();
     }
   }
 
@@ -76,7 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if (this.showLogin) {
       this.closeLogin();
     }
-    this.authService.showRegister.next(true);
+    this.authService.showRegister.set(true);
   }
 
   closeLogin() {
@@ -93,7 +85,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
   closeRegister() {
     if (this.showRegister) {
-      this.authService.showRegister.next(false);
+      this.authService.showRegister.set(false);
     }
   }
 

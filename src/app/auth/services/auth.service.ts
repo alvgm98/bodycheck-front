@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { LoginRequest } from '../models/login-request';
 import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +17,7 @@ export class AuthService {
   private USER_KEY = 'user';
 
   isUserLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  showRegister: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  showRegister = signal(false);
 
   constructor(
     private http: HttpClient,
