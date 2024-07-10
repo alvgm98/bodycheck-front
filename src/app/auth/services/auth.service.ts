@@ -31,9 +31,9 @@ export class AuthService {
   login(credentials: LoginRequest) {
     return this.http.post<AuthReponse>(environment.apiAuthUrl + "login", credentials).pipe(
       tap(response => {
-        // Establecemos 1 dia a la expiracion de las cookies
+        // Establecemos 1 semana de expiracion a las cookies
         const expirationDate = new Date();
-        expirationDate.setDate(expirationDate.getDate() + 1);
+        expirationDate.setDate(expirationDate.getDate() + 7);
         // Guardamos el token y el user en las cookies
         this.cookieService.set(this.TOKEN_KEY, response.token, expirationDate);
         this.cookieService.set(this.USER_KEY, JSON.stringify(response.user), expirationDate);
