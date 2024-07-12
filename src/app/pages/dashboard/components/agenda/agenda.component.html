@@ -1,7 +1,7 @@
 <app-date-picker [(selected)]="selectedDate" (selectedChange)="getAppointmentsByDate()" />
 
 <div class="timetable">
-  <h4 class="day">{{ datePipe.transform(selectedDate, "EEEE dd MMM yyyy") }}</h4>
+  <h4 class="day">{{ selectedDate | date: 'EEEE dd MMM yyyy' | capitalize }}</h4>
   <ul>
     <!-- HORAS -->
     @for (hour of hours; track $index) {
@@ -17,12 +17,13 @@
         <h4 class="customer">{{ appointment.customer.firstName }} {{ appointment.customer.lastName }}</h4>
         <h5 class="phone">{{ appointment.customer.phone }} <i class="fa-solid fa-phone"></i></h5>
         <h5 [ngClass]="appointment.duration < 30 ? 'short-reason' : 'reason'">{{ appointment.reason }}</h5>
-          <p [ngClass]="appointment.duration < 30 ? 'short-duration' : 'duration'">{{ appointment.duration }} min</p>
-          @if (appointment.duration >= 30) {
-            <p class="starts">{{ datePipe.transform( appointment.startTime, "HH:mm") }}</p>
-            <p class="ends">{{ datePipe.transform( appointment.endTime, "HH:mm") }}</p>
-            <div class="timeline" [style.height.px]="appointment.duration * 3 - 66"></div>
-          }
+
+        <p [ngClass]="appointment.duration < 30 ? 'short-duration' : 'duration'">{{ appointment.duration }} min</p>
+        @if (appointment.duration >= 30) {
+          <p class="starts">{{ appointment.startTime | date: 'HH:mm' }} </p>
+          <p class="ends">{{ appointment.endTime | date: 'HH:mm' }}</p>
+          <div class="timeline" [style.height.px]="appointment.duration * 3 - 66"></div>
+        }
     </div>
     }
   </ul>
