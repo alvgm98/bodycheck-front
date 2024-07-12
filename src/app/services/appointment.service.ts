@@ -3,26 +3,31 @@ import { Injectable } from '@angular/core';
 import { Appointment } from '../models/appointment';
 import { environment } from '../../environments/environment.development';
 import { map, Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppointmentService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private datePipe: DatePipe
+  ) { }
 
   getAppointmentsByDate(date: Date): Observable<Appointment[]> {
-    const formattedDate = date.toISOString().split('T')[0];
-    return this.http.get<Appointment[]>(environment.apiAppointmentUrl + 'date/' + formattedDate).pipe(
-      map(appointments =>
-        appointments.map(appointment => {
-          appointment.startTime = new Date(appointment.startTime);
-          appointment.endTime = new Date(appointment.endTime);
-          appointment.duration = this.getDuration(appointment.startTime, appointment.endTime)
-          return appointment;
-        })
-      )
-    );
+    return this.http.get<Appointment[]>(
+      environment.apiAppointmentUrl + 'date/' + this.datePipe.transform(date, 'yyyy-MM-dd'))
+      .pipe(
+        map(appointments =>
+          appointments.map(appointment => {
+            appointment.startTime = new Date(appointment.startTime);
+            appointment.endTime = new Date(appointment.endTime);
+            appointment.duration = this.getDuration(appointment.startTime, appointment.endTime)
+            return appointment;
+          })
+        )
+      );
   }
 
   private getDuration(startTime: Date, endTime: Date) {
