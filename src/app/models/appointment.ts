@@ -1,6 +1,6 @@
 import { Customer } from "./customer";
 
-export interface appointment {
+export interface Appointment {
   id: number;
   customer: Customer;
   startTime: Date;
