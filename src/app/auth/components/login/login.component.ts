@@ -46,7 +46,6 @@ export class LoginComponent {
       next: () => this.closeModal(),
       error: (error) => {
         this.loginError = this.errorMessages[error.status] || "Error: " + error.status;
-        console.error(error);
       }
     });
   }

@@ -65,9 +65,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.password);
-    console.log(this.password2);
-
     if (!this.registerForm.valid) {
       this.registerForm.markAllAsTouched();
       return;
