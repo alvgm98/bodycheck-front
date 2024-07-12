@@ -1,71 +1,29 @@
-<app-date-picker [(selected)]="selectedDate" />
+<app-date-picker [(selected)]="selectedDate" (selectedChange)="getAppointmentsByDate()" />
 
 <div class="timetable">
   <h4 class="day">{{ datePipe.transform(selectedDate, "EEEE dd MMM yyyy") }}</h4>
   <ul>
-    <li><span class="hour">00:00</span></li>
-    <li><span class="hour">00:30</span></li>
-    <li><span class="hour">01:00</span></li>
-    <li><span class="hour">01:30</span></li>
-    <li><span class="hour">02:00</span></li>
-    <li><span class="hour">02:30</span></li>
-    <li><span class="hour">03:00</span></li>
-    <li><span class="hour">03:30</span></li>
-    <li><span class="hour">04:00</span></li>
-    <li><span class="hour">04:30</span></li>
-    <li><span class="hour">05:00</span></li>
-    <li><span class="hour">05:30</span></li>
-    <li><span class="hour">06:00</span></li>
-    <li><span class="hour">06:30</span></li>
-    <li><span class="hour">07:00</span></li>
-    <li><span class="hour">07:30</span></li>
-    <li><span class="hour">08:00</span></li>
-    <li><span class="hour">08:30</span></li>
-    <li><span class="hour">09:00</span></li>
-    <li><span class="hour">09:30</span></li>
-    <li><span class="hour">10:00</span></li>
-    <li><span class="hour">10:30</span></li>
-    <li><span class="hour">11:00</span></li>
-    <li><span class="hour">11:30</span></li>
-    <li><span class="hour">12:00</span></li>
-    <li><span class="hour">12:30</span></li>
-    <li><span class="hour">13:00</span></li>
-    <li><span class="hour">13:30</span></li>
-    <li><span class="hour">14:00</span></li>
-    <li><span class="hour">14:30</span></li>
-    <li><span class="hour">15:00</span></li>
-    <li><span class="hour">15:30</span></li>
-    <li><span class="hour">16:00</span></li>
-    <li><span class="hour">16:30</span></li>
-    <li><span class="hour">17:00</span></li>
-    <li><span class="hour">17:30</span></li>
-    <li><span class="hour">18:00</span></li>
-    <li><span class="hour">18:30</span></li>
-    <li><span class="hour">19:00</span></li>
-    <li><span class="hour">19:30</span></li>
-    <li><span class="hour">20:00</span></li>
-    <li><span class="hour">20:30</span></li>
-    <li><span class="hour">21:00</span></li>
-    <li><span class="hour">21:30</span></li>
-    <li><span class="hour">22:00</span></li>
-    <li><span class="hour">22:30</span></li>
-    <li><span class="hour">23:00</span></li>
-    <li><span class="hour">23:30</span></li>
+    <!-- HORAS -->
+    @for (hour of hours; track $index) {
+      <li><span class="hour">{{hour}}</span></li>
+    }
     <!-- CITAS -->
-    <div
+    @for (appointment of appointments; track appointment.id) {
+      <div
       class="appointment"
-      [ngStyle]="{'flex-direction': appointmentDuration < 30 ? 'row' : 'column'}"
-      [style.height.px]="appointmentDuration * 3"
-      [style.top.px]="(startDate.getHours() * 60 + startDate.getMinutes()) * 3">
-      <h4 class="customer">Mariano González</h4>
-      <h5 class="phone">661198610 <i class="fa-solid fa-phone"></i></h5>
-      <h5 [ngClass]="appointmentDuration < 30 ? 'short-reason' : 'reason'">Consulta</h5>
-        <p [ngClass]="appointmentDuration < 30 ? 'short-duration' : 'duration'">{{ appointmentDuration }} min</p>
-        @if (appointmentDuration >= 30) {
-          <p class="starts">{{ datePipe.transform(startDate, "HH:mm") }}</p>
-          <p class="ends">{{ datePipe.transform(getFinnishDate(startDate, appointmentDuration), "HH:mm") }}</p>
-          <div class="timeline" [style.height.px]="appointmentDuration * 3 - 60"></div>
-        }
+      [ngStyle]="{'flex-direction': appointment.duration < 30 ? 'row' : 'column'}"
+      [style.height.px]="appointment.duration * 3"
+      [style.top.px]="(appointment.startTime.getHours() * 60 + appointment.startTime.getMinutes()) * 3">
+        <h4 class="customer">{{ appointment.customer.firstName }} {{ appointment.customer.lastName }}</h4>
+        <h5 class="phone">{{ appointment.customer.phone }} <i class="fa-solid fa-phone"></i></h5>
+        <h5 [ngClass]="appointment.duration < 30 ? 'short-reason' : 'reason'">{{ appointment.reason }}</h5>
+          <p [ngClass]="appointment.duration < 30 ? 'short-duration' : 'duration'">{{ appointment.duration }} min</p>
+          @if (appointment.duration >= 30) {
+            <p class="starts">{{ datePipe.transform( appointment.startTime, "HH:mm") }}</p>
+            <p class="ends">{{ datePipe.transform( appointment.endTime, "HH:mm") }}</p>
+            <div class="timeline" [style.height.px]="appointment.duration * 3 - 66"></div>
+          }
     </div>
+    }
   </ul>
 </div>

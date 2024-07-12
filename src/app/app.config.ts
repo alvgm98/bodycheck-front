@@ -4,10 +4,11 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
+import { authInterceptor } from './auth/services/auth.interceptor';
 
 registerLocaleData(localeEs, 'es-ES');
 
@@ -17,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     { provide: LOCALE_ID, useValue: 'es-ES' },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideClientHydration(),
     provideAnimationsAsync(),
     DatePipe,

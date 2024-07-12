@@ -1,6 +1,8 @@
-import { Component, ElementRef, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject } from '@angular/core';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { DatePipe, NgClass, NgStyle } from '@angular/common';
+import { AppointmentService } from '../../../../services/appointment.service';
+import { Appointment } from '../../../../models/appointment';
 
 @Component({
   selector: 'app-agenda',
@@ -9,15 +11,21 @@ import { DatePipe, NgClass, NgStyle } from '@angular/common';
   templateUrl: './agenda.component.html',
   styleUrl: './agenda.component.scss'
 })
-export class AgendaComponent implements OnInit {
+export class AgendaComponent implements AfterViewInit {
   el: ElementRef = inject(ElementRef);
   datePipe: DatePipe = inject(DatePipe);
+
   selectedDate: Date = new Date();
+  appointments: Appointment[] = [];
 
-  appointmentDuration: number = 15;
-  startDate: Date = new Date(2024, 6, 11, 16, 30);
+  hours: string[] = []
 
-  ngOnInit(): void {
+  constructor(private appointmentService: AppointmentService) {
+    this.getAppointmentsByDate();
+    this.generateHours();
+  }
+
+  ngAfterViewInit(): void {
     // Scroll a la hora en la que estamos
     const now = new Date();
     const mins = now.getHours() * 60 + now.getMinutes();
@@ -29,7 +37,20 @@ export class AgendaComponent implements OnInit {
     })
   }
 
-  getFinnishDate(startDate: Date, duration: number): Date {
-    return new Date(startDate.getTime() + duration * 60000);
+  /* Este metodo generá las horas del dia que se imprimirán en el template */
+  generateHours(): void {
+    for (let i = 0; i < 24; i++) {
+      const hour = i < 10 ? `0${i}` : i;
+      this.hours.push(`${hour}:00`);
+      this.hours.push(`${hour}:30`);
+    }
+  }
+
+  getAppointmentsByDate() {
+    this.appointmentService.getAppointmentsByDate(this.selectedDate)
+      .subscribe((data) => {
+        this.appointments = data;
+        console.log(this.appointments);
+      });
   }
 }

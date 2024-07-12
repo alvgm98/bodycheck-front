@@ -5,6 +5,7 @@ export interface Appointment {
   customer: Customer;
   startTime: Date;
   endTime: Date;
+  duration: number;
   reason: string;
   observations: string;
 }
