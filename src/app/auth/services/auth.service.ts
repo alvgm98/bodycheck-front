@@ -13,8 +13,8 @@ import { RegisterRequest } from '../models/register-request';
 })
 export class AuthService {
 
-  private TOKEN_KEY = 'token';
-  private USER_KEY = 'user';
+  private TOKEN_KEY = environment.TOKEN_KEY;
+  private USER_KEY = environment.USER_KEY;
 
   isUserLogged = signal(false);
   showRegister = signal(false);
