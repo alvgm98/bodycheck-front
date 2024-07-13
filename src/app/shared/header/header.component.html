@@ -6,15 +6,15 @@
 
   @if (!isUserLogged) {
     <div class="auth">
-      <button class="flat-button" (click)="toggleShowRegister()">Registrarse</button>
-      <button class="stroked-button" (click)="toggleShowLogin()">Iniciar Sesión</button>
+      <button class="btn flat-button" (click)="toggleShowRegister()">Registrarse</button>
+      <button class="btn stroked-button" (click)="toggleShowLogin()">Iniciar Sesión</button>
       @if (showLogin) {
         <app-login (closeModalEvent)="closeLogin()" />
       }
     </div>
   } @else {
     <div class="auth">
-      <button class="stroked-button" (click)="logout()">Cerrar Sesión</button>
+      <button class="btn stroked-button" (click)="logout()">Cerrar Sesión</button>
     </div>
   }
 

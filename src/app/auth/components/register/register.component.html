@@ -27,6 +27,7 @@
     </div>
 
     <!-- Telefono -->
+  <div class="input-border-group">
     <div class="input-border-group">
       <input formControlName="phone" placeholder=" " type="text" />
       <label class="placeholder">Teléfono*</label>
@@ -36,6 +37,9 @@
         }
       }
     </div>
+
+    <app-toggle-button [leftBtn]="'Estudiante'" [rightBtn]="'Profesional'"/>
+  </div>
 
     <!-- Email -->
     <div class="input-border-group">
@@ -76,7 +80,7 @@
       }
     </div>
 
-    <button class="flat-button">Registrarse</button>
+    <button class="btn flat-button">Registrarse</button>
 
     <!-- Password Security -->
     @if (password.value != '') {

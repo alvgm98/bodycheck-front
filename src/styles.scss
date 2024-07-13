@@ -66,7 +66,7 @@ main {
 }
 
 /********** BUTTONS **********/
-button {
+.btn {
   font-family: "DM Sans", sans-serif;
 
   box-sizing: border-box;
@@ -83,7 +83,7 @@ button {
 
   transition: .4s;
 }
-button:focus-visible {
+.btn:focus-visible {
   outline: 0;
 }
 
