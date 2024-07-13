@@ -1,7 +1,7 @@
 <app-date-picker [(selected)]="selectedDate" (selectedChange)="getAppointmentsByDate()" />
 
 <div class="timetable">
-  <h4 class="day">{{ selectedDate | date: 'EEEE dd MMM yyyy' | capitalize }}</h4>
+  <h4 class="day"><i class="fa-solid fa-plus"></i>{{ selectedDate | date: 'EEEE dd MMM yyyy' | capitalize }}</h4>
   <ul>
     <!-- HORAS -->
     @for (hour of hours; track $index) {
