@@ -40,6 +40,7 @@ export class RegisterComponent implements OnInit {
     firstName: ["", [Validators.required]],
     lastName: ["", [Validators.required]],
     phone: ["", [Validators.required]],
+    situation: ["Estudiante"],
     username: ["", [Validators.required, Validators.email]],
     password: ["", [Validators.required, passwordStrengthValidator()]],
     password2: ["", [Validators.required]],
@@ -63,6 +64,12 @@ export class RegisterComponent implements OnInit {
   }
   get password2() {
     return this.registerForm.controls.password2;
+  }
+
+  selectSituation(situation: string) {
+    this.registerForm.patchValue({
+      situation: situation
+    });
   }
 
   register() {
