@@ -124,11 +124,6 @@ main {
 
   transition: 300ms;
 }
-.input-border-group input:hover {
-  background-color: #f1f1f1;
-  border-color: #f1f1f1;
-  border-bottom-color: $primary-color;
-}
 
 .input-border-group {
   position: relative;
@@ -150,7 +145,6 @@ main {
 .input-border-group input:focus {
   border: 1px solid $primary-color;
   border-bottom: 2px solid $primary-color;
-  background-color: #f1f1f1;
 }
 
 .input-border-group input:focus+.placeholder,

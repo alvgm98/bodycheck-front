@@ -9,38 +9,41 @@
 
   border-bottom: 2px solid $primary-color;
   border-radius: 15px 15px 0 0;
-  padding-top:7px;
+  padding-top: 7px;
   background-color: $white;
 
   display: flex;
 
-  transition: .3s;
+  transition: .5s;
 }
 :host:hover {
-  background-color: #f1f1f1;
+  background-color: #c8f0ea;
 }
 
 .toggle-button {
-	position: relative;
-	cursor: pointer;
+  position: relative;
+  cursor: pointer;
   width: 100%;
-	border: 0;
-	outline: none;
+  border: 0;
+  outline: none;
 
   font-family: "Satoshi-Regular", sans-serif;
   font-size: 16px;
   color: $black;
-	background: transparent;
-	text-align: center;
+  background: transparent;
+  text-align: center;
 }
 
 .toggle-bar {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 50%;
-	height: 100%;
-	background: #c1e9e2;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 50%;
+  height: 100%;
+
+  background: #b0e0d8;
   border-radius: 15px 15px 0 0;
-	transition: .3s;
+
+  transition: .3s;
 }
