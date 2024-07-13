@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject } from '@angular/core';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../../services/appointment.service';
@@ -14,14 +14,15 @@ import { AppointmentComponent } from './components/appointment/appointment.compo
   styleUrl: './agenda.component.scss'
 })
 export class AgendaComponent implements AfterViewInit {
-  el: ElementRef = inject(ElementRef);
-
   selectedDate: Date = new Date();
   appointments: Appointment[] = [];
 
   hours: string[] = []
 
-  constructor(private appointmentService: AppointmentService) {
+  constructor(
+    private appointmentService: AppointmentService,
+    private el: ElementRef
+  ) {
     this.getAppointmentsByDate();
     this.generateHours();
   }
