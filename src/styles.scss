@@ -107,50 +107,6 @@ main {
 }
 
 /********** INPUTS **********/
-.input-group input {
-  box-sizing: border-box;
-  height: 45px;
-  width: 100%;
-
-  border: 0;
-  border-bottom: 2px solid $primary-color;
-  border-radius: 15px 15px 0 0;
-  outline: none;
-  padding-top: 15px;
-  padding-inline: 18px;
-
-  font-size: 16px;
-  background-color: $white;
-  color: $black;
-
-  transition: 300ms;
-}
-
-.input-group {
-  position: relative;
-  width: 100%;
-}
-
-.input-group .placeholder {
-  position: absolute;
-  top: 14px;
-  left: 19px;
-
-  font-size: 16px;
-  color: $black;
-
-  transition: 300ms;
-  pointer-events: none;
-}
-
-.input-group input:focus+.placeholder,
-.input-group input:not(:placeholder-shown)+.placeholder {
-  top: 1px;
-
-  color: $primary-color;
-  font-size: 12px;
-}
-
 .input-border-group input {
   box-sizing: border-box;
   height: 45px;
@@ -167,6 +123,11 @@ main {
   color: $black;
 
   transition: 300ms;
+}
+.input-border-group input:hover {
+  background-color: #f1f1f1;
+  border-color: #f1f1f1;
+  border-bottom-color: $primary-color;
 }
 
 .input-border-group {
@@ -189,6 +150,7 @@ main {
 .input-border-group input:focus {
   border: 1px solid $primary-color;
   border-bottom: 2px solid $primary-color;
+  background-color: #f1f1f1;
 }
 
 .input-border-group input:focus+.placeholder,
