@@ -17,7 +17,7 @@ export class AuthService {
   private USER_KEY = environment.USER_KEY;
 
   isUserLogged = signal(false);
-  showRegister = signal(true);
+  showRegister = signal(false);
 
   constructor(
     private http: HttpClient,
