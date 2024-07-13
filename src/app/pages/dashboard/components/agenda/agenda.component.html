@@ -9,22 +9,7 @@
     }
     <!-- CITAS -->
     @for (appointment of appointments; track appointment.id) {
-      <div
-      class="appointment"
-      [ngStyle]="{'flex-direction': appointment.duration < 30 ? 'row' : 'column'}"
-      [style.height.px]="appointment.duration * 3"
-      [style.top.px]="(appointment.startTime.getHours() * 60 + appointment.startTime.getMinutes()) * 3">
-        <h4 class="customer">{{ appointment.customer.firstName }} {{ appointment.customer.lastName }}</h4>
-        <h5 class="phone">{{ appointment.customer.phone }} <i class="fa-solid fa-phone"></i></h5>
-        <h5 [ngClass]="appointment.duration < 30 ? 'short-reason' : 'reason'">{{ appointment.reason }}</h5>
-
-        <p [ngClass]="appointment.duration < 30 ? 'short-duration' : 'duration'">{{ appointment.duration }} min</p>
-        @if (appointment.duration >= 30) {
-          <p class="starts">{{ appointment.startTime | date: 'HH:mm' }} </p>
-          <p class="ends">{{ appointment.endTime | date: 'HH:mm' }}</p>
-          <div class="timeline" [style.height.px]="appointment.duration * 3 - 66"></div>
-        }
-    </div>
+      <app-appointment [appointment]="appointment" />
     }
   </ul>
 </div>

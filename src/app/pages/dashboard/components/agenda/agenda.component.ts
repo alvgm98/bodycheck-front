@@ -1,14 +1,15 @@
 import { AfterViewInit, Component, ElementRef, inject } from '@angular/core';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
-import { CommonModule, NgClass, NgStyle } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../../services/appointment.service';
 import { Appointment } from '../../../../models/appointment';
 import { CapitalizePipe } from '../../../../pipes/capitalize.pipe';
+import { AppointmentComponent } from './components/appointment/appointment.component';
 
 @Component({
   selector: 'app-agenda',
   standalone: true,
-  imports: [DatePickerComponent, NgClass, NgStyle, CommonModule, CapitalizePipe],
+  imports: [DatePickerComponent, AppointmentComponent, CommonModule, CapitalizePipe],
   templateUrl: './agenda.component.html',
   styleUrl: './agenda.component.scss'
 })
