@@ -49,7 +49,7 @@ export class AgendaComponent implements AfterViewInit {
   }
 
   getAppointmentsByDate() {
-    this.appointmentService.getAppointmentsByDate(this.selectedDate)
+    this.appointmentService.loadAppointmentsByDate(this.selectedDate)
       .subscribe((data) => {
         this.appointments = data;
       });

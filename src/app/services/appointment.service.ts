@@ -15,7 +15,7 @@ export class AppointmentService {
     private datePipe: DatePipe
   ) { }
 
-  getAppointmentsByDate(date: Date): Observable<Appointment[]> {
+  loadAppointmentsByDate(date: Date): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(
       environment.apiAppointmentUrl + 'date/' + this.datePipe.transform(date, 'yyyy-MM-dd'))
       .pipe(
@@ -23,14 +23,14 @@ export class AppointmentService {
           appointments.map(appointment => {
             appointment.startTime = new Date(appointment.startTime);
             appointment.endTime = new Date(appointment.endTime);
-            appointment.duration = this.getDuration(appointment.startTime, appointment.endTime)
+            appointment.duration = this.calcDuration(appointment.startTime, appointment.endTime)
             return appointment;
           })
         )
       );
   }
 
-  private getDuration(startTime: Date, endTime: Date) {
+  private calcDuration(startTime: Date, endTime: Date) {
     /* No tenemos en cuenta los segundos
     Al hacerlo de esta manera MODIFICAMOS los Date originales,
     lo cual deseamos para no volver a sumar el segundo que agregamos en backend en posibles modificaciones posteriores */
