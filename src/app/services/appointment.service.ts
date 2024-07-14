@@ -17,7 +17,7 @@ export class AppointmentService {
 
   loadAppointmentsByDate(date: Date): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(
-      environment.apiAppointmentUrl + 'date/' + this.datePipe.transform(date, 'yyyy-MM-dd'))
+      environment.apiAppointmentUrl + '/date/' + this.datePipe.transform(date, 'yyyy-MM-dd'))
       .pipe(
         map(appointments =>
           appointments.map(appointment => {
