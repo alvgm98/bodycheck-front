@@ -4,12 +4,12 @@ import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../../services/appointment.service';
 import { Appointment } from '../../../../models/appointment';
 import { CapitalizePipe } from '../../../../pipes/capitalize.pipe';
-import { AppointmentComponent } from './components/appointment/appointment.component';
+import { AgendaAppointmentComponent } from './components/appointment/agenda-appointment.component';
 
 @Component({
   selector: 'app-agenda',
   standalone: true,
-  imports: [DatePickerComponent, AppointmentComponent, CommonModule, CapitalizePipe],
+  imports: [DatePickerComponent, AgendaAppointmentComponent, CommonModule, CapitalizePipe],
   templateUrl: './agenda.component.html',
   styleUrl: './agenda.component.scss'
 })

@@ -6,15 +6,15 @@ import { CommonModule, NgClass } from '@angular/common';
   selector: 'app-appointment',
   standalone: true,
   imports: [NgClass, CommonModule],
-  templateUrl: './appointment.component.html',
-  styleUrl: './appointment.component.scss',
+  templateUrl: './agenda-appointment.component.html',
+  styleUrl: './agenda-appointment.component.scss',
   host: {
     '[style.flex-direction]': 'flexDirection',
     '[style.height.px]': 'height',
     '[style.top.px]': 'top'
   }
 })
-export class AppointmentComponent implements OnChanges {
+export class AgendaAppointmentComponent implements OnChanges {
   private MIN_SIZE = 3;
 
   appointment = input.required<Appointment>();
