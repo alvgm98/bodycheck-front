@@ -45,9 +45,7 @@ export class AuthService {
         this.isUserLogged.set(true);
         this.router.navigateByUrl("app");
       }),
-      catchError(error => {
-        return throwError(() => error);
-      })
+      catchError(error => throwError(() => error))
     )
   }
 
