@@ -55,9 +55,7 @@
       transition: .4s;
     }
     i:hover {
-      border-color: $primary-color;
-      color: $primary-color;
-      background-color: $background-color;
+      background-color: $primary-color-hover;
     }
   }
   .day::after {
