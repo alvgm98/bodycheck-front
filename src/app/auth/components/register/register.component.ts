@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { RegisterRequest } from '../../models/register-request';
@@ -15,11 +15,11 @@ import { ToggleButtonComponent } from '../../../components/toggle-button/toggle-
 })
 export class RegisterComponent implements OnInit {
 
-  @Input() usernameInput: string = "";
+  usernameInput = input<string>("");
   // Necesito variar de esta manera el valor de username ya que el formulario se construye antes de recibir usernameInput
   ngOnInit(): void {
     this.registerForm.patchValue({
-      username: this.usernameInput
+      username: this.usernameInput()
     });
   }
 
