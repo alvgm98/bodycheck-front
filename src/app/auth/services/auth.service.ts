@@ -53,7 +53,7 @@ export class AuthService {
     this.cookieService.delete(this.TOKEN_KEY);
     this.cookieService.delete(this.USER_KEY);
     this.isUserLogged.set(false);
-    this.router.navigateByUrl("");
+    window.location.href = '/';
   }
 
   register(userData: RegisterRequest) {
