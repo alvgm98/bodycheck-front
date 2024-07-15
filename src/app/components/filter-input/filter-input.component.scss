@@ -1,0 +1,49 @@
+@import 'colors';
+
+:host input {
+  box-sizing: border-box;
+  height: 60px;
+  width: 100%;
+
+  border: 1px solid $white;
+  border-bottom: 2px solid $primary-color;
+  border-radius: 15px 15px 0 0;
+  outline: none;
+  padding: 25px 18px 0 18px;
+
+  font-size: 16px;
+  font-weight: 600;
+  background-color: $white;
+  color: $black;
+
+  transition: 300ms;
+}
+
+:host {
+  position: relative;
+  width: 100%;
+}
+
+:host .placeholder {
+  position: absolute;
+  top: 30px;
+  left: 19px;
+
+  font-size: 16px;
+  color: $black;
+
+  transition: 300ms;
+  pointer-events: none;
+}
+
+:host input:focus,
+:host input:not(:placeholder-shown) {
+  background-color: #d4f2e9;
+}
+
+:host input:focus+.placeholder,
+:host input:not(:placeholder-shown)+.placeholder {
+  top: 8px;
+  left: 20px;
+  font-size: 14px;
+}
