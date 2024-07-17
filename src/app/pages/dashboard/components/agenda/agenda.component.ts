@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../../services/appointment.service';
 import { Appointment } from '../../../../models/appointment';
 import { CapitalizePipe } from '../../../../pipes/capitalize.pipe';
-import { AgendaAppointmentComponent } from './components/appointment/agenda-appointment.component';
+import { AgendaAppointmentComponent } from './components/agenda-appointment/agenda-appointment.component';
 import { AppointmentSeparatorComponent } from './components/appointment-separator/appointment-separator.component';
 
 @Component({
