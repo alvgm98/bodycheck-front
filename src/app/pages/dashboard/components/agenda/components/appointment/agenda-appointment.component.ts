@@ -3,7 +3,7 @@ import { Appointment } from '../../../../../../models/appointment';
 import { CommonModule, NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-appointment',
+  selector: 'app-agenda-appointment',
   standalone: true,
   imports: [NgClass, CommonModule],
   templateUrl: './agenda-appointment.component.html',
