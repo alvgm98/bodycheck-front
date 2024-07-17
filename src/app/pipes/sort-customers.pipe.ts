@@ -22,11 +22,6 @@ export class SortCustomersPipe implements PipeTransform {
         bValue = bValue.toLowerCase();
       }
 
-      /* if (aValue instanceof Date && bValue instanceof Date) {
-        aValue = aValue.getTime();
-        bValue = bValue.getTime();
-      } */
-
       if (aValue < bValue) {
         return order === 'asc' ? -1 : 1;
       } else if (aValue > bValue) {
