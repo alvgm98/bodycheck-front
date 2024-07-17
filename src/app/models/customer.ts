@@ -9,3 +9,5 @@ export interface Customer {
   height: number;
   observations: string;
 }
+
+export type CustomerKey = keyof Customer;

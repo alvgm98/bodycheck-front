@@ -1,15 +1,16 @@
 import { AfterViewInit, Component, effect, ElementRef } from '@angular/core';
 import { CustomerService } from '../../../../services/customer.service';
-import { Customer } from '../../../../models/customer';
+import { Customer, CustomerKey } from '../../../../models/customer';
 import { CapitalizePipe } from '../../../../pipes/capitalize.pipe';
 import { CalculateAgePipe } from '../../../../pipes/calculate-age.pipe';
 import { FilterInputComponent } from '../../../../components/filter-input/filter-input.component';
 import { FilterCustomersPipe } from '../../../../pipes/filter-customers.pipe';
+import { SortCustomersPipe } from '../../../../pipes/sort-customers.pipe';
 
 @Component({
   selector: 'app-customer-list',
   standalone: true,
-  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, FilterCustomersPipe],
+  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, FilterCustomersPipe, SortCustomersPipe],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
@@ -17,7 +18,15 @@ export class CustomerListComponent implements AfterViewInit {
 
   customers: Customer[] = [];
 
-  filterCondition: string = "";
+  /* Filter */
+  filterCondition: string = '';
+
+  /* Sorter */
+  sortFields: CustomerKey[] = ['firstName', 'phone', 'email', 'birthdate'];
+  sortField: CustomerKey = 'id';
+  sortOrder: string = 'asc';
+
+  /* Paginator */
   pageSize: number = 5;
 
   constructor(
@@ -45,5 +54,14 @@ export class CustomerListComponent implements AfterViewInit {
     // const paginatorSize = this.el.nativeElement.querySelector(".paginator"); NO OLVIDAR AÑADIR A LA OPERACIÓN
 
     this.pageSize = Math.floor((hostHeight - controlsHeight - 80) / 80);
+  }
+
+  changeSort(field: CustomerKey) {
+    if (this.sortField === field) {
+      this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortField = field;
+      this.sortOrder = 'asc';
+    }
   }
 }

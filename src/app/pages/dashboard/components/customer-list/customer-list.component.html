@@ -5,13 +5,57 @@
 
 <table id="customer-list">
   <thead>
-    <th>Nombre</th>
-    <th>Teléfono</th>
-    <th>Email</th>
-    <th>Edad</th>
+
+    <th (click)="changeSort(sortFields[0])">
+      Nombre
+      @if (sortField === sortFields[0]) {
+        @if (sortOrder === 'asc') {
+          <i class="fa-solid fa-arrow-up"></i>
+        }
+        @if (sortOrder === 'desc') {
+          <i class="fa-solid fa-arrow-down"></i>
+        }
+      }
+    </th>
+
+    <th (click)="changeSort(sortFields[1])">
+      Teléfono
+      @if (sortField === sortFields[1]) {
+        @if (sortOrder === 'asc') {
+          <i class="fa-solid fa-arrow-up"></i>
+        }
+        @if (sortOrder === 'desc') {
+          <i class="fa-solid fa-arrow-down"></i>
+        }
+      }
+    </th>
+
+    <th (click)="changeSort(sortFields[2])">
+      Email
+      @if (sortField === sortFields[2]) {
+        @if (sortOrder === 'asc') {
+          <i class="fa-solid fa-arrow-up"></i>
+        }
+        @if (sortOrder === 'desc') {
+          <i class="fa-solid fa-arrow-down"></i>
+        }
+      }
+    </th>
+
+    <th (click)="changeSort(sortFields[3])">
+      Edad
+      @if (sortField === sortFields[3]) {
+        @if (sortOrder === 'asc') {
+          <i class="fa-solid fa-arrow-up"></i>
+        }
+        @if (sortOrder === 'desc') {
+          <i class="fa-solid fa-arrow-down"></i>
+        }
+      }
+    </th>
   </thead>
   <tbody>
-    @for (customer of customers | filterCustomers : filterCondition; track customer.id) {
+    @for (customer of customers | filterCustomers : filterCondition | sortCustomers : sortField : sortOrder ; track customer.id) {
       <tr>
         <td>{{ customer.firstName + " " + customer.lastName | capitalize }}</td>
         <td>{{ customer.phone }}</td>

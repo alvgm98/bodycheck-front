@@ -44,13 +44,28 @@
   border-collapse: collapse;
 
   th {
-    font-size: 18px;
+    font-size: 20px;
+    width: 20%;
+    transition: 300ms;
+  }
+  th:first-child {
+    width: 40%;
+  }
+  th:hover {
+    cursor: pointer;
+    background-color: $background-color;
+    border-radius: 20px 20px 0 0;
   }
 
   td, th {
     box-sizing: border-box;
-    height: 80px;
+    height: 88px;
     text-align: center;
+  }
+
+  td {
+    font-size: 18px;
+    font-family: 'Satoshi-Medium', sans-serif;
   }
 
   tr:nth-child(odd) {
