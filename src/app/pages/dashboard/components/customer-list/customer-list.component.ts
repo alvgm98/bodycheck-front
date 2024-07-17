@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect, ElementRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, effect, ElementRef } from '@angular/core';
 import { CustomerService } from '../../../../services/customer.service';
 import { Customer, CustomerKey } from '../../../../models/customer';
 import { CapitalizePipe } from '../../../../pipes/capitalize.pipe';
@@ -6,11 +6,13 @@ import { CalculateAgePipe } from '../../../../pipes/calculate-age.pipe';
 import { FilterInputComponent } from '../../../../components/filter-input/filter-input.component';
 import { FilterCustomersPipe } from '../../../../pipes/filter-customers.pipe';
 import { SortCustomersPipe } from '../../../../pipes/sort-customers.pipe';
+import { PaginateCustomersPipe } from '../../../../pipes/paginate-customers.pipe';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-customer-list',
   standalone: true,
-  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, FilterCustomersPipe, SortCustomersPipe],
+  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, FilterCustomersPipe, SortCustomersPipe, PaginateCustomersPipe, NgClass],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
@@ -27,11 +29,13 @@ export class CustomerListComponent implements AfterViewInit {
   sortOrder: string = 'asc';
 
   /* Paginator */
+  page: number = 0;
   pageSize: number = 5;
 
   constructor(
     private customerService: CustomerService,
-    private el: ElementRef
+    private el: ElementRef,
+    private cdr: ChangeDetectorRef
   ) {
     this.customerService.loadCustomers();
 
@@ -42,20 +46,15 @@ export class CustomerListComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.calculatePageSize();
+    this.cdr.detectChanges();
   }
 
+  /* Filter */
   filterValue(filter: string) {
     this.filterCondition = filter;
   }
 
-  calculatePageSize() {
-    const hostHeight = this.el.nativeElement.offsetHeight;
-    const controlsHeight = this.el.nativeElement.querySelector(".controls").offsetHeight;
-    // const paginatorSize = this.el.nativeElement.querySelector(".paginator"); NO OLVIDAR AÑADIR A LA OPERACIÓN
-
-    this.pageSize = Math.floor((hostHeight - controlsHeight - 80) / 80);
-  }
-
+  /* Sorter */
   changeSort(field: CustomerKey) {
     if (this.sortField === field) {
       this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
@@ -63,5 +62,21 @@ export class CustomerListComponent implements AfterViewInit {
       this.sortField = field;
       this.sortOrder = 'asc';
     }
+  }
+
+  /* Paginator */
+  calculatePageSize() {
+    const hostHeight = this.el.nativeElement.offsetHeight;
+    const controlsHeight = this.el.nativeElement.querySelector(".controls").offsetHeight;
+    const paginatorHeight = this.el.nativeElement.querySelector(".paginator").offsetHeight;
+    const rowHeight = this.el.nativeElement.querySelector("thead").offsetHeight;
+
+    this.pageSize = Math.floor((hostHeight - controlsHeight - paginatorHeight - rowHeight) / rowHeight);
+  }
+
+  changePage(page: number) {
+    this.page = page;
+
+    console.log(page);
   }
 }

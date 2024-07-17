@@ -10,10 +10,10 @@
       Nombre
       @if (sortField === sortFields[0]) {
         @if (sortOrder === 'asc') {
-          <i class="fa-solid fa-arrow-up"></i>
+          <i class="fa-solid fa-arrow-up-a-z"></i>
         }
         @if (sortOrder === 'desc') {
-          <i class="fa-solid fa-arrow-down"></i>
+          <i class="fa-solid fa-arrow-down-z-a"></i>
         }
       }
     </th>
@@ -22,10 +22,10 @@
       Teléfono
       @if (sortField === sortFields[1]) {
         @if (sortOrder === 'asc') {
-          <i class="fa-solid fa-arrow-up"></i>
+          <i class="fa-solid fa-arrow-up-9-1"></i>
         }
         @if (sortOrder === 'desc') {
-          <i class="fa-solid fa-arrow-down"></i>
+          <i class="fa-solid fa-arrow-down-1-9"></i>
         }
       }
     </th>
@@ -34,10 +34,10 @@
       Email
       @if (sortField === sortFields[2]) {
         @if (sortOrder === 'asc') {
-          <i class="fa-solid fa-arrow-up"></i>
+          <i class="fa-solid fa-arrow-up-a-z"></i>
         }
         @if (sortOrder === 'desc') {
-          <i class="fa-solid fa-arrow-down"></i>
+          <i class="fa-solid fa-arrow-down-z-a"></i>
         }
       }
     </th>
@@ -46,16 +46,16 @@
       Edad
       @if (sortField === sortFields[3]) {
         @if (sortOrder === 'asc') {
-          <i class="fa-solid fa-arrow-up"></i>
+          <i class="fa-solid fa-arrow-up-9-1"></i>
         }
         @if (sortOrder === 'desc') {
-          <i class="fa-solid fa-arrow-down"></i>
+          <i class="fa-solid fa-arrow-down-1-9"></i>
         }
       }
     </th>
   </thead>
   <tbody>
-    @for (customer of customers | filterCustomers : filterCondition | sortCustomers : sortField : sortOrder ; track customer.id) {
+    @for (customer of customers | filterCustomers : filterCondition | sortCustomers : sortField : sortOrder | paginateCustomers : pageSize : page ; track customer.id) {
       <tr>
         <td>{{ customer.firstName + " " + customer.lastName | capitalize }}</td>
         <td>{{ customer.phone }}</td>
@@ -65,6 +65,38 @@
     }
   </tbody>
 </table>
+
+<div class="paginator">
+  <span
+    class="material-symbols-outlined"
+    [ngClass]="page === 0 ? 'disabled-pager' : 'enabled-pager'"
+    (click)="changePage(0)">
+    first_page
+  </span>
+  <span
+    class="material-symbols-outlined"
+    [ngClass]="page === 0 ? 'disabled-pager' : 'enabled-pager'"
+    (click)="changePage(page - 1)">
+    chevron_left
+  </span>
+
+  <div class="page">
+    {{ page + 1 }}
+  </div>
+
+  <span
+    class="material-symbols-outlined"
+    [ngClass]="page * pageSize + pageSize >= (customers | filterCustomers : filterCondition).length ? 'disabled-pager' : 'enabled-pager'"
+    (click)="changePage(page + 1)">
+    chevron_right
+  </span>
+  <span
+    class="material-symbols-outlined"
+    [ngClass]="page * pageSize + pageSize >= (customers | filterCustomers : filterCondition).length ? 'disabled-pager' : 'enabled-pager'"
+    (click)="changePage(999)">
+    last_page
+  </span>
+</div>
 
 @if (customers.length === 0) {
   <div class="no-results">Aún no tienes agregado ningún cliente...</div>
