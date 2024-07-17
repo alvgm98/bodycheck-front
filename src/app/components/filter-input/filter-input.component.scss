@@ -38,7 +38,7 @@
 
 :host input:focus,
 :host input:not(:placeholder-shown) {
-  background-color: #d4f2e9;
+  background-color: $background-color;
 }
 
 :host input:focus+.placeholder,

@@ -56,7 +56,7 @@
       transition: .4s;
     }
     i:hover {
-      background-color: $primary-color-hover;
+      background-color: $background-color;
     }
   }
   .day::after {
@@ -84,8 +84,8 @@
     list-style: none;
 
     height: 90px;
-    border-top: 2px solid $primary-color-hover;
-    border-left: 2px solid $primary-color-hover;
+    border-top: 2px solid $primary-color-low-opc;
+    border-left: 2px solid $primary-color-low-opc;
   }
 
   .hour {
