@@ -5,17 +5,19 @@ import { AppointmentService } from '../../../../services/appointment.service';
 import { Appointment } from '../../../../models/appointment';
 import { CapitalizePipe } from '../../../../pipes/capitalize.pipe';
 import { AgendaAppointmentComponent } from './components/appointment/agenda-appointment.component';
+import { AppointmentSeparatorComponent } from './components/appointment-separator/appointment-separator.component';
 
 @Component({
   selector: 'app-agenda',
   standalone: true,
-  imports: [DatePickerComponent, AgendaAppointmentComponent, CommonModule, CapitalizePipe],
+  imports: [DatePickerComponent, AgendaAppointmentComponent, AppointmentSeparatorComponent, CommonModule, CapitalizePipe],
   templateUrl: './agenda.component.html',
   styleUrl: './agenda.component.scss'
 })
 export class AgendaComponent implements AfterViewInit {
   selectedDate: Date = new Date();
   appointments: Appointment[] = [];
+  matchingDates: Date[] = [];
 
   hours: string[] = []
   MINUTE_SIZE = 3; // Pixeles que ocupa cada minuto
@@ -53,10 +55,11 @@ export class AgendaComponent implements AfterViewInit {
     this.appointmentService.loadAppointmentsByDate(this.selectedDate)
       .subscribe((data) => {
         this.appointments = data;
+        this.matchingDates = this.getMatchingDates(data);
       });
   }
 
-/*   getMatchingDates(appointments: Appointment[]): Date[] {
+  getMatchingDates(appointments: Appointment[]): Date[] {
     const matchingDates: Date[] = [];
     const endTimesSet = new Set<string>();
 
@@ -81,7 +84,7 @@ export class AgendaComponent implements AfterViewInit {
     });
 
     return matchingDates;
-  } */
+  }
 
   calculatePosition(date: Date): number {
     return (date.getHours() * 60 + date.getMinutes()) * this.MINUTE_SIZE;

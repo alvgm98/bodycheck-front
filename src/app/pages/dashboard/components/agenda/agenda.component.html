@@ -11,5 +11,9 @@
     @for (appointment of appointments; track appointment.id) {
       <app-appointment [appointment]="appointment" [top]="calculatePosition(appointment.startTime)" [MINUTE_SIZE]="MINUTE_SIZE" />
     }
+    <!-- SEPARATORS -->
+    @for (matchingDate of matchingDates; track $index) {
+      <app-appointment-separator [top]="calculatePosition(matchingDate)" />
+    }
   </ul>
 </div>
