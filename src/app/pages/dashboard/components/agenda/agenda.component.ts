@@ -18,6 +18,7 @@ export class AgendaComponent implements AfterViewInit {
   appointments: Appointment[] = [];
 
   hours: string[] = []
+  MINUTE_SIZE = 3; // Pixeles que ocupa cada minuto
 
   constructor(
     private appointmentService: AppointmentService,
@@ -53,5 +54,36 @@ export class AgendaComponent implements AfterViewInit {
       .subscribe((data) => {
         this.appointments = data;
       });
+  }
+
+/*   getMatchingDates(appointments: Appointment[]): Date[] {
+    const matchingDates: Date[] = [];
+    const endTimesSet = new Set<string>();
+
+    // Crear un Set de endTimes en formato 'HH:mm'
+    appointments.forEach(appointment => {
+      const endTime = appointment.endTime;
+      const endTimeString = `${endTime.getHours()}:${endTime.getMinutes()}`;
+      endTimesSet.add(endTimeString);
+    });
+
+    // Comparar startTimes con los endTimes almacenados en el Set
+    appointments.forEach(appointment => {
+      const startTime = appointment.startTime;
+      const startTimeString = `${startTime.getHours()}:${startTime.getMinutes()}`;
+
+      if (endTimesSet.has(startTimeString)) {
+        // Añadir solo si no está ya en el array
+        if (!matchingDates.some(date => date.getTime() === startTime.getTime())) {
+          matchingDates.push(startTime);
+        }
+      }
+    });
+
+    return matchingDates;
+  } */
+
+  calculatePosition(date: Date): number {
+    return (date.getHours() * 60 + date.getMinutes()) * this.MINUTE_SIZE;
   }
 }

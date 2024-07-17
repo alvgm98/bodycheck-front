@@ -11,25 +11,24 @@ import { CommonModule, NgClass } from '@angular/common';
   host: {
     '[style.flex-direction]': 'flexDirection',
     '[style.height.px]': 'height',
-    '[style.top.px]': 'top'
+    '[style.top.px]': 'top()'
   }
 })
 export class AgendaAppointmentComponent implements OnChanges {
-  private MIN_SIZE = 3;
+  MINUTE_SIZE = input.required<number>();
 
   appointment = input.required<Appointment>();
+  top = input.required<number>();
 
   /* Dynamic styles */
   flexDirection: string = 'column';
   height: number = 0;
-  top: number = 0;
   timelineHeight: number = 0;
 
   ngOnChanges(): void {
     this.flexDirection = this.appointment().duration < 30 ? 'row' : 'column';
-    this.height = this.appointment().duration * this.MIN_SIZE;
-    this.top = (this.appointment().startTime.getHours() * 60 + this.appointment().startTime.getMinutes()) * this.MIN_SIZE;
-    this.timelineHeight = this.appointment().duration * this.MIN_SIZE - 66;
+    this.height = this.appointment().duration * this.MINUTE_SIZE();
+    this.timelineHeight = this.appointment().duration * this.MINUTE_SIZE() - 66;
   }
 
 }

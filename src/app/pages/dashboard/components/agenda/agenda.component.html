@@ -9,7 +9,7 @@
     }
     <!-- CITAS -->
     @for (appointment of appointments; track appointment.id) {
-      <app-appointment [appointment]="appointment" />
+      <app-appointment [appointment]="appointment" [top]="calculatePosition(appointment.startTime)" [MINUTE_SIZE]="MINUTE_SIZE" />
     }
   </ul>
 </div>
