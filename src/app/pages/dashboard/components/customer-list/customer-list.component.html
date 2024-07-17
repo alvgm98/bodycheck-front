@@ -55,7 +55,7 @@
     </th>
   </thead>
   <tbody>
-    @for (customer of customers | filterCustomers : filterCondition | sortCustomers : sortField : sortOrder | paginateCustomers : pageSize : page ; track customer.id) {
+    @for (customer of filteredCustomers | sortCustomers : sortField : sortOrder | paginateCustomers : pageSize : page ; track customer.id) {
       <tr>
         <td>{{ customer.firstName + " " + customer.lastName | capitalize }}</td>
         <td>{{ customer.phone }}</td>
@@ -67,39 +67,41 @@
 </table>
 
 <div class="paginator">
-  <span
-    class="material-symbols-outlined"
-    [ngClass]="page === 0 ? 'disabled-pager' : 'enabled-pager'"
-    (click)="changePage(0)">
-    first_page
-  </span>
-  <span
-    class="material-symbols-outlined"
-    [ngClass]="page === 0 ? 'disabled-pager' : 'enabled-pager'"
-    (click)="changePage(page - 1)">
-    chevron_left
-  </span>
+    @if (filteredCustomers.length > pageSize) {
+    <span
+      class="material-symbols-outlined"
+      [ngClass]="page === 0 ? 'disabled-pager' : 'enabled-pager'"
+      (click)="changePage(0)">
+      first_page
+    </span>
+    <span
+      class="material-symbols-outlined"
+      [ngClass]="page === 0 ? 'disabled-pager' : 'enabled-pager'"
+      (click)="changePage(page - 1)">
+      chevron_left
+    </span>
 
-  <div class="page">
-    {{ page + 1 }}
-  </div>
+    <div class="page">
+      {{ page + 1 }}
+    </div>
 
-  <span
-    class="material-symbols-outlined"
-    [ngClass]="page * pageSize + pageSize >= (customers | filterCustomers : filterCondition).length ? 'disabled-pager' : 'enabled-pager'"
-    (click)="changePage(page + 1)">
-    chevron_right
-  </span>
-  <span
-    class="material-symbols-outlined"
-    [ngClass]="page * pageSize + pageSize >= (customers | filterCustomers : filterCondition).length ? 'disabled-pager' : 'enabled-pager'"
-    (click)="changePage(999)">
-    last_page
-  </span>
+    <span
+      class="material-symbols-outlined"
+      [ngClass]="page * pageSize + pageSize >= filteredCustomers.length ? 'disabled-pager' : 'enabled-pager'"
+      (click)="changePage(page + 1)">
+      chevron_right
+    </span>
+    <span
+      class="material-symbols-outlined"
+      [ngClass]="page * pageSize + pageSize >= filteredCustomers.length ? 'disabled-pager' : 'enabled-pager'"
+      (click)="changeToLastPage()">
+      last_page
+    </span>
+  }
 </div>
 
 @if (customers.length === 0) {
   <div class="no-results">Aún no tienes agregado ningún cliente...</div>
-} @else if ((customers | filterCustomers : filterCondition).length === 0) {
+} @else if (filteredCustomers.length === 0) {
   <div class="no-results">No hay coincidencias...</div>
 }

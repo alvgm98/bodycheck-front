@@ -12,13 +12,14 @@ import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-customer-list',
   standalone: true,
-  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, FilterCustomersPipe, SortCustomersPipe, PaginateCustomersPipe, NgClass],
+  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, SortCustomersPipe, PaginateCustomersPipe, NgClass],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
 export class CustomerListComponent implements AfterViewInit {
 
   customers: Customer[] = [];
+  filteredCustomers: Customer[] = [];
 
   /* Filter */
   filterCondition: string = '';
@@ -35,12 +36,16 @@ export class CustomerListComponent implements AfterViewInit {
   constructor(
     private customerService: CustomerService,
     private el: ElementRef,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private filterPipe: FilterCustomersPipe
   ) {
     this.customerService.loadCustomers();
 
     effect(() => {
       this.customers = customerService.customers();
+      if (this.customers.length > 0) {
+        this.setFilteredCustomers();
+      }
     })
   }
 
@@ -52,6 +57,11 @@ export class CustomerListComponent implements AfterViewInit {
   /* Filter */
   filterValue(filter: string) {
     this.filterCondition = filter;
+    this.setFilteredCustomers();
+  }
+
+  setFilteredCustomers() {
+    this.filteredCustomers = this.filterPipe.transform(this.customers, this.filterCondition);
   }
 
   /* Sorter */
@@ -78,5 +88,9 @@ export class CustomerListComponent implements AfterViewInit {
     this.page = page;
 
     console.log(page);
+  }
+
+  changeToLastPage() {
+    this.page = Math.floor(this.filteredCustomers.length / this.pageSize);
   }
 }

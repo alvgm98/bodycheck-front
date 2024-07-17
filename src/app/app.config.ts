@@ -9,6 +9,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { authInterceptor } from './auth/services/auth.interceptor';
+import { FilterCustomersPipe } from './pipes/filter-customers.pipe';
 
 registerLocaleData(localeEs, 'es-ES');
 
@@ -22,5 +23,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideAnimationsAsync(),
     DatePipe,
+    FilterCustomersPipe,
   ]
 };
