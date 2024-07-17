@@ -7,8 +7,8 @@
 
   width: 100%;
 
-  border-left: 8px solid $primary-color-700;
-  background-color: $primary-color;
+  border-left: 8px solid $secondary-color-300;
+  background-color: $secondary-color-200;
   color: #144d46;
 
   display: flex;
@@ -90,6 +90,6 @@
     left: 15px;
     transform: translateY(-50%);
 
-    border: 1px dashed $primary-color-700;
+    border: 1px dashed $secondary-color-300;
   }
 }
