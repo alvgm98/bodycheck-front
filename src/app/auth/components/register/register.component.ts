@@ -5,6 +5,7 @@ import { RegisterRequest } from '../../models/register-request';
 import { passwordsMatchValidator, passwordStrengthValidator } from '../../validators/password.validator';
 import { NgClass } from '@angular/common';
 import { ToggleButtonComponent } from '../../../components/toggle-button/toggle-button.component';
+import { Situation } from '../../models/enums/situation.enum';
 
 @Component({
   selector: 'app-register',
@@ -40,7 +41,7 @@ export class RegisterComponent implements OnInit {
     firstName: ["", [Validators.required]],
     lastName: ["", [Validators.required]],
     phone: ["", [Validators.required]],
-    situation: ["Estudiante"],
+    situation: [Situation.E],
     username: ["", [Validators.required, Validators.email]],
     password: ["", [Validators.required, passwordStrengthValidator()]],
     password2: ["", [Validators.required]],
@@ -68,7 +69,7 @@ export class RegisterComponent implements OnInit {
 
   selectSituation(situation: string) {
     this.registerForm.patchValue({
-      situation: situation
+      situation: Situation[situation.charAt(0).toUpperCase() as keyof typeof Situation]
     });
   }
 
