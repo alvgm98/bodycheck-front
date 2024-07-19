@@ -21,6 +21,7 @@ export class AppointmentService {
       .pipe(
         map(appointments =>
           appointments.map(appointment => {
+            appointment.date = new Date(appointment.date);
             appointment.startTime = new Date(appointment.startTime);
             appointment.endTime = new Date(appointment.endTime);
             appointment.duration = this.calcDuration(appointment.startTime, appointment.endTime)
