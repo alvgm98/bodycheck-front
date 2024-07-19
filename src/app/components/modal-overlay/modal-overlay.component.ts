@@ -5,8 +5,13 @@ import { Component, output } from '@angular/core';
   standalone: true,
   imports: [],
   template: '',
-  styleUrl: './modal-overlay.component.scss',
+  styles: [`
+    :host {
+      background-color:  #00000080;
+    }
+  `],
   host: {
+    'class': 'modal-overlay',
     '(click)': 'close()'
   }
 })
