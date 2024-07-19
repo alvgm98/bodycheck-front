@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Appointment } from '../models/appointment';
 import { environment } from '../../environments/environment.development';
-import { map, Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
 @Injectable({
@@ -10,25 +10,32 @@ import { DatePipe } from '@angular/common';
 })
 export class AppointmentService {
 
+  selectedDate = signal<Date>(new Date());
+  agendaAppointments = signal<Appointment[]>([]);
+
   constructor(
     private http: HttpClient,
     private datePipe: DatePipe
-  ) { }
+  ) {
+    this.loadAppointmentsByDate();
+  }
 
-  loadAppointmentsByDate(date: Date): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(
-      environment.apiAppointmentUrl + '/date/' + this.datePipe.transform(date, 'yyyy-MM-dd'))
+  loadAppointmentsByDate(): void {
+    this.http.get<Appointment[]>(
+      environment.apiAppointmentUrl + '/date/' + this.datePipe.transform(this.selectedDate(), 'yyyy-MM-dd'))
       .pipe(
-        map(appointments =>
-          appointments.map(appointment => {
-            appointment.date = new Date(appointment.date);
-            appointment.startTime = new Date(appointment.startTime);
-            appointment.endTime = new Date(appointment.endTime);
-            appointment.duration = this.calcDuration(appointment.startTime, appointment.endTime)
-            return appointment;
-          })
+        tap(appointments =>
+          this.agendaAppointments.set(
+            appointments.map(appointment => {
+              appointment.date = new Date(appointment.date);
+              appointment.startTime = new Date(appointment.startTime);
+              appointment.endTime = new Date(appointment.endTime);
+              appointment.duration = this.calcDuration(appointment.startTime, appointment.endTime)
+              return appointment;
+            })
+          )
         )
-      );
+      ).subscribe();
   }
 
   private calcDuration(startTime: Date, endTime: Date) {

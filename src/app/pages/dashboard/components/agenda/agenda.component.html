@@ -1,4 +1,4 @@
-<app-date-picker [(selected)]="selectedDate" (selectedChange)="getAppointmentsByDate()" />
+<app-date-picker [(selected)]="selectedDate" (selectedChange)="selectDate()" />
 
 <div class="timetable">
   <h4 class="day"><i class="fa-solid fa-plus" (click)="openAppointmentForm(null)"></i>{{ selectedDate | date: 'EEEE dd MMM yyyy' | capitalize }}</h4>

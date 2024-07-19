@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, output } from '@angular/core';
+import { AfterViewInit, Component, effect, ElementRef, output } from '@angular/core';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../../services/appointment.service';
@@ -26,8 +26,12 @@ export class AgendaComponent implements AfterViewInit {
     private appointmentService: AppointmentService,
     private el: ElementRef
   ) {
-    this.getAppointmentsByDate();
     this.generateHours();
+
+    effect(() => {
+      this.appointments = appointmentService.agendaAppointments();
+      this.matchingDates = this.getMatchingDates(this.appointments);
+    })
   }
 
   ngAfterViewInit(): void {
@@ -51,12 +55,12 @@ export class AgendaComponent implements AfterViewInit {
     }
   }
 
+  selectDate() {
+    this.appointmentService.selectedDate.set(this.selectedDate);
+    this.getAppointmentsByDate();
+  }
   getAppointmentsByDate() {
-    this.appointmentService.loadAppointmentsByDate(this.selectedDate)
-      .subscribe((data) => {
-        this.appointments = data;
-        this.matchingDates = this.getMatchingDates(data);
-      });
+    this.appointmentService.loadAppointmentsByDate();
   }
 
   getMatchingDates(appointments: Appointment[]): Date[] {
