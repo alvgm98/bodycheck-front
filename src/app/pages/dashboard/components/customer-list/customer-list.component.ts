@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, effect, ElementRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, effect, ElementRef, output } from '@angular/core';
 import { CustomerService } from '../../../../services/customer.service';
 import { Customer, CustomerKey } from '../../../../models/customer';
 import { CapitalizePipe } from '../../../../pipes/capitalize.pipe';
@@ -92,5 +92,11 @@ export class CustomerListComponent implements AfterViewInit {
 
   changeToLastPage() {
     this.page = Math.floor(this.filteredCustomers.length / this.pageSize);
+  }
+
+  /* Abrir Customer Form Modal */
+  openCustomerFormEvent = output<void>();
+  openCustomerForm() {
+    this.openCustomerFormEvent.emit();
   }
 }

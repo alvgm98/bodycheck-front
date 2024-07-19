@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, output } from '@angular/core';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../../services/appointment.service';
@@ -88,5 +88,11 @@ export class AgendaComponent implements AfterViewInit {
 
   calculatePosition(date: Date): number {
     return (date.getHours() * 60 + date.getMinutes()) * this.MINUTE_SIZE;
+  }
+
+  /* Abrir Appointment Form Modal */
+  openAppointmentFormEvent = output<Appointment | null>();
+  openAppointmentForm(appointment: Appointment | null) {
+    this.openAppointmentFormEvent.emit(appointment);
   }
 }

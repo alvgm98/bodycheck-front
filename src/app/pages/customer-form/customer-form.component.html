@@ -1,0 +1,50 @@
+<form class="modal-form">
+  <h3>Nuevo Cliente</h3>
+
+  <div class="form-row">
+    <!-- First Name -->
+    <div class="input-border-group">
+      <input formControlName="firstName" placeholder=" " type="text" />
+      <label class="placeholder">Nombre*</label>
+      @if (controls.firstName.invalid && (controls.firstName.dirty || controls.firstName.touched)) {
+        @if (controls.firstName.errors?.['required']) {
+          <div class="invalid-field">Introduce tu nombre.</div>
+        }
+      }
+    </div>
+    <!-- Last Name -->
+    <div class="input-border-group">
+      <input formControlName="lastName" placeholder=" " type="text" />
+      <label class="placeholder">Apellido*</label>
+      @if (controls.lastName.invalid && (controls.lastName.dirty || controls.lastName.touched)) {
+        @if (controls.lastName.errors?.['required']) {
+          <div class="invalid-field">Introduce tu apellido.</div>
+        }
+      }
+    </div>
+  </div>
+
+  <div class="form-row">
+    <!-- First Name -->
+    <div class="input-border-group">
+      <input formControlName="email" placeholder=" " type="email" />
+      <label class="placeholder">Email*</label>
+      @if (controls.email.invalid && (controls.email.dirty || controls.email.touched)) {
+        @if (controls.email.errors?.['required']) {
+          <div class="invalid-field">Introduce el correo del cliente.</div>
+        }
+      }
+    </div>
+    <!-- Last Name -->
+    <div class="input-border-group">
+      <input formControlName="lastName" placeholder=" " type="text" />
+      <label class="placeholder">Teléfono*</label>
+      @if (controls.lastName.invalid && (controls.lastName.dirty || controls.lastName.touched)) {
+        @if (controls.lastName.errors?.['required']) {
+          <div class="invalid-field">Introduce el teléfono del cliente</div>
+        }
+      }
+    </div>
+  </div>
+
+</form>
