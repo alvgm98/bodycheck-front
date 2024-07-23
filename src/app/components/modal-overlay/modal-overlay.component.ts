@@ -7,6 +7,7 @@ import { Component, output } from '@angular/core';
   template: '',
   styles: [`
     :host {
+      z-index: 4;
       background-color:  #00000080;
     }
   `],
