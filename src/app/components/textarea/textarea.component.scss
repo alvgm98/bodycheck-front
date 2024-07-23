@@ -1,0 +1,86 @@
+@import 'colors';
+
+@mixin placeholder-moved {
+  top: -11px;
+  left: 15px;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  padding: 2px 10px;
+  font-size: 12px;
+  background-color: $white;
+}
+
+:host {
+  position: relative;
+  width: 100%;
+
+  textarea {
+    resize: none;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 200px;
+
+    outline: 0;
+    border: 1px solid $white;
+    border-bottom: 2px solid $primary-color;
+    border-radius: 15px 15px 0 0;
+    padding: 16px 22px 8px 22px;
+
+    font-size: 16px;
+    background-color: $white;
+    color: $black;
+
+    transition: 300ms;
+  }
+
+  .placeholder {
+    position: absolute;
+    top: 15px;
+    left: 23px;
+
+    font-size: 16px;
+    color: $black;
+
+    transition: 300ms;
+    pointer-events: none;
+  }
+
+  textarea:focus {
+    border: 1px solid $primary-color;
+    border-bottom: 2px solid $primary-color;
+
+    +.placeholder {
+      @include placeholder-moved();
+    }
+  }
+
+  .placeholder-moved {
+    @include placeholder-moved();
+  }
+
+  .maxlength-info {
+    position: absolute;
+    bottom: 18px;
+    right: 22px;
+    color: $black;
+  }
+}
+
+textarea::-webkit-scrollbar {
+  width: 10px;
+  overflow: hidden;
+}
+textarea::-webkit-scrollbar-track {
+  background: #b0e0d8;
+  border-radius: 8px 8px 0 0;
+}
+textarea::-webkit-scrollbar-thumb {
+  background: $primary-color;
+  border-radius: 8px 8px 0 0;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+  background: $primary-color-700;
+}
+
+

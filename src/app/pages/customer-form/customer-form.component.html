@@ -1,4 +1,4 @@
-<form class="modal-form">
+<form [formGroup]="customerForm" class="modal-form">
   <h3>Nuevo Cliente</h3>
 
   <div class="form-row">
@@ -15,7 +15,7 @@
     <!-- Last Name -->
     <div class="input-border-group">
       <input formControlName="lastName" placeholder=" " type="text" />
-      <label class="placeholder">Apellido*</label>
+      <label class="placeholder">Apellidos*</label>
       @if (controls.lastName.invalid && (controls.lastName.dirty || controls.lastName.touched)) {
         @if (controls.lastName.errors?.['required']) {
           <div class="invalid-field">Introduce tu apellido.</div>
@@ -27,7 +27,7 @@
   <div class="form-row">
     <!-- First Name -->
     <div class="input-border-group">
-      <input formControlName="email" placeholder=" " type="email" />
+      <input formControlName="email" placeholder=" " type="text" />
       <label class="placeholder">Email*</label>
       @if (controls.email.invalid && (controls.email.dirty || controls.email.touched)) {
         @if (controls.email.errors?.['required']) {
@@ -46,5 +46,25 @@
       }
     </div>
   </div>
+
+  <div class="form-row">
+    <div class="input-border-group">
+      <input formControlName="birthdate" placeholder=" " type="date" />
+      <label class="placeholder">Fecha de Nacimiento*</label>
+      @if (controls.birthdate.invalid && (controls.birthdate.dirty || controls.birthdate.touched)) {
+        @if (controls.birthdate.errors?.['required']) {
+          <div class="invalid-field">Introduce la fecha de nacimiento</div>
+        }
+      }
+    </div>
+
+    <app-toggle-button (selectEvent)="selectGender($event)" [leftBtn]="'Masculino'" [rightBtn]="'Femenino'" />
+  </div>
+
+  <div class="form-row">
+    <app-textarea (contentEmitter)="getObservations($event)" [placeholderName]="'Observaciones'" />
+  </div>
+
+  <button class="btn flat-button" (click)="createCustomer()">Registrar Cliente</button>
 
 </form>
