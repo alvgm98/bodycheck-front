@@ -19,7 +19,6 @@
   overflow-y: scroll;
   overflow-x: hidden;
   background-color: $white;
-  color: $black;
 
   .day {
     position: sticky;
@@ -45,7 +44,6 @@
       height: 40px;
       width: 40px;
 
-      color: $black;
       background-color: $white;
       border: 2px solid $black;
       border-radius: 10px;
