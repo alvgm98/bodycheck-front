@@ -1,5 +1,5 @@
 <p>{{ selected ? selected : title() + '*' }}</p>
-<i class="fa-solid fa-angle-down" [ngStyle]="showDropdown ? {'transform': 'rotate(180deg)'} : {}" (click)="toggleShowDropdown()"></i>
+<i class="fa-solid fa-angle-down" [ngStyle]="showDropdown ? {'transform': 'rotate(180deg)'} : {}" ></i>
 
 @if (showDropdown) {
   <div class="dropdown deploy-dropdown-animation">

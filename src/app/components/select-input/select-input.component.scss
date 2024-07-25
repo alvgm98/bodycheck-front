@@ -18,8 +18,8 @@
   align-items: center;
 
   p {
-    // text-align: center;
     flex: 1;
+    user-select: none;
     margin: 0;
   }
 

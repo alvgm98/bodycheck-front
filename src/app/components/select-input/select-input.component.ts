@@ -9,6 +9,7 @@ import { Component, ElementRef, input, output } from '@angular/core';
   styleUrl: './select-input.component.scss',
   host: {
     '[class.invalid]': 'hasErrors()',
+    '(click)': "toggleShowDropdown()"
   }
 })
 export class SelectInputComponent {
