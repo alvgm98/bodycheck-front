@@ -159,6 +159,19 @@ main {
   background-color: $white;
 }
 
+
+.input-border-group .input-info {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+
+  height: 45px;
+
+  color: $primary-color;
+  font-weight: bold;
+  user-select: none;
+}
+
 // Eliminar las ayudas a los input numericos
 /* Chrome, Safari, Edge, Opera */
 input[type=number]::-webkit-inner-spin-button,
@@ -182,6 +195,9 @@ input[type=number] {
   ~.placeholder {
     color: $error-color;
     border-color: $error-color;
+  }
+  ~.input-info {
+    color: $error-color;
   }
 }
 
