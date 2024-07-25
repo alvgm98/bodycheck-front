@@ -17,7 +17,7 @@
   transition: .5s;
 }
 :host:hover {
-  background-color: #c8f0ea;
+  background-color: $tertiary-color-200;
 }
 
 .toggle-button {
@@ -41,7 +41,7 @@
   width: 50%;
   height: 100%;
 
-  background: #b0e0d8;
+  background: $tertiary-color-300;
   border-radius: 15px 15px 0 0;
 
   transition: .3s;
