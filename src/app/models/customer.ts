@@ -1,3 +1,4 @@
+import { Ethnicity } from "./enums/ethnicity.enum";
 import { Gender } from "./enums/gender.enum";
 
 export interface Customer {
@@ -7,8 +8,9 @@ export interface Customer {
   email: string;
   phone: string;
   birthdate: Date;
-  gender: Gender;
   height: number;
+  gender: Gender;
+  ethnicity: Ethnicity;
   observations: string;
 }
 
