@@ -1,0 +1,15 @@
+<p>{{ selected ? selected : title() + '*' }}</p>
+<i class="fa-solid fa-angle-down" [ngStyle]="showDropdown ? {'transform': 'rotate(180deg)'} : {}" (click)="toggleShowDropdown()"></i>
+
+@if (showDropdown) {
+  <div class="dropdown deploy-dropdown-animation">
+    @for (option of options(); track $index) {
+      <div class="option" (click)="select(option)">
+        {{ option }}
+      </div>
+      @if ($index < options().length - 1) {
+        <div class="separator"></div>
+      }
+    }
+  </div>
+}
