@@ -84,6 +84,7 @@ main {
 
   transition: .4s;
 }
+
 .btn:focus-visible {
   outline: 0;
 }
@@ -158,6 +159,20 @@ main {
   background-color: $white;
 }
 
+// Eliminar las ayudas a los input numericos
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
 /* VALIDACIONES */
 
 .ng-invalid:not(form).ng-touched {
@@ -194,6 +209,7 @@ main {
 .pop-in-login {
   animation: pop-in-login-modal 0.3s;
 }
+
 @keyframes pop-in-login-modal {
   0% {
     height: 100px;
@@ -203,9 +219,11 @@ main {
     height: 250px;
   }
 }
+
 .pop-out-login {
   animation: pop-out-login-modal 0.3s forwards;
 }
+
 @keyframes pop-out-login-modal {
   100% {
     scale: 0;
@@ -215,17 +233,21 @@ main {
 .pop-in-register {
   animation: pop-in-register-modal 1s forwards;
 }
+
 @keyframes pop-in-register-modal {
   0% {
     transform: translateX(-100dvw);
   }
+
   100% {
     transform: translateX(0);
   }
 }
+
 .pop-out-register {
   animation: pop-out-register-modal 1s forwards;
 }
+
 @keyframes pop-out-register-modal {
   to {
     transform: translateX(-100dvw);
@@ -235,17 +257,21 @@ main {
 .pop-in-welcome {
   animation: pop-in-welcome-modal 1s forwards;
 }
+
 @keyframes pop-in-welcome-modal {
   from {
     transform: translateX(100dvw);
   }
+
   to {
     transform: translateX(0);
   }
 }
+
 .pop-out-welcome {
   animation: pop-out-welcome-modal 1s forwards;
 }
+
 @keyframes pop-out-welcome-modal {
   to {
     transform: translateX(100dvw);
