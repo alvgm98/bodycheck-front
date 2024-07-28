@@ -12,7 +12,10 @@ import { ethnicityOptions } from '../../models/enums/ethnicity.enum';
   standalone: true,
   imports: [ToggleButtonComponent, SelectInputComponent, TextareaComponent, ReactiveFormsModule],
   templateUrl: './customer-form.component.html',
-  styleUrl: './customer-form.component.scss'
+  styleUrl: './customer-form.component.scss',
+  host: {
+    'class': 'form-pop-up-animation'
+  }
 })
 export class CustomerFormComponent {
 

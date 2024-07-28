@@ -9,6 +9,16 @@ import { Component, output } from '@angular/core';
     :host {
       z-index: 4;
       background-color:  #00000080;
+      animation: overlay-fade-in .5s;
+    }
+
+    @keyframes overlay-fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
   `],
   host: {

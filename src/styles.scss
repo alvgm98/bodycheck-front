@@ -196,6 +196,7 @@ input[type=number] {
     color: $error-color;
     border-color: $error-color;
   }
+
   ~.input-info {
     color: $error-color;
   }
@@ -322,5 +323,21 @@ input[type=number] {
     width: 100%;
     display: flex;
     gap: 40px
+  }
+}
+
+.form-pop-up-animation {
+  animation: form-pop-up .5s forwards;
+}
+
+@keyframes form-pop-up {
+  from {
+    top: 100%;
+    scale: 0;
+  }
+
+  to {
+    top: 50%;
+    scale: 1;
   }
 }
