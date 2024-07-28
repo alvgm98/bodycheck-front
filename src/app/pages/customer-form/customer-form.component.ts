@@ -4,15 +4,19 @@ import { Gender } from '../../models/enums/gender.enum';
 import { ToggleButtonComponent } from '../../components/toggle-button/toggle-button.component';
 import { TextareaComponent } from '../../components/textarea/textarea.component';
 import { Customer } from '../../models/customer';
+import { SelectInputComponent } from '../../components/select-input/select-input.component';
+import { ethnicityOptions } from '../../models/enums/ethnicity.enum';
 
 @Component({
   selector: 'app-customer-form',
   standalone: true,
-  imports: [ToggleButtonComponent, TextareaComponent, ReactiveFormsModule],
+  imports: [ToggleButtonComponent, SelectInputComponent, TextareaComponent, ReactiveFormsModule],
   templateUrl: './customer-form.component.html',
   styleUrl: './customer-form.component.scss'
 })
 export class CustomerFormComponent {
+
+  ethnicityOptions: string[] = ethnicityOptions;
 
   constructor(private fb: FormBuilder) { }
 
@@ -22,8 +26,9 @@ export class CustomerFormComponent {
     phone: ["", [Validators.required]],
     email: ["", [Validators.required, Validators.email]],
     birthdate: ["", [Validators.required]],
+    height: ["", [Validators.required]],
     gender: [Gender.M],
-    height: [0, [Validators.required]],
+    ethnicity: ["", [Validators.required]],
     observations: [""]
   })
   get controls() {
@@ -36,6 +41,12 @@ export class CustomerFormComponent {
     });
   }
 
+  selectEthnicity(ethnicity: string) {
+    this.customerForm.patchValue({
+      ethnicity: ethnicity
+    });
+  }
+
   getObservations(observations: string) {
     this.customerForm.patchValue({
       observations: observations
@@ -43,6 +54,11 @@ export class CustomerFormComponent {
   }
 
   createCustomer() {
+    if (!this.customerForm.valid) {
+      this.customerForm.markAllAsTouched();
+      return;
+    }
+
     console.log(this.customerForm.value)
     console.log(this.customerForm.value as unknown as Customer)
   }

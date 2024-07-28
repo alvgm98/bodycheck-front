@@ -1,5 +1,5 @@
 <form [formGroup]="customerForm" class="modal-form">
-  <h3>Nuevo Cliente</h3>
+  <h3>Añadir Cliente</h3>
 
   <div class="form-row">
     <!-- First Name -->
@@ -31,7 +31,7 @@
       <label class="placeholder">Email*</label>
       @if (controls.email.invalid && (controls.email.dirty || controls.email.touched)) {
         @if (controls.email.errors?.['required']) {
-          <div class="invalid-field">Introduce el correo del cliente.</div>
+          <div class="invalid-field">Introduce el correo.</div>
         }
       }
     </div>
@@ -41,7 +41,7 @@
       <label class="placeholder">Teléfono*</label>
       @if (controls.lastName.invalid && (controls.lastName.dirty || controls.lastName.touched)) {
         @if (controls.lastName.errors?.['required']) {
-          <div class="invalid-field">Introduce el teléfono del cliente</div>
+          <div class="invalid-field">Introduce el teléfono.</div>
         }
       }
     </div>
@@ -53,12 +53,38 @@
       <label class="placeholder">Fecha de Nacimiento*</label>
       @if (controls.birthdate.invalid && (controls.birthdate.dirty || controls.birthdate.touched)) {
         @if (controls.birthdate.errors?.['required']) {
-          <div class="invalid-field">Introduce la fecha de nacimiento</div>
+          <div class="invalid-field">Introduce la fecha de nacimiento.</div>
         }
       }
     </div>
 
     <app-toggle-button (selectEvent)="selectGender($event)" [leftBtn]="'Masculino'" [rightBtn]="'Femenino'" />
+  </div>
+
+  <div class="form-row">
+    <div class="input-border-group">
+      <input formControlName="height" placeholder=" " type="number"/>
+      <label class="placeholder">Altura*</label>
+      <div class="input-info">cm</div>
+      @if (controls.height.invalid && (controls.height.dirty || controls.height.touched)) {
+        @if (controls.height.errors?.['required']) {
+          <div class="invalid-field">Introduce la altura.</div>
+        }
+      }
+    </div>
+
+    @let ethnicityHasErrors = controls.ethnicity.touched && controls.ethnicity.errors?.['required'];
+    <div style="width: 100%;">
+      <app-select-input
+      (selectEvent)="selectEthnicity($event)"
+      [title]="'Etnia'"
+      [options]="ethnicityOptions"
+      [hasErrors]="ethnicityHasErrors"
+      />
+      @if (ethnicityHasErrors) {
+        <div class="invalid-field">Selecciona la etnia.</div>
+      }
+    </div>
   </div>
 
   <div class="form-row">
