@@ -17,7 +17,7 @@ export class SelectInputComponent {
   selected: string = '';
   selectEvent = output<string>();
   title = input.required<string>();
-  options = input.required<string[]>();
+  options = input.required<{key: string, value: string}[]>();
   hasErrors = input<boolean>(false);
 
   showDropdown = false;
@@ -39,9 +39,9 @@ export class SelectInputComponent {
     setTimeout(() => this.showDropdown = false, 200);
   }
 
-  select(option: string) {
-    this.selected = option;
-    this.selectEvent.emit(this.selected);
+  select(option: {key: string, value: string}) {
+    this.selected = option.value;
+    this.selectEvent.emit(option.key);
     this.closeDropdown();
   }
 }

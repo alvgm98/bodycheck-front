@@ -5,7 +5,7 @@
   <div class="dropdown deploy-dropdown-animation">
     @for (option of options(); track $index) {
       <div class="option" (click)="select(option)">
-        {{ option }}
+        {{ option.value }}
       </div>
       @if ($index < options().length - 1) {
         <div class="separator"></div>

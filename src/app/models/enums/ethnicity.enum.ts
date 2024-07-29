@@ -1,7 +1,9 @@
 export enum Ethnicity {
-  AS, // Asiatico
-  AA, // Africano
-  CH  // Caucasico
+  AS, AA, CH
 }
 
-export const ethnicityOptions = ['Asiática', 'Africana', 'Caucásica'];
+export const ethnicityOptions = [
+  { key: 'AS', value: 'Asiática' },
+  { key: 'AA', value: 'Africana' },
+  { key: 'CH', value: 'Caucásica' }
+];
