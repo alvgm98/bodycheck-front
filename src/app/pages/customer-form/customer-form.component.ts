@@ -5,7 +5,7 @@ import { ToggleButtonComponent } from '../../components/toggle-button/toggle-but
 import { TextareaComponent } from '../../components/textarea/textarea.component';
 import { Customer } from '../../models/customer';
 import { SelectInputComponent } from '../../components/select-input/select-input.component';
-import { Ethnicity, ethnicityOptions } from '../../models/enums/ethnicity.enum';
+import { ethnicityOptions } from '../../models/enums/ethnicity.enum';
 import { CustomerService } from '../../services/customer.service';
 
 @Component({
