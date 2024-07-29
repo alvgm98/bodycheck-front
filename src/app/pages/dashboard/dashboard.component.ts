@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, ElementRef } from '@angular/core';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
 import { ModalOverlayComponent } from '../../components/modal-overlay/modal-overlay.component';
@@ -20,7 +20,10 @@ export class DashboardComponent {
 
   errorMessages: string[] = [];
 
-  constructor(private errorService: ErrorService) {
+  constructor(
+    private errorService: ErrorService,
+    private el: ElementRef
+  ) {
     effect(() => {
       if (errorService.errorMessage()) {
         this.errorMessages.push(errorService.errorMessage());
@@ -36,8 +39,22 @@ export class DashboardComponent {
   }
 
   closeModals() {
-    this.showCustomerForm = false;
-    this.showAppointmentForm = false;
+    const overlay = this.el.nativeElement.querySelector('app-modal-overlay');
+    overlay.classList.remove('overlay-fade-in-animation');
+    overlay.classList.add('overlay-fade-out-animation');
+
+    if (this.showCustomerForm) {
+      const customerForm = this.el.nativeElement.querySelector('app-customer-form');
+      customerForm.classList.remove('form-pop-up-animation');
+      customerForm.classList.add('form-pop-down-animation');
+      setTimeout(() => this.showCustomerForm = false, 300);
+    }
+    if (this.showAppointmentForm) {
+      const appointmentForm = this.el.nativeElement.querySelector('app-appointment-form');
+      appointmentForm.classList.remove('form-pop-up-animation');
+      appointmentForm.classList.add('form-pop-down-animation');
+      setTimeout(() => this.showAppointmentForm = false, 300);
+    }
   }
 
   closeError(index: number) {
