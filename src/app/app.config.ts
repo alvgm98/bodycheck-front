@@ -10,6 +10,7 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { authInterceptor } from './auth/services/auth.interceptor';
 import { FilterCustomersPipe } from './pipes/filter-customers.pipe';
+import { errorInterceptor } from './shared/error.interceptor';
 
 registerLocaleData(localeEs, 'es-ES');
 
@@ -19,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     { provide: LOCALE_ID, useValue: 'es-ES' },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor, errorInterceptor])),
     provideClientHydration(),
     provideAnimationsAsync(),
     DatePipe,

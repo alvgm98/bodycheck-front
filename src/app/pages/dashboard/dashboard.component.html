@@ -10,3 +10,7 @@
     <app-customer-form (closeEvent)="closeModals()"/>
   }
 }
+
+@for (errorMessage of errorMessages; track $index) {
+  <app-error-modal (closeEvent)="closeError($index)" [errorMessage]="errorMessage" />
+}

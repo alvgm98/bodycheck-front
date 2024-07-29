@@ -1,0 +1,33 @@
+@import 'colors';
+
+:host {
+  cursor: pointer;
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  box-sizing: border-box;
+  height: 60px;
+  border-radius: 40px;
+  padding-inline: 15px;
+
+  background-color: $bg-error-color;
+  color: #000;
+  font-family: 'Satoshi-Medium', sans-serif;
+
+  display: flex;
+  align-items: center;
+
+  transition: 300ms;
+  animation: error-appear 300ms;
+}
+
+@keyframes error-appear {
+  from {
+    bottom: -60px;
+  }
+  to {
+    bottom: 60px;
+  }
+}

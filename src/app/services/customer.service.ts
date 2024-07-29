@@ -22,17 +22,15 @@ export class CustomerService {
         tap(data => {
           this.customers.set(data);
           this.customersLoaded = true;
-          this.loading = false;
-        })
+        }),
       ).subscribe();
+      this.loading = false;
     }
   }
 
   addCustomer(customer: Customer) {
     this.http.post<Customer>(environment.apiCustomerUrl, customer).pipe(
-      tap(data => {
-        this.customers.set([...this.customers(), data])
-      })
+      tap(data => this.customers.set([...this.customers(), data])),
     ).subscribe();
   }
 }
