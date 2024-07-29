@@ -16,8 +16,9 @@ export class FilterCustomersPipe implements PipeTransform {
       return [];
     }
 
-    return customers.filter(customer => (customer.firstName + " " + customer.lastName).toLocaleLowerCase().includes(condition.toLocaleLowerCase()));
-
+    return customers.filter(customer =>
+      (customer.firstName + " " + customer.lastName).toLocaleLowerCase().includes(condition.toLocaleLowerCase())
+      || customer.phone.includes(condition)
+      || customer.email.includes(condition));
   }
-
 }
