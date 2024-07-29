@@ -1,4 +1,4 @@
-<form [formGroup]="customerForm" class="modal-form">
+<form [formGroup]="customerForm" class="modal-form" (submit)="createCustomer()">
   <h3>Añadir Cliente</h3>
 
   <div class="form-row">
@@ -28,20 +28,20 @@
     <!-- First Name -->
     <div class="input-border-group">
       <input formControlName="email" placeholder=" " type="text" />
-      <label class="placeholder">Email*</label>
+      <label class="placeholder">Email</label>
       @if (controls.email.invalid && (controls.email.dirty || controls.email.touched)) {
-        @if (controls.email.errors?.['required']) {
-          <div class="invalid-field">Introduce el correo.</div>
+        @if (controls.email.errors?.['email']) {
+          <div class="invalid-field">Email no válido.</div>
         }
       }
     </div>
     <!-- Last Name -->
     <div class="input-border-group">
-      <input formControlName="lastName" placeholder=" " type="text" />
-      <label class="placeholder">Teléfono</label>
-      @if (controls.lastName.invalid && (controls.lastName.dirty || controls.lastName.touched)) {
-        @if (controls.lastName.errors?.['email']) {
-          <div class="invalid-field">Email incorrecto.</div>
+      <input formControlName="phone" placeholder=" " type="text" />
+      <label class="placeholder">Teléfono*</label>
+      @if (controls.phone.invalid && (controls.phone.dirty || controls.phone.touched)) {
+        @if (controls.phone.errors?.['email']) {
+          <div class="invalid-field">Introduce el teléfono.</div>
         }
       }
     </div>
@@ -91,6 +91,6 @@
     <app-textarea (contentEmitter)="getObservations($event)" [placeholderName]="'Observaciones'" />
   </div>
 
-  <button class="btn flat-button" (click)="createCustomer()">Registrar Cliente</button>
+  <button class="btn flat-button">Registrar Cliente</button>
 
 </form>

@@ -7,6 +7,6 @@
     <app-appointment-form />
   }
   @if (showCustomerForm) {
-    <app-customer-form/>
+    <app-customer-form (closeEvent)="closeModals()"/>
   }
 }

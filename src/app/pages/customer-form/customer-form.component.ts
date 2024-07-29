@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Gender } from '../../models/enums/gender.enum';
 import { ToggleButtonComponent } from '../../components/toggle-button/toggle-button.component';
 import { TextareaComponent } from '../../components/textarea/textarea.component';
 import { Customer } from '../../models/customer';
 import { SelectInputComponent } from '../../components/select-input/select-input.component';
-import { ethnicityOptions } from '../../models/enums/ethnicity.enum';
+import { Ethnicity, ethnicityOptions } from '../../models/enums/ethnicity.enum';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-customer-form',
@@ -19,9 +20,14 @@ import { ethnicityOptions } from '../../models/enums/ethnicity.enum';
 })
 export class CustomerFormComponent {
 
-  ethnicityOptions: string[] = ethnicityOptions;
+  closeEvent = output<void>();
 
-  constructor(private fb: FormBuilder) { }
+  ethnicityOptions = ethnicityOptions;
+
+  constructor(
+    private fb: FormBuilder,
+    private customerService: CustomerService
+  ) { }
 
   customerForm = this.fb.group({
     firstName: ["", [Validators.required]],
@@ -62,8 +68,8 @@ export class CustomerFormComponent {
       return;
     }
 
-    console.log(this.customerForm.value)
-    console.log(this.customerForm.value as unknown as Customer)
-  }
+    this.customerService.addCustomer(this.customerForm.value as unknown as Customer);
 
+    this.closeEvent.emit();
+  }
 }
