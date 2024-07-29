@@ -100,8 +100,14 @@
   }
 </div>
 
-@if (customers.length === 0) {
-  <div class="no-results">Aún no tienes agregado ningún cliente...</div>
-} @else if (filteredCustomers.length === 0) {
-  <div class="no-results">No hay coincidencias...</div>
+@if (loadingCustomers) {
+  <div class="no-results">
+    <mat-spinner></mat-spinner>
+  </div>
+} @else {
+  @if (customers.length === 0) {
+    <div class="no-results">Aún no tienes agregado ningún cliente...</div>
+  } @else if (filteredCustomers.length === 0) {
+    <div class="no-results">No hay coincidencias...</div>
+  }
 }

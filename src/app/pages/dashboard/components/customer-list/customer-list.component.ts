@@ -7,16 +7,19 @@ import { FilterInputComponent } from '../../../../components/filter-input/filter
 import { FilterCustomersPipe } from '../../../../pipes/filter-customers.pipe';
 import { SortCustomersPipe } from '../../../../pipes/sort-customers.pipe';
 import { PaginateCustomersPipe } from '../../../../pipes/paginate-customers.pipe';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-customer-list',
   standalone: true,
-  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, SortCustomersPipe, PaginateCustomersPipe, NgClass],
+  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, SortCustomersPipe, PaginateCustomersPipe, NgClass, MatProgressSpinnerModule],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
 export class CustomerListComponent implements AfterViewInit {
+
+  loadingCustomers = true;
 
   customers: Customer[] = [];
   filteredCustomers: Customer[] = [];
@@ -45,6 +48,12 @@ export class CustomerListComponent implements AfterViewInit {
       this.customers = customerService.customers();
       if (this.customers.length > 0) {
         this.setFilteredCustomers();
+      }
+    })
+
+    effect(() => {
+      if (!customerService.loading()) {
+        this.loadingCustomers = false;
       }
     })
   }
