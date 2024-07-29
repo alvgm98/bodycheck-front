@@ -38,10 +38,10 @@
     <!-- Last Name -->
     <div class="input-border-group">
       <input formControlName="lastName" placeholder=" " type="text" />
-      <label class="placeholder">Teléfono*</label>
+      <label class="placeholder">Teléfono</label>
       @if (controls.lastName.invalid && (controls.lastName.dirty || controls.lastName.touched)) {
-        @if (controls.lastName.errors?.['required']) {
-          <div class="invalid-field">Introduce el teléfono.</div>
+        @if (controls.lastName.errors?.['email']) {
+          <div class="invalid-field">Email incorrecto.</div>
         }
       }
     </div>

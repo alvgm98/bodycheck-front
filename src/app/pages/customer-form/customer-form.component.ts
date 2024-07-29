@@ -27,7 +27,7 @@ export class CustomerFormComponent {
     firstName: ["", [Validators.required]],
     lastName: ["", [Validators.required]],
     phone: ["", [Validators.required]],
-    email: ["", [Validators.required, Validators.email]],
+    email: ["", [Validators.email]],
     birthdate: ["", [Validators.required]],
     height: ["", [Validators.required]],
     gender: [Gender.M],
