@@ -5,7 +5,10 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './appointment-form.component.html',
-  styleUrl: './appointment-form.component.scss'
+  styleUrl: './appointment-form.component.scss',
+  host: {
+    'class': 'form-pop-up-animation'
+  }
 })
 export class AppointmentFormComponent {
 
