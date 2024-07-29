@@ -297,12 +297,13 @@ input[type=number] {
 
 /* MODAL FORM */
 .modal-form {
+  position: relative;
   box-sizing: border-box;
   width: 100%;
   height: 100%;
 
   border: 2px solid $primary-color;
-  border-radius: 10%;
+  border-radius: 6%;
   padding: 40px 80px;
 
   display: flex;
@@ -324,6 +325,16 @@ input[type=number] {
     display: flex;
     gap: 40px
   }
+}
+
+.close-icon {
+  cursor: pointer;
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  font-size: 25px;
+  color: $primary-color;
 }
 
 .form-pop-up-animation {

@@ -69,7 +69,10 @@ export class CustomerFormComponent {
     }
 
     this.customerService.addCustomer(this.customerForm.value as unknown as Customer);
+    this.close();
+  }
 
+  close() {
     this.closeEvent.emit();
   }
 }
