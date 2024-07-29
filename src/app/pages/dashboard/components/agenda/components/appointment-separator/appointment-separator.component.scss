@@ -2,7 +2,8 @@
 
 :host {
   position: absolute;
-  left: 0;
-  width: 100%;
-  border-bottom: 1px solid $black;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 30px);
+  border-bottom: 2px dashed $white;
 }
