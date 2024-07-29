@@ -55,7 +55,7 @@
     </th>
   </thead>
   <tbody>
-    @for (customer of filteredCustomers | sortCustomers : sortField : sortOrder | paginateCustomers : pageSize : page ; track customer.id) {
+    @for (customer of filteredCustomers | paginateCustomers : pageSize : page : sortField : sortOrder ; track customer.id) {
       <tr>
         <td>{{ customer.firstName + " " + customer.lastName | capitalize }}</td>
         <td>{{ customer.phone }}</td>

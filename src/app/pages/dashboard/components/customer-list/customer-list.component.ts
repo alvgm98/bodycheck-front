@@ -5,7 +5,6 @@ import { CapitalizePipe } from '../../../../pipes/capitalize.pipe';
 import { CalculateAgePipe } from '../../../../pipes/calculate-age.pipe';
 import { FilterInputComponent } from '../../../../components/filter-input/filter-input.component';
 import { FilterCustomersPipe } from '../../../../pipes/filter-customers.pipe';
-import { SortCustomersPipe } from '../../../../pipes/sort-customers.pipe';
 import { PaginateCustomersPipe } from '../../../../pipes/paginate-customers.pipe';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgClass } from '@angular/common';
@@ -13,7 +12,7 @@ import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-customer-list',
   standalone: true,
-  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, SortCustomersPipe, PaginateCustomersPipe, NgClass, MatProgressSpinnerModule],
+  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, PaginateCustomersPipe, NgClass, MatProgressSpinnerModule],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
