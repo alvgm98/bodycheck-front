@@ -314,10 +314,8 @@ input[type=number] {
 
   h3 {
     font-size: 32px;
-  }
-
-  .appointment-form-day {
-    width: 50%;
+    margin: 20px;
+    color: $primary-color;
   }
 
   .form-row {
@@ -340,6 +338,7 @@ input[type=number] {
 .form-pop-up-animation {
   animation: form-pop-up .3s forwards;
 }
+
 @keyframes form-pop-up {
   from {
     top: 100%;
@@ -355,6 +354,7 @@ input[type=number] {
 .form-pop-down-animation {
   animation: form-pop-down .3s forwards;
 }
+
 @keyframes form-pop-down {
   to {
     top: 100%;
@@ -365,10 +365,12 @@ input[type=number] {
 .overlay-fade-in-animation {
   animation: overlay-fade-in .3s;
 }
+
 @keyframes overlay-fade-in {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -377,6 +379,7 @@ input[type=number] {
 .overlay-fade-out-animation {
   animation: overlay-fade-out .3s;
 }
+
 @keyframes overlay-fade-out {
   to {
     opacity: 0;

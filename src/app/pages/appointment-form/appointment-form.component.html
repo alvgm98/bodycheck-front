@@ -2,21 +2,21 @@
   <i (click)="close()" class="close-icon fa-solid fa-xmark"></i>
   <h3>Nueva Cita</h3>
 
-  <div class="appointment-form-day">
-    <div class="input-border-group">
-      <input formControlName="firstName" placeholder=" " type="date" />
-      <label class="placeholder">Día</label>
-    </div>
+  <div class="form-row">
+
   </div>
 
   <div class="form-row">
-    <div class="input-border-group">
-      <input formControlName="firstName" placeholder=" " type="time" />
-      <label class="placeholder">Hora de Inicio</label>
-    </div>
-    <div class="input-border-group">
-      <input formControlName="firstName" placeholder=" " type="time" />
-      <label class="placeholder">Hora de Fin</label>
+    <app-date-picker [selected]="date()" (selectedChange)="setSelectedDate($event)" style="border-bottom: 2px solid #109d8a;" />
+    <div class="time-col">
+      <div class="input-border-group">
+        <input formControlName="firstName" placeholder=" " type="time" />
+        <label class="placeholder">Hora de Inicio</label>
+      </div>
+      <div class="input-border-group">
+        <input formControlName="firstName" placeholder=" " type="time" />
+        <label class="placeholder">Hora de Fin</label>
+      </div>
     </div>
   </div>
 </form>
