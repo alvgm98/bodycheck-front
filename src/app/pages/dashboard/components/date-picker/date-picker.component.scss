@@ -4,3 +4,14 @@
   border-bottom: 1px solid $black;
   width: 600px;
 }
+
+@media (width < 1800px) {
+  .date-picker {
+    width: 500px;
+  }
+}
+@media (width < 1400px) {
+  .date-picker {
+    width: 400px;
+  }
+}
