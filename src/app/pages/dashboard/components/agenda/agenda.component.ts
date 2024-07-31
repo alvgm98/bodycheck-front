@@ -63,6 +63,7 @@ export class AgendaComponent implements AfterViewInit {
     this.appointmentService.loadAppointmentsByDate();
   }
 
+  // Metodo para crear separadores entre citas contiguas
   getMatchingDates(appointments: Appointment[]): Date[] {
     const matchingDates: Date[] = [];
     const endTimesSet = new Set<string>();
