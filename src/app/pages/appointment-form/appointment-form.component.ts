@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-appointment-form',
@@ -12,4 +12,9 @@ import { Component } from '@angular/core';
 })
 export class AppointmentFormComponent {
 
+  closeEvent = output<void>();
+
+  close() {
+    this.closeEvent.emit();
+  }
 }
