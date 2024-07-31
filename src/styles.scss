@@ -66,6 +66,23 @@ main {
   align-items: center;
 }
 
+/********** SCROLL BAR **********/
+::-webkit-scrollbar {
+  width: 12px;
+  overflow: hidden;
+}
+::-webkit-scrollbar-track {
+  background: #b0e0d8;
+  border-radius: 8px 8px 0 0;
+}
+::-webkit-scrollbar-thumb {
+  background: $primary-color;
+  border-radius: 8px 8px 0 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-color-700;
+}
+
 /********** BUTTONS **********/
 .btn {
   font-family: "DM Sans", sans-serif;
