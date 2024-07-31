@@ -1,7 +1,9 @@
 @import 'colors';
 
 :host {
+  box-sizing: border-box;
   height: 100%;
+  width: min(30%, 600px);
 
   display: flex;
   flex-direction: column;
