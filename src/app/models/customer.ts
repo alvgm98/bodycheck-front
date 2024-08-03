@@ -1,5 +1,7 @@
+import { Appointment } from "./appointment";
 import { Ethnicity } from "./enums/ethnicity.enum";
 import { Gender } from "./enums/gender.enum";
+import { Measurement } from "./measurement";
 
 export interface Customer {
   id: number;
@@ -12,6 +14,11 @@ export interface Customer {
   gender: Gender;
   ethnicity: Ethnicity;
   observations: string;
+}
+
+export interface CustomerDetailed extends Customer {
+  lastMeasurement?: Omit<Measurement, 'customer'>;
+  lastAppointment?: Omit<Appointment, 'customer'>;
 }
 
 export type CustomerKey = keyof Customer;
