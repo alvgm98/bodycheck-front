@@ -68,8 +68,15 @@
     font-family: 'Satoshi-Medium', sans-serif;
   }
 
+  tr {
+    transition: 300ms;
+  }
   tr:nth-child(odd) {
     background-color: $background-color;
+  }
+  tr:hover {
+    cursor: pointer;
+    background-color: $tertiary-color-300;
   }
 }
 
