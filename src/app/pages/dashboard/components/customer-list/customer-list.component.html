@@ -56,7 +56,7 @@
   </thead>
   <tbody>
     @for (customer of filteredCustomers | paginateCustomers : pageSize : page : sortField : sortOrder ; track customer.id) {
-      <tr>
+      <tr [routerLink]="['customer', customer.id]">
         <td>{{ customer.firstName + " " + customer.lastName | capitalize }}</td>
         <td>{{ customer.phone }}</td>
         <td>{{ customer.email }}</td>

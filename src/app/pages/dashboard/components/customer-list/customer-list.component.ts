@@ -8,11 +8,12 @@ import { FilterCustomersPipe } from '../../../../pipes/filter-customers.pipe';
 import { PaginateCustomersPipe } from '../../../../pipes/paginate-customers.pipe';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-customer-list',
   standalone: true,
-  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, PaginateCustomersPipe, NgClass, MatProgressSpinnerModule],
+  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, PaginateCustomersPipe, NgClass, RouterLink, MatProgressSpinnerModule],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
