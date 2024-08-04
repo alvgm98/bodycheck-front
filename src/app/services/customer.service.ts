@@ -33,8 +33,8 @@ export class CustomerService {
   }
 
   addCustomer(customer: Customer) {
-    this.http.post<Customer>(environment.apiCustomerUrl, customer).pipe(
+    return this.http.post<Customer>(environment.apiCustomerUrl, customer).pipe(
       tap(data => this.customers.set([...this.customers(), data])),
-    ).subscribe();
+    );
   }
 }

@@ -68,8 +68,9 @@ export class CustomerFormComponent {
       return;
     }
 
-    this.customerService.addCustomer(this.customerForm.value as unknown as Customer);
-    this.close();
+    this.customerService.addCustomer(this.customerForm.value as unknown as Customer).subscribe({
+      complete: () => this.close()
+    });
   }
 
   close() {
