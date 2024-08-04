@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { Customer } from '../models/customer';
+import { Customer, CustomerDetailed } from '../models/customer';
 import { environment } from '../../environments/environment.development';
 import { tap } from 'rxjs';
-import { error } from 'node:console';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +26,10 @@ export class CustomerService {
         }),
       ).subscribe({ error: () => this.loading.set(false) });
     }
+  }
+
+  loadCustomer(id: number) {
+    return this.http.get<CustomerDetailed>(`${environment.apiCustomerUrl}/detailed/${id}`);
   }
 
   addCustomer(customer: Customer) {
