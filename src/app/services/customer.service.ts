@@ -9,22 +9,22 @@ import { tap } from 'rxjs';
 })
 export class CustomerService {
 
-  loading = signal<boolean>(false);
+  customersLoading = signal<boolean>(false);
   customersLoaded = false;
   customers = signal<Customer[]>([]);
 
   constructor(private http: HttpClient) { }
 
   loadCustomers(): void {
-    if (!this.loading() && !this.customersLoaded) {
-      this.loading.set(true);
+    if (!this.customersLoading() && !this.customersLoaded) {
+      this.customersLoading.set(true);
       this.http.get<Customer[]>(environment.apiCustomerUrl).pipe(
         tap(data => {
           this.customers.set(data);
           this.customersLoaded = true;
-          this.loading.set(false);
+          this.customersLoading.set(false);
         }),
-      ).subscribe({ error: () => this.loading.set(false) });
+      ).subscribe({ error: () => this.customersLoading.set(false) });
     }
   }
 

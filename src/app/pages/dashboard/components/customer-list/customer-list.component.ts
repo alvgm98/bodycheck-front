@@ -52,7 +52,7 @@ export class CustomerListComponent implements AfterViewInit {
     })
 
     effect(() => {
-      if (!customerService.loading()) {
+      if (!customerService.customersLoading()) {
         this.loadingCustomers = false;
       }
     })
