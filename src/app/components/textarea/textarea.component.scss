@@ -51,12 +51,6 @@
   .placeholder-moved {
     @include placeholder-moved();
   }
-
-  .maxlength-info {
-    position: absolute;
-    bottom: 18px;
-    right: 22px;
-  }
 }
 
 textarea::-webkit-scrollbar {
