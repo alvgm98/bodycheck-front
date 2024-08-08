@@ -38,6 +38,7 @@ export class CustomerFormComponent {
     height: ["", [Validators.required]],
     gender: [Gender.M],
     ethnicity: ["", [Validators.required]],
+    target: ["", Validators.required],
     observations: [""]
   })
   get controls() {

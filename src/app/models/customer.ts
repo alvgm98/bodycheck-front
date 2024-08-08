@@ -13,6 +13,7 @@ export interface Customer {
   height: number;
   gender: Gender;
   ethnicity: Ethnicity;
+  target: string;
   observations: string;
 }
 

@@ -26,7 +26,7 @@
   </div>
 
   <div class="form-row">
-    <!-- First Name -->
+    <!-- Email -->
     <div class="input-border-group">
       <input formControlName="email" placeholder=" " type="text" />
       <label class="placeholder">Email</label>
@@ -36,12 +36,25 @@
         }
       }
     </div>
-    <!-- Last Name -->
+  </div>
+
+  <div class="form-row">
+    <!-- Phone -->
     <div class="input-border-group">
       <input formControlName="phone" placeholder=" " type="text" />
       <label class="placeholder">Teléfono*</label>
       @if (controls.phone.invalid && (controls.phone.dirty || controls.phone.touched)) {
         @if (controls.phone.errors?.['email']) {
+          <div class="invalid-field">Introduce el teléfono.</div>
+        }
+      }
+    </div>
+    <!-- Target -->
+    <div class="input-border-group">
+      <input formControlName="target" placeholder=" " type="text" />
+      <label class="placeholder">Objetivo*</label>
+      @if (controls.target.invalid && (controls.target.dirty || controls.target.touched)) {
+        @if (controls.target.errors?.['email']) {
           <div class="invalid-field">Introduce el teléfono.</div>
         }
       }
