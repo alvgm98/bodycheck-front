@@ -19,6 +19,7 @@ export class DashboardComponent {
   showAppointmentForm = false;
 
   errorMessages: string[] = [];
+  successMessages: string[] = [];
 
   constructor(
     private errorService: ErrorService,
@@ -57,8 +58,15 @@ export class DashboardComponent {
     }
   }
 
-  closeError(index: number) {
+  closeErrorMessage(index: number) {
     this.errorMessages.splice(index);
     this.errorService.errorMessage.set('');
+  }
+
+  addSuccessMessage(message: string) {
+    this.successMessages.push(message);
+  }
+  closeSuccessMessage(index: number) {
+    this.successMessages.splice(index);
   }
 }

@@ -21,6 +21,7 @@ import { CustomerService } from '../../services/customer.service';
 export class CustomerFormComponent {
 
   closeEvent = output<void>();
+  successEvent = output<string>();
 
   ethnicityOptions = ethnicityOptions;
 
@@ -70,7 +71,10 @@ export class CustomerFormComponent {
     }
 
     this.customerService.addCustomer(this.customerForm.value as unknown as Customer).subscribe({
-      complete: () => this.close()
+      complete: () => {
+        this.successEvent.emit("Cliente creado con exito")
+        this.close();
+      }
     });
   }
 
