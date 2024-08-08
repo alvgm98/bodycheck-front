@@ -10,9 +10,8 @@
   box-sizing: border-box;
   height: 60px;
   border-radius: 40px;
-  padding-inline: 15px;
+  padding-inline: 25px;
 
-  background-color: $bg-error-color;
   color: #000;
   font-family: 'Satoshi-Medium', sans-serif;
 
@@ -20,10 +19,10 @@
   align-items: center;
 
   transition: 300ms;
-  animation: error-appear 300ms;
+  animation: message-appear 300ms;
 }
 
-@keyframes error-appear {
+@keyframes message-appear {
   from {
     bottom: -60px;
   }

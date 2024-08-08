@@ -1,14 +1,14 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, input, output } from '@angular/core';
+import { Component, HostBinding, input, output } from '@angular/core';
 
 @Component({
-  selector: 'app-error-modal',
+  selector: 'app-message-modal',
   standalone: true,
   imports: [],
-  template: `{{errorMessage()}}`,
-  styleUrl: './error-modal.component.scss',
+  template: `{{message()}}`,
+  styleUrl: './message-modal.component.scss',
   animations: [
-    trigger('errorAnimation', [
+    trigger('message-animation', [
       state('open', style({ bottom: '60px', opacity: 1 })),
       state('closed', style({ opacity: 0 })),
       transition('* => open', animate('300ms ease-in')),
@@ -16,13 +16,21 @@ import { Component, input, output } from '@angular/core';
     ])
   ],
   host: {
-    '[@errorAnimation]': 'animationState',
+    '[@message-animation]': 'animationState',
     '(click)': 'close()'
   }
 })
-export class ErrorModalComponent {
+export class MessageModalComponent {
   animationState = 'open';
-  errorMessage = input.required<string>()
+  message = input.required<string>();
+  messageType = input.required<string>();
+
+  @HostBinding('style.backgroundColor') get backgroundColor() {
+    return  this.messageType() == 'error'   ? '#ef233cb0' :
+            this.messageType() == 'success' ? '#109d8ab0' :
+            this.messageType() == 'info'    ? '#0077b6b0' :
+                                              '#adb5bdcb';
+  }
 
   closeEvent = output<void>();
   closeTimeout: NodeJS.Timeout;

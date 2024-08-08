@@ -12,5 +12,5 @@
 }
 
 @for (errorMessage of errorMessages; track $index) {
-  <app-error-modal (closeEvent)="closeError($index)" [errorMessage]="errorMessage" />
+  <app-message-modal (closeEvent)="closeError($index)" [message]="errorMessage" [messageType]="'error'" />
 }

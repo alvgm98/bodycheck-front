@@ -4,13 +4,13 @@ import { AgendaComponent } from './components/agenda/agenda.component';
 import { ModalOverlayComponent } from '../../components/modal-overlay/modal-overlay.component';
 import { CustomerFormComponent } from '../customer-form/customer-form.component';
 import { AppointmentFormComponent } from '../appointment-form/appointment-form.component';
-import { ErrorModalComponent } from '../../components/error-modal/error-modal.component';
 import { ErrorService } from '../../services/error.service';
+import { MessageModalComponent } from '../../components/message-modal/message-modal.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CustomerListComponent, AgendaComponent, ModalOverlayComponent, CustomerFormComponent, AppointmentFormComponent, ErrorModalComponent],
+  imports: [CustomerListComponent, AgendaComponent, ModalOverlayComponent, CustomerFormComponent, AppointmentFormComponent, MessageModalComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
