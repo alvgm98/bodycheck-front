@@ -1,1 +1,8 @@
-<p>customer-detailed works!</p>
+<article id="customer-card">
+  @if (customer) {
+    <app-customer-card [customer]="customer" />
+  } @else {
+    <mat-spinner></mat-spinner>
+  }
+
+</article>

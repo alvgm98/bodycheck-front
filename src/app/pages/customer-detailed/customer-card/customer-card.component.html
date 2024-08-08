@@ -1,0 +1,28 @@
+<div class="customer-data-hero">
+  <div class="customer-icon">
+    <i class="fa-solid fa-user"></i>
+  </div>
+  <div class="customer-main-data">
+    <h3>{{ customer().firstName + " " + customer().lastName | capitalize }}</h3>
+    <div class="contact">
+      <h5 class="phone"> <i class="fa-solid fa-phone"></i> {{ customer().phone }} </h5>
+      @if (customer().email) {
+        <h5 class="email"> <i class="fa-solid fa-envelope"></i> {{ customer().email }} </h5>
+      }
+    </div>
+  </div>
+</div>
+<div class="customer-data">
+  <div class="customer-data-row">
+    <p class="age"><span>Edad: </span>{{ customer().birthdate }} <span class="age-separator">|</span> {{ customer().birthdate | calculateAge }} años</p>
+    <p><span>Altura: </span>{{ customer().height }} cm</p>
+  </div>
+  <div class="customer-data-row">
+    <p><span>Género: </span>{{ customer().gender }}</p>
+    <p><span>Étnia: </span>{{ customer().ethnicity }}</p>
+    <p><span>Objetivo: </span>{{ customer().target }}</p>
+  </div>
+</div>
+<div class="customer-observations">
+  <pre>{{ customer().observations }}</pre>
+</div>

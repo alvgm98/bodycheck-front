@@ -1,18 +1,20 @@
 import { Component, input, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 import { CustomerDetailed } from '../../models/customer';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CustomerCardComponent } from './customer-card/customer-card.component';
 
 @Component({
   selector: 'app-customer-detailed',
   standalone: true,
-  imports: [],
+  imports: [CustomerCardComponent, MatProgressSpinnerModule],
   templateUrl: './customer-detailed.component.html',
   styleUrl: './customer-detailed.component.scss'
 })
 export class CustomerDetailedComponent implements OnInit {
 
   customerId = input.required<number>();
-  customer?: CustomerDetailed;
+  customer!: CustomerDetailed;
   loading = true;
 
   constructor(

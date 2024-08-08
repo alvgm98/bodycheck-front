@@ -1,0 +1,25 @@
+@import 'colors';
+
+:host {
+  flex: 1;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 60px 100px;
+  display: flex;
+}
+
+#customer-card {
+  border: 2px solid $primary-color;
+  border-radius: 12px;
+  padding: 50px 70px;
+  height: fit-content;
+
+  box-sizing: border-box;
+  min-width: 450px;
+  min-height: 350px;
+
+  background-color: $white;
+
+  display: grid;
+  place-items: center;
+}

@@ -1,0 +1,86 @@
+@import 'colors';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* --- HERO --- */
+.customer-data-hero {
+  display: flex;
+  gap: 24px;
+
+  .customer-icon {
+    box-sizing: border-box;
+    height: 120px;
+    width: 120px;
+    border: 5px solid $primary-color;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    i {
+      font-size: 70px;
+      color: $primary-color;
+    }
+  }
+
+  .customer-main-data {
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      margin-block: 10px;
+      font-size: 30px;
+    }
+
+    .contact {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .phone,
+    .email {
+      margin: 0;
+      font-size: 18px;
+      i {
+        font-size: 16px;
+        margin-right: 2px;
+      }
+    }
+  }
+}
+
+/* --- DATA --- */
+.customer-data {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .customer-data-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 26px;
+  }
+  .age-separator {
+    margin-inline: 6px;
+    font-weight: normal;
+  }
+  p {
+    margin: 0;
+  }
+  span {
+    font-weight: bold;
+  }
+}
+
+/* --- OBSERVATIONS --- */
+.customer-observations pre {
+  margin: 0;
+  border-top: 2px solid $primary-color;
+  padding-top: 20px;
+}
