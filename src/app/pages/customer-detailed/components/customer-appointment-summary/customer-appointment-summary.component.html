@@ -1,0 +1,28 @@
+<!-- LEFT ARROW -->
+<i
+  (click)="scrollToLeft()"
+  [ngClass]="maxScrollLeft ? 'arrow-disabled' : 'arrow'"
+  class="fa-solid fa-caret-left arrow"
+>
+</i>
+<!-- APPOINTMENTS -->
+<div class="center">
+  @if (maxScrollRight) {
+    <h3>Añadir Cita</h3>
+  } @else {
+    <h3>Citas</h3>
+  }
+  <div class="scroller">
+    @for (appointment of appointments(); track $index) {
+    <app-customer-appointment [appointment]="appointment" />
+    }
+    <i class="add-appointment fa-solid fa-plus"></i>
+  </div>
+</div>
+<!-- RIGHT ARROW -->
+<i
+  (click)="scrollToRight()"
+  [ngClass]="maxScrollRight ? 'arrow-disabled' : 'arrow'"
+  class="fa-solid fa-caret-right"
+>
+</i>

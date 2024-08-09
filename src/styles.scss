@@ -71,14 +71,17 @@ main {
   width: 12px;
   overflow: hidden;
 }
+
 ::-webkit-scrollbar-track {
   background: #b0e0d8;
   border-radius: 8px 8px 0 0;
 }
+
 ::-webkit-scrollbar-thumb {
   background: $primary-color;
   border-radius: 8px 8px 0 0;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: $primary-color-700;
 }
@@ -123,6 +126,35 @@ main {
 
 .stroked-button:hover {
   background-color: $background-color;
+}
+
+/********** ARROWS **********/
+.arrow,
+.arrow-disabled {
+  box-sizing: border-box;
+  width: 80px;
+  height: 100%;
+
+  font-size: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow {
+  color: $primary-color;
+  transition: 300ms;
+}
+
+.arrow-disabled {
+  color: $disabled-font-color;
+  pointer-events: none;
+}
+
+.arrow:hover {
+  cursor: pointer;
+  background-color: $tertiary-color-200;
 }
 
 /********** INPUTS **********/

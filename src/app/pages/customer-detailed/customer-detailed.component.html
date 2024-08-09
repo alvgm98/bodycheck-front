@@ -9,11 +9,7 @@
 
   <article id="customer-appointments-sumary">
     @if (customer) {
-      <i class="fa-solid fa-caret-left arrow"></i>
-      <div style="box-sizing: border-box; width: 100%; height: 100%; padding-block:50px ; display: flex; justify-content: center;">
-        <app-customer-appointment [appointment]="customer.appointments![customer.appointments!.length - 1]" />
-      </div>
-      <i class="fa-solid fa-caret-right arrow"></i>
+      <app-customer-appointment-summary [appointments]="customer.appointments!" />
     } @else {
       <mat-spinner></mat-spinner>
     }
