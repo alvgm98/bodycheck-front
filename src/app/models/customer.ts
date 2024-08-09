@@ -18,8 +18,8 @@ export interface Customer {
 }
 
 export interface CustomerDetailed extends Customer {
-  measurements?: Omit<Measurement, 'customer'>[];
-  appointments?: Omit<Appointment, 'customer'>[];
+  measurements?: Measurement[];
+  appointments?: Appointment[];
 }
 
 export type CustomerKey = keyof Customer;

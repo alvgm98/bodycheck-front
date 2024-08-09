@@ -6,6 +6,7 @@
   height: 100%;
   padding: 60px 100px;
   display: flex;
+  gap: 100px;
 }
 
 #customer-card {
@@ -22,4 +23,13 @@
 
   display: grid;
   place-items: center;
+}
+
+#customer-sumary {
+  border: 2px solid $primary-color;
+  border-radius: 12px;
+  padding: 50px 70px;
+  height: fit-content;
+
+  background-color: $white;
 }

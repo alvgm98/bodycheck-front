@@ -4,5 +4,10 @@
   } @else {
     <mat-spinner></mat-spinner>
   }
+</article>
 
+<article id="customer-sumary">
+  <div class="left-arrow"></div>
+  <app-customer-appointment [appointment]="customer.appointments![customer.appointments!.length - 1]" />
+  <div class="right-arrow"></div>
 </article>

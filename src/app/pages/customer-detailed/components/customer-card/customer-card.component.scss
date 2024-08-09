@@ -35,6 +35,7 @@
     h3 {
       margin-block: 10px;
       font-size: 30px;
+      color: $primary-color;
     }
 
     .contact {
@@ -48,6 +49,7 @@
       margin: 0;
       font-size: 18px;
       i {
+        color: $primary-color;
         font-size: 16px;
         margin-right: 2px;
       }
@@ -74,7 +76,9 @@
     margin: 0;
   }
   span {
-    font-weight: bold;
+    color: $primary-color;
+    font-family: 'Satoshi-Variable';
+    font-weight: 900;
   }
 }
 
