@@ -3,6 +3,7 @@ import { Injectable, signal } from '@angular/core';
 import { Customer, CustomerDetailed } from '../models/customer';
 import { environment } from '../../environments/environment.development';
 import { tap } from 'rxjs';
+import { DateUtilService } from './util/date-util.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class CustomerService {
   customersLoaded = false;
   customers = signal<Customer[]>([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private dateUtil: DateUtilService
+  ) { }
 
   loadCustomers(): void {
     if (!this.customersLoading() && !this.customersLoaded) {
@@ -29,7 +33,12 @@ export class CustomerService {
   }
 
   loadCustomer(id: number) {
-    return this.http.get<CustomerDetailed>(`${environment.apiCustomerUrl}/detailed/${id}`);
+    return this.http.get<CustomerDetailed>(`${environment.apiCustomerUrl}/detailed/${id}`)
+      .pipe(
+        tap(customer =>
+          customer.appointments = this.dateUtil.initializeAppointments(customer.appointments!)
+        )
+      );
   }
 
   addCustomer(customer: Customer) {
