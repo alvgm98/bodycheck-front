@@ -6,16 +6,23 @@
   height: 100%;
   padding: 60px 100px;
   display: flex;
-  gap: 100px;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.sumary-row {
+  height: fit-content;
+  display: flex;
+  gap: 80px;
 }
 
 #customer-card {
-  border: 2px solid $primary-color;
+  border: 4px solid $primary-color;
   border-radius: 12px;
   padding: 50px 70px;
-  height: fit-content;
 
   box-sizing: border-box;
+  height: fit-content;
   min-width: 450px;
   min-height: 350px;
 
@@ -25,11 +32,36 @@
   place-items: center;
 }
 
-#customer-sumary {
-  border: 2px solid $primary-color;
+#customer-appointments-sumary {
+  flex: 1;
+  box-sizing: border-box;
+  border: 4px solid $primary-color;
   border-radius: 12px;
-  padding: 50px 70px;
-  height: fit-content;
+  overflow: hidden;
 
   background-color: $white;
+
+  display: flex;
+  align-items: center;
+
+  .arrow {
+    box-sizing: border-box;
+    width: 80px;
+    height: 100%;
+    // border-radius: 8px;
+
+    background-color: $white;
+    font-size: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 300ms;
+  }
+  .arrow:hover {
+    cursor: pointer;
+    background-color: $tertiary-color-300;
+  }
+
 }

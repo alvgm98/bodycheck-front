@@ -1,9 +1,62 @@
+@import 'colors';
+
 :host {
   position: relative;
 
+  box-sizing: border-box;
+  height: 100%;
+  width: min(1000px, 70%);
+
+  border: 4px solid $secondary-color-300;
+  border-radius: 12px;
+
+  background-color: $secondary-color-200;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
+}
+
+.date {
+  font-size: 32px;
+  margin: 0;
+}
+
+.reason {
+  font-size: 20px;
+  margin: 0;
+}
+
+.duration,
+.starts,
+.ends {
+  position: absolute;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.duration {
+  top: 10px;
+  right: 10px;
+
+}
+.starts {
+  top: 10px;
+  left: 8px;
+}
+.ends {
+  bottom: 10px;
+  left: 8px;
+}
+.timeline {
+  position: absolute;
+  top: 50%;
+  height: 72%;
+  left: 20px;
+  transform: translateY(-50%);
+
+  border-left: 3px dashed $secondary-color-300;
 }

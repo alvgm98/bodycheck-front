@@ -1,7 +1,7 @@
 <h4 class="date">{{ appointment().date | date: 'EEEE dd MMM yyyy' | capitalize }}</h4>
-<h5>{{ appointment().reason }}</h5>
+<h5 class="reason">{{ appointment().reason }}</h5>
 
-<p>{{ appointment().duration }} min</p>
+<p class="duration">{{ appointment().duration }} min</p>
 <p class="starts">{{ appointment().startTime | date: 'HH:mm' }} </p>
 <p class="ends">{{ appointment().endTime | date: 'HH:mm' }}</p>
 <div class="timeline"></div>
