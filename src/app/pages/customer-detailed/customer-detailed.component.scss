@@ -17,28 +17,29 @@
   gap: 80px;
 }
 
-#customer-card {
+#customer-card,
+#customer-appointments-summary {
   border: 4px solid $primary-color;
   border-radius: 12px;
-  padding: 50px 70px;
 
   box-sizing: border-box;
+
+  background-color: $white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#customer-card {
+  padding: 50px 70px;
+
   height: fit-content;
   min-width: 450px;
   min-height: 350px;
-
-  background-color: $white;
-
-  display: grid;
-  place-items: center;
 }
 
-#customer-appointments-sumary {
+#customer-appointments-summary {
   flex: 1;
-  box-sizing: border-box;
-  border: 4px solid $primary-color;
-  border-radius: 12px;
   overflow: hidden;
-
-  background-color: $white;
 }
