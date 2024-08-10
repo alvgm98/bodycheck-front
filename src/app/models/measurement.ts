@@ -8,9 +8,11 @@ export interface Measurement {
   weight: number;
   circumference: Circumference;
   skinfold: Skinfold;
+  observations: string;
 }
 
 export interface Circumference {
+  id: number;
   armRelaxed: number;
   armFlexed: number;
   waist: number;

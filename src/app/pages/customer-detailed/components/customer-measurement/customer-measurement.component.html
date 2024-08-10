@@ -1,1 +1,36 @@
-<p>{{ measurement().session }}</p>
+<div class="measurement-hero">
+  <h4>{{ measurement().date | date: 'EEEE dd MMM yyyy' | capitalize }}</h4>
+  <div class="measurement-info">
+    <p>Sesión: <span>{{ measurement().session }}</span></p>
+    <p>Peso: <span>{{ measurement().weight }}kg</span></p>
+  </div>
+  <div class="measurement-observations">
+      <pre>{{ measurement().observations ? measurement().observations : 'No hay obersevaciones' }}</pre>
+  </div>
+</div>
+
+<div class="circumference">
+  <h4>Circunferencias</h4>
+  <div class="data">
+    <p><span>Brazo Relajado: </span>{{ measurement().circumference.armRelaxed }}cm</p>
+    <p><span>Brazo Flexionado: </span>{{ measurement().circumference.armFlexed }}cm</p>
+    <p><span>Muñeca: </span>{{ measurement().circumference.waist }}cm</p>
+    <p><span>Cintura: </span>{{ measurement().circumference.hip }}cm</p>
+    <p><span>Muslo: </span>{{ measurement().circumference.thigh }}cm</p>
+    <p><span>Gemelo: </span>{{ measurement().circumference.calf }}cm</p>
+  </div>
+</div>
+
+<div class="skinfold">
+  <h4>Pliegues</h4>
+  <div class="data">
+    <p><span>Triceps: </span>{{ measurement().skinfold.triceps }}mm</p>
+    <p><span>Biceps: </span>{{ measurement().skinfold.biceps }}mm</p>
+    <p><span>Subescapular: </span>{{ measurement().skinfold.subscapular }}mm</p>
+    <p><span>Suprailiaca: </span>{{ measurement().skinfold.suprailiac }}mm</p>
+    <p><span>Cresta Iliaca: </span>{{ measurement().skinfold.iliacCrest }}mm</p>
+    <p><span>Abdominal: </span>{{ measurement().skinfold.abdominal }}mm</p>
+    <p><span>Muslo: </span>{{ measurement().skinfold.thigh }}mm</p>
+    <p><span>Gemelo: </span>{{ measurement().skinfold.calf }}mm</p>
+  </div>
+</div>
