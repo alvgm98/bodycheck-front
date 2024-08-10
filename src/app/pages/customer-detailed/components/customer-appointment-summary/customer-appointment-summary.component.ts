@@ -41,7 +41,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
     const appointmentWidth = this.el.nativeElement.querySelector('app-customer-appointment').offsetWidth;
 
     scroller.scrollTo({
-      left: scroller.scrollWidth - (appointmentWidth * 2),
+      left: scroller.scrollWidth - (appointmentWidth * 2 + 100),
     })
   }
 
