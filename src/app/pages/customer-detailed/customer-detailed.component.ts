@@ -4,11 +4,12 @@ import { CustomerDetailed } from '../../models/customer';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CustomerCardComponent } from './components/customer-card/customer-card.component';
 import { CustomerAppointmentSummaryComponent } from './components/customer-appointment-summary/customer-appointment-summary.component';
+import { CustomerMeasurementSummaryComponent } from './components/customer-measurement-summary/customer-measurement-summary.component';
 
 @Component({
   selector: 'app-customer-detailed',
   standalone: true,
-  imports: [CustomerCardComponent, MatProgressSpinnerModule, CustomerAppointmentSummaryComponent],
+  imports: [CustomerCardComponent, CustomerAppointmentSummaryComponent, CustomerMeasurementSummaryComponent, MatProgressSpinnerModule],
   templateUrl: './customer-detailed.component.html',
   styleUrl: './customer-detailed.component.scss'
 })

@@ -18,7 +18,8 @@
 }
 
 #customer-card,
-#customer-appointments-summary {
+#customer-appointments-summary,
+#customer-measurements-summary {
   border: 4px solid $primary-color;
   border-radius: 12px;
 
@@ -39,7 +40,8 @@
   min-height: 350px;
 }
 
-#customer-appointments-summary {
+#customer-appointments-summary,
+#customer-measurements-summary {
   flex: 1;
   overflow: hidden;
 }

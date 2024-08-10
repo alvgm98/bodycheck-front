@@ -1,20 +1,20 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, input } from '@angular/core';
-import { CustomerAppointmentComponent } from '../customer-appointment/customer-appointment.component';
-import { Appointment } from '../../../../models/appointment';
 import { NgClass } from '@angular/common';
+import { Measurement } from '../../../../models/measurement';
+import { CustomerMeasurementComponent } from '../customer-measurement/customer-measurement.component';
 
 @Component({
-  selector: 'app-customer-appointment-summary',
+  selector: 'app-customer-measurement-summary',
   standalone: true,
-  imports: [CustomerAppointmentComponent, NgClass],
-  templateUrl: './customer-appointment-summary.component.html',
+  imports: [CustomerMeasurementComponent, NgClass],
+  templateUrl: './customer-measurement-summary.component.html',
   host: {
     'class': 'summary-host'
   }
 })
-export class CustomerAppointmentSummaryComponent implements AfterViewInit {
-  appointments = input.required({
-    transform: (value: Appointment[]) => this.sortAppointments(value)
+export class CustomerMeasurementSummaryComponent implements AfterViewInit {
+  measurements = input.required({
+    transform: (value: Measurement[]) => this.sortMeasurements(value)
   });
 
   maxScrollLeft: boolean = false;
@@ -26,7 +26,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    if (this.appointments().length > 0) {
+    if (this.measurements().length > 0) {
       this.scrollToInit();
     } else {
       this.maxScrollLeft = true;
@@ -36,22 +36,22 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
   }
 
   /**
-   * Scrollea a la ultima cita si esta existe
+   * Scrollea a la ultima medición si esta existe
    */
   private scrollToInit() {
     const scroller = this.el.nativeElement.querySelector(".scroller");
-    const appointmentWidth = this.el.nativeElement.querySelector('app-customer-appointment').offsetWidth;
+    const measurementWidth = this.el.nativeElement.querySelector('app-customer-measurement').offsetWidth;
 
     scroller.scrollTo({
-      left: scroller.scrollWidth - (appointmentWidth * 2 + 100),
+      left: scroller.scrollWidth - (measurementWidth * 2 + 100),
     })
   }
 
   /**
-   * Método para ordenar ascendentemente las citas por su fecha de inicio
+   * Método para ordenar ascendentemente las mediciones por su sesion
    */
-  private sortAppointments(appointments: Appointment[]): Appointment[] {
-    return appointments.sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
+  private sortMeasurements(measurements: Measurement[]): Measurement[] {
+    return measurements.sort((a, b) => a.session - b.session);
   }
 
   scrollToLeft() {
@@ -59,15 +59,15 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
     this.maxScrollRight = false;
 
     const scroller = this.el.nativeElement.querySelector(".scroller");
-    const appointmentWidth = this.el.nativeElement.querySelector('app-customer-appointment').offsetWidth;
+    const measurementWidth = this.el.nativeElement.querySelector('app-customer-measurement').offsetWidth;
 
     scroller.scrollTo({
-      left: scroller.scrollLeft - appointmentWidth,
+      left: scroller.scrollLeft - measurementWidth,
       behavior: 'smooth'
     })
 
     // Bloqueamos el scroll a la izquierda al llegar al máximo
-    this.maxScrollLeft = scroller.scrollLeft <= appointmentWidth + 100;
+    this.maxScrollLeft = scroller.scrollLeft <= measurementWidth + 100;
   }
 
   scrollToRight() {
@@ -75,10 +75,10 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
     this.maxScrollLeft = false;
 
     const scroller = this.el.nativeElement.querySelector(".scroller");
-    const appointmentWidth = this.el.nativeElement.querySelector('app-customer-appointment').offsetWidth;
+    const measurementWidth = this.el.nativeElement.querySelector('app-customer-measurement').offsetWidth;
 
     scroller.scrollTo({
-      left: scroller.scrollLeft + appointmentWidth,
+      left: scroller.scrollLeft + measurementWidth,
       behavior: 'smooth'
     })
 
@@ -88,8 +88,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
      * Otra ya que el maximo de scroll, es scroll width - element width.
      */
     // Bloqueamos el scroll a la derecha al llegar al máximo
-    const auxWidth = this.appointments().length - 1;
-    this.maxScrollRight = scroller.scrollLeft >= (appointmentWidth * auxWidth + 100 * auxWidth);
+    const auxWidth = this.measurements().length - 1;
+    this.maxScrollRight = scroller.scrollLeft >= (measurementWidth * auxWidth + 100 * auxWidth);
   }
-
 }

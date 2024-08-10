@@ -15,3 +15,13 @@
     }
   </article>
 </div>
+
+<div class="sumary-row">
+  <article id="customer-measurements-summary">
+    @if (customer) {
+      <app-customer-measurement-summary [measurements]="customer.measurements!" />
+    } @else {
+      <mat-spinner></mat-spinner>
+    }
+  </article>
+</div>

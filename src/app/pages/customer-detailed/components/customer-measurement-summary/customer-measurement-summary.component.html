@@ -8,13 +8,13 @@
 <!-- APPOINTMENTS -->
 <div class="center">
   @if (maxScrollRight) {
-    <h3>Añadir Cita</h3>
+    <h3>Añadir Medición</h3>
   } @else {
-    <h3>Citas</h3>
+    <h3>Mediciones</h3>
   }
   <div class="scroller">
-    @for (appointment of appointments(); track $index) {
-    <app-customer-appointment [appointment]="appointment" />
+    @for (measurement of measurements(); track $index) {
+      <app-customer-measurement [measurement]="measurement" />
     }
     <i class="add-item fa-solid fa-plus"></i>
   </div>
