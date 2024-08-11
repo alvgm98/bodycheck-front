@@ -3,11 +3,13 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from '../auth/components/register/register.component';
 import { FooterComponent } from '../shared/components/footer/footer.component';
 import { AuthService } from '../auth/services/auth.service';
+import { BenefitsComponent } from './components/benefits/benefits.component';
+import { WaveDividerComponent } from './components/wave-divider/wave-divider.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RegisterComponent, ReactiveFormsModule, FooterComponent],
+  imports: [RegisterComponent, WaveDividerComponent, BenefitsComponent, ReactiveFormsModule, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
