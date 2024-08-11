@@ -363,7 +363,7 @@ input[type=number] {
 }
 
 .pop-in-register {
-  animation: pop-in-register-modal 1s forwards;
+  animation: pop-in-register-modal .6s forwards;
 }
 
 @keyframes pop-in-register-modal {
@@ -377,7 +377,7 @@ input[type=number] {
 }
 
 .pop-out-register {
-  animation: pop-out-register-modal 1s forwards;
+  animation: pop-out-register-modal .6s forwards;
 }
 
 @keyframes pop-out-register-modal {
@@ -387,7 +387,7 @@ input[type=number] {
 }
 
 .pop-in-welcome {
-  animation: pop-in-welcome-modal 1s forwards;
+  animation: pop-in-welcome-modal .6s forwards;
 }
 
 @keyframes pop-in-welcome-modal {
@@ -401,7 +401,7 @@ input[type=number] {
 }
 
 .pop-out-welcome {
-  animation: pop-out-welcome-modal 1s forwards;
+  animation: pop-out-welcome-modal .6s forwards;
 }
 
 @keyframes pop-out-welcome-modal {

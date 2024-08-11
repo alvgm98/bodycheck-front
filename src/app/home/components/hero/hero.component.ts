@@ -31,11 +31,13 @@ export class HeroComponent {
 
   /* Mostrar y Ocultar Formulario de Registro */
   showRegisterFn() {
-    const welcome = this.el.nativeElement.querySelector("#welcome");
-    welcome.classList.remove("pop-in-welcome");
-    welcome.classList.add("pop-out-welcome");
+    if (!this.showRegister) {
+      const welcome = this.el.nativeElement.querySelector("#welcome");
+      welcome.classList.remove("pop-in-welcome");
+      welcome.classList.add("pop-out-welcome");
+    }
 
-    this.showRegister = true;
+    requestAnimationFrame(() => this.showRegister = true);
   }
   showRegisterFromWelcome() { // Necesario para poder actualizar estado de showRegister desde Home
     this.authService.showRegister.set(true);
@@ -50,8 +52,8 @@ export class HeroComponent {
     welcome.classList.add("pop-in-welcome");
 
     setTimeout(() => {
-      this.showRegister = false;
-    }, 1000)
+      requestAnimationFrame(() => this.showRegister = false);
+    }, 600)
   }
 
   welcomeForm = this.fb.group({
