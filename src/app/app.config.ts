@@ -5,7 +5,6 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { authInterceptor } from './auth/services/auth.interceptor';
@@ -16,7 +15,6 @@ registerLocaleData(localeEs, 'es-ES');
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
     { provide: LOCALE_ID, useValue: 'es-ES' },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),

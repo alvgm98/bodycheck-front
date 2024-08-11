@@ -26,8 +26,6 @@ export class AppointmentFormComponent {
 
   setSelectedDate(date: Date) {
     this.date.set(date);
-    console.log(date)
-    console.log(this.date())
   }
 
   close() {
