@@ -1,24 +1,5 @@
-<section id="hero">
-  @if (showRegister) {
-    <app-register [usernameInput]="username" />
-  }
-  <article id="welcome">
-    <div class="title">
-      <img src="favicon.webp" alt="B">
-      <h2>ODYCHECK</h2>
-    </div>
-    <h1>Aplicación web para dietistas y nutricionistas</h1>
-    <h2>Monitorea y optimiza el progreso de tus clientes</h2>
-    <p>Gestiona las medidas antropométricas de tus clientes con facilidad<br>y visualiza su evolución a través de gráficos avanzados.</p>
-    <form [formGroup]="welcomeForm" (submit)="showRegisterFromWelcome()">
-      <div class="input-border-group">
-        <input formControlName="username" placeholder=" " type="email"/>
-        <label class="placeholder">Email</label>
-      </div>
-      <button class="btn flat-button">Registrate Gratis</button>
-    </form>
-  </article>
-</section>
+<!-- HERO Y REGISTRO -->
+<app-hero />
 
 <app-wave-divider [rotate]="true" />
 
