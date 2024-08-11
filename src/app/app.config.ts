@@ -9,8 +9,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { authInterceptor } from './auth/services/auth.interceptor';
-import { FilterCustomersPipe } from './pipes/filter-customers.pipe';
-import { errorInterceptor } from './shared/error.interceptor';
+import { FilterCustomersPipe } from './shared/pipes/filter-customers.pipe';
+import { errorInterceptor } from './shared/services/error.interceptor';
 
 registerLocaleData(localeEs, 'es-ES');
 

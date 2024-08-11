@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { RegisterRequest } from '../../models/register-request';
 import { passwordsMatchValidator, passwordStrengthValidator } from '../../validators/password.validator';
 import { NgClass } from '@angular/common';
-import { ToggleButtonComponent } from '../../../components/toggle-button/toggle-button.component';
+import { ToggleButtonComponent } from '../../../shared/ui/toggle-button/toggle-button.component';
 import { Situation } from '../../models/enums/situation.enum';
 
 @Component({

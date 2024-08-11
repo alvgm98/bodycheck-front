@@ -59,11 +59,11 @@ app-root {
 main {
   flex: 1;
   margin-top: 80px;
+  box-sizing: border-box;
   width: 100%;
 
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 /********** SCROLL BAR **********/
