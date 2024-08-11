@@ -57,7 +57,7 @@
 
     <!-- Password -->
     <div class="input-border-group">
-      <input formControlName="password" placeholder=" " type="password" />
+      <input formControlName="password" placeholder=" " type="password" (keyup)="checkShowPasswordSecurity()"/>
       <label class="placeholder">Contraseña*</label>
       @if (password.invalid && (password.dirty || password.touched)) {
         @if (password.errors?.['required']) {
@@ -83,7 +83,7 @@
     <button class="btn flat-button">Registrarse</button>
 
     <!-- Password Security -->
-    @if (password.value != '') {
+    @if (showPasswordSecurity) {
       <div
         class="password-security pop-in-password-security"
         [ngClass]="{'insecure-password': password.errors != null}"

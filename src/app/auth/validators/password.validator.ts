@@ -4,11 +4,6 @@ export function passwordStrengthValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
 
-    // Si no hay valor sólo mostramos el error de Required
-    if (!value) {
-      return null;
-    }
-
     const errors: any = {};
 
     const hasUpperCase = /[A-Z]/.test(value);

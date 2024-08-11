@@ -109,13 +109,19 @@
 }
 
 .pop-in-password-security {
-  animation: pop-in-password-security-modal .8s forwards;
+  animation: pop-in-password-security-modal .6s forwards;
 }
 @keyframes pop-in-password-security-modal {
   0% {
     transform: translateX(-50dvw);
   }
-  100% {
+  50% {
     transform: translateX(0);
+  }
+  55% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50dvw);
   }
 }

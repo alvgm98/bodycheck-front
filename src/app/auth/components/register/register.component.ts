@@ -1,4 +1,4 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, ElementRef, input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { RegisterRequest } from '../../models/register-request';
@@ -17,6 +17,9 @@ import { Situation } from '../../models/enums/situation.enum';
 export class RegisterComponent implements OnInit {
 
   usernameInput = input<string>("");
+  showPasswordSecurity: boolean = false;
+  passwordSecurityTimeOut?: NodeJS.Timeout;
+
   // Necesito variar de esta manera el valor de username ya que el formulario se construye antes de recibir usernameInput
   ngOnInit(): void {
     this.registerForm.patchValue({
@@ -33,6 +36,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private el: ElementRef,
     private authService: AuthService
   ) { }
 
@@ -92,5 +96,32 @@ export class RegisterComponent implements OnInit {
 
   closeModal() {
     this.authService.showRegister.set(false);
+  }
+
+  checkShowPasswordSecurity() {
+    if (!this.showPasswordSecurity && this.password.value) {
+      this.showPasswordSecurityFn();
+    }
+
+    if (this.showPasswordSecurity && !this.password.value) {
+      clearTimeout(this.passwordSecurityTimeOut);
+      this.el.nativeElement.querySelector('.password-security').style.animationPlayState = 'running';
+
+      setTimeout(() => {
+        this.showPasswordSecurity = false;
+        requestAnimationFrame(() => {
+          if (this.password.value) {
+            this.showPasswordSecurityFn();
+          }
+        });
+      }, 300);
+    }
+  }
+
+  showPasswordSecurityFn() {
+    this.showPasswordSecurity = true;
+    this.passwordSecurityTimeOut = setTimeout(() => {
+      requestAnimationFrame(() => this.el.nativeElement.querySelector('.password-security').style.animationPlayState = 'paused')
+    }, 300);
   }
 }
