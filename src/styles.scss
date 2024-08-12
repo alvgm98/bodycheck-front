@@ -459,8 +459,8 @@ input[type=number] {
   /* RE-MODIFICACION DE ESTILOS EN INPUTS PARA BAJARLE LA OPACIDAD */
   input,
   app-select-input {
-    background-color: #f0fdf990 !important;
-    border-color: #d4ebe5 !important;
+    background-color: #f0fdf960 !important;
+    border-color: #cae4dd !important;
     border-bottom-color: $primary-color !important;
   }
 
@@ -468,15 +468,22 @@ input[type=number] {
   .input-border-group input:not(:placeholder-shown)+.placeholder,
   textarea:focus+.placeholder,
   .placeholder-moved {
-    background-color: #d4ebe5 !important;
+    background-color: #cae4dd !important;
   }
 
   app-toggle-button,
   .textarea-glass textarea,
   mat-card {
-    background-color: #f0fdf990 !important;
+    background-color: #f0fdf960 !important;
   }
 
+  app-toggle-button:hover {
+    background-color: #55aca360 !important;
+  }
+
+  .toggle-bar {
+    background-color: #76b5ac !important;
+  }
 }
 
 .close-icon {
