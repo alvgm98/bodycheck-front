@@ -1,20 +1,6 @@
 @import 'colors';
 
 :host {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-
   box-sizing: border-box;
   width: min(80%, 800px);
-  border-radius: 6%;
-  padding: 4px;
-
-  background-color: $background-color;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

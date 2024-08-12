@@ -410,22 +410,39 @@ input[type=number] {
   }
 }
 
-/* MODAL FORM */
-.modal-form {
-  position: relative;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
+/* MODALS FORM */
+.customer-form,
+.appointment-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
 
-  border: 2px solid $primary-color;
+  border: 3px solid $primary-color;
   border-radius: 6%;
-  padding: 40px 80px;
+
+  background-color: #aae5d444;
+  backdrop-filter: blur(10px);
 
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+
+  form {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+
+    padding: 40px 80px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
 
   h3 {
     font-size: 32px;

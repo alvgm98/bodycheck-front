@@ -8,7 +8,7 @@ import { Component, output } from '@angular/core';
   styles: [`
     :host {
       z-index: 4;
-      background-color:  #00000080;
+      background-color:  #00000026;
     }
   `],
   host: {

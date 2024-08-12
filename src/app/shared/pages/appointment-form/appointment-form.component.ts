@@ -9,7 +9,7 @@ import { DatePickerComponent } from '../../../dashboard/components/date-picker/d
   templateUrl: './appointment-form.component.html',
   styleUrl: './appointment-form.component.scss',
   host: {
-    'class': 'form-pop-up-animation'
+    'class': 'appointment-form form-pop-up-animation'
   }
 })
 export class AppointmentFormComponent {

@@ -16,7 +16,7 @@ import { Customer } from '../../models/customer';
   templateUrl: './customer-form.component.html',
   styleUrl: './customer-form.component.scss',
   host: {
-    'class': 'form-pop-up-animation'
+    'class': 'customer-form form-pop-up-animation'
   }
 })
 export class CustomerFormComponent {
