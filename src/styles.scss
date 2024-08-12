@@ -455,6 +455,28 @@ input[type=number] {
     display: flex;
     gap: 40px
   }
+
+  /* RE-MODIFICACION DE ESTILOS EN INPUTS PARA BAJARLE LA OPACIDAD */
+  input,
+  app-select-input {
+    background-color: #f0fdf990 !important;
+    border-color: #d4ebe5 !important;
+    border-bottom-color: $primary-color !important;
+  }
+
+  .input-border-group input:focus+.placeholder,
+  .input-border-group input:not(:placeholder-shown)+.placeholder,
+  textarea:focus+.placeholder,
+  .placeholder-moved {
+    background-color: #d4ebe5 !important;
+  }
+
+  app-toggle-button,
+  .textarea-glass textarea,
+  mat-card {
+    background-color: #f0fdf990 !important;
+  }
+
 }
 
 .close-icon {

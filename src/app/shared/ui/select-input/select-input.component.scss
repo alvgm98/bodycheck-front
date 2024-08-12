@@ -49,7 +49,8 @@
     max-height: 0;
     border-radius: 0 0 15px 15px;
 
-    background-color: $tertiary-color-200;
+    background-color: $tertiary-color-200-low-opc;
+    backdrop-filter: blur(6px);
 
     .option {
       height: 45px;
@@ -63,7 +64,7 @@
       transition: 300ms;
       &:hover {
         cursor: pointer;
-        background-color: $tertiary-color-300;
+        background-color: $tertiary-color-300-low-opc;
       }
     }
 

@@ -44,10 +44,7 @@
     pointer-events: none;
   }
 
-  textarea:focus+.placeholder {
-    @include placeholder-moved();
-  }
-
+  textarea:focus+.placeholder,
   .placeholder-moved {
     @include placeholder-moved();
   }
