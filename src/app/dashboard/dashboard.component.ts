@@ -1,10 +1,10 @@
 import { Component, effect, ElementRef } from '@angular/core';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
-import { ModalOverlayComponent } from '../shared/ui/modal-overlay/modal-overlay.component';
+import { ModalOverlayComponent } from '../shared/components/modal-overlay/modal-overlay.component';
 import { CustomerFormComponent } from '../shared/pages/customer-form/customer-form.component';
 import { AppointmentFormComponent } from '../shared/pages/appointment-form/appointment-form.component';
-import { MessageModalComponent } from '../shared/ui/message-modal/message-modal.component';
+import { MessageModalComponent } from '../shared/components/message-modal/message-modal.component';
 import { ErrorService } from '../shared/services/error.service';
 
 
