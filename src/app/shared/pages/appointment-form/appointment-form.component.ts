@@ -1,11 +1,12 @@
 import { Component, model, output } from '@angular/core';
 import { AppointmentService } from '../../services/appointment.service';
 import { DatePickerComponent } from '../../../dashboard/components/date-picker/date-picker.component';
+import { CheckboxComponent } from '../../ui/checkbox/checkbox.component';
 
 @Component({
   selector: 'app-appointment-form',
   standalone: true,
-  imports: [DatePickerComponent],
+  imports: [DatePickerComponent, CheckboxComponent],
   templateUrl: './appointment-form.component.html',
   styleUrl: './appointment-form.component.scss',
   host: {
@@ -15,6 +16,8 @@ import { DatePickerComponent } from '../../../dashboard/components/date-picker/d
 export class AppointmentFormComponent {
 
   closeEvent = output<void>();
+
+  registeredCustomer = true;
 
   date = model<Date>(new Date());
 

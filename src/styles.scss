@@ -484,6 +484,20 @@ input[type=number] {
   .toggle-bar {
     background-color: #76b5ac !important;
   }
+
+  .checkbox-label {
+    height: 25px;
+    border: 2px solid $primary-color;
+    border-radius: 5px;
+    padding-inline: 10px;
+
+    background-color: #cae4dd;
+    color: $primary-color;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .close-icon {

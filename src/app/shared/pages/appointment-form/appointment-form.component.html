@@ -7,6 +7,14 @@
       <input placeholder=" " type="text" />
       <label class="placeholder">Cliente</label>
     </div>
+    <div class="checkbox-group">
+      <app-checkbox [(checked)]="registeredCustomer" />
+      @if (registeredCustomer) {
+        <span class="checkbox-label">Cliente Registrado</span>
+      } @else {
+        <span class="checkbox-label">Cliente No Registrado</span>
+      }
+    </div>
   </div>
 
   <div class="form-row">

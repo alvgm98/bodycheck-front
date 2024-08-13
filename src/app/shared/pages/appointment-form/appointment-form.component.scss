@@ -5,6 +5,15 @@
   width: min(90%, 1000px);
   height: min(90%, 800px);
 
+  .checkbox-group {
+    width: 60%;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+  }
+
   .time-col {
     width: 60%;
     display: flex;
