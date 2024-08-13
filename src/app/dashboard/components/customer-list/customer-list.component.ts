@@ -5,22 +5,20 @@ import { CalculateAgePipe } from '../../../shared/pipes/calculate-age.pipe';
 import { FilterInputComponent } from '../../../shared/ui/filter-input/filter-input.component';
 import { FilterCustomersPipe } from '../../../shared/pipes/filter-customers.pipe';
 import { PaginateCustomersPipe } from '../../../shared/pipes/paginate-customers.pipe';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { NgClass } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 import { Customer, CustomerKey } from '../../../shared/models/customer';
+import { PaginatorComponent } from '../../../shared/components/paginator/paginator.component';
 
 @Component({
   selector: 'app-customer-list',
   standalone: true,
-  imports: [FilterInputComponent, CapitalizePipe, CalculateAgePipe, PaginateCustomersPipe, NgClass, RouterLink, MatProgressSpinnerModule],
+  imports: [FilterInputComponent, PaginatorComponent, CapitalizePipe, CalculateAgePipe, PaginateCustomersPipe, RouterLink, MatProgressSpinnerModule],
   templateUrl: './customer-list.component.html',
   styleUrl: './customer-list.component.scss'
 })
 export class CustomerListComponent implements AfterViewInit {
-
   loadingCustomers = true;
-
   customers: Customer[] = [];
   filteredCustomers: Customer[] = [];
 
@@ -95,12 +93,6 @@ export class CustomerListComponent implements AfterViewInit {
 
   changePage(page: number) {
     this.page = page;
-
-    console.log(page);
-  }
-
-  changeToLastPage() {
-    this.page = Math.floor(this.filteredCustomers.length / this.pageSize);
   }
 
   /* Abrir Customer Form Modal */

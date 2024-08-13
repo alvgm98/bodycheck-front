@@ -1,0 +1,21 @@
+<span class="material-symbols-outlined" [ngClass]="page === 0 ? 'disabled-pager' : 'enabled-pager'"
+  (click)="changePage(0)">
+  first_page
+</span>
+<span class="material-symbols-outlined" [ngClass]="page === 0 ? 'disabled-pager' : 'enabled-pager'"
+  (click)="changePage(page - 1)">
+  chevron_left
+</span>
+
+<div class="page">
+  {{ page + 1 }}
+</div>
+
+<span class="material-symbols-outlined" [ngClass]="page === lastPage ? 'disabled-pager' : 'enabled-pager'"
+  (click)="changePage(page + 1)">
+  chevron_right
+</span>
+<span class="material-symbols-outlined" [ngClass]="page === lastPage ? 'disabled-pager' : 'enabled-pager'"
+  (click)="changePage(lastPage)">
+  last_page
+</span>

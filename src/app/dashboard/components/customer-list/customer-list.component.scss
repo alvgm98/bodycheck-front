@@ -1,41 +1,40 @@
 @import 'colors';
 
 :host {
-  flex: 1;
-
   background-color: $white;
 
+  flex: 1;
   display: flex;
   flex-direction: column;
+}
 
-  .controls {
-    padding: 40px 60px;
+.controls {
+  padding: 40px 60px;
+
+  display: flex;
+  align-items: flex-end;
+  gap: 30px;
+
+  i {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    height: 40px;
+    width: 40px;
+
+    border: 2px solid $primary-color;
+    border-radius: 10px;
+    color: $primary-color;
+    font-size: 22px;
 
     display: flex;
-    align-items: flex-end;
-    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    transition: .4s;
+  }
 
-    i {
-      flex-shrink: 0;
-      box-sizing: border-box;
-      height: 40px;
-      width: 40px;
-
-      border: 2px solid $primary-color;
-      border-radius: 10px;
-      color: $primary-color;
-      font-size: 22px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: .4s;
-    }
-
-    i:hover {
-      cursor: pointer;
-      background-color: $background-color;
-    }
+  i:hover {
+    cursor: pointer;
+    background-color: $background-color;
   }
 }
 
@@ -48,16 +47,19 @@
     width: 20%;
     transition: 300ms;
   }
+
   th:first-child {
     width: 40%;
   }
+
   th:hover {
     cursor: pointer;
     background-color: $background-color;
     border-radius: 20px 20px 0 0;
   }
 
-  td, th {
+  td,
+  th {
     box-sizing: border-box;
     height: 88px;
     text-align: center;
@@ -71,9 +73,11 @@
   tr {
     transition: 300ms;
   }
+
   tr:nth-child(odd) {
     background-color: $background-color;
   }
+
   tr:hover {
     cursor: pointer;
     background-color: $tertiary-color-300;
@@ -81,40 +85,8 @@
 }
 
 .paginator {
-  box-sizing: border-box;
   width: 100%;
   height: 80px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-  .enabled-pager {
-    cursor: pointer;
-    transition: 300ms;
-  }
-  .enabled-pager:hover {
-    color: $primary-color;
-  }
-  .disabled-pager {
-    pointer-events: none;
-    color: $background-color;
-    // visibility: hidden;
-  }
-
-
-  .page {
-    box-sizing: border-box;
-    min-width: 28px;
-
-    font-size: 18px;
-    font-weight: bold;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 }
 
 .no-results {
