@@ -41,11 +41,28 @@
 
   .edit {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    right: 10px;
 
-    color: $primary-color;
-    font-size: 22px;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 300ms;
+    i {
+      color: $primary-color;
+      font-size: 22px;
+    }
+  }
+
+  .edit:hover {
+    cursor: pointer;
+    background-color: #badad2;
+
   }
 }
 
