@@ -459,7 +459,7 @@ input[type=number] {
   input,
   app-select-input {
     background-color: #f0fdf960 !important;
-    border-color: #cae4dd;
+    border-color: #badad2;
     border-bottom-color: $primary-color;
   }
 
@@ -467,7 +467,7 @@ input[type=number] {
   .input-border-group input:not(:placeholder-shown)+.placeholder,
   textarea:focus+.placeholder,
   .placeholder-moved {
-    background-color: #cae4dd !important;
+    background-color: #badad2 !important;
   }
 
   app-toggle-button,
@@ -490,7 +490,7 @@ input[type=number] {
     border-radius: 5px;
     padding-inline: 10px;
 
-    background-color: #cae4dd;
+    background-color: #badad2;
     color: $primary-color;
 
     display: flex;

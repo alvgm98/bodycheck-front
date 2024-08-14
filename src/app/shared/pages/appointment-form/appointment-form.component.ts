@@ -14,7 +14,7 @@ import { ModalService } from '../../services/util/modal.service';
   animations: [
     trigger('appointment-form-animation', [
       state('open', style({ top: '50%', scale: 1, transform: 'translate(-50%, -50%)' })),
-      state('closed', style({ top: '100%', scale: 0, transform: 'transform: translateX(-50%)' })),
+      state('closed', style({ top: '100%', scale: 0 })),
       transition('* => open, open => closed', animate('300ms'))
     ])
   ],
