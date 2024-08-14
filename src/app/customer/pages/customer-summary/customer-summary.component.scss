@@ -32,11 +32,21 @@
 }
 
 #customer-card {
+  position: relative;
   padding: 50px 70px;
 
   height: fit-content;
   min-width: 450px;
   min-height: 350px;
+
+  .edit {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    color: $primary-color;
+    font-size: 22px;
+  }
 }
 
 #customer-appointments-summary,

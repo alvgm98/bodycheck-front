@@ -2,6 +2,7 @@
   <article id="customer-card">
     @if (customer) {
       <app-customer-card [customer]="customer" />
+      <i class="fa-solid fa-pen-to-square edit"></i>
     } @else {
       <mat-spinner></mat-spinner>
     }
