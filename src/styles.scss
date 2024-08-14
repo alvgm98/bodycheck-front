@@ -414,9 +414,8 @@ input[type=number] {
 .customer-form,
 .appointment-form {
   position: fixed;
-  top: 50%;
+  top: 100%;
   left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 5;
 
   border: 3px solid $primary-color;
@@ -460,8 +459,8 @@ input[type=number] {
   input,
   app-select-input {
     background-color: #f0fdf960 !important;
-    border-color: #cae4dd !important;
-    border-bottom-color: $primary-color !important;
+    border-color: #cae4dd;
+    border-bottom-color: $primary-color;
   }
 
   .input-border-group input:focus+.placeholder,
@@ -500,6 +499,7 @@ input[type=number] {
   }
 }
 
+/* ICONO CERRAR MODAL */
 .close-icon {
   cursor: pointer;
   position: absolute;
@@ -508,55 +508,4 @@ input[type=number] {
 
   font-size: 25px;
   color: $primary-color;
-}
-
-.form-pop-up-animation {
-  animation: form-pop-up .3s forwards;
-}
-
-@keyframes form-pop-up {
-  from {
-    top: 100%;
-    scale: 0;
-  }
-
-  to {
-    top: 50%;
-    scale: 1;
-  }
-}
-
-.form-pop-down-animation {
-  animation: form-pop-down .3s forwards;
-}
-
-@keyframes form-pop-down {
-  to {
-    top: 100%;
-    scale: 0;
-  }
-}
-
-.overlay-fade-in-animation {
-  animation: overlay-fade-in .3s;
-}
-
-@keyframes overlay-fade-in {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.overlay-fade-out-animation {
-  animation: overlay-fade-out .3s;
-}
-
-@keyframes overlay-fade-out {
-  to {
-    opacity: 0;
-  }
 }

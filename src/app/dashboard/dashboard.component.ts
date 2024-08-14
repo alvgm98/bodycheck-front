@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { CustomerListComponent } from './components/customer-list/customer-list.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
 import { ModalOverlayComponent } from '../shared/components/modal-overlay/modal-overlay.component';
@@ -6,6 +6,7 @@ import { CustomerFormComponent } from '../shared/pages/customer-form/customer-fo
 import { AppointmentFormComponent } from '../shared/pages/appointment-form/appointment-form.component';
 import { MessageModalComponent } from '../shared/components/message-modal/message-modal.component';
 import { ErrorService } from '../shared/services/error.service';
+import { ModalService } from '../shared/services/util/modal.service';
 
 
 @Component({
@@ -24,41 +25,42 @@ export class DashboardComponent {
 
   constructor(
     private errorService: ErrorService,
-    private el: ElementRef
+    private modalService: ModalService
   ) {
+    /* Modal Service */
     effect(() => {
-      if (errorService.errorMessage()) {
-        this.errorMessages.push(errorService.errorMessage());
+      const showOverlay = modalService.showOverlay();
+
+      if (showOverlay) {
+        this.showCustomerForm = modalService.showCustomerForm();
+        this.showAppointmentForm = modalService.showAppointmentForm();
+      }
+
+      if (!showOverlay) {
+        setTimeout(() => this.closeModals(), 300);
       }
     })
+
+    /* Error Message Service */
+    effect(() => errorService.errorMessage() && this.addErrorMessage(errorService.errorMessage()));
   }
 
+  /* Formularios Modales  */
   openCustomerForm() {
-    this.showCustomerForm = true;
+    this.modalService.openCustomerForm();
   }
   openAppointmentForm() {
-    this.showAppointmentForm = true;
+    this.modalService.openAppointmentForm();
   }
-
   closeModals() {
-    const overlay = this.el.nativeElement.querySelector('app-modal-overlay');
-    overlay.classList.remove('overlay-fade-in-animation');
-    overlay.classList.add('overlay-fade-out-animation');
-
-    if (this.showCustomerForm) {
-      const customerForm = this.el.nativeElement.querySelector('app-customer-form');
-      customerForm.classList.remove('form-pop-up-animation');
-      customerForm.classList.add('form-pop-down-animation');
-      setTimeout(() => this.showCustomerForm = false, 300);
-    }
-    if (this.showAppointmentForm) {
-      const appointmentForm = this.el.nativeElement.querySelector('app-appointment-form');
-      appointmentForm.classList.remove('form-pop-up-animation');
-      appointmentForm.classList.add('form-pop-down-animation');
-      setTimeout(() => this.showAppointmentForm = false, 300);
-    }
+    this.showCustomerForm = false;
+    this.showAppointmentForm = false;
   }
 
+  /* Mensajes Modales */
+  addErrorMessage(message: string) {
+    this.errorMessages.push(message);
+  }
   closeErrorMessage(index: number) {
     this.errorMessages.splice(index);
     this.errorService.errorMessage.set('');

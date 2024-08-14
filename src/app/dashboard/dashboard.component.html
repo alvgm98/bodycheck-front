@@ -2,12 +2,12 @@
 <app-agenda (openAppointmentFormEvent)="openAppointmentForm()" />
 
 @if (showAppointmentForm || showCustomerForm) {
-  <app-modal-overlay (closeEvent)="closeModals()" />
+  <app-modal-overlay />
   @if (showAppointmentForm) {
     <app-appointment-form (closeEvent)="closeModals()" />
   }
   @if (showCustomerForm) {
-    <app-customer-form (closeEvent)="closeModals()" (successEvent)="addSuccessMessage($event)"/>
+    <app-customer-form (successEvent)="addSuccessMessage($event)"/>
   }
 }
 

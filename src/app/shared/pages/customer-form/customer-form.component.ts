@@ -1,4 +1,5 @@
-import { Component, output } from '@angular/core';
+import { Component, effect, output } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToggleButtonComponent } from '../../ui/toggle-button/toggle-button.component';
 import { SelectInputComponent } from '../../ui/select-input/select-input.component';
@@ -7,6 +8,7 @@ import { ethnicityOptions } from '../../models/enums/ethnicity.enum';
 import { CustomerService } from '../../services/customer.service';
 import { Gender } from '../../models/enums/gender.enum';
 import { Customer } from '../../models/customer';
+import { ModalService } from '../../services/util/modal.service';
 
 
 @Component({
@@ -15,21 +17,43 @@ import { Customer } from '../../models/customer';
   imports: [ToggleButtonComponent, SelectInputComponent, TextareaComponent, ReactiveFormsModule],
   templateUrl: './customer-form.component.html',
   styleUrl: './customer-form.component.scss',
+  animations: [
+    trigger('customer-form-animation', [
+      state('open', style({ top: '50%', scale: 1, transform: 'translate(-50%, -50%)' })),
+      state('closed', style({ top: '100%', scale: 0, transform: 'transform: translateX(-50%)' })),
+      transition('* => open, open => closed', animate('300ms'))
+    ])
+  ],
   host: {
-    'class': 'customer-form form-pop-up-animation'
+    '[@customer-form-animation]': 'animationState',
+    'class': 'customer-form'
   }
 })
+/**
+ * Esta clase tiene una animación cuando abre y cuando se cierra el componente,
+ * al ejecutar la animacion de cerrar actualiza los signals de ModalService, pero el componente no se destruye.
+ *
+ * Para usar correctamente este componente, debes subscribirte a los signals de ModalService
+ * en el componente padre y ejecutar la destruccion del componente pasados 300ms de que el modal correspondiente torne a false.
+ */
 export class CustomerFormComponent {
+  animationState: string = 'closed';
 
-  closeEvent = output<void>();
   successEvent = output<string>();
 
   ethnicityOptions = ethnicityOptions;
 
   constructor(
     private fb: FormBuilder,
-    private customerService: CustomerService
-  ) { }
+    private customerService: CustomerService,
+    private modalService: ModalService
+  ) {
+    effect(() => this.animationState = modalService.showOverlay() ? 'open' : 'closed')
+  }
+
+  close() {
+    this.modalService.closeAll();
+  }
 
   customerForm = this.fb.group({
     firstName: ["", [Validators.required]],
@@ -77,9 +101,5 @@ export class CustomerFormComponent {
         this.close();
       }
     });
-  }
-
-  close() {
-    this.closeEvent.emit();
   }
 }
