@@ -19,7 +19,6 @@ export class CustomerSummaryComponent {
   constructor(private modalService: ModalService) { }
 
   openCustomerForm() {
-    console.log('message')
     this.modalService.openCustomerForm();
   }
 }

@@ -1,15 +1,14 @@
-import { Component, effect, output } from '@angular/core';
+import { Component, effect, input, OnInit, output } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToggleButtonComponent } from '../../ui/toggle-button/toggle-button.component';
 import { SelectInputComponent } from '../../ui/select-input/select-input.component';
 import { TextareaComponent } from '../../ui/textarea/textarea.component';
-import { ethnicityOptions } from '../../models/enums/ethnicity.enum';
+import { Ethnicity, ETHNICITY_OPTIONS } from '../../models/enums/ethnicity.enum';
 import { CustomerService } from '../../services/customer.service';
 import { Gender } from '../../models/enums/gender.enum';
 import { Customer } from '../../models/customer';
 import { ModalService } from '../../services/util/modal.service';
-
 
 @Component({
   selector: 'app-customer-form',
@@ -36,12 +35,12 @@ import { ModalService } from '../../services/util/modal.service';
  * Para usar correctamente este componente, debes subscribirte a los signals de ModalService
  * en el componente padre y ejecutar la destruccion del componente pasados 300ms de que el modal correspondiente torne a false.
  */
-export class CustomerFormComponent {
+export class CustomerFormComponent implements OnInit {
   animationState: string = 'closed';
 
-  successEvent = output<string>();
+  customer = input<Customer>();
 
-  ethnicityOptions = ethnicityOptions;
+  public ETHNICITY_OPTIONS = ETHNICITY_OPTIONS;
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +50,35 @@ export class CustomerFormComponent {
     effect(() => this.animationState = modalService.showOverlay() ? 'open' : 'closed')
   }
 
+  /**
+   * Al Iniciar el componente comprobamos si ha recibido a customer por input
+   * true: Mostramos sus datos en formulario listos para modificar
+   * flase: Mostramos un formulario vacío listo para crear un nuevo customer
+   */
+  ngOnInit(): void {
+    if (this.customer()) {
+      const customer = this.customer()!;
+
+      this.customerForm.patchValue({
+        firstName: customer.firstName,
+        lastName: customer.lastName,
+        email: customer.email,
+        phone: customer.phone,
+        birthdate: customer.birthdate.toString(),
+        height: customer.height.toString(),
+        gender: customer.gender,
+        ethnicity: Ethnicity[customer.ethnicity],
+        target: customer.target,
+        observations: customer.observations
+      });
+    }
+  }
+
+  /**
+   * Envia la señal al service de cerrar componente. Leerán la señal:
+   * - Este componente: Ejecutando la animación de cerrar
+   * - El componente padre: Destruyendo el componente con la duración de la animación de retraso
+   */
   close() {
     this.modalService.closeAll();
   }
@@ -71,35 +99,54 @@ export class CustomerFormComponent {
     return this.customerForm.controls;
   }
 
-  selectGender(gender: string) {
+  /* SETTERS. Para campos obtenidos a traves de componentes */
+  // Gender
+  setGender(gender: string) {
     this.customerForm.patchValue({
       gender: Gender[gender.charAt(0) as keyof typeof Gender]
     });
   }
-
-  selectEthnicity(ethnicity: string) {
+  // Ethnicity
+  setEthnicity(ethnicity: string) {
     this.customerForm.patchValue({
       ethnicity: ethnicity
     });
   }
-
-  getObservations(observations: string) {
+  // Observations
+  setObservations(observations: string) {
     this.customerForm.patchValue({
       observations: observations
     });
   }
 
-  createCustomer() {
+  /* SUBMIT */
+  successEvent = output<string>(); // Evento para informar al padre de mostrar mensaje de success
+
+  submit() {
     if (!this.customerForm.valid) {
       this.customerForm.markAllAsTouched();
       return;
     }
 
+    if (this.customer()) {
+      this.editCustomer();
+    } else {
+      this.createCustomer();
+    }
+  }
+
+  // Create
+  private createCustomer() {
     this.customerService.addCustomer(this.customerForm.value as unknown as Customer).subscribe({
       complete: () => {
         this.successEvent.emit("Cliente creado con exito")
         this.close();
       }
     });
+  }
+
+  // Edit
+  private editCustomer() {
+    // TODO
   }
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="customerForm" (submit)="createCustomer()">
+<form [formGroup]="customerForm" (submit)="submit()">
   <i (click)="close()" class="close-icon fa-solid fa-xmark"></i>
   <h3>Añadir Cliente</h3>
 
@@ -62,6 +62,7 @@
   </div>
 
   <div class="form-row">
+    <!-- Birthdate -->
     <div class="input-border-group">
       <input formControlName="birthdate" placeholder=" " type="date" />
       <label class="placeholder">Fecha de Nacimiento*</label>
@@ -72,10 +73,12 @@
       }
     </div>
 
-    <app-toggle-button (selectEvent)="selectGender($event)" [leftBtn]="'Masculino'" [rightBtn]="'Femenino'" />
+    <!-- Gender -->
+    <app-toggle-button (selectEvent)="setGender($event)" [leftBtn]="'Masculino'" [rightBtn]="'Femenino'" />
   </div>
 
   <div class="form-row">
+    <!-- Height -->
     <div class="input-border-group">
       <input formControlName="height" placeholder=" " type="number"/>
       <label class="placeholder">Altura*</label>
@@ -86,13 +89,13 @@
         }
       }
     </div>
-
+    <!-- Ethnicity -->
     @let ethnicityHasErrors = controls.ethnicity.touched && controls.ethnicity.errors?.['required'];
     <div style="width: 100%;">
       <app-select-input
-      (selectEvent)="selectEthnicity($event)"
+      (selectEvent)="setEthnicity($event)"
       [title]="'Etnia'"
-      [options]="ethnicityOptions"
+      [options]="ETHNICITY_OPTIONS"
       [hasErrors]="ethnicityHasErrors"
       />
       @if (ethnicityHasErrors) {
@@ -102,9 +105,17 @@
   </div>
 
   <div class="form-row">
-    <app-textarea (contentEmitter)="getObservations($event)" [placeholderName]="'Observaciones'" class="textarea-glass" />
+    <!-- Observations -->
+    <app-textarea (contentEmitter)="setObservations($event)" [placeholderName]="'Observaciones'" class="textarea-glass" />
   </div>
 
-  <button class="btn flat-button">Registrar Cliente</button>
+  @if (customer()) {
+    <div class="edit-btn-row">
+      <button class="btn flat-button">Editar</button>
+      <button type="button" class="btn flat-button cancel-button" (click)="close()">Cancelar</button>
+    </div>
+  } @else {
+    <button class="btn flat-button">Registrar Cliente</button>
+  }
 
 </form>
