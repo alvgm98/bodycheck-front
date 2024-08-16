@@ -74,7 +74,11 @@
     </div>
 
     <!-- Gender -->
-    <app-toggle-button (selectEvent)="setGender($event)" [leftBtn]="'Masculino'" [rightBtn]="'Femenino'" />
+    <app-toggle-button
+      (selectEvent)="setGender($event)"
+      [options]="GENDER_OPTIONS"
+      [defaultOption]="controls.gender.value!"
+    />
   </div>
 
   <div class="form-row">

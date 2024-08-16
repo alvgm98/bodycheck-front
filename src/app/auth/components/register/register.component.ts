@@ -5,7 +5,7 @@ import { RegisterRequest } from '../../models/register-request';
 import { passwordsMatchValidator, passwordStrengthValidator } from '../../validators/password.validator';
 import { NgClass } from '@angular/common';
 import { ToggleButtonComponent } from '../../../shared/ui/toggle-button/toggle-button.component';
-import { Situation } from '../../models/enums/situation.enum';
+import { Situation, SITUATION_OPTIONS, stringToSituation } from '../../models/enums/situation.enum';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +19,8 @@ export class RegisterComponent implements OnInit {
   usernameInput = input<string>("");
   showPasswordSecurity: boolean = false;
   passwordSecurityTimeOut?: NodeJS.Timeout;
+
+  SITUATION_OPTIONS = SITUATION_OPTIONS;
 
   // Necesito variar de esta manera el valor de username ya que el formulario se construye antes de recibir usernameInput
   ngOnInit(): void {
@@ -73,7 +75,7 @@ export class RegisterComponent implements OnInit {
 
   selectSituation(situation: string) {
     this.registerForm.patchValue({
-      situation: Situation[situation.charAt(0).toUpperCase() as keyof typeof Situation]
+      situation: stringToSituation(situation)
     });
   }
 

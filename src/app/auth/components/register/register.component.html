@@ -38,7 +38,7 @@
       }
     </div>
 
-    <app-toggle-button [leftBtn]="'Estudiante'" [rightBtn]="'Profesional'" (selectEvent)="selectSituation($event)"/>
+    <app-toggle-button (selectEvent)="selectSituation($event)" [options]="SITUATION_OPTIONS" />
   </div>
 
     <!-- Email -->

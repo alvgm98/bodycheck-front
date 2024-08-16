@@ -4,9 +4,9 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToggleButtonComponent } from '../../ui/toggle-button/toggle-button.component';
 import { SelectInputComponent } from '../../ui/select-input/select-input.component';
 import { TextareaComponent } from '../../ui/textarea/textarea.component';
-import { Ethnicity, ETHNICITY_OPTIONS, stringToEthnicity } from '../../models/enums/ethnicity.enum';
+import { ETHNICITY_OPTIONS, stringToEthnicity } from '../../models/enums/ethnicity.enum';
+import { GENDER_OPTIONS, stringToGender } from '../../models/enums/gender.enum';
 import { CustomerService } from '../../services/customer.service';
-import { Gender } from '../../models/enums/gender.enum';
 import { Customer } from '../../models/customer';
 import { ModalService } from '../modal.service';
 import { MessageService } from '../../../message-modal/message.service';
@@ -42,6 +42,7 @@ export class CustomerFormComponent implements OnInit {
   customer = input<Customer>();
 
   public ETHNICITY_OPTIONS = ETHNICITY_OPTIONS;
+  public GENDER_OPTIONS = GENDER_OPTIONS;
 
   constructor(
     private fb: FormBuilder,
@@ -68,7 +69,7 @@ export class CustomerFormComponent implements OnInit {
         phone: customer.phone,
         birthdate: customer.birthdate.toString(),
         height: customer.height.toString(),
-        gender: customer.gender,
+        gender: customer.gender.toString(),
         ethnicity: customer.ethnicity.toString(),
         target: customer.target,
         observations: customer.observations
@@ -92,7 +93,7 @@ export class CustomerFormComponent implements OnInit {
     email: ["", [Validators.email]],
     birthdate: ["", [Validators.required]],
     height: ["", [Validators.required]],
-    gender: [Gender.M],
+    gender: ["M"],
     ethnicity: ["", [Validators.required]],
     target: ["", Validators.required],
     observations: [""]
@@ -105,7 +106,7 @@ export class CustomerFormComponent implements OnInit {
   // Gender
   setGender(gender: string) {
     this.customerForm.patchValue({
-      gender: Gender[gender.charAt(0) as keyof typeof Gender]
+      gender: gender
     });
   }
   // Ethnicity
@@ -172,7 +173,7 @@ export class CustomerFormComponent implements OnInit {
       phone: this.controls.phone.value!,
       birthdate: new Date(this.controls.birthdate.value!),
       height: Number(this.controls.height.value!),
-      gender: this.controls.gender.value!,
+      gender: stringToGender(this.controls.gender.value!),
       ethnicity: stringToEthnicity(this.controls.ethnicity.value!),
       target: this.controls.target.value!,
       observations: this.controls.observations.value!,
