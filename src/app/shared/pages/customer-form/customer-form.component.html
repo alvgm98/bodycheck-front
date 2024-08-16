@@ -93,11 +93,11 @@
     @let ethnicityHasErrors = controls.ethnicity.touched && controls.ethnicity.errors?.['required'];
     <div style="width: 100%;">
       <app-select-input
-      [title]="'Etnia'"
-      [inputSelected]="controls.ethnicity.value"
-      [options]="ETHNICITY_OPTIONS"
-      (selectEvent)="setEthnicity($event)"
-      [hasErrors]="ethnicityHasErrors"
+        [title]="'Etnia'"
+        [inputSelected]="controls.ethnicity.value"
+        [options]="ETHNICITY_OPTIONS"
+        (selectEvent)="setEthnicity($event)"
+        [hasErrors]="ethnicityHasErrors"
       />
       @if (ethnicityHasErrors) {
         <div class="invalid-field">Selecciona la etnia.</div>
@@ -107,7 +107,12 @@
 
   <div class="form-row">
     <!-- Observations -->
-    <app-textarea (contentEmitter)="setObservations($event)" [placeholderName]="'Observaciones'" class="textarea-glass" />
+    <app-textarea
+      (contentEmitter)="setObservations($event)"
+      [placeholderName]="'Observaciones'"
+      [content]="controls.observations.value!"
+      class="textarea-glass"
+    />
   </div>
 
   @if (customer()) {
