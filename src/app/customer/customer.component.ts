@@ -1,6 +1,6 @@
 import { Component, effect, input, OnInit } from '@angular/core';
 import { CustomerSummaryComponent } from './pages/customer-summary/customer-summary.component';
-import { CustomerDetailed } from '../shared/models/customer';
+import { Customer, CustomerDetailed } from '../shared/models/customer';
 import { CustomerService } from '../shared/services/customer.service';
 import { ModalService } from '../shared/pages/modal.service';
 import { CustomerFormComponent } from '../shared/pages/customer-form/customer-form.component';
@@ -65,5 +65,9 @@ export class CustomerComponent implements OnInit {
   private closeModals() {
     this.showCustomerForm = false;
     // this.showAppointmentForm = false;
+  }
+
+  updateCustomerData(updatedCustomer: Customer) {
+    Object.assign(this.customer!, updatedCustomer);
   }
 }

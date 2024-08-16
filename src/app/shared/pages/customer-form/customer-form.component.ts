@@ -148,11 +148,13 @@ export class CustomerFormComponent implements OnInit {
   }
 
   // Edit
+  updatedCustomerEvent = output<Customer>();
   private editCustomer() {
     const customer: Customer = this.formToCustomer();
 
     this.customerService.updateCustomer(customer).subscribe({
-      complete: () => {
+      next: (data) => {
+        this.updatedCustomerEvent.emit(data);
         this.messageService.emitSuccess("Cliente actualizado con exito")
         this.close();
       }

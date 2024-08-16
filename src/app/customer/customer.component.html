@@ -2,5 +2,5 @@
 
 @if (showCustomerForm) {
   <app-modal-overlay />
-  <app-customer-form [customer]="customer" />
+  <app-customer-form [customer]="customer" (updatedCustomerEvent)="updateCustomerData($event)" />
 }
