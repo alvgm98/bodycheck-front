@@ -19,6 +19,7 @@ export class CustomerService {
     private dateUtil: DateUtilService
   ) { }
 
+  /* GET ALL */
   loadCustomers(): void {
     if (!this.customersLoading() && !this.customersLoaded) {
       this.customersLoading.set(true);
@@ -32,6 +33,7 @@ export class CustomerService {
     }
   }
 
+  /* GET */
   loadCustomer(id: number) {
     return this.http.get<CustomerDetailed>(`${environment.apiCustomerUrl}/detailed/${id}`)
       .pipe(
@@ -41,9 +43,25 @@ export class CustomerService {
       );
   }
 
+  /* POST */
   addCustomer(customer: Customer) {
-    return this.http.post<Customer>(environment.apiCustomerUrl, customer).pipe(
-      tap(data => this.customers.set([...this.customers(), data])),
-    );
+    return this.http.post<Customer>(environment.apiCustomerUrl, customer)
+      .pipe(
+        // Añadimos el customer a customers
+        tap(data => this.customers.set([...this.customers(), data])),
+      );
+  }
+
+  /* PUT */
+  updateCustomer(customer: Customer) {
+    return this.http.put<Customer>(`${environment.apiCustomerUrl}/${customer.id}`, customer)
+      .pipe(
+        // Actualizamos el customer actualizado en customers
+        tap(updatedCustomer =>
+          this.customers.update(customers =>
+            customers.map(c =>
+              c.id === updatedCustomer.id ? updatedCustomer : c))
+        )
+      );
   }
 }

@@ -7,3 +7,7 @@ export const ETHNICITY_OPTIONS = [
   { key: 'AA', value: 'Africana' },
   { key: 'CH', value: 'Caucásica' }
 ];
+
+export function stringToEthnicity(value: string): Ethnicity {
+  return Ethnicity[value as keyof typeof Ethnicity];
+}

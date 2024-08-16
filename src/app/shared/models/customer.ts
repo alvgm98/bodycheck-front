@@ -4,7 +4,7 @@ import { Gender } from "./enums/gender.enum";
 import { Measurement } from "./measurement";
 
 export interface Customer {
-  id: number;
+  id: number | null;
   firstName: string;
   lastName: string;
   email: string;

@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToggleButtonComponent } from '../../ui/toggle-button/toggle-button.component';
 import { SelectInputComponent } from '../../ui/select-input/select-input.component';
 import { TextareaComponent } from '../../ui/textarea/textarea.component';
-import { Ethnicity, ETHNICITY_OPTIONS } from '../../models/enums/ethnicity.enum';
+import { Ethnicity, ETHNICITY_OPTIONS, stringToEthnicity } from '../../models/enums/ethnicity.enum';
 import { CustomerService } from '../../services/customer.service';
 import { Gender } from '../../models/enums/gender.enum';
 import { Customer } from '../../models/customer';
@@ -137,7 +137,9 @@ export class CustomerFormComponent implements OnInit {
 
   // Create
   private createCustomer() {
-    this.customerService.addCustomer(this.customerForm.value as unknown as Customer).subscribe({
+    const customer: Customer = this.formToCustomer();
+
+    this.customerService.addCustomer(customer).subscribe({
       complete: () => {
         this.successEvent.emit("Cliente creado con exito")
         this.close();
@@ -147,6 +149,31 @@ export class CustomerFormComponent implements OnInit {
 
   // Edit
   private editCustomer() {
-    // TODO
+    const customer: Customer = this.formToCustomer();
+
+    this.customerService.updateCustomer(customer).subscribe({
+      complete: () => {
+        this.successEvent.emit("Cliente actualizado con exito")
+        this.close();
+      }
+    })
+  }
+
+  private formToCustomer(): Customer {
+    const id: number | null = this.customer() ? this.customer()!.id : null;
+
+    return {
+      id: id,
+      firstName: this.controls.firstName.value!,
+      lastName: this.controls.lastName.value!,
+      email: this.controls.email.value!,
+      phone: this.controls.phone.value!,
+      birthdate: new Date(this.controls.birthdate.value!),
+      height: Number(this.controls.height.value!),
+      gender: this.controls.gender.value!,
+      ethnicity: stringToEthnicity(this.controls.ethnicity.value!),
+      target: this.controls.target.value!,
+      observations: this.controls.observations.value!,
+    }
   }
 }

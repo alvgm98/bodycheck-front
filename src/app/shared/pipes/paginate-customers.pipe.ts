@@ -23,9 +23,9 @@ export class PaginateCustomersPipe implements PipeTransform {
         bValue = bValue.toLowerCase();
       }
 
-      if (aValue < bValue) {
+      if (aValue! < bValue!) {
         return sortOrder === 'asc' ? -1 : 1;
-      } else if (aValue > bValue) {
+      } else if (aValue! > bValue!) {
         return sortOrder === 'asc' ? 1 : -1;
       } else {
         return 0;
