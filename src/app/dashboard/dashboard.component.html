@@ -7,13 +7,6 @@
     <app-appointment-form (closeEvent)="closeModals()" />
   }
   @if (showCustomerForm) {
-    <app-customer-form (successEvent)="addSuccessMessage($event)"/>
+    <app-customer-form />
   }
-}
-
-@for (errorMessage of errorMessages; track $index) {
-  <app-message-modal (closeEvent)="closeErrorMessage($index)" [message]="errorMessage" [messageType]="'error'" />
-}
-@for (successMessage of successMessages; track $index) {
-  <app-message-modal (closeEvent)="closeErrorMessage($index)" [message]="successMessage" [messageType]="'success'" />
 }

@@ -4,9 +4,8 @@ import { AgendaComponent } from './components/agenda/agenda.component';
 import { ModalOverlayComponent } from '../shared/components/modal-overlay/modal-overlay.component';
 import { CustomerFormComponent } from '../shared/pages/customer-form/customer-form.component';
 import { AppointmentFormComponent } from '../shared/pages/appointment-form/appointment-form.component';
-import { MessageModalComponent } from '../shared/components/message-modal/message-modal.component';
-import { ErrorService } from '../shared/services/error.service';
-import { ModalService } from '../shared/services/util/modal.service';
+import { MessageModalComponent } from '../message-modal/message-modal.component';
+import { ModalService } from '../shared/pages/modal.service';
 
 
 @Component({
@@ -20,11 +19,7 @@ export class DashboardComponent {
   showCustomerForm = false;
   showAppointmentForm = false;
 
-  errorMessages: string[] = [];
-  successMessages: string[] = [];
-
   constructor(
-    private errorService: ErrorService,
     private modalService: ModalService
   ) {
     /* Modal Service */
@@ -40,9 +35,6 @@ export class DashboardComponent {
         setTimeout(() => this.closeModals(), 300);
       }
     })
-
-    /* Error Message Service */
-    effect(() => errorService.errorMessage() && this.addErrorMessage(errorService.errorMessage()));
   }
 
   /* Formularios Modales  */
@@ -55,21 +47,5 @@ export class DashboardComponent {
   closeModals() {
     this.showCustomerForm = false;
     this.showAppointmentForm = false;
-  }
-
-  /* Mensajes Modales */
-  addErrorMessage(message: string) {
-    this.errorMessages.push(message);
-  }
-  closeErrorMessage(index: number) {
-    this.errorMessages.splice(index);
-    this.errorService.errorMessage.set('');
-  }
-
-  addSuccessMessage(message: string) {
-    this.successMessages.push(message);
-  }
-  closeSuccessMessage(index: number) {
-    this.successMessages.splice(index);
   }
 }

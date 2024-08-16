@@ -9,7 +9,7 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { authInterceptor } from './auth/services/auth.interceptor';
 import { FilterCustomersPipe } from './shared/pipes/filter-customers.pipe';
-import { errorInterceptor } from './shared/services/error.interceptor';
+import { errorInterceptor } from './message-modal/error.interceptor';
 
 registerLocaleData(localeEs, 'es-ES');
 

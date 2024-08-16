@@ -1,18 +1,18 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, retry, throwError } from 'rxjs';
-import { ErrorService } from './error.service';
+import { MessageService } from './message.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
-  const errorService = inject(ErrorService);
+  const messageService = inject(MessageService);
 
   return next(req).pipe(
     catchError(error => {
       if (error.status == 0) {
-        errorService.errorMessage.set('Ha ocurrido un error. No hay conexion con el servidor!')
+        messageService.emitError('Ha ocurrido un error. No hay conexion con el servidor!');
       } else {
-        errorService.errorMessage.set('Ha ocurrido un error desconocido.')
+        messageService.emitError('Ha ocurrido un error desconocido.');
       }
       return throwError(() => error);
     }),

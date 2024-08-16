@@ -3,7 +3,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { AppointmentService } from '../../services/appointment.service';
 import { DatePickerComponent } from '../../../dashboard/components/date-picker/date-picker.component';
 import { CheckboxComponent } from '../../ui/checkbox/checkbox.component';
-import { ModalService } from '../../services/util/modal.service';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: 'app-appointment-form',

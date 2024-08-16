@@ -4,7 +4,7 @@ import { CustomerAppointmentSummaryComponent } from '../../components/customer-a
 import { CustomerMeasurementSummaryComponent } from '../../components/customer-measurement-summary/customer-measurement-summary.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CustomerDetailed } from '../../../shared/models/customer';
-import { ModalService } from '../../../shared/services/util/modal.service';
+import { ModalService } from '../../../shared/pages/modal.service';
 
 @Component({
   selector: 'app-customer-summary',

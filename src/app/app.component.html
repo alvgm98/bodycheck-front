@@ -2,3 +2,10 @@
 <main>
   <router-outlet/>
 </main>
+
+@for (errorMessage of errorMessages; track $index) {
+  <app-message-modal (closeEvent)="closeErrorMessage($index)" [message]="errorMessage" [messageType]="'error'" />
+}
+@for (successMessage of successMessages; track $index) {
+  <app-message-modal (closeEvent)="closeSuccessMessage($index)" [message]="successMessage" [messageType]="'success'" />
+}

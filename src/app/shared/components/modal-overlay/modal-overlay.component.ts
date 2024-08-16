@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, effect } from '@angular/core';
-import { ModalService } from '../../services/util/modal.service';
+import { ModalService } from '../../pages/modal.service';
 
 @Component({
   selector: 'app-modal-overlay',

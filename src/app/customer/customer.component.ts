@@ -2,7 +2,7 @@ import { Component, effect, input, OnInit } from '@angular/core';
 import { CustomerSummaryComponent } from './pages/customer-summary/customer-summary.component';
 import { CustomerDetailed } from '../shared/models/customer';
 import { CustomerService } from '../shared/services/customer.service';
-import { ModalService } from '../shared/services/util/modal.service';
+import { ModalService } from '../shared/pages/modal.service';
 import { CustomerFormComponent } from '../shared/pages/customer-form/customer-form.component';
 import { ModalOverlayComponent } from '../shared/components/modal-overlay/modal-overlay.component';
 

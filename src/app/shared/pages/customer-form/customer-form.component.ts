@@ -8,7 +8,8 @@ import { Ethnicity, ETHNICITY_OPTIONS, stringToEthnicity } from '../../models/en
 import { CustomerService } from '../../services/customer.service';
 import { Gender } from '../../models/enums/gender.enum';
 import { Customer } from '../../models/customer';
-import { ModalService } from '../../services/util/modal.service';
+import { ModalService } from '../modal.service';
+import { MessageService } from '../../../message-modal/message.service';
 
 @Component({
   selector: 'app-customer-form',
@@ -45,7 +46,8 @@ export class CustomerFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private customerService: CustomerService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private messageService: MessageService
   ) {
     effect(() => this.animationState = modalService.showOverlay() ? 'open' : 'closed')
   }
@@ -120,8 +122,6 @@ export class CustomerFormComponent implements OnInit {
   }
 
   /* SUBMIT */
-  successEvent = output<string>(); // Evento para informar al padre de mostrar mensaje de success
-
   submit() {
     if (!this.customerForm.valid) {
       this.customerForm.markAllAsTouched();
@@ -141,7 +141,7 @@ export class CustomerFormComponent implements OnInit {
 
     this.customerService.addCustomer(customer).subscribe({
       complete: () => {
-        this.successEvent.emit("Cliente creado con exito")
+        this.messageService.emitSuccess("Cliente creado con exito")
         this.close();
       }
     });
@@ -153,7 +153,7 @@ export class CustomerFormComponent implements OnInit {
 
     this.customerService.updateCustomer(customer).subscribe({
       complete: () => {
-        this.successEvent.emit("Cliente actualizado con exito")
+        this.messageService.emitSuccess("Cliente actualizado con exito")
         this.close();
       }
     })
