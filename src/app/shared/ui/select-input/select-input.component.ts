@@ -1,5 +1,5 @@
 import { NgClass, NgStyle } from '@angular/common';
-import { Component, ElementRef, input, output } from '@angular/core';
+import { Component, ElementRef, input, OnInit, output } from '@angular/core';
 
 @Component({
   selector: 'app-select-input',
@@ -12,17 +12,45 @@ import { Component, ElementRef, input, output } from '@angular/core';
     '(click)': "toggleShowDropdown()"
   }
 })
-export class SelectInputComponent {
+/**
+ * Componente custom de un input de tipo select
+ *
+ * @param title Nombre del campo, se mostrará mientras no haya nada seleccionado.
+ * @param selected Valor de la opción seleccionada.
+ * @param inputSelected Valdrá la key de la opción que se desea seleccionada por defecto.
+ * @param options Todas las opciones que se mostrarán en el dropdown:
+ *                key   -> El valor que tiene en el Enum.
+ *                value -> El texto que se mostrará según la opción seleccionada.
+ * @param hasErrors Modifica los estilos si es verdadero.
+ * @param selectEvent Emite la key de la opción seleccionada para poder se transformado a Enum en el padre.
+ */
+export class SelectInputComponent implements OnInit {
 
-  selected: string = '';
-  selectEvent = output<string>();
   title = input.required<string>();
-  options = input.required<{key: string, value: string}[]>();
-  hasErrors = input<boolean>(false);
+  selected: string = '';
+  inputSelected = input<string | null>();
 
   showDropdown = false;
+  options = input.required<{ key: string, value: string }[]>();
+
+  hasErrors = input<boolean>(false);
+
+  selectEvent = output<string>();
 
   constructor(private el: ElementRef) { }
+
+  /**
+   * Seleccionamos una de las opciones si el componente recibe 'inputSelected'
+   */
+  ngOnInit(): void {
+    if (this.inputSelected()) {
+      const option = this.options().find(opt => opt.key == this.inputSelected())
+
+      if (option) {
+        this.selected = option.value;
+      }
+    }
+  }
 
   toggleShowDropdown() {
     if (!this.showDropdown)
@@ -39,7 +67,7 @@ export class SelectInputComponent {
     setTimeout(() => this.showDropdown = false, 200);
   }
 
-  select(option: {key: string, value: string}) {
+  select(option: { key: string, value: string }) {
     this.selected = option.value;
     this.selectEvent.emit(option.key);
     this.closeDropdown();

@@ -93,9 +93,10 @@
     @let ethnicityHasErrors = controls.ethnicity.touched && controls.ethnicity.errors?.['required'];
     <div style="width: 100%;">
       <app-select-input
-      (selectEvent)="setEthnicity($event)"
       [title]="'Etnia'"
+      [inputSelected]="controls.ethnicity.value"
       [options]="ETHNICITY_OPTIONS"
+      (selectEvent)="setEthnicity($event)"
       [hasErrors]="ethnicityHasErrors"
       />
       @if (ethnicityHasErrors) {

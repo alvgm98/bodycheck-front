@@ -69,7 +69,7 @@ export class CustomerFormComponent implements OnInit {
         birthdate: customer.birthdate.toString(),
         height: customer.height.toString(),
         gender: customer.gender,
-        ethnicity: Ethnicity[customer.ethnicity],
+        ethnicity: customer.ethnicity.toString(),
         target: customer.target,
         observations: customer.observations
       });
