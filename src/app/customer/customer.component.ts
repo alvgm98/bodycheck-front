@@ -26,7 +26,9 @@ export class CustomerComponent implements OnInit {
   customerId = input.required<number>();
   customer?: CustomerDetailed;
 
+  /* Modales */
   showCustomerForm: boolean = false;
+  // showAppointmentForm: boolean = false;
 
   loading = true;
 
@@ -34,21 +36,26 @@ export class CustomerComponent implements OnInit {
     private customerService: CustomerService,
     private modalService: ModalService
   ) {
-    /* Modal Service */
+    /* MODAL SERVICE */
     effect(() => {
       const showOverlay = modalService.showOverlay();
-
+      // Abre el modal correspondiente
       if (showOverlay) {
         this.showCustomerForm = modalService.showCustomerForm();
         // this.showAppointmentForm = modalService.showAppointmentForm();
       }
-
+      // Cierra los modales al terminar la animación.
       if (!showOverlay) {
         setTimeout(() => this.closeModals(), 300);
       }
     })
   }
 
+  /**
+   * Al iniciar el componente carga el customer a partir de la ID recibida por URL
+   * -> next:    Reemplaza los spinners de carga por los datos del cliente.
+   * -> error:   Reemplaza los spinners de carga por mensajes de error.
+   */
   ngOnInit(): void {
     this.customerService.loadCustomer(this.customerId()).subscribe({
       next: (data) => {
@@ -62,11 +69,19 @@ export class CustomerComponent implements OnInit {
     });
   }
 
+  /**
+   * Cierra los modales al instante.
+   * IMPORTANTE llamar a este método una vez terminada la animación del modal
+   */
   private closeModals() {
     this.showCustomerForm = false;
     // this.showAppointmentForm = false;
   }
 
+  /**
+   * Actualiza los datos del Customer a partir de los datos actualizados recibidos del formulario
+   * @param updatedCustomer Datos actualizados del customer.
+   */
   updateCustomerData(updatedCustomer: Customer) {
     Object.assign(this.customer!, updatedCustomer);
   }
