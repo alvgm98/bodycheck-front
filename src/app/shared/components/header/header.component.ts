@@ -1,6 +1,7 @@
-import { Component, effect, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, effect, ElementRef, output } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { LoginComponent } from '../../../auth/components/login/login.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,11 +17,12 @@ export class HeaderComponent {
   showRegister: boolean = false;
   isUserLogged: boolean = false;
 
-  @Output() scrollToTop = new EventEmitter<void>();
+  scrollToTop = output<void>();
 
   constructor(
     private el: ElementRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     effect(() => this.showRegister = authService.showRegister());
     effect(() => this.isUserLogged = authService.isUserLogged());
@@ -75,7 +77,11 @@ export class HeaderComponent {
   }
 
   clickTitle() {
-    this.closeRegister();
-    this.scrollToTop.emit();
+    if (!this.isUserLogged) {
+      this.closeRegister();
+      this.scrollToTop.emit();
+    } else {
+      this.router.navigateByUrl("app");
+    }
   }
 }
