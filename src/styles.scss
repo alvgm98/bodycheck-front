@@ -296,6 +296,14 @@ main {
   user-select: none;
 }
 
+// Input disabled
+.input-border-group input:disabled {
+  border-bottom-color: #6d6d6d;
+}
+.input-border-group input:disabled ~.placeholder {
+  color: #b0b0b0;
+}
+
 // Eliminar las ayudas a los input numericos
 /* Chrome, Safari, Edge, Opera */
 input[type=number]::-webkit-inner-spin-button,
@@ -477,6 +485,10 @@ input[type=number] {
   }
 
   /* RE-MODIFICACION DE ESTILOS EN INPUTS PARA BAJARLE LA OPACIDAD */
+  .placeholder {
+    color: #6d6d6d;
+  }
+
   input,
   app-select-input {
     background-color: #f0fdf960 !important;

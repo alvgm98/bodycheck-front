@@ -1,12 +1,27 @@
 import { Customer } from "./customer";
+import { GenericObject } from "./generic";
 
 export interface Appointment {
   id: number;
-  customer: Customer;
+  customer: Customer | null;
+  customerName: string;
+  customerPhone: string;
   date: Date;
   startTime: Date;
   endTime: Date;
   duration: number;
+  reason: string;
+  observations: string;
+}
+
+export interface AppointmentRequest {
+  id: number | null;
+  customer: GenericObject | null;
+  customerName: string;
+  customerPhone: string;
+  date: Date;
+  startTime: string;
+  endTime: string;
   reason: string;
   observations: string;
 }

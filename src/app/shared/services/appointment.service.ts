@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment.development';
 import { tap } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { DateUtilService } from './util/date-util.service';
-import { Appointment } from '../models/appointment';
+import { Appointment, AppointmentRequest } from '../models/appointment';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +30,25 @@ export class AppointmentService {
           this.agendaAppointments.set(this.dateUtil.initializeAppointments(appointments))
         )
       ).subscribe();
+  }
+
+  addAppointment(appointment: AppointmentRequest) {
+    console.log(appointment)
+    return this.http.post<Appointment>(environment.apiAppointmentUrl, appointment)
+      .pipe(
+        /* Añadimos la cita a la lista de citas si la fecha seleccionada es la misma que la de creación */
+        tap(data => {
+          console.log(data)
+          const f = new Date(data.date); // Al ser en el backend tipo Date, viene en formato "yyyy-MM-dd" en string
+
+          if (
+            f.getDay() == this.selectedDate().getDay()
+            && f.getMonth() == this.selectedDate().getMonth()
+            && f.getFullYear() == this.selectedDate().getFullYear()
+          ) {
+            this.agendaAppointments.set(this.dateUtil.initializeAppointments([...this.agendaAppointments(), data]))
+          }
+        })
+      )
   }
 }

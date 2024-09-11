@@ -1,14 +1,14 @@
-<form>
+<form [formGroup]="appointmentForm" (submit)="submit()">
   <i (click)="close()" class="close-icon fa-solid fa-xmark"></i>
   <h3>Nueva Cita</h3>
 
   <div class="form-row">
     <div class="input-border-group">
-      <input placeholder=" " type="text" />
-      <label class="placeholder">Cliente</label>
+      <input formControlName="customer" placeholder=" " type="text" />
+      <label class="placeholder">Cliente{{ registeredCustomer ? "*" : "" }} </label>
     </div>
     <div class="checkbox-group">
-      <app-checkbox [(checked)]="registeredCustomer" />
+      <app-checkbox [(checked)]="registeredCustomer" (checkedChange)="registeredCustomerCheckedChange()" />
       @if (registeredCustomer) {
         <span class="checkbox-label">Cliente Registrado</span>
       } @else {
@@ -17,17 +17,46 @@
     </div>
   </div>
 
+  <!-- Si la cita no es con un cliente registrado pedimos que le añada un nombre y telefono de cliente -->
+  @if (!registeredCustomer) {
+    <div class="form-row">
+      <div class="input-border-group">
+        <input formControlName="customerName" placeholder=" " type="text" />
+        <label class="placeholder">Nombre del Cliente*</label>
+      </div>
+      <div class="input-border-group">
+        <input formControlName="customerPhone" placeholder=" " type="text" />
+        <label class="placeholder">Teléfono de Cliente*</label>
+      </div>
+    </div>
+  }
+
   <div class="form-row">
-    <app-date-picker [selected]="date()" (selectedChange)="setSelectedDate($event)" style="border-bottom: 2px solid #109d8a;" />
+    <app-date-picker [selected]="date" (selectedChange)="date = $event" style="border-bottom: 2px solid #109d8a;" />
     <div class="time-col">
       <div class="input-border-group">
-        <input formControlName="firstName" placeholder=" " type="time" />
+        <input formControlName="reason" placeholder=" " type="text" />
+        <label class="placeholder">Motivo de la Cita*</label>
+      </div>
+      <div class="input-border-group">
+        <input formControlName="startTime" placeholder=" " type="time" />
         <label class="placeholder">Hora de Inicio</label>
       </div>
       <div class="input-border-group">
-        <input formControlName="firstName" placeholder=" " type="time" />
+        <input formControlName="endTime" placeholder=" " type="time" />
         <label class="placeholder">Hora de Fin</label>
       </div>
     </div>
   </div>
+
+  <div class="form-row">
+    <app-textarea
+      (contentEmitter)="observations = $event"
+      [content]="observations"
+      [placeholderName]="'Observaciones'"
+      class="textarea-glass"
+    />
+  </div>
+
+  <button class="btn flat-button">Registrar Cita</button>
 </form>
