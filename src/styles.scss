@@ -300,7 +300,8 @@ main {
 .input-border-group input:disabled {
   border-bottom-color: #6d6d6d;
 }
-.input-border-group input:disabled ~.placeholder {
+
+.input-border-group input:disabled~.placeholder {
   color: #b0b0b0;
 }
 
@@ -435,12 +436,6 @@ input[type=number] {
   left: 50%;
   z-index: 5;
 
-  border: 3px solid $primary-color;
-  border-radius: 6%;
-
-  background-color: #aae5d444;
-  backdrop-filter: blur(10px);
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -451,7 +446,13 @@ input[type=number] {
     width: 100%;
     height: 100%;
 
+    border: 3px solid $primary-color;
     padding: 40px 80px;
+    border-radius: 6%;
+
+    background-color: #aae5d444;
+    backdrop-filter: blur(10px);
+
 
     display: flex;
     flex-direction: column;

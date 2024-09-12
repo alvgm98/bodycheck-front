@@ -8,18 +8,22 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaComponent } from '../../ui/textarea/textarea.component';
 import { AppointmentRequest } from '../../models/appointment';
 import { GenericObject } from '../../models/generic';
+import { ModalCustomerListComponent } from '../modal-customer-list/modal-customer-list.component';
+import { Customer } from '../../models/customer';
 
 @Component({
   selector: 'app-appointment-form',
   standalone: true,
-  imports: [DatePickerComponent, CheckboxComponent, TextareaComponent, ReactiveFormsModule],
+  imports: [DatePickerComponent, CheckboxComponent, TextareaComponent, ModalCustomerListComponent, ReactiveFormsModule],
   templateUrl: './appointment-form.component.html',
   styleUrl: './appointment-form.component.scss',
   animations: [
     trigger('appointment-form-animation', [
       state('open', style({ top: '50%', scale: 1, transform: 'translate(-50%, -50%)' })),
       state('closed', style({ top: '100%', scale: 0 })),
-      transition('* => open, open => closed', animate('300ms'))
+      state('showingCustomerList', style({ top: '50%', scale: 1, transform: 'translate(150%, -50%)' })),
+      transition('* => open, * => closed', animate('300ms')),
+      transition('open => showingCustomerList', animate('380ms'))
     ])
   ],
   host: {
@@ -40,6 +44,7 @@ export class AppointmentFormComponent {
   // appointment = input<Appointment>();
 
   registeredCustomer = true;
+  showCustomerList = false;
 
   customerId: GenericObject | null = null;
   date: Date = new Date();
@@ -87,6 +92,41 @@ export class AppointmentFormComponent {
     }
   }
 
+  /**
+   * Al escribir en el campo de Cliente, se ocultará momentaneamente el formulario para mostrar el listado de clientes
+   */
+  toggleShowCustomerList() {
+    if (this.controls.customer.value) {
+      this.animationState = 'showingCustomerList';
+      this.showCustomerList = true;
+    } else {
+      this.closeShowCustomerList();
+    }
+  }
+
+  customerListEvent(customer: Customer | string) {
+    // Entrará en el if si seleccionó la opción de que el cliente no esta registrado
+    if (typeof customer === 'string') {
+      // Volvemos a la vista inicial
+      this.closeShowCustomerList();
+      // Marcamos al cliente como no registrado
+      this.registeredCustomer = false;
+      // Reseteamos el campo customer y añadimos el valor con el que estabamos filtrando a 'customerName'
+      this.appointmentForm.patchValue({
+        customer: "",
+        customerName: customer
+      })
+    } else {
+      // TODO seleccionar cliente SI registrado
+    }
+  }
+
+  private closeShowCustomerList() {
+    this.animationState = 'open'
+    setTimeout(() => this.showCustomerList = false, 380)
+  }
+
+  /* SUBMITS */
   submit() {
     if (!this.appointmentForm.valid) {
       this.appointmentForm.markAllAsTouched();

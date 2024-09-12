@@ -1,0 +1,37 @@
+@import 'colors';
+
+:host {
+  position: fixed;
+  top: 50%;
+  left: -150%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+
+
+  border: 3px solid $primary-color;
+  background-color: #aae5d444;
+  backdrop-filter: blur(10px);
+
+  box-sizing: border-box;
+  width: min(90%, 1000px);
+  max-height: 400px;
+  padding: 40px 80px;
+  border-radius: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-registered {
+  color: $primary-color;
+  font-size: 20px;
+}
+.no-registered:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: $primary-color-700;
+}

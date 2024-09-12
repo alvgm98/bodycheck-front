@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="input-border-group">
+    <input
+      id="modalCustomerListSearchInput"
+      formControlName="customer"
+      placeholder=" "
+      type="text"
+      #filter
+      [value]="searchFilter()"
+    />
+    <label class="placeholder">Cliente*</label>
+  </div>
+
+  <p class="no-registered" (click)="noRegisteredCustomer(filter.value)">El cliente no se encuentra registrado</p>
+
+  <div class="list">
+
+  </div>
+
+</div>

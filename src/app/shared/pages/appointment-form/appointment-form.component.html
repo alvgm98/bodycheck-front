@@ -5,8 +5,8 @@
   <div class="form-row">
     @if (registeredCustomer) {
       <div class="input-border-group">
-        <input formControlName="customer" placeholder=" " type="text" />
-        <label class="placeholder">Cliente{{ registeredCustomer ? "*" : "" }} </label>
+        <input formControlName="customer" placeholder=" " type="text" (keyup)="toggleShowCustomerList()" />
+        <label class="placeholder">Cliente*</label>
       </div>
     } @else {
       <!-- Si la cita no es con un cliente registrado pedimos que el nombre y telefono del cliente -->
@@ -61,3 +61,7 @@
 
   <button class="btn flat-button">Registrar Cita</button>
 </form>
+
+@if (showCustomerList) {
+  <app-modal-customer-list [searchFilter]="controls.customer.value" (outputEvent)="customerListEvent($event)" />
+}
