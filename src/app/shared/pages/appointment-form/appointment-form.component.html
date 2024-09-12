@@ -3,10 +3,25 @@
   <h3>Nueva Cita</h3>
 
   <div class="form-row">
-    <div class="input-border-group">
-      <input formControlName="customer" placeholder=" " type="text" />
-      <label class="placeholder">Cliente{{ registeredCustomer ? "*" : "" }} </label>
-    </div>
+    @if (registeredCustomer) {
+      <div class="input-border-group">
+        <input formControlName="customer" placeholder=" " type="text" />
+        <label class="placeholder">Cliente{{ registeredCustomer ? "*" : "" }} </label>
+      </div>
+    } @else {
+      <!-- Si la cita no es con un cliente registrado pedimos que el nombre y telefono del cliente -->
+      <div class="form-row">
+        <div class="input-border-group">
+          <input formControlName="customerName" placeholder=" " type="text" />
+          <label class="placeholder">Nombre del Cliente*</label>
+        </div>
+        <div class="input-border-group">
+          <input formControlName="customerPhone" placeholder=" " type="text" />
+          <label class="placeholder">Teléfono de Cliente*</label>
+        </div>
+      </div>
+    }
+
     <div class="checkbox-group">
       <app-checkbox [(checked)]="registeredCustomer" (checkedChange)="registeredCustomerCheckedChange()" />
       @if (registeredCustomer) {
@@ -16,20 +31,6 @@
       }
     </div>
   </div>
-
-  <!-- Si la cita no es con un cliente registrado pedimos que le añada un nombre y telefono de cliente -->
-  @if (!registeredCustomer) {
-    <div class="form-row">
-      <div class="input-border-group">
-        <input formControlName="customerName" placeholder=" " type="text" />
-        <label class="placeholder">Nombre del Cliente*</label>
-      </div>
-      <div class="input-border-group">
-        <input formControlName="customerPhone" placeholder=" " type="text" />
-        <label class="placeholder">Teléfono de Cliente*</label>
-      </div>
-    </div>
-  }
 
   <div class="form-row">
     <app-date-picker [selected]="date" (selectedChange)="date = $event" style="border-bottom: 2px solid #109d8a;" />

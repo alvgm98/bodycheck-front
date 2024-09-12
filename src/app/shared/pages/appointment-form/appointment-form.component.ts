@@ -74,9 +74,8 @@ export class AppointmentFormComponent {
   }
 
   /**
-   * Se ejecuta al cambiar el estado del checkbox que indica si el Customer se encuentra registrado,
-   * habilitando y deshabilitando el campo customer segun la elección. Y cambiando los datos ya escritos,
-   * si los hubiese, al nuevo campo "customerName".
+   * Se ejecuta al cambiar el estado del checkbox que indica si el Customer se encuentra registrado.
+   * Si hubiera datos en el campo 'customer' se mueven a 'customerName'
    */
   registeredCustomerCheckedChange() {
     if (!this.registeredCustomer) {
@@ -85,12 +84,6 @@ export class AppointmentFormComponent {
         customer: "",
         customerName: customerName
       })
-
-      // Deshabilitamos el campo customer al ser un Customer no registrado
-      this.controls.customer.disable();
-    } else {
-      // Habilitamos el campo customer al ser un Customer registrado
-      this.controls.customer.enable();
     }
   }
 
