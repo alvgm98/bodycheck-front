@@ -1,5 +1,13 @@
-<h4 class="customer">{{ appointment().customerName }}</h4>
-<h5 class="phone">{{ appointment().customerPhone }} <i class="fa-solid fa-phone"></i></h5>
+<h4 class="customer">{{
+  appointment().customer
+  ? appointment().customer!.firstName + " " + appointment().customer!.lastName
+  : appointment().customerName }}
+</h4>
+<h5 class="phone">{{
+  appointment().customer
+  ? appointment().customer!.phone
+  : appointment().customerPhone }} <i class="fa-solid fa-phone"></i>
+</h5>
 <h5 [ngClass]="appointment().duration! < 30 ? 'short-reason' : 'reason'">{{ appointment().reason }}</h5>
 
 <p [ngClass]="appointment().duration! < 30 ? 'short-duration' : 'duration'">{{ appointment().duration }} min</p>

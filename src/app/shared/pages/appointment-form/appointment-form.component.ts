@@ -163,10 +163,11 @@ export class AppointmentFormComponent {
   private setDateTime(time: string): string {
     const [hour, min] = time.split(':').map(Number);
 
+    const auxDate = new Date(this.date); // Creamos esta constante ya que 'this.date' puede llegar como un objeto del tipo Moment, usando diferentes funciones
 
-    const year = this.date.getFullYear();
-    const month = ('0' + (this.date.getMonth() + 1)).slice(-2); // Los meses comienzan desde 0
-    const day = ('0' + this.date.getDate()).slice(-2);
+    const year = auxDate.getFullYear();
+    const month = ('0' + (auxDate.getMonth() + 1)).slice(-2); // Los meses comienzan desde 0
+    const day = ('0' + auxDate.getDate()).slice(-2);
 
     return `${year}-${month}-${day}T${String(hour).padStart(2, '0')}:${String(min).padStart(2, '0')}:00`;
   }

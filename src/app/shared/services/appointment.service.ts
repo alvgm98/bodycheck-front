@@ -40,11 +40,12 @@ export class AppointmentService {
         tap(data => {
           console.log(data)
           const f = new Date(data.date); // Al ser en el backend tipo Date, viene en formato "yyyy-MM-dd" en string
+          const auxSelectedDate = new Date(this.selectedDate()); // Creamos esta constante ya que 'this.selectedDate()' puede llegar como un objeto del tipo Moment, usando diferentes funciones
 
           if (
-            f.getDay() == this.selectedDate().getDay()
-            && f.getMonth() == this.selectedDate().getMonth()
-            && f.getFullYear() == this.selectedDate().getFullYear()
+            f.getDay() == auxSelectedDate.getDay()
+            && f.getMonth() == auxSelectedDate.getMonth()
+            && f.getFullYear() == auxSelectedDate.getFullYear()
           ) {
             this.agendaAppointments.set(this.dateUtil.initializeAppointments([...this.agendaAppointments(), data]))
           }
