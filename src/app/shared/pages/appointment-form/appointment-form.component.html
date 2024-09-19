@@ -63,5 +63,5 @@
 </form>
 
 @if (showCustomerList) {
-  <app-modal-customer-list [searchFilter]="controls.customer.value" (outputEvent)="customerListEvent($event)" />
+  <app-modal-customer-list [filterConditionInput]="controls.customer.value" (outputEvent)="customerListEvent($event)" />
 }

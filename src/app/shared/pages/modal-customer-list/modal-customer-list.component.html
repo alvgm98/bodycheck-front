@@ -6,15 +6,25 @@
       placeholder=" "
       type="text"
       #filter
-      [value]="searchFilter()"
+      (keyup)="filterCondition = filter.value"
+      [value]="filterConditionInput()"
     />
     <label class="placeholder">Cliente*</label>
   </div>
 
-  <p class="no-registered" (click)="noRegisteredCustomer(filter.value)">El cliente no se encuentra registrado</p>
 
   <div class="list">
-
+    <p class="no-registered" (click)="noRegisteredCustomer(filterCondition)">¿El cliente no se encuentra registrado?</p>
+    @for (customer of customers | filterCustomers : filterCondition; track $index) {
+      <div class="customer-li">
+        <div class="name">
+          {{ customer.firstName + " " + customer.lastName }}
+        </div>
+        <div class="phone">
+          {{ customer.phone }} <i class="fa-solid fa-phone"></i>
+        </div>
+      </div>
+    }
   </div>
 
 </div>
