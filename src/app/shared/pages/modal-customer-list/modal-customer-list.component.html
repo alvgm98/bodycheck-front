@@ -1,20 +1,22 @@
 <div class="container">
-  <div class="input-border-group">
-    <input
-      id="modalCustomerListSearchInput"
-      formControlName="customer"
-      placeholder=" "
-      type="text"
-      #filter
-      (keyup)="filterCondition = filter.value"
-      [value]="filterConditionInput()"
-    />
-    <label class="placeholder">Cliente*</label>
+  <div style="box-sizing: border-box; width: 100%; padding-inline: 80px; padding-top: 40px;">
+    <div class="input-border-group">
+      <input
+        id="modalCustomerListSearchInput"
+        formControlName="customer"
+        placeholder=" "
+        type="text"
+        #filter
+        (keyup)="filterCondition = filter.value"
+        [value]="filterConditionInput()"
+      />
+      <label class="placeholder">Cliente*</label>
+    </div>
   </div>
 
 
+  <p class="no-registered" (click)="noRegisteredCustomer(filterCondition)">¿El cliente no se encuentra registrado?</p>
   <div class="list">
-    <p class="no-registered" (click)="noRegisteredCustomer(filterCondition)">¿El cliente no se encuentra registrado?</p>
     @for (customer of customers | filterCustomers : filterCondition; track $index) {
       <div class="customer-li">
         <div class="name">
