@@ -10,6 +10,7 @@ import { AppointmentRequest } from '../../models/appointment';
 import { GenericObject } from '../../models/generic';
 import { ModalCustomerListComponent } from '../modal-customer-list/modal-customer-list.component';
 import { Customer } from '../../models/customer';
+import { customerRequiredValidator } from './validators/appointment.valitador';
 
 @Component({
   selector: 'app-appointment-form',
@@ -46,7 +47,7 @@ export class AppointmentFormComponent {
   registeredCustomer = true;
   showCustomerList = false;
 
-  customerId: GenericObject | null = null;
+  customerSelectedId: GenericObject | null = null;
   date: Date = new Date();
   observations: string = "";
 
@@ -76,6 +77,8 @@ export class AppointmentFormComponent {
     startTime: ["", Validators.required],
     endTime: ["", Validators.required],
     reason: ["", Validators.required],
+  }, {
+    validators: customerRequiredValidator()
   })
   get controls() {
     return this.appointmentForm.controls;
@@ -97,7 +100,7 @@ export class AppointmentFormComponent {
     }
     // Al cambiar a REGISTRADO
     else {
-      this.customerId = null;
+      this.customerSelectedId = null;
     }
   }
 
@@ -142,7 +145,7 @@ export class AppointmentFormComponent {
         customer: customer.firstName + " " + customer.lastName,
       })
       // Guardamos el id del cliente en un Objeto Generico
-      this.customerId = { id: customer.id! };
+      this.customerSelectedId = { id: customer.id! };
     }
   }
 
@@ -155,6 +158,7 @@ export class AppointmentFormComponent {
   /* SUBMITS */
   submit() {
     if (!this.appointmentForm.valid) {
+      console.log('No pasa')
       this.appointmentForm.markAllAsTouched();
       return;
     }
@@ -175,7 +179,7 @@ export class AppointmentFormComponent {
 
     return {
       id: id,
-      customer: this.customerId,
+      customer: this.customerSelectedId,
       customerName: this.controls.customerName.value!,
       customerPhone: this.controls.customerPhone.value!,
       date: this.date,
