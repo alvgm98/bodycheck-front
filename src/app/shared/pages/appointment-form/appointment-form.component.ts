@@ -55,13 +55,16 @@ export class AppointmentFormComponent {
     private appointmentService: AppointmentService,
     private modalService: ModalService
   ) {
+    // Si el Service de modales envia la señal de que el Overlay se va a cerrar, se cerrará tambien el Componente
     effect(() => this.animationState = modalService.showOverlay() ? 'open' : 'closed')
 
+    // Se seleccionará por defecto la fecha seleccionada en el dashboard
     this.date = appointmentService.selectedDate();
   }
 
   // TODO OnInit para cuando hay un appointment de input
 
+  /** Envia la señal al Service de modales de que se deben cerrar los Modales y el Overlay */
   close() {
     this.modalService.closeAll();
   }
@@ -80,15 +83,21 @@ export class AppointmentFormComponent {
 
   /**
    * Se ejecuta al cambiar el estado del checkbox que indica si el Customer se encuentra registrado.
-   * Si hubiera datos en el campo 'customer' se mueven a 'customerName'
+   * - Al cambiar a NO REGISTRADO: el valor del campo 'customer' se mueven a 'customerName'.
+   * - Al cambiar a REGISTRADO: los campos 'customer' y 'customerName' se resetean y vaciamos el valor de customerId si hubiera un Customer seleccionado.
    */
   registeredCustomerCheckedChange() {
+    // Al cambiar a NO REGISTRADO
     if (!this.registeredCustomer) {
       const customerName = this.controls.customer.value;
       this.appointmentForm.patchValue({
         customer: "",
         customerName: customerName
       })
+    }
+    // Al cambiar a REGISTRADO
+    else {
+      this.customerId = null;
     }
   }
 
@@ -104,11 +113,18 @@ export class AppointmentFormComponent {
     }
   }
 
+  /**
+   * Recibe el valor del componente ModalCustomerList, donde se listan todos los Customer del usuario, dependiendo del tipo de 'customer'
+   * - 'customer' es Customer -> Guardaremos el ID del Customer y mostraremos su nombre y apellidos.
+   * - 'customer' es string -> Seleccionaremos que el Customer no se encuentra registrado e introduciremos el valor del input de filtrar los Customer en el campo 'customerName'
+   * @param customer será un Customer si el usuario seleccionó uno, o el valor del input de filtrado si seleccionó que el Customer no se encuentra registrado
+   */
   customerListEvent(customer: Customer | string) {
-    // Entrará en el if si seleccionó la opción de que el cliente no esta registrado
+    // Volvemos a la vista inicial
+    this.closeShowCustomerList();
+
+    // CustomerList devolvió el valor del input de filtrado.
     if (typeof customer === 'string') {
-      // Volvemos a la vista inicial
-      this.closeShowCustomerList();
       // Marcamos al cliente como no registrado
       this.registeredCustomer = false;
       // Reseteamos el campo customer y añadimos el valor con el que estabamos filtrando a 'customerName'
@@ -116,11 +132,21 @@ export class AppointmentFormComponent {
         customer: "",
         customerName: customer
       })
-    } else {
-      // TODO seleccionar cliente SI registrado
+    }
+    // CustomerList devolvió un Customer.
+    else {
+      // Marcamos al cliente como registrado si no lo estuviera
+      this.registeredCustomer = true;
+      // Mostramos el nombre y apellidos del Cliente seleccionado
+      this.appointmentForm.patchValue({
+        customer: customer.firstName + " " + customer.lastName,
+      })
+      // Guardamos el id del cliente en un Objeto Generico
+      this.customerId = { id: customer.id! };
     }
   }
 
+  /** Realiza la animación de ocultar ModalCustomerList y muestra el componente principal */
   private closeShowCustomerList() {
     this.animationState = 'open'
     setTimeout(() => this.showCustomerList = false, 380)

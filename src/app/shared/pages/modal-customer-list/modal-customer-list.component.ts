@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, input, output, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, input, output, Renderer2 } from '@angular/core';
 import { Customer } from '../../models/customer';
 import { CustomerService } from '../../services/customer.service';
 import { FilterCustomersPipe } from '../../pipes/filter-customers.pipe';
@@ -24,9 +24,8 @@ export class ModalCustomerListComponent implements AfterViewInit {
   constructor(
     private el: ElementRef,
     private renderer: Renderer2,
-    private customerService: CustomerService
   ) {
-    this.customers = customerService.customers();
+    this.customers = inject(CustomerService).customers();
   }
 
   ngAfterViewInit(): void {
@@ -36,5 +35,9 @@ export class ModalCustomerListComponent implements AfterViewInit {
 
   noRegisteredCustomer(filterValue: string) {
     this.outputEvent.emit(filterValue);
+  }
+
+  selectCustomer(customer: Customer) {
+    this.outputEvent.emit(customer);
   }
 }

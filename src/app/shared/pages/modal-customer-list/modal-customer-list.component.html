@@ -18,7 +18,7 @@
   <p class="no-registered" (click)="noRegisteredCustomer(filterCondition)">¿El cliente no se encuentra registrado?</p>
   <div class="list">
     @for (customer of customers | filterCustomers : filterCondition; track $index) {
-      <div class="customer-li">
+      <div class="customer-li" (click)="selectCustomer(customer)">
         <div class="name">
           {{ customer.firstName + " " + customer.lastName }}
         </div>
