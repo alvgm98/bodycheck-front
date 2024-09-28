@@ -168,6 +168,7 @@ export class AppointmentFormComponent {
     const appointment: AppointmentRequest = this.formToAppointment();
 
     this.appointmentService.addAppointment(appointment).subscribe({
+      next: () => this.close(),
       error: (error) => console.log(error)
     })
 
@@ -180,8 +181,8 @@ export class AppointmentFormComponent {
     return {
       id: id,
       customer: this.customerSelectedId,
-      customerName: this.controls.customerName.value!,
-      customerPhone: this.controls.customerPhone.value!,
+      customerName: this.controls.customerName.value,
+      customerPhone: this.controls.customerPhone.value,
       date: this.date,
       startTime: this.setDateTime(this.controls.startTime.value!),
       endTime: this.setDateTime(this.controls.endTime.value!),

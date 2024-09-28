@@ -4,8 +4,8 @@ import { GenericObject } from "./generic";
 export interface Appointment {
   id: number;
   customer: Customer | null;
-  customerName: string;
-  customerPhone: string;
+  customerName: string | null;
+  customerPhone: string | null;
   date: Date;
   startTime: Date;
   endTime: Date;
@@ -17,8 +17,8 @@ export interface Appointment {
 export interface AppointmentRequest {
   id: number | null;
   customer: GenericObject | null;
-  customerName: string;
-  customerPhone: string;
+  customerName: string | null;
+  customerPhone: string | null;
   date: Date;
   startTime: string;
   endTime: string;
