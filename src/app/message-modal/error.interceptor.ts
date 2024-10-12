@@ -12,7 +12,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       if (error.status == 0) {
         messageService.emitError('Ha ocurrido un error. No hay conexion con el servidor!');
       } else {
-        messageService.emitError('Ha ocurrido un error desconocido.');
+        messageService.emitError(error.error.message ? error.error.message : 'Ha ocurrido un error desconocido.');
       }
       return throwError(() => error);
     }),

@@ -158,7 +158,6 @@ export class AppointmentFormComponent {
   /* SUBMITS */
   submit() {
     if (!this.appointmentForm.valid) {
-      console.log('No pasa')
       this.appointmentForm.markAllAsTouched();
       return;
     }
