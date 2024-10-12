@@ -26,7 +26,7 @@ import { MessageService } from '../../../message-modal/message.service';
   ],
   host: {
     '[@customer-form-animation]': 'animationState',
-    'class': 'customer-form'
+    'class': 'modal-form'
   }
 })
 /**

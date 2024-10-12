@@ -21,3 +21,55 @@
     align-items: center;
   }
 }
+
+@media (height < 1100px) {
+  :host {
+    width: 90%;
+
+    form {
+      grid-template-columns: 1fr 1.5fr;
+    }
+
+    h3,
+    .btn {
+      grid-column: 1 / -1;
+      margin-inline: 30%;
+    }
+
+    .customer-row {
+      flex-direction: column-reverse;
+    }
+
+    .time-section {
+      grid-row: span 2;
+      align-self: end;
+    }
+
+    .textarea-glass {
+      align-self: end;
+      margin-bottom: -4px; // Necesario para alinearlo con el datepicker
+    }
+  }
+}
+
+@media (width < 1600px) {
+  :host {
+    width: 90%;
+
+    .customer-row {
+      position: relative;
+      align-self: start;
+    }
+
+    .checkbox-group {
+      position: absolute;
+      top: -50px;
+      left: 0;
+      width: 100%;
+    }
+
+    form {
+      grid-template-columns: 1fr 1.8fr;
+    }
+  }
+}

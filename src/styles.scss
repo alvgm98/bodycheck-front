@@ -429,8 +429,7 @@ input[type=number] {
 }
 
 /* MODALS FORM */
-.customer-form,
-.appointment-form {
+.modal-form {
   position: fixed;
   top: 100%;
   left: 50%;
@@ -448,20 +447,18 @@ input[type=number] {
 
     border: 3px solid $primary-color;
     padding: 40px 80px;
-    border-radius: 6%;
+    border-radius: 50px;
 
     background-color: #aae5d444;
     backdrop-filter: blur(10px);
 
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 40px;
   }
 
   h3 {
+    text-align: center;
     font-size: 32px;
     margin: 20px;
     color: $primary-color;

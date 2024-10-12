@@ -29,7 +29,7 @@ import { customerRequiredValidator } from './validators/appointment.valitador';
   ],
   host: {
     '[@appointment-form-animation]': 'animationState',
-    'class': 'appointment-form'
+    'class': 'modal-form'
   }
 })
 /**
