@@ -1,0 +1,56 @@
+@import 'colors';
+
+:host {
+  box-sizing: border-box;
+  height: 48px;
+  margin-bottom: 40px;
+
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tab {
+  box-sizing: border-box;
+  width: 200px;
+  height: 38px;
+  padding-block: 5px;
+
+  border: 1px solid $primary-color;
+  border-width: 0px 1px 1px 1px;
+  border-radius: 0 0 12px 12px;
+
+  font-size: 20px;
+  font-weight: bold;
+  background-color: $white;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  transition: 300ms;
+
+  * {
+    color: $primary-color;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+.tab:hover {
+  cursor: pointer;
+  height: 48px;
+
+  * {
+    color: $primary-color-700;
+  }
+}
+
+.tab-active {
+  height: 48px;
+}

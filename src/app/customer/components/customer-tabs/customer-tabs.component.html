@@ -1,0 +1,43 @@
+<div
+class="tab"
+[ngClass]="{'tab-active': tabOpened === 'summary'}"
+(click)="tabOpened = 'summary'"
+>
+  <div>
+    <i class="fa-solid fa-list"></i>
+    Resumen
+  </div>
+</div>
+<div
+class="tab"
+[ngClass]="{'tab-active': tabOpened === 'appointments'}"
+(click)="tabOpened = 'appointments'"
+>
+
+  <div>
+    <i class="fa-solid fa-calendar-days"></i>
+    Citas
+  </div>
+</div>
+<div
+class="tab"
+[ngClass]="{'tab-active': tabOpened === 'measurements'}"
+(click)="tabOpened = 'measurements'"
+>
+
+  <div>
+    <i class="fa-solid fa-weight-scale"></i>
+    Mediciones
+  </div>
+</div>
+<div
+class="tab"
+[ngClass]="{'tab-active': tabOpened === 'charts'}"
+(click)="tabOpened = 'charts'"
+>
+
+  <div>
+    <i class="fa-solid fa-chart-column"></i>
+    Graficas
+  </div>
+</div>

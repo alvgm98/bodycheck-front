@@ -1,0 +1,10 @@
+@import 'colors';
+
+:host {
+  flex: 1;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 80px 60px 80px;
+  display: flex;
+  flex-direction: column;
+}

@@ -5,25 +5,17 @@ import { CustomerService } from '../shared/services/customer.service';
 import { ModalService } from '../shared/pages/modal.service';
 import { CustomerFormComponent } from '../shared/pages/customer-form/customer-form.component';
 import { ModalOverlayComponent } from '../shared/components/modal-overlay/modal-overlay.component';
+import { CustomerTabsComponent } from './components/customer-tabs/customer-tabs.component';
 
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [CustomerSummaryComponent, ModalOverlayComponent, CustomerFormComponent],
+  imports: [CustomerTabsComponent, CustomerSummaryComponent, ModalOverlayComponent, CustomerFormComponent],
   templateUrl: './customer.component.html',
-  styles: [`
-    :host {
-      flex: 1;
-      box-sizing: border-box;
-      width: 100%;
-      padding: 60px 100px;
-      display: flex;
-      flex-direction: column;
-    }
-  `]
+  styleUrls: ['./customer.component.scss'],
 })
 export class CustomerComponent implements OnInit {
-  customerId = input.required<number>();
+  customerId = input.required<number>(); // Recoge la ID del Customer de la URL
   customer?: CustomerDetailed;
 
   /* Modales */
@@ -52,7 +44,7 @@ export class CustomerComponent implements OnInit {
   }
 
   /**
-   * Al iniciar el componente carga el customer a partir de la ID recibida por URL
+   * Al iniciar el componente carga el Customer y TODOS sus datos.
    * -> next:    Reemplaza los spinners de carga por los datos del cliente.
    * -> error:   Reemplaza los spinners de carga por mensajes de error.
    */
