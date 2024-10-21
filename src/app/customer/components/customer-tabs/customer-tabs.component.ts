@@ -10,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class CustomerTabsComponent {
   tabOpened: string = 'summary';
+
+  changeTab(tab: string) {
+    this.tabOpened = tab;
+
+    // TODO abrir el tab en CustomerComponent
+  }
 }

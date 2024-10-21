@@ -1,7 +1,7 @@
 <div
 class="tab"
 [ngClass]="{'tab-active': tabOpened === 'summary'}"
-(click)="tabOpened = 'summary'"
+(click)="changeTab('summary')"
 >
   <div>
     <i class="fa-solid fa-list"></i>
@@ -11,7 +11,7 @@ class="tab"
 <div
 class="tab"
 [ngClass]="{'tab-active': tabOpened === 'appointments'}"
-(click)="tabOpened = 'appointments'"
+(click)="changeTab('appointments')"
 >
 
   <div>
@@ -22,7 +22,7 @@ class="tab"
 <div
 class="tab"
 [ngClass]="{'tab-active': tabOpened === 'measurements'}"
-(click)="tabOpened = 'measurements'"
+(click)="changeTab('measurements')"
 >
 
   <div>
@@ -33,7 +33,7 @@ class="tab"
 <div
 class="tab"
 [ngClass]="{'tab-active': tabOpened === 'charts'}"
-(click)="tabOpened = 'charts'"
+(click)="changeTab('charts')"
 >
 
   <div>
