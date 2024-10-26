@@ -1,5 +1,6 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, model } from '@angular/core';
+import { TABS } from '../../../shared/models/constants/tabs.constants';
 
 @Component({
   selector: 'app-customer-tabs',
@@ -8,12 +9,16 @@ import { Component } from '@angular/core';
   templateUrl: './customer-tabs.component.html',
   styleUrl: './customer-tabs.component.scss'
 })
+/**
+ * Esta clase será la encargada de navegar a traves de las pages del Customer.
+ * Enviando al componente padre en todo momento la pestaña seleccionada.
+ */
 export class CustomerTabsComponent {
-  tabOpened: string = 'summary';
+  TABS = TABS;
+  tabOpened = model<string>(TABS.SUMMARY);
 
+  /** Establece la página a mostrar */
   changeTab(tab: string) {
-    this.tabOpened = tab;
-
-    // TODO abrir el tab en CustomerComponent
+    this.tabOpened.set(tab);
   }
 }

@@ -1,6 +1,14 @@
-<app-customer-tabs />
+<app-customer-tabs [(tabOpened)]="tabOpened" />
 
-<app-customer-summary [customer]="customer" />
+@if (tabOpened === TABS.SUMMARY) {
+  <app-customer-summary [customer]="customer" />
+} @else if (tabOpened === TABS.APPOINTMENTS) {
+  <app-appointments-summary />
+} @else if (tabOpened === TABS.MEASUREMENTS) {
+  <app-measurements-summary />
+} @else if (tabOpened === TABS.CHARTS) {
+  <app-charts-summary />
+}
 
 @if (showCustomerForm) {
   <app-modal-overlay />

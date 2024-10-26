@@ -6,17 +6,25 @@ import { ModalService } from '../shared/pages/modal.service';
 import { CustomerFormComponent } from '../shared/pages/customer-form/customer-form.component';
 import { ModalOverlayComponent } from '../shared/components/modal-overlay/modal-overlay.component';
 import { CustomerTabsComponent } from './components/customer-tabs/customer-tabs.component';
+import { TABS } from '../shared/models/constants/tabs.constants';
+import { AppointmentsSummaryComponent } from './pages/appointments-summary/appointments-summary.component';
+import { MeasurementsSummaryComponent } from './pages/measurements-summary/measurements-summary.component';
+import { ChartsSummaryComponent } from './pages/charts-summary/charts-summary.component';
 
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [CustomerTabsComponent, CustomerSummaryComponent, ModalOverlayComponent, CustomerFormComponent],
+  imports: [CustomerTabsComponent, CustomerSummaryComponent, AppointmentsSummaryComponent, MeasurementsSummaryComponent, ChartsSummaryComponent, ModalOverlayComponent, CustomerFormComponent],
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss'],
 })
+/** Este componente será el encargado de contener todo lo referente a la vista del Customer detallado */
 export class CustomerComponent implements OnInit {
   customerId = input.required<number>(); // Recoge la ID del Customer de la URL
   customer?: CustomerDetailed;
+
+  TABS = TABS;
+  tabOpened: string = TABS.SUMMARY;
 
   /* Modales */
   showCustomerForm: boolean = false;
