@@ -1,7 +1,21 @@
-<h4 class="date">{{ appointment().date | date: 'EEEE dd MMM yyyy' | capitalize }}</h4>
-<h5 class="reason">{{ appointment().reason }}</h5>
+<div class="appointment-hero">
+  <h4>{{ appointment().date | date: 'EEEE dd MMM yyyy' | capitalize }}</h4>
+  <div class="appointment-observations">
+    <pre>
+      {{ appointment().observations ? appointment().observations : "No hay observaciones en esta cita" }}
+    </pre>
+  </div>
+</div>
 
-<p class="duration">{{ appointment().duration }} min</p>
-<p class="starts">{{ appointment().startTime | date: 'HH:mm' }} </p>
-<p class="ends">{{ appointment().endTime | date: 'HH:mm' }}</p>
-<div class="timeline"></div>
+<div class="appointment-data">
+  <div class="data-title">
+    <h5><i class="fa-regular fa-user"></i> Motivo</h5>
+    <h5><i class="fa-regular fa-clock"></i> Hora</h5>
+    <h5><i class="fa-regular fa-calendar"></i> Duración</h5>
+  </div>
+  <div class="data">
+    <p>{{ appointment().reason }}</p>
+    <p>{{ appointment().startTime | date: 'HH:mm' }} - {{ appointment().endTime | date: 'HH:mm' }}</p>
+    <p>{{ appointment().duration }} min</p>
+  </div>
+</div>
