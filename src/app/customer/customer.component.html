@@ -3,7 +3,7 @@
 @if (tabOpened === TABS.SUMMARY) {
   <app-customer-summary [customer]="customer" />
 } @else if (tabOpened === TABS.APPOINTMENTS) {
-  <app-appointments-summary />
+  <app-appointments-summary [appointments]="customer?.appointments!" />
 } @else if (tabOpened === TABS.MEASUREMENTS) {
   <app-measurements-summary />
 } @else if (tabOpened === TABS.CHARTS) {

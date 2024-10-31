@@ -1,1 +1,9 @@
-<p>appointments-summary works!</p>
+@if (appointments()) {
+  @for (appointment of appointments(); track $index) {
+    <app-customer-appointment [appointment]="appointment" />
+  }
+} @else {
+  <p id="no-appointments-yet">No hay registrada ninguna cita con este cliente</p>
+}
+
+
