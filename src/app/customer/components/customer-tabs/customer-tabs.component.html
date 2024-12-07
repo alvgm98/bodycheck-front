@@ -1,3 +1,4 @@
+<!-- RESUMEN -->
 <div
 class="tab"
 [ngClass]="{'tab-active': tabOpened() === TABS.SUMMARY}"
@@ -8,36 +9,51 @@ class="tab"
     Resumen
   </div>
 </div>
-<div
-class="tab"
-[ngClass]="{'tab-active': tabOpened() === TABS.APPOINTMENTS}"
-(click)="changeTab(TABS.APPOINTMENTS)"
->
 
-  <div>
-    <i class="fa-solid fa-calendar-days"></i>
-    Citas
-  </div>
-</div>
+<!-- MEDICIONES -->
 <div
 class="tab"
 [ngClass]="{'tab-active': tabOpened() === TABS.MEASUREMENTS}"
 (click)="changeTab(TABS.MEASUREMENTS)"
 >
-
   <div>
     <i class="fa-solid fa-weight-scale"></i>
     Mediciones
   </div>
 </div>
+
+<!-- GRAFICAS -->
 <div
 class="tab"
 [ngClass]="{'tab-active': tabOpened() === TABS.CHARTS}"
 (click)="changeTab(TABS.CHARTS)"
 >
-
   <div>
     <i class="fa-solid fa-chart-column"></i>
     Graficas
   </div>
 </div>
+
+<!-- EXPORTAR -->
+<div
+class="tab"
+[ngClass]="{'tab-active': tabOpened() === TABS.EXPORT}"
+(click)="changeTab(TABS.EXPORT)"
+>
+  <div>
+    <i class="fa-solid fa-cloud-arrow-down"></i>
+    Exportar
+  </div>
+</div>
+
+<!-- IMPORTAR (PROXIMAMENTE) -->
+<!-- <div
+class="tab"
+[ngClass]="{'tab-active': tabOpened() === TABS.IMPORT}"
+(click)="changeTab(TABS.IMPORT)"
+>
+  <div>
+    <i class="fa-solid fa-cloud-arrow-up"></i>
+    Importar
+  </div>
+</div> -->

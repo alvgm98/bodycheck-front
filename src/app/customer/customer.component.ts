@@ -7,18 +7,18 @@ import { CustomerFormComponent } from '../shared/pages/customer-form/customer-fo
 import { ModalOverlayComponent } from '../shared/components/modal-overlay/modal-overlay.component';
 import { CustomerTabsComponent } from './components/customer-tabs/customer-tabs.component';
 import { TABS } from '../shared/models/constants/tabs.constants';
-import { AppointmentsSummaryComponent } from './pages/appointments-summary/appointments-summary.component';
 import { MeasurementsSummaryComponent } from './pages/measurements-summary/measurements-summary.component';
 import { ChartsSummaryComponent } from './pages/charts-summary/charts-summary.component';
+import { ExportCustomerComponent } from './pages/export-customer/export-customer.component';
 
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [CustomerTabsComponent, CustomerSummaryComponent, AppointmentsSummaryComponent, MeasurementsSummaryComponent, ChartsSummaryComponent, ModalOverlayComponent, CustomerFormComponent],
+  imports: [CustomerTabsComponent, CustomerSummaryComponent, MeasurementsSummaryComponent, ChartsSummaryComponent, ExportCustomerComponent, ModalOverlayComponent, CustomerFormComponent],
   templateUrl: './customer.component.html',
   styleUrls: ['./customer.component.scss'],
 })
-/** Este componente será el encargado de contener todo lo referente a la vista del Customer detallado */
+/** Este componente será el encargado de contener todo lo referente a la vista del Customer detallado -> Cada una de las pestañas y los formularios modales de Customer y Appointment */
 export class CustomerComponent implements OnInit {
   customerId = input.required<number>(); // Recoge la ID del Customer de la URL
   customer?: CustomerDetailed;
