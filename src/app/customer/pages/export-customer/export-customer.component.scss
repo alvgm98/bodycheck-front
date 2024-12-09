@@ -1,0 +1,37 @@
+@import 'colors';
+
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+#export-customer {
+  border: 4px solid $primary-color;
+  border-radius: 12px;
+  padding: 50px 70px;
+
+  box-sizing: border-box;
+
+  background-color: $white;
+
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  margin: 0;
+  font-size: 32px;
+  color: $primary-color;
+}
+
+p {
+  margin-block: 5px 25px;
+}
+
+i {
+  color: $white;
+}
+
+button {
+  margin-top: 20px;
+}

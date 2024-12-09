@@ -1,1 +1,17 @@
-<p>export-customer works!</p>
+<article id="export-customer">
+  <h3>Exportar Datos del Cliente</h3>
+  <p>Selecciona el formato para descargar el los datos del Cliente</p>
+
+  <app-select-input
+    [title]="'Selecciona el formato de exportación'"
+    [options]="EXPORT_FORMATS"
+    [hasErrors]="exportHasError"
+    (selectEvent)="selectFormat($event)"
+  />
+
+  <button class="btn flat-button" (click)="export()">
+    <i class="fa-solid fa-cloud-arrow-down"></i>
+    Exportar Datos
+  </button>
+
+</article>

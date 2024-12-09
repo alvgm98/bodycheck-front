@@ -166,7 +166,6 @@ main {
   background-color: $tertiary-color-200;
 }
 
-
 /********** SUMMARY **********/
 .summary-host {
   height: 100%;
@@ -539,4 +538,18 @@ input[type=number] {
 
   font-size: 25px;
   color: $primary-color;
+}
+
+/* SOBREESCRIBIR ESTILOS SELECT-INPUT EN EXPORT */
+
+#export-customer app-select-input {
+  border: 2px solid $primary-color !important;
+}
+
+#export-customer .invalid {
+  border: 2px solid $error-color !important;
+}
+
+#export-customer .dropdown {
+  background-color: $secondary-color-200;
 }
