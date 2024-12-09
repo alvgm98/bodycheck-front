@@ -39,11 +39,11 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
    * Scrollea a la ultima medición si esta existe
    */
   private scrollToInit() {
-    const scroller = this.el.nativeElement.querySelector(".scroller");
-    const measurementWidth = this.el.nativeElement.querySelector('app-customer-measurement').offsetWidth;
+    const scrollerElement = this.el.nativeElement.querySelector(".scroller");
+    const visibleWidth = scrollerElement.clientWidth; // Ancho del measurement
 
-    scroller.scrollTo({
-      left: scroller.scrollWidth - (measurementWidth * 2 + 100),
+    scrollerElement.scrollTo({
+      left: scrollerElement.scrollWidth - (visibleWidth * 2),
     })
   }
 
@@ -54,12 +54,13 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
     return measurements.sort((a, b) => a.session - b.session);
   }
 
+  /** Se encarga de scrollear a la izquierda y bloquear esta posibilidad si llega al limite */
   scrollToLeft() {
     // Desbloqueamos scroll a la derecha
     this.maxScrollRight = false;
 
     const scrollerElement = this.el.nativeElement.querySelector(".scroller");
-    const visibleWidth = scrollerElement.clientWidth; // Ancho del appointment
+    const visibleWidth = scrollerElement.clientWidth; // Ancho del measurement
 
     const nextScrollPosition = scrollerElement.scrollLeft - visibleWidth; // Proxima posicion del scroll despues de la animacion smooth
 
@@ -78,12 +79,13 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
 
   }
 
+  /** Se encarga de scrollear a la derecha y bloquear esta posibilidad si llega al limite */
   scrollToRight() {
     // Desbloqueamos scroll a la izquierda
     this.maxScrollLeft = false;
 
     const scrollerElement = this.el.nativeElement.querySelector(".scroller");
-    const visibleWidth = scrollerElement.clientWidth; // Ancho del appointment
+    const visibleWidth = scrollerElement.clientWidth; // Ancho del measurement
 
     const nextScrollPosition = scrollerElement.scrollLeft + visibleWidth; // Proxima posicion del scroll despues de la animacion smooth
     const maxScrollableDistance = scrollerElement.scrollWidth - visibleWidth; // Limite del scroll

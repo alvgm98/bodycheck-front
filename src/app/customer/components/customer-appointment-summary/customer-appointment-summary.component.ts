@@ -39,11 +39,11 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
    * Scrollea a la ultima cita si esta existe
    */
   private scrollToInit() {
-    const scroller = this.el.nativeElement.querySelector(".scroller");
-    const appointmentWidth = this.el.nativeElement.querySelector('app-customer-appointment').offsetWidth;
+    const scrollerElement = this.el.nativeElement.querySelector(".scroller");
+    const visibleWidth = scrollerElement.clientWidth; // Ancho del appointment
 
-    scroller.scrollTo({
-      left: scroller.scrollWidth - (appointmentWidth * 2 + 100),
+    scrollerElement.scrollTo({
+      left: scrollerElement.scrollWidth - (visibleWidth * 2),
     })
   }
 
@@ -54,6 +54,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
     return appointments.sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
   }
 
+  /** Se encarga de scrollear a la izquierda y bloquear esta posibilidad si llega al limite */
   scrollToLeft() {
     // Desbloqueamos scroll a la derecha
     this.maxScrollRight = false;
@@ -78,6 +79,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
 
   }
 
+  /** Se encarga de scrollear a la derecha y bloquear esta posibilidad si llega al limite */
   scrollToRight() {
     // Desbloqueamos scroll a la izquierda
     this.maxScrollLeft = false;
