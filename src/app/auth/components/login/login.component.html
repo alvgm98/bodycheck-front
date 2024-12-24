@@ -4,7 +4,7 @@
   <div class="input-border-group">
     <input formControlName="username" placeholder=" " type="email" />
     <label class="placeholder">Email</label>
-    @if (username.invalid && (username.dirty || username.touched)) {
+    @if (username.invalid && username.touched) {
       @if (username.errors?.['required']) {
         <div class="invalid-field">Introduce el email.</div>
       }
@@ -17,7 +17,7 @@
   <div class="input-border-group login-password">
     <input formControlName="password" placeholder=" " type="password" />
     <label class="placeholder">Contraseña</label>
-    @if (password.invalid && (password.dirty || password.touched)) {
+    @if (password.invalid && password.touched) {
       @if (password.errors?.['required']) {
         <div class="invalid-field">Introduce la contraseña.</div>
       }
