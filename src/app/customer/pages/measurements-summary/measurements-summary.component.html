@@ -1,1 +1,25 @@
-<p>measurements-summary works!</p>
+<!-- SESSION TABS -->
+<div class="session-tabs">
+  @for (measurement of measurements(); track $index) {
+    <div
+      class="session-tab"
+      [ngClass]="{'selected': $index === selected}"
+      (click)="selectMeasurement($index)"
+    >
+      {{ measurement.session }}
+    </div>
+  }
+  <!-- TAB: AÑADIR MEDICIÓN -->
+  <div
+    class="session-tab"
+    [ngClass]="{'selected': selected === -1}"
+    (click)="selectMeasurement(-1)"
+  >
+    <i class="fa-solid fa-plus"></i>
+  </div>
+</div>
+
+<!-- MEASUREMENT FORM -->
+<div id="form">
+  {{ measurements()![selected] }}
+</div>

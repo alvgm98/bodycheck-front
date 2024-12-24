@@ -1,0 +1,58 @@
+@import 'colors';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.session-tabs {
+  padding-left: 24px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 4px;
+
+  .session-tab {
+    box-sizing: border-box;
+    height: 30px;
+    width: 40px;
+    border: 4px solid $primary-color;
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+
+    background-color: $white;
+    color: $primary-color;
+    font-weight: bold;
+    font-size: 1.2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    transition: 300ms;
+
+    i {
+      padding-top: 5px;
+      color: $primary-color;
+    }
+
+    &:hover {
+      cursor: pointer;
+      height: 42px;
+    }
+  }
+
+  .selected {
+    height: 42px;
+  }
+}
+
+#form {
+  border: 4px solid $primary-color;
+  border-radius: 12px;
+
+  background-color: $white;
+  height: 500px;
+}
