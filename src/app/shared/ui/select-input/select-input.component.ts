@@ -1,10 +1,10 @@
-import { NgClass, NgStyle } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { Component, ElementRef, input, OnInit, output } from '@angular/core';
 
 @Component({
   selector: 'app-select-input',
   standalone: true,
-  imports: [NgStyle, NgClass],
+  imports: [NgStyle],
   templateUrl: './select-input.component.html',
   styleUrl: './select-input.component.scss',
   host: {
