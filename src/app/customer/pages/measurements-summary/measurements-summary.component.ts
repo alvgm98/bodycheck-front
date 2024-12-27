@@ -12,16 +12,11 @@ import { NgClass } from '@angular/common';
 export class MeasurementsSummaryComponent implements OnInit {
 
   measurements = input<Measurement[]>();
-  selected!: number; // Valdrá el indice de la medición seleccionada o -1 si esta seleccionado el añadir medición
+  selected: number = -1; // Valdrá el indice de la medición seleccionada o -1 si esta seleccionado el añadir medición
 
-  constructor() {
-  }
-
+  /** Al cargar el componente seleccionamos la ultima medición si la hay */
   ngOnInit(): void {
-    // Seleccionamos la última medicion si la hay.
-    if (!this.measurements()) {
-      this.selected = -1;
-    } else {
+    if (this.measurements()) {
       this.selected = this.measurements()!.length - 1;
     }
   }
