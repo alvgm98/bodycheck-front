@@ -1,0 +1,162 @@
+<form [formGroup]="measurementForm" (ngSubmit)="submit()">
+  <div class="main-data">
+    <div class="col">
+      <h2>Horse María<span>Sesión: 7</span></h2>
+
+      <div class="input-border-group" id="date">
+        <input formControlName="date" placeholder=" " type="date"/>
+        <label class="placeholder">Fecha*</label>
+      </div>
+
+      <div class="input-border-group" id="weight">
+        <input formControlName="weight" placeholder=" " type="number"/>
+        <label class="placeholder">Peso*</label>
+        <div class="input-info">kg</div>
+        @if (controls.weight.invalid && (controls.weight.dirty || controls.weight.touched)) {
+          @if (controls.weight.errors?.['required']) {
+            <div class="invalid-field">Introduce el peso.</div>
+          }
+        }
+      </div>
+    </div>
+
+    <!-- Observations -->
+    <div id="observations">
+      <app-textarea
+        (contentEmitter)="measurementForm.get('observations')?.setValue($event)"
+        [placeholderName]="'Observaciones'"
+        [content]="controls.observations.value!"
+      />
+    </div>
+  </div>
+
+  <div id="mediciones">
+    <!-- CIRCUNFERENCIAS -->
+    <fieldset formGroupName="circumference">
+      <legend>Circunferencias</legend>
+
+      <!-- ARM RELAXED -->
+      <div class="input-border-group">
+        <input formControlName="armRelaxed" placeholder=" " type="number"/>
+        <label class="placeholder">Brazo Relajado*</label>
+        <div class="input-info">cm</div>
+        @if (circumferenceControls.armRelaxed.invalid && (circumferenceControls.armRelaxed.dirty || circumferenceControls.armRelaxed.touched)) {
+          @if (circumferenceControls.armRelaxed.errors?.['required']) {
+            <div class="invalid-field">Introduce la Circunferencia.</div>
+          }
+        }
+      </div>
+      <!-- ARM FLEXED -->
+      <div class="input-border-group">
+        <input formControlName="armFlexed" placeholder=" " type="number"/>
+        <label class="placeholder">Brazo Flexionado*</label>
+        <div class="input-info">cm</div>
+        @if (circumferenceControls.armFlexed.invalid && (circumferenceControls.armFlexed.dirty || circumferenceControls.armFlexed.touched)) {
+          @if (circumferenceControls.armFlexed.errors?.['required']) {
+            <div class="invalid-field">Introduce la Circunferencia.</div>
+          }
+        }
+      </div>
+      <!-- WAIST -->
+      <div class="input-border-group">
+        <input formControlName="waist" placeholder=" " type="number"/>
+        <label class="placeholder">Cintura*</label>
+        <div class="input-info">cm</div>
+        @if (circumferenceControls.waist.invalid && (circumferenceControls.waist.dirty || circumferenceControls.waist.touched)) {
+          @if (circumferenceControls.waist.errors?.['required']) {
+            <div class="invalid-field">Introduce la Circunferencia.</div>
+          }
+        }
+      </div>
+      <!-- HIP -->
+      <div class="input-border-group">
+        <input formControlName="hip" placeholder=" " type="number"/>
+        <label class="placeholder">Cadera*</label>
+        <div class="input-info">cm</div>
+        @if (circumferenceControls.hip.invalid && (circumferenceControls.hip.dirty || circumferenceControls.hip.touched)) {
+          @if (circumferenceControls.hip.errors?.['required']) {
+            <div class="invalid-field">Introduce la Circunferencia.</div>
+          }
+        }
+      </div>
+      <!-- THIGH -->
+      <div class="input-border-group">
+        <input formControlName="thigh" placeholder=" " type="number"/>
+        <label class="placeholder">Muslo*</label>
+        <div class="input-info">cm</div>
+        @if (circumferenceControls.thigh.invalid && (circumferenceControls.thigh.dirty || circumferenceControls.thigh.touched)) {
+          @if (circumferenceControls.thigh.errors?.['required']) {
+            <div class="invalid-field">Introduce la Circunferencia.</div>
+          }
+        }
+      </div>
+      <!-- CALF -->
+      <div class="input-border-group">
+        <input formControlName="calf" placeholder=" " type="number"/>
+        <label class="placeholder">Pantorilla*</label>
+        <div class="input-info">cm</div>
+        @if (circumferenceControls.calf.invalid && (circumferenceControls.calf.dirty || circumferenceControls.calf.touched)) {
+          @if (circumferenceControls.calf.errors?.['required']) {
+            <div class="invalid-field">Introduce la Circunferencia.</div>
+          }
+        }
+      </div>
+    </fieldset>
+
+    <!-- PLIEGUES -->
+    <fieldset formGroupName="skinfold">
+      <legend>Pliegues</legend>
+
+      <!-- TRICEPS -->
+      <div class="input-border-group">
+        <input formControlName="triceps" placeholder=" " type="number"/>
+        <label class="placeholder">Triceps</label>
+        <div class="input-info">mm</div>
+      </div>
+      <!-- BICEPS -->
+      <div class="input-border-group">
+        <input formControlName="biceps" placeholder=" " type="number"/>
+        <label class="placeholder">Biceps</label>
+        <div class="input-info">mm</div>
+      </div>
+      <!-- SUBSCAPULAR -->
+      <div class="input-border-group">
+        <input formControlName="subscapular" placeholder=" " type="number"/>
+        <label class="placeholder">Subescapular</label>
+        <div class="input-info">mm</div>
+      </div>
+      <!-- SUPRAILIAC -->
+      <div class="input-border-group">
+        <input formControlName="suprailiac" placeholder=" " type="number"/>
+        <label class="placeholder">Suprailiaca</label>
+        <div class="input-info">mm</div>
+      </div>
+      <!-- ILIAC CREST -->
+      <div class="input-border-group">
+        <input formControlName="iliacCrest" placeholder=" " type="number"/>
+        <label class="placeholder">Cresta Iliaca</label>
+        <div class="input-info">mm</div>
+      </div>
+      <!-- ABDOMINAL -->
+      <div class="input-border-group">
+        <input formControlName="abdominal" placeholder=" " type="number"/>
+        <label class="placeholder">Abdominal</label>
+        <div class="input-info">mm</div>
+      </div>
+      <!-- THIGH -->
+      <div class="input-border-group">
+        <input formControlName="thigh" placeholder=" " type="number"/>
+        <label class="placeholder">Muslo</label>
+        <div class="input-info">mm</div>
+      </div>
+      <!-- CALF -->
+      <div class="input-border-group">
+        <input formControlName="calf" placeholder=" " type="number"/>
+        <label class="placeholder">Pantorilla</label>
+        <div class="input-info">mm</div>
+      </div>
+    </fieldset>
+  </div>
+
+  <button type="submit" class="btn flat-button" style="width: 300px;">Registrar Medicion</button>
+</form>

@@ -553,3 +553,9 @@ input[type=number] {
 #export-customer .dropdown {
   background-color: $secondary-color-200;
 }
+
+/* Measurement form */
+#observations textarea,
+#observations .placeholder {
+background-color: #fff !important;
+}
