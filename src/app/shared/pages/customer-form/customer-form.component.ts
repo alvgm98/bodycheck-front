@@ -90,7 +90,7 @@ export class CustomerFormComponent implements OnInit {
     firstName: ["", [Validators.required]],
     lastName: ["", [Validators.required]],
     phone: ["", [Validators.required]],
-    email: ["", [Validators.email]],
+    email: ["", [Validators.required, Validators.email]],
     birthdate: ["", [Validators.required]],
     height: ["", [Validators.required]],
     gender: ["M"],

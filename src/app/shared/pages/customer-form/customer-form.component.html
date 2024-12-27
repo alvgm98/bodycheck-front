@@ -31,6 +31,9 @@
       <input formControlName="email" placeholder=" " type="text" />
       <label class="placeholder">Email</label>
       @if (controls.email.invalid && (controls.email.dirty || controls.email.touched)) {
+        @if (controls.email.errors?.['required']) {
+          <div class="invalid-field">Introduce el email.</div>
+        }
         @if (controls.email.errors?.['email']) {
           <div class="invalid-field">Email no válido.</div>
         }
