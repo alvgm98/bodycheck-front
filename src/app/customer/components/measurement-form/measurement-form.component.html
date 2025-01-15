@@ -37,6 +37,28 @@
 
       <!-- ARM RELAXED -->
       <div class="input-border-group">
+        <input formControlName="neck" placeholder=" " type="number"/>
+        <label class="placeholder">Cuello*</label>
+        <div class="input-info">cm</div>
+        @if (circumferenceControls.neck.invalid && (circumferenceControls.neck.dirty || circumferenceControls.neck.touched)) {
+          @if (circumferenceControls.neck.errors?.['required']) {
+            <div class="invalid-field">Introduce la Circunferencia.</div>
+          }
+        }
+      </div>
+      <!-- ARM FLEXED -->
+      <div class="input-border-group">
+        <input formControlName="chest" placeholder=" " type="number"/>
+        <label class="placeholder">Pecho*</label>
+        <div class="input-info">cm</div>
+        @if (circumferenceControls.chest.invalid && (circumferenceControls.chest.dirty || circumferenceControls.chest.touched)) {
+          @if (circumferenceControls.chest.errors?.['required']) {
+            <div class="invalid-field">Introduce la Circunferencia.</div>
+          }
+        }
+      </div>
+      <!-- ARM RELAXED -->
+      <div class="input-border-group">
         <input formControlName="armRelaxed" placeholder=" " type="number"/>
         <label class="placeholder">Brazo Relajado*</label>
         <div class="input-info">cm</div>

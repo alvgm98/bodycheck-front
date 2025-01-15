@@ -27,6 +27,8 @@ export class MeasurementFormComponent implements OnInit {
     weight: [null, [Validators.required, Validators.min(0)]],
     circumference: this.fb.group({
       id: [null],
+      neck: [null, [Validators.required, Validators.min(0)]],
+      chest: [null, [Validators.required, Validators.min(0)]],
       armRelaxed: [null, [Validators.required, Validators.min(0)]],
       armFlexed: [null, [Validators.required, Validators.min(0)]],
       waist: [null, [Validators.required, Validators.min(0)]],

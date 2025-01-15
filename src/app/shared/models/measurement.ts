@@ -13,6 +13,8 @@ export interface Measurement {
 
 export interface Circumference {
   id: number;
+  neck: number;
+  chest: number;
   armRelaxed: number;
   armFlexed: number;
   waist: number;
