@@ -37,9 +37,10 @@ export class CustomerService {
   loadCustomer(id: number) {
     return this.http.get<CustomerDetailed>(`${environment.apiCustomerUrl}/detailed/${id}`)
       .pipe(
-        tap(customer =>
-          customer.appointments = this.dateUtil.initializeAppointments(customer.appointments!)
-        )
+        tap(customer => {
+          customer.appointments = this.dateUtil.initializeAppointments(customer.appointments!);
+          customer.measurements = this.dateUtil.initializeMeasurements(customer.measurements!);
+        })
       );
   }
 

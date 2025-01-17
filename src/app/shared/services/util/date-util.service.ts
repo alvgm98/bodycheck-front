@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Appointment } from '../../models/appointment';
+import { Measurement } from '../../models/measurement';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,16 @@ export class DateUtilService {
       appointment.duration = this.calcDuration(appointment.startTime, appointment.endTime);
       return appointment;
     })
+  }
+
+  /** Ordenamos las mediciones por fecha y cargamos el valor del atributo sesion */
+  initializeMeasurements(measurements: Measurement[]) {
+    return measurements
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      .map((measurement, index) => {
+        measurement.session = index + 1;
+        return measurement;
+      })
   }
 
   private calcDuration(startTime: Date, endTime: Date) {
