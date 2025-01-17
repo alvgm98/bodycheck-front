@@ -21,5 +21,5 @@
 
 <!-- MEASUREMENT FORM -->
 <div id="form">
-  <app-measurement-form />
+  <app-measurement-form [measurement]="selected < 0 ? null : measurements()![selected]" />
 </div>

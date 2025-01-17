@@ -131,7 +131,7 @@
 
       <!-- TRICEPS -->
       <div class="input-border-group">
-        <input formControlName="triceps" placeholder=" " type="number"/>
+        <input formControlName="triceps" placeholder=" " type="number" />
         <label class="placeholder">Triceps</label>
         <div class="input-info">mm</div>
       </div>
@@ -180,5 +180,9 @@
     </fieldset>
   </div>
 
-  <button type="submit" class="btn flat-button" style="width: 300px;">Registrar Medicion</button>
+  @if (measurement()) {
+    <button type="submit" class="btn flat-button" style="width: 300px;">Editar Medicion</button>
+  } @else {
+    <button type="submit" class="btn flat-button" style="width: 300px;">Registrar Medicion</button>
+  }
 </form>
