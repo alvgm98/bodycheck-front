@@ -50,6 +50,12 @@
   .placeholder-moved {
     @include placeholder-moved();
   }
+
+  textarea:focus {
+    border-top: 1px solid $primary-color;
+    border-left: 1px solid $primary-color;
+    border-right: 1px solid $primary-color;
+  }
 }
 
 textarea::-webkit-scrollbar {
