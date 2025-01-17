@@ -13,9 +13,7 @@ import { Appointment } from '../../../shared/models/appointment';
   }
 })
 export class CustomerAppointmentSummaryComponent implements AfterViewInit {
-  appointments = input.required({
-    transform: (value: Appointment[]) => this.sortAppointments(value)
-  });
+  appointments = input<Appointment[]>();
 
   maxScrollLeft: boolean = false;
   maxScrollRight: boolean = false;
@@ -26,7 +24,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    if (this.appointments().length > 0) {
+    if (this.appointments()!.length > 0) {
       this.scrollToInit();
     } else {
       this.maxScrollLeft = true;
@@ -45,13 +43,6 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
     scrollerElement.scrollTo({
       left: scrollerElement.scrollWidth - (visibleWidth * 2),
     })
-  }
-
-  /**
-   * Método para ordenar ascendentemente las citas por su fecha de inicio
-   */
-  private sortAppointments(appointments: Appointment[]): Appointment[] {
-    return appointments.sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
   }
 
   /** Se encarga de scrollear a la izquierda y bloquear esta posibilidad si llega al limite */

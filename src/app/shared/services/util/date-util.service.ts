@@ -7,6 +7,7 @@ import { Measurement } from '../../models/measurement';
 })
 export class DateUtilService {
 
+  /** Ordenamos las citas por fecha y calculamos la duración de cada una */
   initializeAppointments(appointments: Appointment[]) {
     return appointments.map(appointment => {
       appointment.date = new Date(appointment.date);
@@ -14,7 +15,7 @@ export class DateUtilService {
       appointment.endTime = new Date(appointment.endTime);
       appointment.duration = this.calcDuration(appointment.startTime, appointment.endTime);
       return appointment;
-    })
+    }).sort((a, b) => a.startTime.getTime() - b.startTime.getTime())
   }
 
   /** Ordenamos las mediciones por fecha y cargamos el valor del atributo sesion */

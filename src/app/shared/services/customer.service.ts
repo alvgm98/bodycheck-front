@@ -37,6 +37,7 @@ export class CustomerService {
   loadCustomer(id: number) {
     return this.http.get<CustomerDetailed>(`${environment.apiCustomerUrl}/detailed/${id}`)
       .pipe(
+        // Inicializamos las citas y mediciones del customer y las ordenamos temporalmente
         tap(customer => {
           customer.appointments = this.dateUtil.initializeAppointments(customer.appointments!);
           customer.measurements = this.dateUtil.initializeMeasurements(customer.measurements!);
