@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect, ElementRef, output } from '@angular/core';
+import { AfterViewInit, Component, effect, ElementRef, output, Renderer2 } from '@angular/core';
 import { DatePickerComponent } from '../date-picker/date-picker.component';
 import { CommonModule } from '@angular/common';
 import { AppointmentService } from '../../../shared/services/appointment.service';
@@ -24,7 +24,8 @@ export class AgendaComponent implements AfterViewInit {
 
   constructor(
     private appointmentService: AppointmentService,
-    private el: ElementRef
+    private el: ElementRef,
+    private renderer: Renderer2
   ) {
     this.generateHours();
 
@@ -40,10 +41,7 @@ export class AgendaComponent implements AfterViewInit {
     const mins = now.getHours() * 60 + now.getMinutes();
 
     const timetable = this.el.nativeElement.querySelector(".timetable");
-    timetable.scrollTo({
-      top: (mins - 30) * 3,
-      behavior: 'smooth'
-    })
+    this.renderer.setProperty(timetable, 'scrollTop', (mins - 30) * 3);
   }
 
   /* Este metodo generá las horas del dia que se imprimirán en el template */

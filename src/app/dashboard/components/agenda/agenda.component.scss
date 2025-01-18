@@ -23,6 +23,8 @@
   overflow-x: hidden;
   background-color: $white;
 
+  scroll-behavior: smooth;
+
   .day {
     position: sticky;
     top: 0;
