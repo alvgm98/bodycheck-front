@@ -13,9 +13,7 @@ import { Measurement } from '../../../shared/models/measurement';
   }
 })
 export class CustomerMeasurementSummaryComponent implements AfterViewInit {
-  measurements = input.required({
-    transform: (value: Measurement[]) => this.sortMeasurements(value)
-  });
+  measurements = input<Measurement[]>();
 
   maxScrollLeft: boolean = false;
   maxScrollRight: boolean = false;
@@ -26,7 +24,7 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit(): void {
-    if (this.measurements().length > 0) {
+    if (this.measurements()!.length > 0) {
       this.scrollToInit();
     } else {
       this.maxScrollLeft = true;
@@ -46,13 +44,6 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
 
     // Hacemos que el scroll se comporte 'smooth' después de la primera animación
     this.renderer.setStyle(scrollerElement, 'scrollBehavior', 'smooth');
-  }
-
-  /**
-   * Método para ordenar ascendentemente las mediciones por su sesion
-   */
-  private sortMeasurements(measurements: Measurement[]): Measurement[] {
-    return measurements.sort((a, b) => a.session - b.session);
   }
 
   /** Se encarga de scrollear a la izquierda y bloquear esta posibilidad si llega al limite */
