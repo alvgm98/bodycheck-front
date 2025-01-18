@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef } from '@angular/core';
+import { Component, effect, ElementRef, Renderer2 } from '@angular/core';
 import { RegisterComponent } from '../../../auth/components/register/register.component';
 import { AuthService } from '../../../auth/services/auth.service';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -16,6 +16,7 @@ export class HeroComponent {
 
   constructor(
     private el: ElementRef,
+    private renderer: Renderer2,
     private fb: FormBuilder,
     private authService: AuthService
   ) {
@@ -33,8 +34,8 @@ export class HeroComponent {
   showRegisterFn() {
     if (!this.showRegister) {
       const welcome = this.el.nativeElement.querySelector("#welcome");
-      welcome.classList.remove("pop-in-welcome");
-      welcome.classList.add("pop-out-welcome");
+      this.renderer.removeClass(welcome, "pop-in-welcome");
+      this.renderer.addClass(welcome, "pop-out-welcome");
     }
 
     requestAnimationFrame(() => this.showRegister = true);
@@ -44,12 +45,12 @@ export class HeroComponent {
   }
   hideRegister() {
     const registerModal = this.el.nativeElement.querySelector("#register-modal");
-    registerModal.classList.remove("pop-in-register");
-    registerModal.classList.add("pop-out-register");
+    this.renderer.removeClass(registerModal, "pop-in-register");
+    this.renderer.addClass(registerModal, "pop-out-register");
 
     const welcome = this.el.nativeElement.querySelector("#welcome");
-    welcome.classList.remove("pop-out-welcome");
-    welcome.classList.add("pop-in-welcome");
+    this.renderer.removeClass(welcome, "pop-out-welcome");
+    this.renderer.addClass(welcome, "pop-in-welcome");
 
     setTimeout(() => {
       requestAnimationFrame(() => this.showRegister = false);
