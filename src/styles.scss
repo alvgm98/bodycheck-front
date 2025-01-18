@@ -538,6 +538,11 @@ input[type=number] {
 
   font-size: 25px;
   color: $primary-color;
+
+  transition: 300ms;
+  &:hover {
+    color: $primary-color-700;
+  }
 }
 
 /* SOBREESCRIBIR ESTILOS SELECT-INPUT EN EXPORT */
