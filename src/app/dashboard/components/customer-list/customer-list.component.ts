@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, effect, ElementRef, output } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, effect, ElementRef, output, Renderer2 } from '@angular/core';
 import { CustomerService } from '../../../shared/services/customer.service';
 import { CapitalizePipe } from '../../../shared/pipes/capitalize.pipe';
 import { CalculateAgePipe } from '../../../shared/pipes/calculate-age.pipe';
@@ -37,6 +37,7 @@ export class CustomerListComponent implements AfterViewInit {
   constructor(
     private customerService: CustomerService,
     private el: ElementRef,
+    private renderer: Renderer2,
     private cdr: ChangeDetectorRef,
     private filterPipe: FilterCustomersPipe
   ) {
@@ -84,10 +85,10 @@ export class CustomerListComponent implements AfterViewInit {
 
   /* Paginator */
   calculatePageSize() {
-    const hostHeight = this.el.nativeElement.offsetHeight;
-    const controlsHeight = this.el.nativeElement.querySelector(".controls").offsetHeight;
-    const paginatorHeight = this.el.nativeElement.querySelector(".paginator").offsetHeight;
-    const rowHeight = this.el.nativeElement.querySelector("thead").offsetHeight;
+    const hostHeight = this.renderer.selectRootElement(this.el.nativeElement, true).offsetHeight;
+    const controlsHeight = this.renderer.selectRootElement('.controls', true).offsetHeight;
+    const paginatorHeight = this.renderer.selectRootElement('.paginator', true).offsetHeight;
+    const rowHeight = this.renderer.selectRootElement('thead', true).offsetHeight;
 
     this.pageSize = Math.floor((hostHeight - controlsHeight - paginatorHeight - rowHeight) / rowHeight);
   }
