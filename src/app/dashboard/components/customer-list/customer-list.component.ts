@@ -63,6 +63,7 @@ export class CustomerListComponent implements AfterViewInit {
 
   /* Filter */
   filterValue(filter: string) {
+    this.page = 0;
     this.filterCondition = filter;
     this.setFilteredCustomers();
   }
