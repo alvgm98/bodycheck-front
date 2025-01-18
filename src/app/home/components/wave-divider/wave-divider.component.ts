@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, input, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, input, OnInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-wave-divider',
