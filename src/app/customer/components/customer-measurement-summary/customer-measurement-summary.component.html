@@ -12,7 +12,7 @@
   } @else {
     <h3>Mediciones</h3>
   }
-  <div class="scroller">
+  <div id="measurement-scroller" class="scroller">
     @for (measurement of measurements(); track $index) {
       <app-customer-measurement [measurement]="measurement" />
     }

@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, input, Renderer2 } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { CustomerMeasurementComponent } from '../../ui/customer-measurement/customer-measurement.component';
 import { Measurement } from '../../../shared/models/measurement';
@@ -21,7 +21,7 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
   maxScrollRight: boolean = false;
 
   constructor(
-    private el: ElementRef,
+    private renderer: Renderer2,
     private cdr: ChangeDetectorRef
   ) { }
 
@@ -39,12 +39,13 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
    * Scrollea a la ultima medición si esta existe
    */
   private scrollToInit() {
-    const scrollerElement = this.el.nativeElement.querySelector(".scroller");
+    const scrollerElement = this.renderer.selectRootElement('#measurement-scroller', true);
     const visibleWidth = scrollerElement.clientWidth; // Ancho del measurement
 
-    scrollerElement.scrollTo({
-      left: scrollerElement.scrollWidth - (visibleWidth * 2),
-    })
+    this.renderer.setProperty(scrollerElement, 'scrollLeft', scrollerElement.scrollWidth - (visibleWidth * 2));
+
+    // Hacemos que el scroll se comporte 'smooth' después de la primera animación
+    this.renderer.setStyle(scrollerElement, 'scrollBehavior', 'smooth');
   }
 
   /**
@@ -59,7 +60,7 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
     // Desbloqueamos scroll a la derecha
     this.maxScrollRight = false;
 
-    const scrollerElement = this.el.nativeElement.querySelector(".scroller");
+    const scrollerElement = this.renderer.selectRootElement('#measurement-scroller', true);
     const visibleWidth = scrollerElement.clientWidth; // Ancho del measurement
 
     const nextScrollPosition = scrollerElement.scrollLeft - visibleWidth; // Proxima posicion del scroll despues de la animacion smooth
@@ -72,11 +73,7 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
      */
     this.maxScrollLeft = nextScrollPosition < visibleWidth;
 
-    scrollerElement.scrollTo({
-      left: nextScrollPosition,
-      behavior: 'smooth'
-    })
-
+    this.renderer.setProperty(scrollerElement, 'scrollLeft', nextScrollPosition);
   }
 
   /** Se encarga de scrollear a la derecha y bloquear esta posibilidad si llega al limite */
@@ -84,7 +81,7 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
     // Desbloqueamos scroll a la izquierda
     this.maxScrollLeft = false;
 
-    const scrollerElement = this.el.nativeElement.querySelector(".scroller");
+    const scrollerElement = this.renderer.selectRootElement('#measurement-scroller', true);
     const visibleWidth = scrollerElement.clientWidth; // Ancho del measurement
 
     const nextScrollPosition = scrollerElement.scrollLeft + visibleWidth; // Proxima posicion del scroll despues de la animacion smooth
@@ -98,9 +95,6 @@ export class CustomerMeasurementSummaryComponent implements AfterViewInit {
      */
     this.maxScrollRight = maxScrollableDistance - nextScrollPosition < visibleWidth;
 
-    scrollerElement.scrollTo({
-      left: nextScrollPosition,
-      behavior: 'smooth',
-    });
+    this.renderer.setProperty(scrollerElement, 'scrollLeft', nextScrollPosition);
   }
 }

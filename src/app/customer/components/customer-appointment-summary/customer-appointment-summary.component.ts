@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, input, Renderer2 } from '@angular/core';
 import { CustomerAppointmentComponent } from '../../ui/customer-appointment/customer-appointment.component';
 import { NgClass } from '@angular/common';
 import { Appointment } from '../../../shared/models/appointment';
@@ -20,6 +20,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
 
   constructor(
     private el: ElementRef,
+    private renderer: Renderer2,
     private cdr: ChangeDetectorRef
   ) { }
 
@@ -37,12 +38,13 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
    * Scrollea a la ultima cita si esta existe
    */
   private scrollToInit() {
-    const scrollerElement = this.el.nativeElement.querySelector(".scroller");
+    const scrollerElement = this.renderer.selectRootElement('#appointment-scroller', true);
     const visibleWidth = scrollerElement.clientWidth; // Ancho del appointment
 
-    scrollerElement.scrollTo({
-      left: scrollerElement.scrollWidth - (visibleWidth * 2),
-    })
+    this.renderer.setProperty(scrollerElement, 'scrollLeft', scrollerElement.scrollWidth - (visibleWidth * 2));
+
+    // Hacemos que el scroll se comporte 'smooth' después de la primera animación
+    this.renderer.setStyle(scrollerElement, 'scrollBehavior', 'smooth');
   }
 
   /** Se encarga de scrollear a la izquierda y bloquear esta posibilidad si llega al limite */
@@ -50,7 +52,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
     // Desbloqueamos scroll a la derecha
     this.maxScrollRight = false;
 
-    const scrollerElement = this.el.nativeElement.querySelector(".scroller");
+    const scrollerElement = this.renderer.selectRootElement('#appointment-scroller', true);
     const visibleWidth = scrollerElement.clientWidth; // Ancho del appointment
 
     const nextScrollPosition = scrollerElement.scrollLeft - visibleWidth; // Proxima posicion del scroll despues de la animacion smooth
@@ -63,10 +65,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
      */
     this.maxScrollLeft = nextScrollPosition < visibleWidth;
 
-    scrollerElement.scrollTo({
-      left: nextScrollPosition,
-      behavior: 'smooth'
-    })
+    this.renderer.setProperty(scrollerElement, 'scrollLeft', nextScrollPosition);
 
   }
 
@@ -75,7 +74,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
     // Desbloqueamos scroll a la izquierda
     this.maxScrollLeft = false;
 
-    const scrollerElement = this.el.nativeElement.querySelector(".scroller");
+    const scrollerElement = this.renderer.selectRootElement('#appointment-scroller', true);
     const visibleWidth = scrollerElement.clientWidth; // Ancho del appointment
 
     const nextScrollPosition = scrollerElement.scrollLeft + visibleWidth; // Proxima posicion del scroll despues de la animacion smooth
@@ -89,10 +88,7 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
      */
     this.maxScrollRight = maxScrollableDistance - nextScrollPosition < visibleWidth;
 
-    scrollerElement.scrollTo({
-      left: nextScrollPosition,
-      behavior: 'smooth',
-    });
+    this.renderer.setProperty(scrollerElement, 'scrollLeft', nextScrollPosition);
   }
 
 }

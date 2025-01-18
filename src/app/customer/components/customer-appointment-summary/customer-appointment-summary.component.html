@@ -12,7 +12,7 @@
   } @else {
     <h3>Citas</h3>
   }
-  <div class="scroller">
+  <div id="appointment-scroller" class="scroller">
     @for (appointment of appointments(); track $index) {
     <app-customer-appointment [appointment]="appointment" />
     }
