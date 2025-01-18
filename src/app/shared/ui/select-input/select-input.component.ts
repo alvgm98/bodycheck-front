@@ -1,5 +1,5 @@
-import { NgStyle } from '@angular/common';
-import { Component, ElementRef, input, OnInit, output } from '@angular/core';
+import { isPlatformBrowser, NgStyle } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, Inject, input, OnDestroy, OnInit, output, PLATFORM_ID, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-select-input',
@@ -24,7 +24,7 @@ import { Component, ElementRef, input, OnInit, output } from '@angular/core';
  * @param hasErrors Modifica los estilos si es verdadero.
  * @param selectEvent Emite la key de la opción seleccionada para poder se transformado a Enum en el padre.
  */
-export class SelectInputComponent implements OnInit {
+export class SelectInputComponent implements OnInit, AfterViewInit, OnDestroy {
 
   title = input.required<string>();
   selected: string = '';
@@ -37,7 +37,11 @@ export class SelectInputComponent implements OnInit {
 
   selectEvent = output<string>();
 
-  constructor(private el: ElementRef) { }
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
 
   /**
    * Seleccionamos una de las opciones si el componente recibe 'inputSelected'
@@ -52,6 +56,25 @@ export class SelectInputComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.renderer.listen('document', 'click', this.handleClickOutside.bind(this));
+    }
+  }
+
+  ngOnDestroy() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.renderer.listen('document', 'click', this.handleClickOutside.bind(this))();
+    }
+  }
+
+  /** Funcion para cerrar el dropdown al hacer click fuera de este */
+  handleClickOutside(event: MouseEvent) {
+    if (this.showDropdown && !this.el.nativeElement.contains(event.target)) {
+      this.closeDropdown();
+    }
+  }
+
   toggleShowDropdown() {
     if (!this.showDropdown)
       this.showDropdown = !this.showDropdown;
@@ -61,8 +84,8 @@ export class SelectInputComponent implements OnInit {
 
   closeDropdown() {
     const dropdown = this.el.nativeElement.querySelector('.dropdown');
-    dropdown.classList.remove('deploy-dropdown-animation')
-    dropdown.classList.add('hide-dropdown-animation')
+    this.renderer.removeClass(dropdown, 'deploy-dropdown-animation');
+    this.renderer.addClass(dropdown, 'hide-dropdown-animation');
 
     setTimeout(() => this.showDropdown = false, 200);
   }
