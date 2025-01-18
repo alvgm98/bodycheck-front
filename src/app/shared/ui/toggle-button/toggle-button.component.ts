@@ -1,4 +1,4 @@
-import { Component, ElementRef, input, OnInit, output } from '@angular/core';
+import { Component, ElementRef, input, OnInit, output, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-toggle-button',
@@ -16,7 +16,7 @@ export class ToggleButtonComponent implements OnInit {
 
   selectEvent = output<string>();
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.leftBtn = this.options()[0];
@@ -32,14 +32,15 @@ export class ToggleButtonComponent implements OnInit {
   }
 
   selectLeft() {
-    const toggleBar = this.el.nativeElement.querySelector(".toggle-bar")
-    toggleBar.style.left = '0';
+    const toggleBar = this.el.nativeElement.querySelector(".toggle-bar");
+    this.renderer.setStyle(toggleBar, 'left', '0');
 
     this.selectEvent.emit(this.leftBtn.key);
   }
+
   selectRight() {
-    const toggleBar = this.el.nativeElement.querySelector(".toggle-bar")
-    toggleBar.style.left = '50%';
+    const toggleBar = this.el.nativeElement.querySelector(".toggle-bar");
+    this.renderer.setStyle(toggleBar, 'left', '50%');
 
     this.selectEvent.emit(this.rightBtn.key);
   }
