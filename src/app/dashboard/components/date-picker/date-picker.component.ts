@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, model } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, model, Renderer2 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -21,30 +21,20 @@ import 'moment/locale/es';
 export class DatePickerComponent implements AfterViewInit {
   selected = model<Date>(new Date());
 
-  constructor(private el: ElementRef) { }
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2
+  ) { }
 
   ngAfterViewInit(): void {
-    const labels = this.el.nativeElement.querySelectorAll('.mat-calendar-table-header span')
+    const labels = this.el.nativeElement.querySelectorAll('.mat-calendar-table-header span');
 
-    labels[1].textContent = 'L';
-    labels[3].textContent = 'M';
-    labels[5].textContent = 'M';
-    labels[7].textContent = 'J';
-    labels[9].textContent = 'V';
-    labels[11].textContent = 'S';
-    labels[13].textContent = 'D';
-
-   /*  labels[1].textContent = 'Lunes';
-    labels[3].textContent = 'Martes';
-    labels[5].textContent = 'Miercoles';
-    labels[7].textContent = 'Jueves';
-    labels[9].textContent = 'Viernes';
-    labels[11].textContent = 'Sabado';
-    labels[13].textContent = 'Domingo'; */
-
-    /* labels.forEach((label: HTMLElement) => {
-      label.style.fontWeight = 'bold';
-    }) */
+    this.renderer.setProperty(labels[1], 'textContent', 'L');
+    this.renderer.setProperty(labels[3], 'textContent', 'M');
+    this.renderer.setProperty(labels[5], 'textContent', 'X');
+    this.renderer.setProperty(labels[7], 'textContent', 'J');
+    this.renderer.setProperty(labels[9], 'textContent', 'V');
+    this.renderer.setProperty(labels[11], 'textContent', 'S');
+    this.renderer.setProperty(labels[13], 'textContent', 'D');
   }
-
 }
