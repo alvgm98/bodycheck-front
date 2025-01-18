@@ -3,6 +3,7 @@ import { GenericObject } from "./generic";
 
 export interface Appointment {
   id: number;
+  number: number;
   customer: Customer | null;
   customerName: string | null;
   customerPhone: string | null;

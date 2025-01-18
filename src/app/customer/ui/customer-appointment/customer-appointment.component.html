@@ -8,14 +8,23 @@
 </div>
 
 <div class="appointment-data">
-  <div class="data-title">
-    <h5><i class="fa-regular fa-user"></i> Motivo:</h5>
-    <h5><i class="fa-regular fa-clock"></i> Hora:</h5>
-    <h5><i class="fa-regular fa-calendar"></i> Duración:</h5>
+  <div>
+    <h5><i class="fa-solid fa-hashtag"></i> Cita:</h5>
+    <p>{{ appointment().number }}</p>
   </div>
-  <div class="data">
+
+  <div>
+    <h5><i class="fa-regular fa-user"></i> Motivo:</h5>
     <p>{{ appointment().reason }}</p>
+  </div>
+
+  <div>
+    <h5><i class="fa-regular fa-clock"></i> Hora:</h5>
     <p>{{ appointment().startTime | date: 'HH:mm' }} - {{ appointment().endTime | date: 'HH:mm' }}</p>
+  </div>
+
+  <div>
+    <h5><i class="fa-regular fa-calendar"></i> Duración:</h5>
     <p>{{ appointment().duration }} min</p>
   </div>
 </div>
