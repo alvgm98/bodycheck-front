@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, output } from '@angular/core';
+import { Component, effect, ElementRef, output, Renderer2 } from '@angular/core';
 import { AuthService } from '../../../auth/services/auth.service';
 import { LoginComponent } from '../../../auth/components/login/login.component';
 import { Router } from '@angular/router';
@@ -21,6 +21,7 @@ export class HeaderComponent {
 
   constructor(
     private el: ElementRef,
+    private renderer: Renderer2,
     private authService: AuthService,
     private router: Router
   ) {
@@ -60,15 +61,15 @@ export class HeaderComponent {
 
   closeLogin() {
     const modalCorner = this.el.nativeElement.querySelector(".modal-corner");
-    modalCorner.style.display = "none" // Elimino la esquina del modal ya que durante la animación se superpone
+    this.renderer.setStyle(modalCorner, 'display', 'none'); // Elimino la esquina del modal ya que durante la animación se superpone
 
     const loginModal = this.el.nativeElement.querySelector("#login-modal");
-    loginModal.classList.remove("pop-in-login");
-    loginModal.classList.add("pop-out-login");
+    this.renderer.removeClass(loginModal, 'pop-in-login');
+    this.renderer.addClass(loginModal, 'pop-out-login');
 
     setTimeout(() => {
       this.showLogin = false;
-    }, 300)
+    }, 300);
   }
   closeRegister() {
     if (this.showRegister) {
