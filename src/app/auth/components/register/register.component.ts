@@ -1,4 +1,4 @@
-import { Component, ElementRef, input, OnInit } from '@angular/core';
+import { Component, ElementRef, input, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { RegisterRequest } from '../../models/register-request';
@@ -39,7 +39,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private el: ElementRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private renderer: Renderer2
   ) { }
 
   /* Validaciones del formulario */
@@ -99,7 +100,6 @@ export class RegisterComponent implements OnInit {
   closeModal() {
     this.authService.showRegister.set(false);
   }
-
   checkShowPasswordSecurity() {
     if (!this.showPasswordSecurity && this.password.value) {
       this.showPasswordSecurityFn();
@@ -107,7 +107,7 @@ export class RegisterComponent implements OnInit {
 
     if (this.showPasswordSecurity && !this.password.value) {
       clearTimeout(this.passwordSecurityTimeOut);
-      this.el.nativeElement.querySelector('.password-security').style.animationPlayState = 'running';
+      this.renderer.setStyle(this.el.nativeElement.querySelector('.password-security'), 'animationPlayState', 'running');
 
       setTimeout(() => {
         this.showPasswordSecurity = false;
@@ -123,7 +123,7 @@ export class RegisterComponent implements OnInit {
   showPasswordSecurityFn() {
     this.showPasswordSecurity = true;
     this.passwordSecurityTimeOut = setTimeout(() => {
-      requestAnimationFrame(() => this.el.nativeElement.querySelector('.password-security').style.animationPlayState = 'paused')
+      requestAnimationFrame(() => this.renderer.setStyle(this.el.nativeElement.querySelector('.password-security'), 'animationPlayState', 'paused'))
     }, 300);
   }
 }
