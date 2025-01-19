@@ -13,6 +13,7 @@ import { Measurement } from '../../../shared/models/measurement';
 export class MeasurementFormComponent implements OnInit {
 
   measurement = input<Measurement | null>();
+  newSessionNumber = input<number>();
 
   constructor(private fb: FormBuilder) {
     // Modificamos los valores del formulario cada vez que se cambie la pestaña

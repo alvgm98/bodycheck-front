@@ -21,5 +21,8 @@
 
 <!-- MEASUREMENT FORM -->
 <div id="form">
-  <app-measurement-form [measurement]="selected < 0 ? null : measurements()![selected]" />
+  <app-measurement-form
+    [measurement]="selected < 0 ? null : measurements()![selected]"
+    [newSessionNumber]="measurements()!.length + 1"
+  />
 </div>

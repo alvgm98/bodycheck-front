@@ -1,7 +1,7 @@
 <form [formGroup]="measurementForm" (ngSubmit)="submit()">
   <div class="main-data">
     <div class="col">
-      <h2>Horse María<span>Sesión: 7</span></h2>
+      <h2>Horse María<span>Sesión: {{ measurement()?.session ?? newSessionNumber() }}</span></h2>
 
       <div class="input-border-group" id="date">
         <input formControlName="date" placeholder=" " type="date"/>
