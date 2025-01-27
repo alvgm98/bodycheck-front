@@ -2,6 +2,7 @@ import { Component, input, OnInit } from '@angular/core';
 import { Measurement } from '../../../shared/models/measurement';
 import { NgClass } from '@angular/common';
 import { MeasurementFormComponent } from '../../components/measurement-form/measurement-form.component';
+import { CustomerDetailed } from '../../../shared/models/customer';
 
 @Component({
   selector: 'app-measurements-summary',
@@ -12,13 +13,13 @@ import { MeasurementFormComponent } from '../../components/measurement-form/meas
 })
 export class MeasurementsSummaryComponent implements OnInit {
 
-  measurements = input<Measurement[]>();
+  customer = input.required<CustomerDetailed>();
   selected: number = -1; // Valdrá el indice de la medición seleccionada o -1 si esta seleccionado el añadir medición
 
   /** Al cargar el componente seleccionamos la ultima medición si la hay */
   ngOnInit(): void {
-    if (this.measurements()) {
-      this.selected = this.measurements()!.length - 1;
+    if (this.customer().measurements) {
+      this.selected = this.customer().measurements!.length - 1;
     }
   }
 

@@ -1,6 +1,6 @@
 <!-- SESSION TABS -->
 <div class="session-tabs">
-  @for (measurement of measurements(); track $index) {
+  @for (measurement of customer().measurements; track $index) {
     <div
       class="session-tab"
       [ngClass]="{'selected': $index === selected}"
@@ -22,7 +22,8 @@
 <!-- MEASUREMENT FORM -->
 <div id="form">
   <app-measurement-form
-    [measurement]="selected < 0 ? null : measurements()![selected]"
-    [newSessionNumber]="measurements()!.length + 1"
+    [measurement]="selected < 0 ? null : customer().measurements![selected]"
+    [newSessionNumber]="customer().measurements!.length + 1"
+    [customerId]="customer().id!"
   />
 </div>

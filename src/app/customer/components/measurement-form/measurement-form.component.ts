@@ -1,8 +1,8 @@
 import { Component, effect, input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaComponent } from '../../../shared/ui/textarea/textarea.component';
-import { Measurement } from '../../../shared/models/measurement';
-// import { MeasurementService } from '../../../shared/services/measurement.service';
+import { Measurement, MeasurementRequest } from '../../../shared/models/measurement';
+import { MeasurementService } from '../../../shared/services/measurement.service';
 
 @Component({
   selector: 'app-measurement-form',
@@ -15,10 +15,11 @@ export class MeasurementFormComponent implements OnInit {
 
   measurement = input<Measurement | null>();
   newSessionNumber = input<number>();
+  customerId = input.required<number>();
 
   constructor(
     private fb: FormBuilder,
-    // private measurementService: MeasurementService,
+    private measurementService: MeasurementService,
   ) {
     // Modificamos los valores del formulario cada vez que se cambie la pestaña
     effect(() => this.patchMeasurementValues())
@@ -33,7 +34,30 @@ export class MeasurementFormComponent implements OnInit {
       return;
     } */
 
-    console.dir(this.measurementForm.value)
+    this.measurement() ? this.edit() : this.create()
+  }
+
+  create() {
+    console.dir(this.formToMeasurement())
+    this.measurementService.addMeasurement(this.formToMeasurement()).subscribe({
+      next: (response) => {
+        console.log('Measurement created successfully', response);
+      },
+      error: (error) => {
+        console.error('Error creating measurement', error);
+      }
+    });
+  }
+
+  edit() {
+    this.measurementService.updateMeasurement(this.formToMeasurement()).subscribe({
+      next: (response) => {
+        console.log('Measurement created successfully', response);
+      },
+      error: (error) => {
+        console.error('Error editing measurement', error);
+      }
+    });
   }
 
   /**
@@ -110,4 +134,46 @@ export class MeasurementFormComponent implements OnInit {
   get skinfoldControls() {
     return this.controls.skinfold.controls;
   }
+
+  private formToMeasurement(): MeasurementRequest {
+    let id = null;
+    let session = this.newSessionNumber()!;
+
+    if (this.measurement()) {
+      id = this.measurement()!.id;
+      session = this.measurement()!.session;
+    }
+
+    return {
+      id: id,
+      customer: { id: this.customerId() },
+      session: session,
+      date: new Date(this.controls.date.value!),
+      weight: this.controls.weight.value!,
+      circumference: {
+        id: this.circumferenceControls.id.value ?? null,
+        neck: this.circumferenceControls.neck.value!,
+        chest: this.circumferenceControls.chest.value!,
+        armRelaxed: this.circumferenceControls.armRelaxed.value!,
+        armFlexed: this.circumferenceControls.armFlexed.value!,
+        waist: this.circumferenceControls.waist.value!,
+        hip: this.circumferenceControls.hip.value!,
+        thigh: this.circumferenceControls.thigh.value!,
+        calf: this.circumferenceControls.calf.value!,
+      },
+      skinfold: {
+        id: this.skinfoldControls.id.value ?? null,
+        triceps: this.skinfoldControls.triceps.value!,
+        biceps: this.skinfoldControls.biceps.value!,
+        subscapular: this.skinfoldControls.subscapular.value!,
+        suprailiac: this.skinfoldControls.suprailiac.value!,
+        iliacCrest: this.skinfoldControls.iliacCrest.value!,
+        abdominal: this.skinfoldControls.abdominal.value!,
+        thigh: this.skinfoldControls.thigh.value!,
+        calf: this.skinfoldControls.calf.value!,
+      },
+      observations: this.controls.observations.value!,
+    };
+  }
+
 }
