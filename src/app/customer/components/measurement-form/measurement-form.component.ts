@@ -2,6 +2,7 @@ import { Component, effect, input, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaComponent } from '../../../shared/ui/textarea/textarea.component';
 import { Measurement } from '../../../shared/models/measurement';
+// import { MeasurementService } from '../../../shared/services/measurement.service';
 
 @Component({
   selector: 'app-measurement-form',
@@ -15,7 +16,10 @@ export class MeasurementFormComponent implements OnInit {
   measurement = input<Measurement | null>();
   newSessionNumber = input<number>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    // private measurementService: MeasurementService,
+  ) {
     // Modificamos los valores del formulario cada vez que se cambie la pestaña
     effect(() => this.patchMeasurementValues())
   }
@@ -24,15 +28,23 @@ export class MeasurementFormComponent implements OnInit {
   }
 
   submit() {
+    /* if (!this.measurementForm.valid) {
+      this.measurementForm.markAllAsTouched();
+      return;
+    } */
 
+    console.dir(this.measurementForm.value)
   }
 
   /**
    * Patchea los valores de los input por los valores del Measurement recibido por input
    */
   patchMeasurementValues() {
+    const date = new Date();
+    const formatted = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+
     this.measurementForm.patchValue({
-      date: this.measurement()?.date,
+      date: this.measurement()?.date.toString() || formatted,
       weight: this.measurement()?.weight,
       circumference: ({
         id: this.measurement()?.circumference.id,
@@ -58,14 +70,15 @@ export class MeasurementFormComponent implements OnInit {
       }),
       observations: this.measurement()?.observations,
     })
+
   }
 
   /** Inicializa el formulario vacio y sus Validadores */
   measurementForm = this.fb.group({
-    date: [new Date(), Validators.required],
+    date: ['', Validators.required],
     weight: [0, [Validators.required, Validators.min(0)]],
     circumference: this.fb.group({
-      id: [0],
+      id: [0], // Aunque marque el id como 0, al cargar los datos de un Measurement vacio, este será undefined
       neck: [0, [Validators.required, Validators.min(0)]],
       chest: [0, [Validators.required, Validators.min(0)]],
       armRelaxed: [0, [Validators.required, Validators.min(0)]],
@@ -76,7 +89,7 @@ export class MeasurementFormComponent implements OnInit {
       calf: [0, [Validators.required, Validators.min(0)]],
     }),
     skinfold: this.fb.group({
-      id: [0],
+      id: [0], // Aunque marque el id como 0, al cargar los datos de un Measurement vacio, este será undefined
       triceps: [0, [Validators.required, Validators.min(0)]],
       biceps: [0, [Validators.required, Validators.min(0)]],
       subscapular: [0, [Validators.required, Validators.min(0)]],
