@@ -1,7 +1,7 @@
 <app-customer-tabs [(tabOpened)]="tabOpened" />
 
 @if (tabOpened === TABS.SUMMARY) {
-  <app-customer-summary [customer]="customer" />
+  <app-customer-summary [customer]="customer!" />
 } @else if (tabOpened === TABS.MEASUREMENTS) {
   <app-measurements-summary [customer]="customer!" />
 } @else if (tabOpened === TABS.CHARTS) {

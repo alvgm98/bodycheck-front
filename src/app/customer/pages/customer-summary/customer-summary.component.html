@@ -1,7 +1,7 @@
 <div class="sumary-row">
   <article id="customer-card">
-    @if (customer) {
-      <app-customer-card [customer]="customer" />
+    @if (customer()) {
+      <app-customer-card [customer]="customer()" />
       <div (click)="openCustomerForm()" class="edit">
         <i class="fa-solid fa-pen-to-square"></i>
       </div>
@@ -11,8 +11,8 @@
   </article>
 
   <article id="customer-appointments-summary">
-    @if (customer) {
-      <app-customer-appointment-summary [appointments]="customer.appointments!" />
+    @if (customer()) {
+      <app-customer-appointment-summary [appointments]="customer().appointments!" />
     } @else {
       <mat-spinner></mat-spinner>
     }
@@ -21,8 +21,8 @@
 
 <div class="sumary-row">
   <article id="customer-measurements-summary">
-    @if (customer) {
-      <app-customer-measurement-summary [measurements]="customer.measurements!" />
+    @if (customer()) {
+      <app-customer-measurement-summary [measurements]="customer().measurements!" />
     } @else {
       <mat-spinner></mat-spinner>
     }

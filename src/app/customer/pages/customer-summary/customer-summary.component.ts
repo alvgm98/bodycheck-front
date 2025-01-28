@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { CustomerCardComponent } from '../../components/customer-card/customer-card.component';
 import { CustomerAppointmentSummaryComponent } from '../../components/customer-appointment-summary/customer-appointment-summary.component';
 import { CustomerMeasurementSummaryComponent } from '../../components/customer-measurement-summary/customer-measurement-summary.component';
@@ -14,7 +14,7 @@ import { ModalService } from '../../../shared/pages/modal.service';
   styleUrl: './customer-summary.component.scss'
 })
 export class CustomerSummaryComponent {
-  @Input() customer?: CustomerDetailed;
+  customer = input.required<CustomerDetailed>();
 
   constructor(private modalService: ModalService) { }
 
