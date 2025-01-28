@@ -38,6 +38,7 @@
   height: fit-content;
   min-width: 450px;
   min-height: 350px;
+  max-width: max(25%, 450px);
 
   .edit {
     position: absolute;
