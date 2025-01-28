@@ -1,4 +1,4 @@
-import { Component, effect, input, OnInit } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaComponent } from '../../../shared/ui/textarea/textarea.component';
 import { Measurement, MeasurementRequest } from '../../../shared/models/measurement';
@@ -13,8 +13,7 @@ import { finalize } from 'rxjs';
   templateUrl: './measurement-form.component.html',
   styleUrl: './measurement-form.component.scss'
 })
-export class MeasurementFormComponent implements OnInit {
-
+export class MeasurementFormComponent {
   measurement = input<Measurement | null>();
   newSessionNumber = input<number>();
   customerId = input.required<number>();
@@ -27,9 +26,6 @@ export class MeasurementFormComponent implements OnInit {
   ) {
     // Modificamos los valores del formulario cada vez que se cambie la pestaña
     effect(() => this.patchMeasurementValues())
-  }
-
-  ngOnInit(): void {
   }
 
   submit() {
