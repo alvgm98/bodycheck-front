@@ -3,11 +3,13 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaComponent } from '../../../shared/ui/textarea/textarea.component';
 import { Measurement, MeasurementRequest } from '../../../shared/models/measurement';
 import { MeasurementService } from '../../../shared/services/measurement.service';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-measurement-form',
   standalone: true,
-  imports: [TextareaComponent, ReactiveFormsModule],
+  imports: [TextareaComponent, ReactiveFormsModule, MatProgressSpinner],
   templateUrl: './measurement-form.component.html',
   styleUrl: './measurement-form.component.scss'
 })
@@ -16,6 +18,8 @@ export class MeasurementFormComponent implements OnInit {
   measurement = input<Measurement | null>();
   newSessionNumber = input<number>();
   customerId = input.required<number>();
+
+  loading: boolean = false; // Este atributo se encargará de mostrar y ocultar el spinner de carga
 
   constructor(
     private fb: FormBuilder,
@@ -34,30 +38,23 @@ export class MeasurementFormComponent implements OnInit {
       return;
     } */
 
-    this.measurement() ? this.edit() : this.create()
+    this.loading = true;
+    const observable = this.measurement() ? this.edit() : this.create()
+
+    observable
+      .pipe(finalize(() => this.loading = false))
+      .subscribe({
+        next: (measurement) => console.log('Measurement processed successfully', measurement),
+        error: (error) => console.error('Error processing measurement', error)
+      });
   }
 
   create() {
-    console.dir(this.formToMeasurement())
-    this.measurementService.addMeasurement(this.formToMeasurement()).subscribe({
-      next: (response) => {
-        console.log('Measurement created successfully', response);
-      },
-      error: (error) => {
-        console.error('Error creating measurement', error);
-      }
-    });
+    return this.measurementService.addMeasurement(this.formToMeasurement())
   }
 
   edit() {
-    this.measurementService.updateMeasurement(this.formToMeasurement()).subscribe({
-      next: (response) => {
-        console.log('Measurement created successfully', response);
-      },
-      error: (error) => {
-        console.error('Error editing measurement', error);
-      }
-    });
+    return this.measurementService.updateMeasurement(this.formToMeasurement())
   }
 
   /**

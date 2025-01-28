@@ -180,9 +180,16 @@
     </fieldset>
   </div>
 
-  @if (measurement()) {
-    <button type="submit" class="btn flat-button" style="width: 300px;">Editar Medicion</button>
-  } @else {
-    <button type="submit" class="btn flat-button" style="width: 300px;">Registrar Medicion</button>
+  <!-- Spinner de carga mientras se actualizan las mediciones -->
+  @if (loading) {
+    <mat-spinner></mat-spinner>
+  }
+  <!-- Boton de Registro o Edición -->
+  @else {
+    @if (measurement()) {
+      <button type="submit" class="btn flat-button" style="width: 300px;">Editar Medicion</button>
+    } @else {
+      <button type="submit" class="btn flat-button" style="width: 300px;">Registrar Medicion</button>
+    }
   }
 </form>
