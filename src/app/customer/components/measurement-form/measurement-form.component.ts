@@ -5,6 +5,7 @@ import { Measurement, MeasurementRequest } from '../../../shared/models/measurem
 import { MeasurementService } from '../../../shared/services/measurement.service';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { finalize } from 'rxjs';
+import { MessageService } from '../../../message-modal/message.service';
 
 @Component({
   selector: 'app-measurement-form',
@@ -23,6 +24,7 @@ export class MeasurementFormComponent {
   constructor(
     private fb: FormBuilder,
     private measurementService: MeasurementService,
+    private messageService: MessageService
   ) {
     // Modificamos los valores del formulario cada vez que se cambie la pestaña
     effect(() => this.patchMeasurementValues())
@@ -40,8 +42,11 @@ export class MeasurementFormComponent {
     observable
       .pipe(finalize(() => this.loading = false))
       .subscribe({
-        next: (measurement) => console.log('Measurement processed successfully', measurement),
-        error: (error) => console.error('Error processing measurement', error)
+        next: (measurement) => { this.messageService.emitSuccess(`Medición ${this.measurement() ? "editada" : "creada"} correctamente`) },
+        error: (error) => {
+          console.error("MEASUREMENT-FORM: ", error);
+          this.messageService.emitError(`No se ha podido ${this.measurement() ? "editar" : "crear"} la medición`);
+        }
       });
   }
 
