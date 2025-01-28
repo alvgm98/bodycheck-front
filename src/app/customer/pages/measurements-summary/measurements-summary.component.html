@@ -25,5 +25,6 @@
     [measurement]="selected < 0 ? null : customer().measurements![selected]"
     [newSessionNumber]="customer().measurements!.length + 1"
     [customerId]="customer().id!"
+    (measurementChangeEvent)="updateMeasurements($event)"
   />
 </div>

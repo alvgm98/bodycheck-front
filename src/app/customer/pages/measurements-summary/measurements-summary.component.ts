@@ -21,6 +21,8 @@ export class MeasurementsSummaryComponent implements OnInit {
     if (this.customer().measurements) {
       this.selected = this.customer().measurements!.length - 1;
     }
+
+    console.log('message')
   }
 
   /**
@@ -32,6 +34,20 @@ export class MeasurementsSummaryComponent implements OnInit {
    */
   selectMeasurement(index: number) {
     this.selected = index;
+  }
+
+  /**
+   * Actualiza la lista de mediciones del cliente de manera que coincida con la bdd sin necesidad de llamar al back
+   *
+   * @param measurement - Medición modificada en back
+   */
+  updateMeasurements(measurement: Measurement) {
+    if (measurement.session > this.customer().measurements!.length) {
+      this.customer().measurements!.push(measurement);
+      this.selected = measurement.session - 1;
+    } else {
+      this.customer().measurements![measurement.session - 1] = measurement;
+    }
   }
 
 }

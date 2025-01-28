@@ -1,4 +1,4 @@
-import { Component, effect, input } from '@angular/core';
+import { Component, effect, input, output } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaComponent } from '../../../shared/ui/textarea/textarea.component';
 import { Measurement, MeasurementRequest } from '../../../shared/models/measurement';
@@ -20,6 +20,7 @@ export class MeasurementFormComponent {
   customerId = input.required<number>();
 
   loading: boolean = false; // Este atributo se encargará de mostrar y ocultar el spinner de carga
+  measurementChangeEvent = output<Measurement>(); // Este output se encargará de enviar al padre las mediciones nuevas y las editadas
 
   constructor(
     private fb: FormBuilder,
@@ -42,7 +43,11 @@ export class MeasurementFormComponent {
     observable
       .pipe(finalize(() => this.loading = false))
       .subscribe({
-        next: (measurement) => { this.messageService.emitSuccess(`Medición ${this.measurement() ? "editada" : "creada"} correctamente`) },
+        next: (measurement) => {
+          measurement.session = this.measurement() ? this.measurement()!.session : this.newSessionNumber()!;
+          this.measurementChangeEvent.emit(measurement);
+          this.messageService.emitSuccess(`Medición ${this.measurement() ? "editada" : "creada"} correctamente`);
+        },
         error: (error) => {
           console.error("MEASUREMENT-FORM: ", error);
           this.messageService.emitError(`No se ha podido ${this.measurement() ? "editar" : "crear"} la medición`);
