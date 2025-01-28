@@ -21,8 +21,6 @@ export class MeasurementsSummaryComponent implements OnInit {
     if (this.customer().measurements) {
       this.selected = this.customer().measurements!.length - 1;
     }
-
-    console.log('message')
   }
 
   /**
