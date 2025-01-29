@@ -3,4 +3,8 @@
 :host {
   box-sizing: border-box;
   width: min(80%, 800px);
+
+  form {
+    grid-template-columns: 1fr;
+  }
 }

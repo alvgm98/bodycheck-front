@@ -2,6 +2,7 @@
   <i (click)="close()" class="close-icon fa-solid fa-xmark"></i>
   <h3>Nueva Cita</h3>
 
+  <!-- Customer Name -->
   <div class="form-row customer-row">
   @if (registeredCustomer) {
     <div class="input-border-group">
@@ -42,57 +43,54 @@
       </div>
     </div>
   }
+  </div>
 
-    <div class="checkbox-group">
-      <app-checkbox [(checked)]="registeredCustomer" (checkedChange)="registeredCustomerCheckedChange()" />
-      @if (registeredCustomer) {
-        <span class="checkbox-label">Cliente Registrado</span>
-      } @else {
-        <span class="checkbox-label">Cliente No Registrado</span>
+  <div class="checkbox-group">
+    <span class="checkbox-label">Cliente {{ registeredCustomer ? "" : "No" }} Registrado</span>
+    <app-checkbox [(checked)]="registeredCustomer" (checkedChange)="registeredCustomerCheckedChange()" />
+  </div>
+
+  <!-- Datepicker -->
+  <app-date-picker id="datepicker" [selected]="date" (selectedChange)="date = $event" style="border-bottom: 2px solid #109d8a;" />
+
+  <!-- Timepicker -->
+  <div class="time-col">
+    <div class="input-border-group">
+      <input formControlName="reason" placeholder=" " type="text" />
+      <label class="placeholder">Motivo de la Cita*</label>
+      @if (
+      controls.reason.invalid
+      && (controls.reason.dirty || controls.reason.touched)
+      && controls.reason.errors?.['required']
+      ) {
+        <div class="invalid-field">Indica cual es el motivo de la cita.</div>
+      }
+    </div>
+    <div class="input-border-group">
+      <input formControlName="startTime" placeholder=" " type="time" />
+      <label class="placeholder">Hora de Inicio*</label>
+      @if (
+      controls.startTime.invalid
+      && (controls.startTime.dirty || controls.startTime.touched)
+      && controls.startTime.errors?.['required']
+      ) {
+        <div class="invalid-field">Indica la hora de inicio.</div>
+      }
+    </div>
+    <div class="input-border-group">
+      <input formControlName="endTime" placeholder=" " type="time" />
+      <label class="placeholder">Hora de Fin*</label>
+      @if (
+      controls.endTime.invalid
+      && (controls.endTime.dirty || controls.endTime.touched)
+      && controls.endTime.errors?.['required']
+      ) {
+        <div class="invalid-field">Indica la hora de finalización.</div>
       }
     </div>
   </div>
 
-  <div class="form-row time-section">
-    <app-date-picker [selected]="date" (selectedChange)="date = $event" style="border-bottom: 2px solid #109d8a;" />
-    <div class="time-col">
-      <div class="input-border-group">
-        <input formControlName="reason" placeholder=" " type="text" />
-        <label class="placeholder">Motivo de la Cita*</label>
-        @if (
-        controls.reason.invalid
-        && (controls.reason.dirty || controls.reason.touched)
-        && controls.reason.errors?.['required']
-        ) {
-          <div class="invalid-field">Indica cual es el motivo de la cita.</div>
-        }
-      </div>
-      <div class="input-border-group">
-        <input formControlName="startTime" placeholder=" " type="time" />
-        <label class="placeholder">Hora de Inicio*</label>
-        @if (
-        controls.startTime.invalid
-        && (controls.startTime.dirty || controls.startTime.touched)
-        && controls.startTime.errors?.['required']
-        ) {
-          <div class="invalid-field">Indica la hora de inicio.</div>
-        }
-      </div>
-      <div class="input-border-group">
-        <input formControlName="endTime" placeholder=" " type="time" />
-        <label class="placeholder">Hora de Fin*</label>
-        @if (
-        controls.endTime.invalid
-        && (controls.endTime.dirty || controls.endTime.touched)
-        && controls.endTime.errors?.['required']
-        ) {
-          <div class="invalid-field">Indica la hora de finalización.</div>
-        }
-      </div>
-    </div>
-  </div>
-
-  <div class="form-row">
+  <div id="observations-div" class="form-row">
     <app-textarea
       (contentEmitter)="observations = $event"
       [content]="observations"

@@ -2,74 +2,85 @@
 
 :host {
   box-sizing: border-box;
-  width: min(90%, 1000px);
+  width: min(90%, 1080px);
+
+  form {
+    grid-template-columns: 1fr 240px;
+    grid-template-areas:
+      "h3 h3"
+      "customer checkbox"
+      "datepicker timepicker"
+      "observations observations"
+      "button button";
+  }
+
+  h3 {
+    grid-area: h3;
+  }
+
+  .customer-row {
+    grid-area: customer;
+  }
 
   .checkbox-group {
-    width: 60%;
-
+    grid-area: checkbox;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
 
+    .checkbox-label {
+      flex: 1;
+    }
+  }
+
+  #datepicker {
+    grid-area: datepicker;
+    height: fit-content;
   }
 
   .time-col {
-    width: 60%;
+    grid-area: timepicker;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
   }
-}
 
-@media (height < 1100px) {
-  :host {
-    width: 90%;
+  #observations-div {
+    grid-area: observations;
+  }
 
-    form {
-      grid-template-columns: 1fr 1.5fr;
-    }
-
-    h3,
-    .btn {
-      grid-column: 1 / -1;
-      margin-inline: 30%;
-    }
-
-    .customer-row {
-      flex-direction: column-reverse;
-    }
-
-    .time-section {
-      grid-row: span 2;
-      align-self: end;
-    }
-
-    .textarea-glass {
-      align-self: end;
-      margin-bottom: -4px; // Necesario para alinearlo con el datepicker
-    }
+  button {
+    grid-area: button;
   }
 }
 
-@media (width < 1600px) {
+@media (height < 1150px) {
   :host {
-    width: 90%;
-
-    .customer-row {
-      position: relative;
-      align-self: start;
-    }
-
-    .checkbox-group {
-      position: absolute;
-      top: -50px;
-      left: 0;
-      width: 100%;
-    }
+    width: fit-content;
+    height: 90%;
 
     form {
-      grid-template-columns: 1fr 1.8fr;
+      gap: 20px 40px;
+      grid-template-columns: 600px 400px;
+      grid-template-areas:
+        "h3 h3"
+        "customer checkbox"
+        "datepicker timepicker"
+        "datepicker observations"
+        "button button";
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    .time-col {
+      gap: 40px;
+    }
+
+    #observations-div {
+      margin-bottom: -18px;
     }
   }
 }

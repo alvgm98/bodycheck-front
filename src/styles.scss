@@ -452,8 +452,11 @@ input[type=number] {
     backdrop-filter: blur(10px);
 
     display: grid;
-    grid-template-columns: 1fr;
     gap: 40px;
+
+    #datepicker span {
+      font-size: 15px !important;
+    }
   }
 
   h3 {
