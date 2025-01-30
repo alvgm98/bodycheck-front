@@ -187,7 +187,10 @@
   <!-- Boton de Registro o Edición -->
   @else {
     @if (measurement()) {
-      <button type="submit" class="btn flat-button" style="width: 300px;">Editar Medicion</button>
+     <div style="display: flex; gap: 20px;">
+        <button type="submit" class="btn flat-button" style="width: 300px;">Editar Medicion</button>
+        <button type="button" class="btn stroked-button" style="width: 300px;">Composición Corporal</button>
+     </div>
     } @else {
       <button type="submit" class="btn flat-button" style="width: 300px;">Registrar Medicion</button>
     }

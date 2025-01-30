@@ -4,41 +4,39 @@
   flex: 1;
   box-sizing: border-box;
   height: 100%;
-  display: flex;
-  flex-direction: column;
+
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  grid-template-areas:
+    "card appointments"
+    "measurements measurements";
   gap: 80px;
-}
 
-.sumary-row {
-  height: fit-content;
-  min-height: 380px;
-  display: flex;
-  gap: 80px;
-}
+  article {
+    width: 100%;
+    min-height: 350px;
 
-#customer-card,
-#customer-appointments-summary,
-#customer-measurements-summary {
-  border: 4px solid $primary-color;
-  border-radius: 12px;
+    border: 4px solid $primary-color;
+    border-radius: 12px;
 
-  box-sizing: border-box;
+    box-sizing: border-box;
 
-  background-color: $white;
+    background-color: $white;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 #customer-card {
+  grid-area: card;
+
   position: relative;
   padding: 50px 70px;
 
   height: fit-content;
-  min-width: 450px;
   min-height: 350px;
-  max-width: max(25%, 450px);
 
   .edit {
     position: absolute;
@@ -54,6 +52,7 @@
     justify-content: center;
 
     transition: 300ms;
+
     i {
       color: $primary-color;
       font-size: 22px;
@@ -67,8 +66,12 @@
   }
 }
 
-#customer-appointments-summary,
+#customer-appointments-summary {
+  grid-area: appointments;
+  overflow: hidden;
+}
+
 #customer-measurements-summary {
-  flex: 1;
+  grid-area: measurements;
   overflow: hidden;
 }

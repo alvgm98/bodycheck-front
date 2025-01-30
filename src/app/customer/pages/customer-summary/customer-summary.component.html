@@ -1,30 +1,26 @@
-<div class="sumary-row">
-  <article id="customer-card">
-    @if (customer()) {
-      <app-customer-card [customer]="customer()" />
-      <div (click)="openCustomerForm()" class="edit">
-        <i class="fa-solid fa-pen-to-square"></i>
-      </div>
-    } @else {
-      <mat-spinner></mat-spinner>
-    }
-  </article>
+<article id="customer-card">
+  @if (customer()) {
+    <app-customer-card [customer]="customer()" />
+    <div (click)="openCustomerForm()" class="edit">
+      <i class="fa-solid fa-pen-to-square"></i>
+    </div>
+  } @else {
+    <mat-spinner></mat-spinner>
+  }
+</article>
 
-  <article id="customer-appointments-summary">
-    @if (customer()) {
-      <app-customer-appointment-summary [appointments]="customer().appointments!" />
-    } @else {
-      <mat-spinner></mat-spinner>
-    }
-  </article>
-</div>
+<article id="customer-appointments-summary">
+  @if (customer()) {
+    <app-customer-appointment-summary [appointments]="customer().appointments!" />
+  } @else {
+    <mat-spinner></mat-spinner>
+  }
+</article>
 
-<div class="sumary-row">
-  <article id="customer-measurements-summary">
-    @if (customer()) {
-      <app-customer-measurement-summary [measurements]="customer().measurements!" />
-    } @else {
-      <mat-spinner></mat-spinner>
-    }
-  </article>
-</div>
+<article id="customer-measurements-summary">
+  @if (customer()) {
+    <app-customer-measurement-summary [measurements]="customer().measurements!" />
+  } @else {
+    <mat-spinner></mat-spinner>
+  }
+</article>
