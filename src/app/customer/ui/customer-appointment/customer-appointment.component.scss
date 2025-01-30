@@ -12,14 +12,14 @@
   border: 4px solid $secondary-color-300;
   border-radius: 12px;
   padding-right: 40px;
-  padding-left: max(40px, 10% );
+  padding-left: max(20px, 10%);
 
   background-color: $secondary-color-200;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 25px;
 }
 
 .appointment-hero {
