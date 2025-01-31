@@ -47,7 +47,7 @@
       <input formControlName="phone" placeholder=" " type="text" />
       <label class="placeholder">Teléfono*</label>
       @if (controls.phone.invalid && (controls.phone.dirty || controls.phone.touched)) {
-        @if (controls.phone.errors?.['email']) {
+        @if (controls.phone.errors?.['required']) {
           <div class="invalid-field">Introduce el teléfono.</div>
         }
       }
@@ -57,7 +57,7 @@
       <input formControlName="target" placeholder=" " type="text" />
       <label class="placeholder">Objetivo*</label>
       @if (controls.target.invalid && (controls.target.dirty || controls.target.touched)) {
-        @if (controls.target.errors?.['email']) {
+        @if (controls.target.errors?.['required']) {
           <div class="invalid-field">Introduce el teléfono.</div>
         }
       }
