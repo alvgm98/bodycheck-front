@@ -48,6 +48,7 @@
 
   #observations-div {
     grid-area: observations;
+    display: flex;
   }
 
   button {
@@ -58,10 +59,8 @@
 @media (height < 1150px) {
   :host {
     width: fit-content;
-    height: 90%;
 
     form {
-      gap: 20px 40px;
       grid-template-columns: 600px 400px;
       grid-template-areas:
         "h3 h3"
@@ -76,11 +75,13 @@
     }
 
     .time-col {
+      justify-content: space-between;
       gap: 40px;
     }
 
     #observations-div {
-      margin-bottom: -18px;
+      align-items: flex-end;
+      margin-bottom: -5px;
     }
   }
 }
