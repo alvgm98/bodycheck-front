@@ -8,3 +8,27 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (height < 1150px) {
+  form {
+    gap: 30px;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  input,
+  app-select-input {
+    margin-bottom: 5px;
+  }
+
+  .invalid-field {
+    height: 10px;
+    margin: 0;
+  }
+
+  .customer-observations {
+    margin-bottom: -5px;
+  }
+}
