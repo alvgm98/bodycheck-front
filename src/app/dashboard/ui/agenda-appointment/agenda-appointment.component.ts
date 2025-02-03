@@ -1,4 +1,4 @@
-import { Component, input, OnChanges } from '@angular/core';
+import { Component, input, OnChanges, output } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { Appointment } from '../../../shared/models/appointment';
 
@@ -31,4 +31,8 @@ export class AgendaAppointmentComponent implements OnChanges {
     this.timelineHeight = this.appointment().duration * this.MINUTE_SIZE() - 66;
   }
 
+  editAppointmentEvent = output<Appointment>();
+  editAppointment() {
+    this.editAppointmentEvent.emit(this.appointment());
+  }
 }

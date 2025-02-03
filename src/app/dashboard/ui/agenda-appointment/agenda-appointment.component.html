@@ -16,3 +16,12 @@
   <p class="ends">{{ appointment().endTime | date: 'HH:mm' }}</p>
   <div class="timeline" [style.height.px]="this.timelineHeight"></div>
 }
+
+<div class="appointment-options">
+  <button aria-label="Editar Cita" (click)="editAppointment()">
+    <i class="fa-solid fa-pen-to-square"></i>
+  </button>
+  <button aria-label="Ver Cliente">
+    <i class="fa-solid fa-eye"></i>
+  </button>
+</div>

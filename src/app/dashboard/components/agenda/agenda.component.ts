@@ -95,7 +95,7 @@ export class AgendaComponent implements AfterViewInit {
 
   /* Abrir Appointment Form Modal */
   openAppointmentFormEvent = output<Appointment | null>();
-  openAppointmentForm(appointment: Appointment | null) {
+  openAppointmentForm(appointment: Appointment | null = null) {
     this.openAppointmentFormEvent.emit(appointment);
   }
 }

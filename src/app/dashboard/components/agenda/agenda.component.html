@@ -1,7 +1,7 @@
 <app-date-picker [(selected)]="selectedDate" (selectedChange)="selectDate()" />
 
 <div class="timetable">
-  <h4 class="day"><i class="fa-solid fa-plus" (click)="openAppointmentForm(null)"></i>{{ selectedDate | date: 'EEEE dd MMM yyyy' | capitalize }}</h4>
+  <h4 class="day"><i class="fa-solid fa-plus" (click)="openAppointmentForm()"></i>{{ selectedDate | date: 'EEEE dd MMM yyyy' | capitalize }}</h4>
   <ul>
     <!-- HORAS -->
     @for (hour of hours; track $index) {
@@ -13,7 +13,8 @@
       [appointment]="appointment"
       [top]="calculatePosition(appointment.startTime)"
       [MINUTE_SIZE]="MINUTE_SIZE"
-      (click)="openAppointmentForm(appointment)" />
+      (editAppointmentEvent)="openAppointmentForm($event)"
+    />
     }
     <!-- SEPARATORS -->
     @for (matchingDate of matchingDates; track $index) {

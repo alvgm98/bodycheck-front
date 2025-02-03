@@ -20,7 +20,7 @@ export interface AppointmentRequest {
   customer: GenericObject | null;
   customerName: string | null;
   customerPhone: string | null;
-  date: Date;
+  date: string;
   startTime: string;
   endTime: string;
   reason: string;

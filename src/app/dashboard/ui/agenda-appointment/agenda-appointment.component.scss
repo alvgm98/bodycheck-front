@@ -16,10 +16,15 @@
   justify-content: center;
   gap: 8px;
   transition: 200ms;
+
   &:hover {
-    cursor: pointer;
     scale: 1.03;
     z-index: 4;
+
+    .appointment-options {
+      transition: 600ms;
+      opacity: 1;
+    }
   }
 
   .customer {
@@ -31,6 +36,7 @@
     margin: 0;
     font-size: 14px;
   }
+
   .short-reason {
     position: absolute;
     top: 50%;
@@ -61,6 +67,7 @@
     font-size: 14px;
     font-weight: bold;
   }
+
   .short-duration {
     position: absolute;
     top: 50%;
@@ -96,5 +103,39 @@
     transform: translateY(-50%);
 
     border: 1px dashed $secondary-color-300;
+  }
+
+  .appointment-options {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: #aae5d444;
+    backdrop-filter: blur(10px);
+
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    transition: 300ms;
+
+    button {
+      cursor: pointer;
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+      font-size: 24px;
+
+      i {
+        transition: 300ms;
+        color: $primary-color-700;
+
+        &:hover {
+          color: $black;
+          scale: 1.2;
+        }
+      }
+    }
   }
 }

@@ -1,10 +1,10 @@
 <app-customer-list (openCustomerFormEvent)="openCustomerForm()" />
-<app-agenda (openAppointmentFormEvent)="openAppointmentForm()" />
+<app-agenda (openAppointmentFormEvent)="openAppointmentForm($event)" />
 
 @if (showAppointmentForm || showCustomerForm) {
   <app-modal-overlay />
   @if (showAppointmentForm) {
-    <app-appointment-form (closeEvent)="closeModals()" />
+    <app-appointment-form (closeEvent)="closeModals()" [appointment]="selectedAppointment" />
   }
   @if (showCustomerForm) {
     <app-customer-form />

@@ -4,20 +4,22 @@ import { AgendaComponent } from './components/agenda/agenda.component';
 import { ModalOverlayComponent } from '../shared/components/modal-overlay/modal-overlay.component';
 import { CustomerFormComponent } from '../shared/pages/customer-form/customer-form.component';
 import { AppointmentFormComponent } from '../shared/pages/appointment-form/appointment-form.component';
-import { MessageModalComponent } from '../message-modal/message-modal.component';
 import { ModalService } from '../shared/pages/modal.service';
+import { Appointment } from '../shared/models/appointment';
 
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CustomerListComponent, AgendaComponent, ModalOverlayComponent, CustomerFormComponent, AppointmentFormComponent, MessageModalComponent],
+  imports: [CustomerListComponent, AgendaComponent, ModalOverlayComponent, CustomerFormComponent, AppointmentFormComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
   showCustomerForm = false;
   showAppointmentForm = false;
+
+  selectedAppointment: Appointment | null = null;
 
   constructor(
     private modalService: ModalService
@@ -41,7 +43,8 @@ export class DashboardComponent {
   openCustomerForm() {
     this.modalService.openCustomerForm();
   }
-  openAppointmentForm() {
+  openAppointmentForm(appointment: Appointment | null) {
+    this.selectedAppointment = appointment;
     this.modalService.openAppointmentForm();
   }
   closeModals() {

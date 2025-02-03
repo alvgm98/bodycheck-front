@@ -6,7 +6,7 @@ import { CheckboxComponent } from '../../ui/checkbox/checkbox.component';
 import { ModalService } from '../modal.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TextareaComponent } from '../../ui/textarea/textarea.component';
-import { AppointmentRequest } from '../../models/appointment';
+import { Appointment, AppointmentRequest } from '../../models/appointment';
 import { GenericObject } from '../../models/generic';
 import { ModalCustomerListComponent } from '../modal-customer-list/modal-customer-list.component';
 import { Customer } from '../../models/customer';
@@ -42,7 +42,7 @@ import { customerRequiredValidator } from './validators/appointment.valitador';
 export class AppointmentFormComponent {
   animationState: string = 'closed';
 
-  // appointment = input<Appointment>();
+  appointment = input.required<Appointment | null>();
 
   registeredCustomer = true;
   showCustomerList = false;
@@ -58,16 +58,39 @@ export class AppointmentFormComponent {
   ) {
     // Si el Service de modales envia la señal de que el Overlay se va a cerrar, se cerrará tambien el Componente
     effect(() => this.animationState = modalService.showOverlay() ? 'open' : 'closed')
+    effect(() => this.patchMeasurementValues(this.appointment()))
 
     // Se seleccionará por defecto la fecha seleccionada en el dashboard
     this.date = appointmentService.selectedDate();
   }
 
-  // TODO OnInit para cuando hay un appointment de input
-
   /** Envia la señal al Service de modales de que se deben cerrar los Modales y el Overlay */
   close() {
     this.modalService.closeAll();
+  }
+
+  /**
+   * Patchea los valores del formulario
+   */
+  patchMeasurementValues(appointment: Appointment | null) {
+    console.log(appointment);
+
+    if (appointment) {
+      const startTime = `${appointment?.startTime.getHours().toString().padStart(2, '0')}:${appointment?.startTime.getMinutes().toString().padStart(2, '0')}`;
+      const endTime = `${appointment?.endTime.getHours().toString().padStart(2, '0')}:${appointment?.endTime.getMinutes().toString().padStart(2, '0')}`;
+
+      this.appointmentForm.patchValue({
+        customer: `${appointment?.customer?.firstName} ${appointment?.customer?.lastName}`,
+        customerName: appointment?.customerName,
+        customerPhone: appointment?.customerPhone,
+        startTime: startTime,
+        endTime: endTime,
+        reason: appointment?.reason,
+      })
+
+      this.observations = appointment.observations;
+      this.date = appointment.date;
+    }
   }
 
   appointmentForm = this.fb.group({
@@ -165,6 +188,7 @@ export class AppointmentFormComponent {
     // TODO separar logica de crear y editar appointment
 
     const appointment: AppointmentRequest = this.formToAppointment();
+    console.log(appointment)
 
     this.appointmentService.addAppointment(appointment).subscribe({
       next: () => this.close(),
@@ -182,12 +206,22 @@ export class AppointmentFormComponent {
       customer: this.customerSelectedId,
       customerName: this.controls.customerName.value,
       customerPhone: this.controls.customerPhone.value,
-      date: this.date,
+      date: this.setDate(this.date),
       startTime: this.setDateTime(this.controls.startTime.value!),
       endTime: this.setDateTime(this.controls.endTime.value!),
       reason: this.controls.reason.value!,
       observations: this.observations,
     }
+  }
+
+  private setDate(date: Date): string {
+    const auxDate = new Date(date.toString()) // Tengo que hacer esto para forzar que sea de tipo Date y no Moment
+
+    const year = auxDate.getFullYear();
+    const month = ('0' + (auxDate.getMonth() + 1)).slice(-2); // Los meses comienzan desde 0
+    const day = ('0' + auxDate.getDate()).slice(-2);
+
+    return `${year}-${month}-${day}`;
   }
 
   private setDateTime(time: string): string {
