@@ -99,7 +99,16 @@
     />
   </div>
 
-  <button class="btn flat-button">Registrar Cita</button>
+  @if (appointment()) {
+    <div class="btn-row edit-btn-row">
+      <button type="submit" class="btn flat-button">Editar Cita</button>
+      <button type="button" class="btn flat-button cancel-button" (click)="close()">Cancelar</button>
+    </div>
+  } @else {
+    <div class="btn-row">
+      <button type="submit" class="btn flat-button register-btn">Registrar Cita</button>
+    </div>
+  }
 </form>
 
 @if (showCustomerList) {
