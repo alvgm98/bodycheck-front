@@ -35,7 +35,7 @@
 
   #datepicker {
     grid-area: datepicker;
-    height: fit-content;
+    display: flex;
   }
 
   .time-col {
