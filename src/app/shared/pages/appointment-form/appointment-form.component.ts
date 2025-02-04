@@ -79,6 +79,13 @@ export class AppointmentFormComponent {
       const startTime = `${appointment?.startTime.getHours().toString().padStart(2, '0')}:${appointment?.startTime.getMinutes().toString().padStart(2, '0')}`;
       const endTime = `${appointment?.endTime.getHours().toString().padStart(2, '0')}:${appointment?.endTime.getMinutes().toString().padStart(2, '0')}`;
 
+      // Comprobamos si el cliente esta registrado
+      if (appointment.customer) {
+        this.customerSelectedId = {id: appointment.customer.id!}
+      } else {
+        this.registeredCustomer = false;
+      }
+
       this.appointmentForm.patchValue({
         customer: `${appointment?.customer?.firstName} ${appointment?.customer?.lastName}`,
         customerName: appointment?.customerName,
@@ -185,21 +192,33 @@ export class AppointmentFormComponent {
       return;
     }
 
-    // TODO separar logica de crear y editar appointment
-
     const appointment: AppointmentRequest = this.formToAppointment();
     console.log(appointment)
 
+    if (!this.appointment()) {
+      this.createAppointment(appointment);
+    } else {
+      this.editAppointment(appointment);
+    }
+  }
+
+  createAppointment(appointment: AppointmentRequest) {
     this.appointmentService.addAppointment(appointment).subscribe({
       next: () => this.close(),
       error: (error) => console.log(error)
     })
+  }
 
+  editAppointment(appointment: AppointmentRequest) {
+    this.appointmentService.updateAppointment(appointment).subscribe({
+      next: () => this.close(),
+      error: (error) => console.log(error)
+    })
   }
 
   private formToAppointment(): AppointmentRequest {
     // TODO obtener el ID si es una edición
-    const id = null;
+    const id = this.appointment() ? this.appointment()!.id : null;
 
     return {
       id: id,
@@ -215,7 +234,7 @@ export class AppointmentFormComponent {
   }
 
   private setDate(date: Date): string {
-    const auxDate = new Date(date.toString()) // Tengo que hacer esto para forzar que sea de tipo Date y no Moment
+    const auxDate = new Date(date) // Tengo que hacer esto para forzar que sea de tipo Date y no Moment
 
     const year = auxDate.getFullYear();
     const month = ('0' + (auxDate.getMonth() + 1)).slice(-2); // Los meses comienzan desde 0
