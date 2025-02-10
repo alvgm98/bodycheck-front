@@ -1,6 +1,7 @@
 import { Component, input, OnChanges, output } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { Appointment } from '../../../shared/models/appointment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agenda-appointment',
@@ -25,6 +26,10 @@ export class AgendaAppointmentComponent implements OnChanges {
   height: number = 0;
   timelineHeight: number = 0;
 
+  constructor(
+    private router: Router
+  ) { }
+
   ngOnChanges(): void {
     this.flexDirection = this.appointment().duration < 30 ? 'row' : 'column';
     this.height = this.appointment().duration * this.MINUTE_SIZE();
@@ -34,5 +39,13 @@ export class AgendaAppointmentComponent implements OnChanges {
   editAppointmentEvent = output<Appointment>();
   editAppointment() {
     this.editAppointmentEvent.emit(this.appointment());
+  }
+
+  viewCustomer() {
+    if (this.appointment().customer) {
+      this.router.navigateByUrl('app/customer/' + this.appointment().customer!.id);
+    } else {
+      // TODO abrir formulario para crear cliente
+    }
   }
 }
