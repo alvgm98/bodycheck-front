@@ -81,7 +81,7 @@ export class AppointmentFormComponent {
 
       // Comprobamos si el cliente esta registrado
       if (appointment.customer) {
-        this.customerSelectedId = {id: appointment.customer.id!}
+        this.customerSelectedId = { id: appointment.customer.id! }
       } else {
         this.registeredCustomer = false;
       }
@@ -200,6 +200,15 @@ export class AppointmentFormComponent {
     } else {
       this.editAppointment(appointment);
     }
+  }
+
+  deleteAppointment() {
+    // TODO ask for confirm
+
+    this.appointmentService.deleteAppointment(this.appointment()!.id).subscribe({
+      next: () => this.close(),
+      error: (error) => console.log(error)
+    })
   }
 
   createAppointment(appointment: AppointmentRequest) {
