@@ -472,18 +472,6 @@ input[type=number] {
     gap: 40px
   }
 
-  .action-btn-row {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5%;
-
-    .btn {
-      width: 30%;
-    }
-  }
-
   /* RE-MODIFICACION DE ESTILOS EN INPUTS PARA BAJARLE LA OPACIDAD */
   .placeholder {
     color: #6d6d6d;

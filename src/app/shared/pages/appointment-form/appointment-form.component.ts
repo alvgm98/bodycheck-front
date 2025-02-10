@@ -51,6 +51,8 @@ export class AppointmentFormComponent {
   date: Date = new Date();
   observations: string = "";
 
+  confirmDelete = false;
+
   constructor(
     private fb: FormBuilder,
     private appointmentService: AppointmentService,

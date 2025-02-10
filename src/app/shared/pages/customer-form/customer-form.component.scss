@@ -7,6 +7,18 @@
   form {
     grid-template-columns: 1fr;
   }
+
+  .action-btn-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+
+    .btn {
+      width: 30%;
+    }
+  }
 }
 
 @media (height < 1150px) {
