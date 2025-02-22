@@ -3,11 +3,12 @@ import { Measurement } from '../../../shared/models/measurement';
 import { NgClass } from '@angular/common';
 import { MeasurementFormComponent } from '../../components/measurement-form/measurement-form.component';
 import { CustomerDetailed } from '../../../shared/models/customer';
+import { BodyCompositionComponent } from '../body-composition/body-composition.component';
 
 @Component({
   selector: 'app-measurements-summary',
   standalone: true,
-  imports: [MeasurementFormComponent, NgClass],
+  imports: [MeasurementFormComponent, BodyCompositionComponent, NgClass],
   templateUrl: './measurements-summary.component.html',
   styleUrl: './measurements-summary.component.scss'
 })

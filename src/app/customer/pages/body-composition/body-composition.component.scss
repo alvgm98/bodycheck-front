@@ -1,0 +1,17 @@
+@import 'colors';
+
+:host {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 50px;
+
+  margin-top: 24px;
+  border: 4px solid $primary-color;
+  border-radius: 12px;
+
+  background-color: $white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
