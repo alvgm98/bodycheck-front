@@ -9,30 +9,56 @@
   </div>
 </div>
 
-<div class="circumference">
+@if (!measurement().circumference && !measurement().skinfold && !measurement().diameter) {
+<div class="no-measurement-group">
+  <h4>No se realizó ninguna toma</h4>
+</div>
+}
+
+@if (measurement().circumference) {
+<div class="measurement-group">
   <h4>Circunferencias</h4>
   <div class="data">
-    <p><span>Cuello: </span>{{ measurement().circumference.neck }}cm</p>
-    <p><span>Pecho: </span>{{ measurement().circumference.chest }}cm</p>
-    <p><span>Brazo Relajado: </span>{{ measurement().circumference.armRelaxed }}cm</p>
-    <p><span>Brazo Flexionado: </span>{{ measurement().circumference.armFlexed }}cm</p>
-    <p><span>Muñeca: </span>{{ measurement().circumference.waist }}cm</p>
-    <p><span>Cintura: </span>{{ measurement().circumference.hip }}cm</p>
-    <p><span>Muslo: </span>{{ measurement().circumference.thigh }}cm</p>
-    <p><span>Gemelo: </span>{{ measurement().circumference.calf }}cm</p>
+    <p><span>Cuello: </span>{{ measurement().circumference?.neck ?? "No medido"}}{{ measurement().circumference?.neck ? "cm" : "" }}</p>
+    <p><span>Pecho: </span>{{ measurement().circumference?.chest ?? "No medido"}}{{ measurement().circumference?.chest ? "cm" : "" }}</p>
+    <p><span>Brazo Relajado: </span>{{ measurement().circumference?.armRelaxed ?? "No medido"}}{{ measurement().circumference?.armRelaxed ? "cm" : "" }}</p>
+    <p><span>Brazo Flexionado: </span>{{ measurement().circumference?.armFlexed ?? "No medido"}}{{ measurement().circumference?.armFlexed ? "cm" : "" }}</p>
+    <p><span>Muñeca: </span>{{ measurement().circumference?.waist ?? "No medido"}}{{ measurement().circumference?.waist ? "cm" : "" }}</p>
+    <p><span>Cintura: </span>{{ measurement().circumference?.hip ?? "No medido"}}{{ measurement().circumference?.hip ? "cm" : "" }}</p>
+    <p><span>Muslo: </span>{{ measurement().circumference?.thigh ?? "No medido"}}{{ measurement().circumference?.thigh ? "cm" : "" }}</p>
+    <p><span>Gemelo: </span>{{ measurement().circumference?.calf ?? "No medido"}}{{ measurement().circumference?.calf ? "cm" : "" }}</p>
   </div>
 </div>
+}
 
-<div class="skinfold">
+@if (measurement().skinfold) {
+<div class="measurement-group">
   <h4>Pliegues</h4>
   <div class="data">
-    <p><span>Triceps: </span>{{ measurement().skinfold.triceps }}mm</p>
-    <p><span>Biceps: </span>{{ measurement().skinfold.biceps }}mm</p>
-    <p><span>Subescapular: </span>{{ measurement().skinfold.subscapular }}mm</p>
-    <p><span>Suprailiaca: </span>{{ measurement().skinfold.suprailiac }}mm</p>
-    <p><span>Cresta Iliaca: </span>{{ measurement().skinfold.iliacCrest }}mm</p>
-    <p><span>Abdominal: </span>{{ measurement().skinfold.abdominal }}mm</p>
-    <p><span>Muslo: </span>{{ measurement().skinfold.thigh }}mm</p>
-    <p><span>Gemelo: </span>{{ measurement().skinfold.calf }}mm</p>
+    <p><span>Triceps: </span>{{ measurement().skinfold?.triceps ?? "No medido"}}{{ measurement().skinfold?.triceps ? "mm" : "" }}</p>
+    <p><span>Biceps: </span>{{ measurement().skinfold?.biceps ?? "No medido"}}{{ measurement().skinfold?.biceps ? "mm" : "" }}</p>
+    <p><span>Subescapular: </span>{{ measurement().skinfold?.subscapular ?? "No medido"}}{{ measurement().skinfold?.subscapular ? "mm" : "" }}</p>
+    <p><span>Suprailiaca: </span>{{ measurement().skinfold?.suprailiac ?? "No medido"}}{{ measurement().skinfold?.suprailiac ? "mm" : "" }}</p>
+    <p><span>Cresta Iliaca: </span>{{ measurement().skinfold?.iliacCrest ?? "No medido"}}{{ measurement().skinfold?.iliacCrest ? "mm" : "" }}</p>
+    <p><span>Abdominal: </span>{{ measurement().skinfold?.abdominal ?? "No medido"}}{{ measurement().skinfold?.abdominal ? "mm" : "" }}</p>
+    <p><span>Muslo: </span>{{ measurement().skinfold?.thigh ?? "No medido"}}{{ measurement().skinfold?.thigh ? "mm" : "" }}</p>
+    <p><span>Gemelo: </span>{{ measurement().skinfold?.calf ?? "No medido"}}{{ measurement().skinfold?.calf ? "mm" : "" }}</p>
   </div>
 </div>
+}
+
+@if (measurement().diameter) {
+<div class="measurement-group">
+  <h4>Diametros</h4>
+  <div class="data">
+    <p><span>Biacromial: </span>{{ measurement().diameter?.biacromial ?? "No medido"}}{{ measurement().diameter?.biacromial ? "mm" : "" }}</p>
+    <p><span>Biileocrestal: </span>{{ measurement().diameter?.biIliacCrest ?? "No medido"}}{{ measurement().diameter?.biIliacCrest ? "mm" : "" }}</p>
+    <p><span>Bicondíleo Húmero: </span>{{ measurement().diameter?.humeralBicondylar ?? "No medido"}}{{ measurement().diameter?.humeralBicondylar ? "mm" : "" }}</p>
+    <p><span>Bicondíleo Fémur: </span>{{ measurement().diameter?.femoralBicondylar ?? "No medido"}}{{ measurement().diameter?.femoralBicondylar ? "mm" : "" }}</p>
+    <p><span>Cresta Biestiloideo: </span>{{ measurement().diameter?.bistyloid ?? "No medido"}}{{ measurement().diameter?.bistyloid ? "mm" : "" }}</p>
+    <p><span>Bimaleolar: </span>{{ measurement().diameter?.bimalleolar ?? "No medido"}}{{ measurement().diameter?.bimalleolar ? "mm" : "" }}</p>
+    <p><span>Torácico Transverso: </span>{{ measurement().diameter?.transverseThoracic ?? "No medido"}}{{ measurement().diameter?.transverseThoracic ? "mm" : "" }}</p>
+    <p><span>Torácico Anteroposterio: </span>{{ measurement().diameter?.anteroposteriorThoracic ?? "No medido"}}{{ measurement().diameter?.anteroposteriorThoracic ? "mm" : "" }}</p>
+  </div>
+</div>
+}

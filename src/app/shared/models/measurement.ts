@@ -7,9 +7,9 @@ export interface Measurement {
   session: number;
   date: Date;
   weight: number;
-  circumference: Circumference;
-  skinfold: Skinfold;
-  diameter: Diameter;
+  circumference: Circumference | null;
+  skinfold: Skinfold | null;
+  diameter: Diameter | null;
   observations: string;
 }
 
@@ -19,9 +19,9 @@ export interface MeasurementRequest {
   session: number;
   date: Date;
   weight: number;
-  circumference: Circumference;
-  skinfold: Skinfold;
-  diameter: Diameter;
+  circumference: Circumference | null;
+  skinfold: Skinfold | null;
+  diameter: Diameter | null;
   observations: string;
 }
 
