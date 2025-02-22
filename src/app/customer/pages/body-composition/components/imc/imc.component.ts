@@ -1,12 +1,12 @@
-import { Component, effect, input, OnInit } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
 import { CommonModule } from '@angular/common';
 
 import * as echarts from 'echarts/core';
 import { GaugeChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
-echarts.use([GaugeChart, CanvasRenderer]);
+import { SVGRenderer } from 'echarts/renderers';
+echarts.use([GaugeChart, SVGRenderer]);
 
 @Component({
   selector: 'app-imc',
@@ -23,6 +23,13 @@ export class ImcComponent {
   imc = input.required<number>();
   imcChart!: EChartsOption;
 
+  imcLegend = [
+    { color: '#58D9F9', text: 'Bajo peso' },
+    { color: '#78d0ba', text: 'Saludable' },
+    { color: '#FDDD60', text: 'Sobrepeso' },
+    { color: '#FF6E76', text: 'Obesidad' }
+  ];
+
   constructor() {
     effect(() => this.renderChart(this.imc()))
   }
@@ -34,8 +41,8 @@ export class ImcComponent {
           type: 'gauge',
           startAngle: 180,
           endAngle: 0,
-          center: ['50%', '75%'],
-          radius: '90%',
+          center: ['50%', '55%'],
+          radius: '100%',
           min: 0,
           max: 40,
           splitNumber: 8,
@@ -43,10 +50,10 @@ export class ImcComponent {
             lineStyle: {
               width: 6,
               color: [
-                [0.4625, '#58D9F9'],
-                [0.625, '#78d0ba'],
-                [0.75, '#FDDD60'],
-                [1, '#FF6E76']
+                [0.4625, this.imcLegend[0].color],
+                [0.625, this.imcLegend[1].color],
+                [0.75, this.imcLegend[2].color],
+                [1, this.imcLegend[3].color]
               ]
             }
           },

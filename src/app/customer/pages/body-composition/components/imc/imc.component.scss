@@ -1,0 +1,39 @@
+:host {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+}
+
+.imc-chart {
+  height: 300px;
+  width: 300px;
+}
+
+.imc-legend {
+  box-sizing: border-box;
+  height: 100%;
+  margin-left: 20px;
+  padding-block: 26px 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+
+  .imc-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .imc-legend-icon {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+  }
+
+  .imc-legend-text {
+    font-family: 'Satoshi-Medium';
+  }
+}

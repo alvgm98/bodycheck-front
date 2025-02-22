@@ -1,1 +1,10 @@
-<div echarts [options]="imcChart"></div>
+<div echarts [options]="imcChart" class="imc-chart"></div>
+
+<div class="imc-legend">
+  @for (item of imcLegend; track $index) {
+    <div class="imc-legend-item">
+      <div class="imc-legend-icon" [ngStyle]="{'background-color': item.color}"></div>
+      <span class="imc-legend-text">{{ item.text }}</span>
+    </div>
+  }
+</div>
