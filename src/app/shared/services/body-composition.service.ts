@@ -28,8 +28,10 @@ export class BodyCompositionService {
       }
     } */
 
-  calcIMC(measurement: Measurement, gender: string) {
-
+  calcIMC(weight: number, height: number) {
+    return new Decimal(weight)
+      .div(new Decimal(height / 100).pow(2))
+      .toNumber();
   }
   calcYMCA(measurement: Measurement, gender: string) {
 

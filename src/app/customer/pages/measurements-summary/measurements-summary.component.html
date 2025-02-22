@@ -30,4 +30,6 @@
 </div>
 
 <!-- BODY COMPOSITION -->
-<app-body-composition />
+@if (selected > -1) {
+  <app-body-composition [customer]="customer()" [measurementSelected]="selected" />
+}
