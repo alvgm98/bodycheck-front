@@ -84,10 +84,11 @@ export class ImcComponent {
           },
           title: {
             offsetCenter: [0, '-10%'],
-            fontSize: 28
+            fontSize: 26,
+            color: 'inherit'
           },
           detail: {
-            fontSize: 30,
+            fontSize: 34,
             offsetCenter: [0, '-35%'],
             valueAnimation: true,
             formatter: function (value: number) {
