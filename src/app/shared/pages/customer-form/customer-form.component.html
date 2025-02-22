@@ -94,6 +94,9 @@
         @if (controls.height.errors?.['required']) {
           <div class="invalid-field">Introduce la altura.</div>
         }
+        @if (controls.height.errors?.['min']) {
+          <div class="invalid-field">La altura debe ir en centimetros.</div>
+        }
       }
     </div>
     <!-- Ethnicity -->
