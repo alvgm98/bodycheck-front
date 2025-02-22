@@ -9,6 +9,7 @@ export interface Measurement {
   weight: number;
   circumference: Circumference;
   skinfold: Skinfold;
+  diameter: Diameter;
   observations: string;
 }
 
@@ -20,6 +21,7 @@ export interface MeasurementRequest {
   weight: number;
   circumference: Circumference;
   skinfold: Skinfold;
+  diameter: Diameter;
   observations: string;
 }
 
@@ -44,4 +46,15 @@ export interface Skinfold {
   abdominal: number;
   thigh: number;
   calf: number;
+}
+export interface Diameter {
+  id: number | null;
+  biacromial: number;
+  biIliacCrest: number;
+  humeralBicondylar: number;
+  femoralBicondylar: number;
+  bistyloid: number;
+  bimalleolar: number;
+  transverseThoracic: number;
+  anteroposteriorThoracic: number;
 }

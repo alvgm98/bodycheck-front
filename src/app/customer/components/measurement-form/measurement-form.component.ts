@@ -95,6 +95,17 @@ export class MeasurementFormComponent {
         thigh: this.measurement()?.skinfold.thigh,
         calf: this.measurement()?.skinfold.calf,
       }),
+      diameter: ({
+        id: this.measurement()?.diameter.id,
+        biacromial: this.measurement()?.diameter.biacromial,
+        biIliacCrest: this.measurement()?.diameter.biIliacCrest,
+        humeralBicondylar: this.measurement()?.diameter.humeralBicondylar,
+        femoralBicondylar: this.measurement()?.diameter.femoralBicondylar,
+        bistyloid: this.measurement()?.diameter.bistyloid,
+        bimalleolar: this.measurement()?.diameter.bimalleolar,
+        transverseThoracic: this.measurement()?.diameter.transverseThoracic,
+        anteroposteriorThoracic: this.measurement()?.diameter.anteroposteriorThoracic,
+      }),
       observations: this.measurement()?.observations,
     })
 
@@ -126,6 +137,17 @@ export class MeasurementFormComponent {
       thigh: [0, [Validators.required, Validators.min(0)]],
       calf: [0, [Validators.required, Validators.min(0)]],
     }),
+    diameter: this.fb.group({
+      id: [0], // Aunque marque el id como 0, al cargar los datos de un Measurement vacio, este será undefined
+      biacromial: [0, [Validators.required, Validators.min(0)]],
+      biIliacCrest: [0, [Validators.required, Validators.min(0)]],
+      humeralBicondylar: [0, [Validators.required, Validators.min(0)]],
+      femoralBicondylar: [0, [Validators.required, Validators.min(0)]],
+      bistyloid: [0, [Validators.required, Validators.min(0)]],
+      bimalleolar: [0, [Validators.required, Validators.min(0)]],
+      transverseThoracic: [0, [Validators.required, Validators.min(0)]],
+      anteroposteriorThoracic: [0, [Validators.required, Validators.min(0)]],
+    }),
     observations: [''],
   });
   get controls() {
@@ -136,6 +158,9 @@ export class MeasurementFormComponent {
   }
   get skinfoldControls() {
     return this.controls.skinfold.controls;
+  }
+  get diameterControls() {
+    return this.controls.diameter.controls;
   }
 
   private formToMeasurement(): MeasurementRequest {
@@ -174,6 +199,17 @@ export class MeasurementFormComponent {
         abdominal: this.skinfoldControls.abdominal.value!,
         thigh: this.skinfoldControls.thigh.value!,
         calf: this.skinfoldControls.calf.value!,
+      },
+      diameter: {
+        id: this.skinfoldControls.id.value ?? null,
+        biacromial: this.diameterControls.biacromial.value!,
+        biIliacCrest: this.diameterControls.biIliacCrest.value!,
+        humeralBicondylar: this.diameterControls.humeralBicondylar.value!,
+        femoralBicondylar: this.diameterControls.femoralBicondylar.value!,
+        bistyloid: this.diameterControls.bistyloid.value!,
+        bimalleolar: this.diameterControls.bimalleolar.value!,
+        transverseThoracic: this.diameterControls.transverseThoracic.value!,
+        anteroposteriorThoracic: this.diameterControls.anteroposteriorThoracic.value!,
       },
       observations: this.controls.observations.value!,
     };
