@@ -31,5 +31,5 @@
 
 <!-- BODY COMPOSITION -->
 @if (selected > -1) {
-  <app-body-composition [customer]="customer()" [measurementSelected]="selected" />
+  <app-body-composition [customer]="customer()" [measurementSelected]="selected" [trigger]="triggerUpdateBodyComposition()" />
 }

@@ -1,4 +1,4 @@
-import { Component, effect, input, OnInit } from '@angular/core';
+import { Component, computed, effect, input, OnInit } from '@angular/core';
 import { BodyCompositionService } from '../../../shared/services/body-composition.service';
 import { CustomerDetailed } from '../../../shared/models/customer';
 import { ImcComponent } from './components/imc/imc.component';
@@ -15,12 +15,17 @@ export class BodyCompositionComponent {
   customer = input.required<CustomerDetailed>();
   measurementSelected = input.required<number>();
 
+  trigger = input<number>(); // Cambio el valor de este trigger para ejecutar el effect de calcular formulas ya que los campos de customer no ejecutan el effect
+
   imc!: number;
 
   constructor(
     private bodyCompositionService: BodyCompositionService
   ) {
-    effect(() => this.calcFormulas(this.customer(), this.measurementSelected()));
+    effect(() => {
+      this.trigger();
+      this.calcFormulas(this.customer(), this.measurementSelected());
+    });
   }
 
   calcFormulas(customer: CustomerDetailed, measurementSelected: number): void {

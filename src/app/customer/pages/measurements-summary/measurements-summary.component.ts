@@ -1,4 +1,4 @@
-import { Component, input, OnInit } from '@angular/core';
+import { Component, input, OnInit, signal } from '@angular/core';
 import { Measurement } from '../../../shared/models/measurement';
 import { NgClass } from '@angular/common';
 import { MeasurementFormComponent } from '../../components/measurement-form/measurement-form.component';
@@ -16,6 +16,8 @@ export class MeasurementsSummaryComponent implements OnInit {
 
   customer = input.required<CustomerDetailed>();
   selected: number = -1; // Valdrá el indice de la medición seleccionada o -1 si esta seleccionado el añadir medición
+
+  triggerUpdateBodyComposition = signal(0); // Este trigger ejecuta los cambios en BodyComposition cuando se actualiza la medición seleccionada
 
   /** Al cargar el componente seleccionamos la ultima medición si la hay */
   ngOnInit(): void {
@@ -47,6 +49,8 @@ export class MeasurementsSummaryComponent implements OnInit {
     } else {
       this.customer().measurements![measurement.session - 1] = measurement;
     }
+
+    this.triggerUpdateBodyComposition.set(this.triggerUpdateBodyComposition() + 1) // IMPORTANTE hacer esto ya que la signal de customer no ejecuta effects al modificar el array measurements.
   }
 
 }
