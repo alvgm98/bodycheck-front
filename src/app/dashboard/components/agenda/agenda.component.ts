@@ -27,6 +27,7 @@ export class AgendaComponent implements AfterViewInit {
     private el: ElementRef,
     private renderer: Renderer2
   ) {
+    this.selectDate(); // Necesario volver a seleccionar -> Si se seleccionó otra dia y se cambia de vista, al volver a esta vista se mostrarían las citas del dia seleccionado en el sevirce en el dia actual
     this.generateHours();
 
     effect(() => {
