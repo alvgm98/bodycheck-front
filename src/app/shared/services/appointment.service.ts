@@ -75,7 +75,7 @@ export class AppointmentService {
   }
 
   deleteAppointment(id: number) {
-    return this.http.delete<Appointment>(`${environment.apiAppointmentUrl}/${id}`)
+    return this.http.delete<void>(`${environment.apiAppointmentUrl}/${id}`)
       .pipe(
         tap(() => {
           this.deleteFromAppointments(id);
