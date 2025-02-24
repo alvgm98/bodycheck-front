@@ -5,12 +5,12 @@
   display: flex;
 }
 
-.imc-chart {
+.icc-chart {
   height: 300px;
   width: 300px;
 }
 
-.imc-legend {
+.icc-legend {
   box-sizing: border-box;
   height: 100%;
   margin-left: 20px;
@@ -22,19 +22,19 @@
   gap: 12px;
 
 
-  .imc-legend-item {
+  .icc-legend-item {
     display: flex;
     align-items: center;
     gap: 8px;
   }
 
-  .imc-legend-icon {
+  .icc-legend-icon {
     height: 15px;
     width: 15px;
     border-radius: 50%;
   }
 
-  .imc-legend-text {
+  .icc-legend-text {
     font-family: 'Satoshi-Medium';
   }
 }

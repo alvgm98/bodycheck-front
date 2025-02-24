@@ -13,12 +13,20 @@ export class BodyCompositionService {
   }
 
   calcICC(waist: number, hip: number) {
+    if (!waist || !hip) {
+      return null;
+    }
+
     return new Decimal(waist)
       .div(new Decimal(hip))
       .toNumber();
   }
 
   calcICA(waist: number, height: number) {
+    if (!waist || !height) {
+      return null;
+    }
+
     return new Decimal(waist)
       .div(new Decimal(height))
       .toNumber();

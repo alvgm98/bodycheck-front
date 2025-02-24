@@ -1,2 +1,11 @@
 <h2>Composición Corporal</h2>
-<app-imc [imc]="imc" />
+
+
+<section id="gauge-charts">
+  <app-imc [imc]="imc" />
+
+  @if (icc) {
+    <app-icc [icc]="icc!" [gender]="customer().gender.toString()" />
+  }
+
+</section>

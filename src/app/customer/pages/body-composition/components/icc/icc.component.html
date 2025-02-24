@@ -1,0 +1,10 @@
+<div echarts [options]="iccChart" class="icc-chart"></div>
+
+<div class="icc-legend">
+  @for (item of iccLegend; track $index) {
+  <div class="icc-legend-item">
+    <div class="icc-legend-icon" [ngStyle]="{'background-color': item.color}"></div>
+    <span class="icc-legend-text">{{ item.text }}</span>
+  </div>
+  }
+</div>
