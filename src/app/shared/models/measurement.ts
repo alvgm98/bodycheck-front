@@ -40,6 +40,8 @@ export interface Skinfold {
   id: number | null;
   triceps: number;
   biceps: number;
+  pectoral: number;
+  midaxillary: number;
   subscapular: number;
   suprailiac: number;
   iliacCrest: number;
