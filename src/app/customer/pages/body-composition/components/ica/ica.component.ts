@@ -46,7 +46,7 @@ export class IcaComponent {
           splitNumber: 8,
           axisLine: {
             lineStyle: {
-              width: 6,
+              width: 8,
               color: [
                 [this.icaLegend[0].value, this.icaLegend[0].color],
                 [this.icaLegend[1].value, this.icaLegend[1].color],
@@ -64,7 +64,8 @@ export class IcaComponent {
             }
           },
           axisTick: {
-            length: 5,
+            length: 4,
+            distance: 5,
             lineStyle: {
               color: 'auto',
               width: 2
@@ -72,6 +73,7 @@ export class IcaComponent {
           },
           splitLine: {
             length: 12,
+            distance: 5,
             lineStyle: {
               color: 'auto',
               width: 5

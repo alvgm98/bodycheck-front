@@ -48,7 +48,7 @@ export class ImcComponent {
           splitNumber: 8,
           axisLine: {
             lineStyle: {
-              width: 6,
+              width: 8,
               color: [
                 [0.4625, this.imcLegend[0].color],
                 [0.625, this.imcLegend[1].color],
@@ -67,7 +67,8 @@ export class ImcComponent {
             }
           },
           axisTick: {
-            length: 5,
+            length: 4,
+            distance: 5,
             lineStyle: {
               color: 'auto',
               width: 2
@@ -75,6 +76,7 @@ export class ImcComponent {
           },
           splitLine: {
             length: 12,
+            distance: 5,
             lineStyle: {
               color: 'auto',
               width: 5

@@ -59,7 +59,7 @@ export class IccComponent implements OnInit {
           splitNumber: 8,
           axisLine: {
             lineStyle: {
-              width: 6,
+              width: 8,
               color: [
                 [this.iccLegend[0].value, this.iccLegend[0].color],
                 [this.iccLegend[1].value, this.iccLegend[1].color],
@@ -77,7 +77,8 @@ export class IccComponent implements OnInit {
             }
           },
           axisTick: {
-            length: 5,
+            length: 4,
+            distance: 5,
             lineStyle: {
               color: 'auto',
               width: 2
@@ -85,6 +86,7 @@ export class IccComponent implements OnInit {
           },
           splitLine: {
             length: 12,
+            distance: 5,
             lineStyle: {
               color: 'auto',
               width: 5
