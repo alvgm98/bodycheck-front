@@ -1,0 +1,10 @@
+<div echarts [options]="icaChart" class="ica-chart"></div>
+
+<div class="ica-legend">
+  @for (item of icaLegend; track $index) {
+  <div class="ica-legend-item">
+    <div class="ica-legend-icon" [ngStyle]="{'background-color': item.color}"></div>
+    <span class="ica-legend-text">{{ item.text }}</span>
+  </div>
+  }
+</div>

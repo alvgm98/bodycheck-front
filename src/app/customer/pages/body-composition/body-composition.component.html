@@ -5,7 +5,11 @@
   <app-imc [imc]="imc" />
 
   @if (icc) {
-    <app-icc [icc]="icc!" [gender]="customer().gender.toString()" />
+  <app-icc [icc]="icc!" [gender]="customer().gender.toString()" />
+  }
+
+  @if (ica) {
+  <app-ica [ica]="ica!" />
   }
 
 </section>

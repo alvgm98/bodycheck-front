@@ -1,0 +1,40 @@
+:host {
+  width: fit-content;
+  height: 200px;
+  overflow: hidden;
+  display: flex;
+}
+
+.ica-chart {
+  height: 300px;
+  width: 300px;
+}
+
+.ica-legend {
+  box-sizing: border-box;
+  height: 100%;
+  margin-left: 20px;
+  padding-block: 26px 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 12px;
+
+
+  .ica-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .ica-legend-icon {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+  }
+
+  .ica-legend-text {
+    font-family: 'Satoshi-Medium';
+  }
+}

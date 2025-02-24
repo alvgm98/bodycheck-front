@@ -1,4 +1,4 @@
-import { Component, effect, input, OnInit } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 import { NgxEchartsDirective, provideEchartsCore } from 'ngx-echarts';
 import { EChartsOption } from 'echarts';
 import { CommonModule } from '@angular/common';
@@ -9,44 +9,31 @@ import { SVGRenderer } from 'echarts/renderers';
 echarts.use([GaugeChart, SVGRenderer]);
 
 @Component({
-  selector: 'app-icc',
+  selector: 'app-ica',
   standalone: true,
   imports: [CommonModule, NgxEchartsDirective],
-  templateUrl: './icc.component.html',
-  styleUrl: './icc.component.scss',
+  templateUrl: './ica.component.html',
+  styleUrl: './ica.component.scss',
   providers: [
     provideEchartsCore({ echarts }),
   ]
 })
-export class IccComponent implements OnInit {
-  icc = input.required<number>();
-  iccChart!: EChartsOption;
+export class IcaComponent {
+  ica = input.required<number>();
+  icaChart!: EChartsOption;
 
-  gender = input.required<string>();
-
-  iccLegend: { color: string, value: number, text: string }[] = [];
-  ngOnInit() {
-    this.iccLegend = this.gender() === 'M' ? [
-      { color: '#78d0ba', value: 0.8, text: 'Riesgo Bajo' },
-      { color: '#FDDD60', value: 0.9, text: 'Riesgo Moderado' },
-      { color: '#FF6E76', value: 1, text: 'Riesgo Alto' }
-    ] : [
-      { color: '#78d0ba', value: 0.7, text: 'Riesgo Bajo' },
-      { color: '#FDDD60', value: 0.85, text: 'Riesgo Moderado' },
-      { color: '#FF6E76', value: 1, text: 'Riesgo Alto' }
-    ];
-  }
+  icaLegend = [
+    { color: '#78d0ba', value: 0.5, text: 'Saludable' },
+    { color: '#FDDD60', value: 0.55, text: 'Riesgo Moderado' },
+    { color: '#FF6E76', value: 1, text: 'Riesgo Alto' }
+  ]
 
   constructor() {
-    effect(() => {
-      if (this.gender()) {
-        this.renderChart(this.icc())
-      }
-    })
+    effect(() => this.renderChart(this.ica()))
   }
 
-  renderChart(icc: number) {
-    this.iccChart = {
+  renderChart(ica: number) {
+    this.icaChart = {
       series: [
         {
           type: 'gauge',
@@ -61,9 +48,9 @@ export class IccComponent implements OnInit {
             lineStyle: {
               width: 6,
               color: [
-                [this.iccLegend[0].value, this.iccLegend[0].color],
-                [this.iccLegend[1].value, this.iccLegend[1].color],
-                [this.iccLegend[2].value, this.iccLegend[2].color],
+                [this.icaLegend[0].value, this.icaLegend[0].color],
+                [this.icaLegend[1].value, this.icaLegend[1].color],
+                [this.icaLegend[2].value, this.icaLegend[2].color],
               ]
             }
           },
@@ -115,8 +102,8 @@ export class IccComponent implements OnInit {
           },
           data: [
             {
-              value: icc,
-              name: 'ICC'
+              value: ica,
+              name: 'ICA'
             }
           ]
         }

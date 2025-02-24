@@ -3,11 +3,12 @@ import { BodyCompositionService } from '../../../shared/services/body-compositio
 import { CustomerDetailed } from '../../../shared/models/customer';
 import { ImcComponent } from './components/imc/imc.component';
 import { IccComponent } from './components/icc/icc.component';
+import { IcaComponent } from './components/ica/ica.component';
 
 @Component({
   selector: 'app-body-composition',
   standalone: true,
-  imports: [ImcComponent, IccComponent],
+  imports: [ImcComponent, IccComponent, IcaComponent],
   templateUrl: './body-composition.component.html',
   styleUrl: './body-composition.component.scss'
 })
