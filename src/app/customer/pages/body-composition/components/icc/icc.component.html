@@ -1,4 +1,6 @@
-<div echarts [options]="iccChart" class="icc-chart"></div>
+<app-tooltip [text]="'Índice Cintura-Cadera'">
+  <div echarts [options]="iccChart" class="icc-chart"></div>
+</app-tooltip>
 
 <div class="icc-legend">
   @for (item of iccLegend; track $index) {

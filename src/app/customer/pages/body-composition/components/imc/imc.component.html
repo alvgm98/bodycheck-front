@@ -1,4 +1,6 @@
-<div echarts [options]="imcChart" class="imc-chart"></div>
+<app-tooltip [text]="'Índice de Masa Corporal'">
+  <div echarts [options]="imcChart" class="imc-chart"></div>
+</app-tooltip>
 
 <div class="imc-legend">
   @for (item of imcLegend; track $index) {

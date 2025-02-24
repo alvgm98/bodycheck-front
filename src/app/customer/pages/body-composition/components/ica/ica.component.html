@@ -1,4 +1,6 @@
-<div echarts [options]="icaChart" class="ica-chart"></div>
+<app-tooltip [text]="'Índice Cintura-Altura'">
+  <div echarts [options]="icaChart" class="ica-chart"></div>
+</app-tooltip>
 
 <div class="ica-legend">
   @for (item of icaLegend; track $index) {

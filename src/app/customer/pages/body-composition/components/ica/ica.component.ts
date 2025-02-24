@@ -6,12 +6,13 @@ import { CommonModule } from '@angular/common';
 import * as echarts from 'echarts/core';
 import { GaugeChart } from 'echarts/charts';
 import { SVGRenderer } from 'echarts/renderers';
+import { TooltipComponent } from '../../../../../shared/ui/tooltip/tooltip.component';
 echarts.use([GaugeChart, SVGRenderer]);
 
 @Component({
   selector: 'app-ica',
   standalone: true,
-  imports: [CommonModule, NgxEchartsDirective],
+  imports: [CommonModule, NgxEchartsDirective, TooltipComponent],
   templateUrl: './ica.component.html',
   styleUrl: './ica.component.scss',
   providers: [
