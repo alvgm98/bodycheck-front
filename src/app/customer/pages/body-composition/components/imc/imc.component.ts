@@ -67,14 +67,14 @@ export class ImcComponent {
             }
           },
           axisTick: {
-            length: 12,
+            length: 5,
             lineStyle: {
               color: 'auto',
               width: 2
             }
           },
           splitLine: {
-            length: 20,
+            length: 12,
             lineStyle: {
               color: 'auto',
               width: 5
