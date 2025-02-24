@@ -25,10 +25,11 @@ export class ImcComponent {
   imcChart!: EChartsOption;
 
   imcLegend = [
-    { color: '#58D9F9', text: 'Bajo peso' },
-    { color: '#78d0ba', text: 'Saludable' },
-    { color: '#FDDD60', text: 'Sobrepeso' },
-    { color: '#FF6E76', text: 'Obesidad' }
+    { color: '#21c3ef', value: 0.4, text: 'Delgadez severa' },
+    { color: '#58D9F9', value: 0.4625, text: 'Bajo peso' },
+    { color: '#78d0ba', value: 0.625, text: 'Saludable' },
+    { color: '#FDDD60', value: 0.75, text: 'Sobrepeso' },
+    { color: '#FF6E76', value: 1, text: 'Obesidad' }
   ];
 
   constructor() {
@@ -51,10 +52,11 @@ export class ImcComponent {
             lineStyle: {
               width: 8,
               color: [
-                [0.4625, this.imcLegend[0].color],
-                [0.625, this.imcLegend[1].color],
-                [0.75, this.imcLegend[2].color],
-                [1, this.imcLegend[3].color]
+                [this.imcLegend[0].value, this.imcLegend[0].color],
+                [this.imcLegend[1].value, this.imcLegend[1].color],
+                [this.imcLegend[2].value, this.imcLegend[2].color],
+                [this.imcLegend[3].value, this.imcLegend[3].color],
+                [this.imcLegend[4].value, this.imcLegend[4].color]
               ]
             }
           },

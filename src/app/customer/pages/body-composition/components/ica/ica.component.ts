@@ -24,9 +24,11 @@ export class IcaComponent {
   icaChart!: EChartsOption;
 
   icaLegend = [
-    { color: '#78d0ba', value: 0.5, text: 'Saludable' },
-    { color: '#FDDD60', value: 0.55, text: 'Riesgo Moderado' },
-    { color: '#FF6E76', value: 1, text: 'Riesgo Alto' }
+    { color: '#21c3ef', value: 0.32, text: 'Delgadez severa' },
+    { color: '#58D9F9', value: 0.42, text: 'Bajo peso' },
+    { color: '#78d0ba', value: 0.52, text: 'Saludable' },
+    { color: '#FDDD60', value: 0.62, text: 'Sobrepeso' },
+    { color: '#FF6E76', value: 1, text: 'Obesidad mórbida' }
   ]
 
   constructor() {
@@ -52,6 +54,8 @@ export class IcaComponent {
                 [this.icaLegend[0].value, this.icaLegend[0].color],
                 [this.icaLegend[1].value, this.icaLegend[1].color],
                 [this.icaLegend[2].value, this.icaLegend[2].color],
+                [this.icaLegend[3].value, this.icaLegend[3].color],
+                [this.icaLegend[4].value, this.icaLegend[4].color],
               ]
             }
           },
