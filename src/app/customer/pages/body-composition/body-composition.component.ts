@@ -1,4 +1,4 @@
-import { Component, computed, effect, input, OnInit } from '@angular/core';
+import { Component, effect, input } from '@angular/core';
 import { BodyCompositionService } from '../../../shared/services/body-composition.service';
 import { CustomerDetailed } from '../../../shared/models/customer';
 import { ImcComponent } from './components/imc/imc.component';
