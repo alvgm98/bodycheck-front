@@ -75,8 +75,6 @@ export class AppointmentFormComponent {
    * Patchea los valores del formulario
    */
   patchMeasurementValues(appointment: Appointment | null) {
-    console.log(appointment);
-
     if (appointment) {
       const startTime = `${appointment?.startTime.getHours().toString().padStart(2, '0')}:${appointment?.startTime.getMinutes().toString().padStart(2, '0')}`;
       const endTime = `${appointment?.endTime.getHours().toString().padStart(2, '0')}:${appointment?.endTime.getMinutes().toString().padStart(2, '0')}`;
@@ -195,7 +193,6 @@ export class AppointmentFormComponent {
     }
 
     const appointment: AppointmentRequest = this.formToAppointment();
-    console.log(appointment)
 
     if (!this.appointment()) {
       this.createAppointment(appointment);
