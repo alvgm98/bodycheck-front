@@ -193,14 +193,52 @@ export class BodyCompositionService {
   }
 
   /* CALCULAR MASA OSEA */
-  calcRocha(measurement: Measurement, gender: string) {
+  calcMartin(measurement: Measurement, height: number) {
+    const { bistyloid, humeralBicondylar, femoralBicondylar, bimalleolar } = measurement.diameter!;
 
+    if (!bistyloid || !humeralBicondylar || !femoralBicondylar || !bimalleolar) {
+      return null;
+    }
+
+    const bistyloidDecimal = new Decimal(bistyloid);
+    const humeralBicondylarDecimal = new Decimal(humeralBicondylar);
+    const femoralBicondylarDecimal = new Decimal(femoralBicondylar);
+    const bimalleolarDecimal = new Decimal(bimalleolar);
+
+    return new Decimal(0.00006)
+      .times(new Decimal(height))
+      .times(
+        (bistyloidDecimal
+          .plus(humeralBicondylarDecimal)
+          .plus(femoralBicondylarDecimal)
+          .plus(bimalleolarDecimal)
+        ).pow(2))
+      .toNumber();
   }
-  calcMartin(measurement: Measurement, gender: string) {
 
+  calcRocha(measurement: Measurement, height: number) {
+    const { bistyloid, femoralBicondylar } = measurement.diameter!;
+
+    if (!bistyloid || !femoralBicondylar) {
+      return null;
+    }
+
+    // Convierto a Decimal y de cm a metros
+    const bistyloidDecimal = new Decimal(bistyloid).div(100);
+    const femoralBicondylarDecimal = new Decimal(femoralBicondylar).div(100);
+    const heightDecimal = new Decimal(height).div(100);
+
+    return new Decimal(3.02)
+      .times(
+        ((heightDecimal.pow(2))
+          .times(bistyloidDecimal)
+          .times(femoralBicondylarDecimal)
+          .times(400)
+        ).pow(new Decimal(0.712))
+      ).toNumber();
   }
 
-  /* CALCULAR MASA MUSCULAR */
+  /* CALCULAR MASA MUSCULAR-ESQUELETICA */
   calcLee(measurement: Measurement, gender: string) {
 
   }
