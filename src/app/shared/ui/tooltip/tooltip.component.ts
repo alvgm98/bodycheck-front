@@ -29,8 +29,6 @@ export class TooltipComponent {
 
       const rect = this.childElement.getBoundingClientRect();
 
-      console.log(rect)
-
       this.renderer.setStyle(this.tooltipElement, 'top', `${rect.top - 35}px`);
       this.renderer.setStyle(this.tooltipElement, 'left', `${rect.left + rect.width / 2}px`);
     }
