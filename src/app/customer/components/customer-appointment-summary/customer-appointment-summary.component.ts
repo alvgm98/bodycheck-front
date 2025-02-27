@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, input, Renderer2 } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, input, Renderer2 } from '@angular/core';
 import { CustomerAppointmentComponent } from '../../ui/customer-appointment/customer-appointment.component';
 import { NgClass } from '@angular/common';
 import { Appointment } from '../../../shared/models/appointment';
@@ -19,19 +19,23 @@ export class CustomerAppointmentSummaryComponent implements AfterViewInit {
   maxScrollRight: boolean = false;
 
   constructor(
-    private el: ElementRef,
     private renderer: Renderer2,
     private cdr: ChangeDetectorRef
   ) { }
 
   ngAfterViewInit(): void {
     if (this.appointments()!.length > 0) {
+      // Deshabilita boton scrollLeft si solo hay una cita
+      if (this.appointments()!.length === 1) {
+        this.maxScrollLeft = true;
+      }
+
       this.scrollToInit();
     } else {
       this.maxScrollLeft = true;
       this.maxScrollRight = true;
-      this.cdr.detectChanges();
     }
+    this.cdr.detectChanges(); // Tengo que forzar la deteccion de cambios para que se muestren instananeamente al hacerlo en el contexto de AfterViewInit
   }
 
   /**
