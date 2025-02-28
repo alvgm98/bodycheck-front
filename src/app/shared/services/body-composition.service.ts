@@ -239,10 +239,49 @@ export class BodyCompositionService {
   }
 
   /* CALCULAR MASA MUSCULAR-ESQUELETICA */
-  calcLee(measurement: Measurement, gender: string) {
+  calcLee(measurement: Measurement, height: number, gender: string, age: number, ethnicity: string) {
+    const { armRelaxed, thigh, calf } = measurement.circumference!;
+    const tricepsP = measurement.skinfold?.triceps;
+    const thighP = measurement.skinfold?.thigh;
+    const calfP = measurement.skinfold?.calf;
 
-  }
-  calcPoortmans(measurement: Measurement, gender: string) {
+    if (armRelaxed == null || thigh == null || calf == null || tricepsP == null || thighP == null || calfP == null) {
+      return null;
+    }
 
+    // 🔹 Convertir a Decimal.js y asegurar unidades en METROS Y CENTÍMETROS
+    const heightDecimal = new Decimal(height).div(100); // Convertir talla a metros
+    const genderDecimal = gender === 'M' ? new Decimal(1) : new Decimal(0);
+    const ethnicityDecimal =
+      ethnicity === 'AS' ? new Decimal(2)        // Asiático
+        : ethnicity === 'AA' ? new Decimal(1.1)  // Africano
+        : new Decimal(0);                        // Caucásico
+
+    // 🔹 Corregir perímetros (restar grosor de la grasa subcutánea)
+    const PBC = new Decimal(armRelaxed)  // Perímetro brazo
+      .minus(new Decimal(Math.PI).times(new Decimal(tricepsP).div(10)))  // Pliegue triceps en cm
+      .toDecimalPlaces(10);  // Redondeo para evitar errores
+
+    const PMC = new Decimal(thigh)  // Perímetro muslo
+      .minus(new Decimal(Math.PI).times(new Decimal(thighP).div(10)))  // Pliegue muslo en cm
+      .toDecimalPlaces(10);
+
+    const PPC = new Decimal(calf)  // Perímetro gemelo
+      .minus(new Decimal(Math.PI).times(new Decimal(calfP).div(10)))  // Pliegue gemelo en cm
+      .toDecimalPlaces(10);
+
+    // 🔹 Aplicar la ecuación de Lee
+    return heightDecimal
+      .times(
+        new Decimal(0.00744).times(PBC.pow(2))
+          .plus(new Decimal(0.00088).times(PMC.pow(2)))
+          .plus(new Decimal(0.00441).times(PPC.pow(2)))
+      )
+      .plus(new Decimal(2.4).times(genderDecimal))
+      .minus(new Decimal(0.048).times(age))
+      .plus(ethnicityDecimal)
+      .plus(7.8)
+      .toDecimalPlaces(4)
+      .toNumber();
   }
 }
