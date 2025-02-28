@@ -48,8 +48,18 @@ export class BodyCompositionComponent {
     this.icc = this.bodyCompositionService.calcICC(waist, hip);
     this.ica = this.bodyCompositionService.calcICA(waist, customer.height)
 
-    /* CÁLCULO DE MASA GRASA */
+    /* CÁLCULO DE PORCENTAJE GRASO */
+    // Calculo las densidades
+    const dgDurninWomersley = this.bodyCompositionService.calcDurninWomersley(customer.measurements![measurementSelected], customer.gender.toString(), customer.height);
+    const dgJacksonPollock7 = this.bodyCompositionService.calcJacksonPollock7(customer.measurements![measurementSelected], customer.gender.toString(), customer.height);
+    const dgJacksonPollock3 = customer.gender.toString() === 'M'
+      ? this.bodyCompositionService.calcJacksonPollock3Male(customer.measurements![measurementSelected], customer.height)
+      : this.bodyCompositionService.calcJacksonPollock3Female(customer.measurements![measurementSelected], customer.height);
 
+    // Calculo los porcentajes con la formula de siri
+    this.pgDurninWomersley = dgDurninWomersley ? this.bodyCompositionService.calcSiri(dgDurninWomersley) : null;
+    this.pgJacksonPollock7 = dgJacksonPollock7 ? this.bodyCompositionService.calcSiri(dgJacksonPollock7) : null;
+    this.pgJacksonPollock3 = dgJacksonPollock3 ? this.bodyCompositionService.calcSiri(dgJacksonPollock3) : null;
 
     /* CÁLCULO DE MASA ÓSEA */
     this.mo = this.calcMO(customer);
