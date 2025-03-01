@@ -4,11 +4,12 @@ import { CustomerDetailed } from '../../../shared/models/customer';
 import { ImcComponent } from './components/imc/imc.component';
 import { IccComponent } from './components/icc/icc.component';
 import { IcaComponent } from './components/ica/ica.component';
+import { CompositionPieComponent } from './components/composition-pie/composition-pie.component';
 
 @Component({
   selector: 'app-body-composition',
   standalone: true,
-  imports: [ImcComponent, IccComponent, IcaComponent],
+  imports: [ImcComponent, IccComponent, IcaComponent, CompositionPieComponent],
   templateUrl: './body-composition.component.html',
   styleUrl: './body-composition.component.scss'
 })
@@ -24,16 +25,19 @@ export class BodyCompositionComponent {
   icc!: number | null;
   ica!: number | null;
 
+  // Masa Total
+  mt!: number;
+
   // Porcentaje Graso
-  pgDurninWomersley!: number | null;
-  pgJacksonPollock7!: number | null;
-  pgJacksonPollock3!: number | null;
+  mgDurninWomersley!: number | null;
+  mgJacksonPollock7!: number | null;
+  mgJacksonPollock3!: number | null;
 
   // Masa Ósea
   mo!: { formula: string, value: number } | null;
 
-  // Masa Musculo-Esqueletica
-  mme!: number | null;
+  // Masa Muscular
+  mm!: number | null;
 
   constructor(
     private bodyCompositionService: BodyCompositionService
@@ -47,13 +51,15 @@ export class BodyCompositionComponent {
   calcFormulas(customer: CustomerDetailed, measurementSelected: number): void {
     const age = this.calcAge(new Date(customer.birthdate), new Date(customer.measurements![measurementSelected].date));
 
+    this.mt = customer.measurements![measurementSelected].weight;
+
     /* CÁLCULO DE INDICES DE SALUD */
     const { waist, hip } = customer.measurements![measurementSelected].circumference!;
     this.imc = this.bodyCompositionService.calcIMC(customer.measurements![measurementSelected].weight, customer.height);
     this.icc = this.bodyCompositionService.calcICC(waist, hip);
     this.ica = this.bodyCompositionService.calcICA(waist, customer.height)
 
-    /* CÁLCULO DE PORCENTAJE GRASO */
+    /* CÁLCULO DE MASA GRASA */
     // Calculo las densidades (m/L)
     const dgDurninWomersley = this.bodyCompositionService.calcDurninWomersley(customer.measurements![measurementSelected], customer.gender.toString(), age);
     const dgJacksonPollock7 = this.bodyCompositionService.calcJacksonPollock7(customer.measurements![measurementSelected], customer.gender.toString(), age);
@@ -62,15 +68,20 @@ export class BodyCompositionComponent {
       : this.bodyCompositionService.calcJacksonPollock3Female(customer.measurements![measurementSelected], age);
 
     // Calculo los porcentajes con la formula de siri
-    this.pgDurninWomersley = dgDurninWomersley ? this.bodyCompositionService.calcSiri(dgDurninWomersley) : null;
-    this.pgJacksonPollock7 = dgJacksonPollock7 ? this.bodyCompositionService.calcSiri(dgJacksonPollock7) : null;
-    this.pgJacksonPollock3 = dgJacksonPollock3 ? this.bodyCompositionService.calcSiri(dgJacksonPollock3) : null;
+    const pgDurninWomersley = dgDurninWomersley ? this.bodyCompositionService.calcSiri(dgDurninWomersley) : null;
+    const pgJacksonPollock7 = dgJacksonPollock7 ? this.bodyCompositionService.calcSiri(dgJacksonPollock7) : null;
+    const pgJacksonPollock3 = dgJacksonPollock3 ? this.bodyCompositionService.calcSiri(dgJacksonPollock3) : null;
+
+    // Calculo la masa absoluta de la grasa
+    this.mgDurninWomersley = pgDurninWomersley ? (pgDurninWomersley / 100) * this.mt : null;
+    this.mgJacksonPollock7 = pgJacksonPollock7 ? (pgJacksonPollock7 / 100) * this.mt : null;
+    this.mgJacksonPollock3 = pgJacksonPollock3 ? (pgJacksonPollock3 / 100) * this.mt : null;
 
     /* CÁLCULO DE MASA ÓSEA */
     this.mo = this.calcMO(customer);
 
     /* CÁLCULO DE MASA MUSCULAR */
-    this.mme = this.bodyCompositionService.calcLee(
+    const mme = this.bodyCompositionService.calcLee(
       customer.measurements![measurementSelected],
       customer.height,
       customer.gender.toString(),
@@ -78,9 +89,11 @@ export class BodyCompositionComponent {
       customer.ethnicity.toString()
     );
 
-    console.log('Porcentaje Graso', this.pgDurninWomersley);
+    this.mm = mme! - this.mo!.value;
+
+    console.log('Masa Grasa', this.mgDurninWomersley);
     console.log('Masa Osea', this.mo);
-    console.log('Masa Musuclar-Esqueletica', this.mme);
+    console.log('Masa Musuclar-Esqueletica', this.mm);
   }
 
   private calcAge(birthdate: Date, measurementDate: Date): number {
