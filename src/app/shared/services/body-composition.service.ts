@@ -41,6 +41,8 @@ export class BodyCompositionService {
 
   /* CALCULAR MASA GRASA MEDIANTE PLIEGUES */
   calcDurninWomersley(measurement: Measurement, gender: string, age: number) {
+    if (!measurement.skinfold) return null;
+
     const { biceps, triceps, subscapular, suprailiac } = measurement.skinfold!;
 
     // Compruebo que existen todos los datos necesarios
@@ -90,6 +92,8 @@ export class BodyCompositionService {
   }
 
   calcJacksonPollock7(measurement: Measurement, gender: string, age: number) {
+    if (!measurement.skinfold) return null;
+
     const { pectoral, abdominal, thigh, triceps, subscapular, suprailiac, midaxillary } = measurement.skinfold!;
 
     // Compruebo que existen todos los datos necesarios
@@ -134,6 +138,8 @@ export class BodyCompositionService {
   }
 
   calcJacksonPollock3Male(measurement: Measurement, age: number) {
+    if (!measurement.skinfold) return null;
+
     const { pectoral, abdominal, thigh } = measurement.skinfold!;
 
     // Compruebo que existen todos los datos necesarios
@@ -159,6 +165,8 @@ export class BodyCompositionService {
       .toNumber();
   }
   calcJacksonPollock3Female(measurement: Measurement, age: number) {
+    if (!measurement.skinfold) return null;
+
     const { triceps, suprailiac, thigh } = measurement.skinfold!;
 
     // Compruebo que existen todos los datos necesarios
@@ -194,6 +202,8 @@ export class BodyCompositionService {
 
   /* CALCULAR MASA OSEA */
   calcMartin(measurement: Measurement, height: number) {
+    if (!measurement.diameter) return null;
+
     const { bistyloid, humeralBicondylar, femoralBicondylar, bimalleolar } = measurement.diameter!;
 
     if (!bistyloid || !humeralBicondylar || !femoralBicondylar || !bimalleolar) {
@@ -217,6 +227,8 @@ export class BodyCompositionService {
   }
 
   calcRocha(measurement: Measurement, height: number) {
+    if (!measurement.diameter) return null;
+
     const { bistyloid, femoralBicondylar } = measurement.diameter!;
 
     if (!bistyloid || !femoralBicondylar) {
@@ -240,6 +252,8 @@ export class BodyCompositionService {
 
   /* CALCULAR MASA MUSCULAR-ESQUELETICA */
   calcLee(measurement: Measurement, height: number, gender: string, age: number, ethnicity: string) {
+    if (!measurement.circumference || !measurement.skinfold) return null;
+
     const { armRelaxed, thigh, calf } = measurement.circumference!;
     const tricepsP = measurement.skinfold?.triceps;
     const thighP = measurement.skinfold?.thigh;
@@ -255,7 +269,7 @@ export class BodyCompositionService {
     const ethnicityDecimal =
       ethnicity === 'AS' ? new Decimal(2)        // Asiático
         : ethnicity === 'AA' ? new Decimal(1.1)  // Africano
-        : new Decimal(0);                        // Caucásico
+          : new Decimal(0);                        // Caucásico
 
     // 🔹 Corregir perímetros (restar grosor de la grasa subcutánea)
     const PBC = new Decimal(armRelaxed)  // Perímetro brazo
@@ -281,7 +295,6 @@ export class BodyCompositionService {
       .minus(new Decimal(0.048).times(age))
       .plus(ethnicityDecimal)
       .plus(7.8)
-      .toDecimalPlaces(4)
       .toNumber();
   }
 }
