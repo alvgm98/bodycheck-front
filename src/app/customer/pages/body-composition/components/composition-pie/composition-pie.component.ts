@@ -33,13 +33,7 @@ export class CompositionPieComponent {
   }
 
   renderChart(mt: number, mg: number, mo: number, mm: number) {
-    const mr = mt - (mg + mo + mm);
-
-    console.log('mr', mr);
-    console.log('mt', mt)
-    console.log('mg', mg)
-    console.log('mo', mo)
-    console.log('mm', mm)
+    let data = this.initData(mt, mg, mo, mm);
 
     this.pieChart = {
       tooltip: {
@@ -78,14 +72,38 @@ export class CompositionPieComponent {
           labelLine: {
             show: false
           },
-          data: [
-            { value: mg, name: 'Masa Grasa', itemStyle: { color: '#FDDD60' } },
-            { value: mo, name: 'Masa Osea', itemStyle: { color: '#58D9F9' } },
-            { value: mm, name: 'Masa Muscular', itemStyle: { color: '#FF6E76' } },
-            { value: mr, name: 'Masa Residual', itemStyle: { color: '#9E9E9E' } }
-          ]
+          data
         }
       ]
     };
   }
+
+  /** Ajusta los datos que se mostrarán según los datos que se hayan podido calcular */
+  private initData(mt: number, mg: number, mo: number, mm: number) {
+    const mr = mt - (mg + mo + mm);
+
+    if (mm <= 0) {
+      // Si no se ha podido calcular la Masa Muscular/Masa Muscular-Esqueletica
+      return [
+        { value: mg, name: 'Masa Grasa', itemStyle: { color: '#FDDD60' } },
+        { value: mr, name: 'Resto', itemStyle: { color: '#9E9E9E' } },
+      ]
+    } else if (mo === 0) {
+      // Si no hay datos de la Masa Osea
+      return [
+        { value: mg, name: 'Masa Grasa', itemStyle: { color: '#FDDD60' } },
+        { value: mm, name: 'Masa Muscular-Esqueletica', itemStyle: { color: '#FF6E76' } },
+        { value: mr, name: 'Masa Residual', itemStyle: { color: '#9E9E9E' } },
+      ]
+    } else {
+      // Si tenemos todos los datos
+      return [
+        { value: mg, name: 'Masa Grasa', itemStyle: { color: '#FDDD60' } },
+        { value: mo, name: 'Masa Osea', itemStyle: { color: '#58D9F9' } },
+        { value: mm, name: 'Masa Muscular', itemStyle: { color: '#FF6E76' } },
+        { value: mr, name: 'Masa Residual', itemStyle: { color: '#9E9E9E' } },
+      ]
+    }
+  }
+
 }
