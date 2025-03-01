@@ -252,7 +252,7 @@ export class BodyCompositionService {
 
   /* CALCULAR MASA MUSCULAR-ESQUELETICA */
   calcLee(measurement: Measurement, height: number, gender: string, age: number, ethnicity: string) {
-    if (!measurement.circumference || !measurement.skinfold) return null;
+    if (!measurement.circumference || !measurement.skinfold) return 0;
 
     const { armRelaxed, thigh, calf } = measurement.circumference!;
     const tricepsP = measurement.skinfold?.triceps;
@@ -260,7 +260,7 @@ export class BodyCompositionService {
     const calfP = measurement.skinfold?.calf;
 
     if (armRelaxed == null || thigh == null || calf == null || tricepsP == null || thighP == null || calfP == null) {
-      return null;
+      return 0;
     }
 
     // 🔹 Convertir a Decimal.js y asegurar unidades en METROS Y CENTÍMETROS
@@ -296,5 +296,10 @@ export class BodyCompositionService {
       .plus(ethnicityDecimal)
       .plus(7.8)
       .toNumber();
+  }
+
+  /* CALCULAR MASA MUSCULAR */
+  calcMM(mme: number, mo: number) {
+    return new Decimal(mme).minus(mo).toNumber();
   }
 }

@@ -29,15 +29,15 @@ export class BodyCompositionComponent {
   mt!: number;
 
   // Porcentaje Graso
-  mgDurninWomersley!: number | null;
-  mgJacksonPollock7!: number | null;
-  mgJacksonPollock3!: number | null;
+  mgDurninWomersley!: number;
+  mgJacksonPollock7!: number;
+  mgJacksonPollock3!: number;
 
   // Masa Ósea
-  mo!: { formula: string, value: number } | null;
+  mo!: { formula: string, value: number };
 
   // Masa Muscular
-  mm!: number | null;
+  mm!: number;
 
   constructor(
     private bodyCompositionService: BodyCompositionService
@@ -73,9 +73,9 @@ export class BodyCompositionComponent {
     const pgJacksonPollock3 = dgJacksonPollock3 ? this.bodyCompositionService.calcSiri(dgJacksonPollock3) : null;
 
     // Calculo la masa absoluta de la grasa
-    this.mgDurninWomersley = pgDurninWomersley ? (pgDurninWomersley / 100) * this.mt : null;
-    this.mgJacksonPollock7 = pgJacksonPollock7 ? (pgJacksonPollock7 / 100) * this.mt : null;
-    this.mgJacksonPollock3 = pgJacksonPollock3 ? (pgJacksonPollock3 / 100) * this.mt : null;
+    this.mgDurninWomersley = pgDurninWomersley ? (pgDurninWomersley / 100) * this.mt : 0;
+    this.mgJacksonPollock7 = pgJacksonPollock7 ? (pgJacksonPollock7 / 100) * this.mt : 0;
+    this.mgJacksonPollock3 = pgJacksonPollock3 ? (pgJacksonPollock3 / 100) * this.mt : 0;
 
     /* CÁLCULO DE MASA ÓSEA */
     this.mo = this.calcMO(customer);
@@ -89,13 +89,14 @@ export class BodyCompositionComponent {
       customer.ethnicity.toString()
     );
 
-    this.mm = mme! - this.mo!.value;
+    this.mm = this.bodyCompositionService.calcMM(mme, this.mo.value);
 
     console.log('Masa Grasa', this.mgDurninWomersley);
     console.log('Masa Osea', this.mo);
     console.log('Masa Musuclar-Esqueletica', this.mm);
   }
 
+  /** Obtiene la edad del sujeto en el momento de la medición */
   private calcAge(birthdate: Date, measurementDate: Date): number {
     const diff = measurementDate.getTime() - birthdate.getTime();
     const ageDate = new Date(diff);
@@ -125,6 +126,6 @@ export class BodyCompositionComponent {
       const moRocha = this.bodyCompositionService.calcRocha(measurement, customer.height);
       if (moRocha) return { formula: "Rocha", value: moRocha };
     }
-    return null;
+    return { formula: "", value: 0 };
   }
 }
