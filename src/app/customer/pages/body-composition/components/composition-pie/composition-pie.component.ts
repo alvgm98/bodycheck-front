@@ -21,6 +21,8 @@ echarts.use([PieChart, TooltipComponent, LegendComponent, SVGRenderer]);
   ]
 })
 export class CompositionPieComponent {
+  formula = input.required<string>();
+
   mt = input.required<number>(); // Masa Total
   mg = input.required<number>(); // Masa Grasa
   mo = input<{ formula: string, value: number }>({ formula: '', value: 0 }); // Masa Osea
@@ -39,10 +41,21 @@ export class CompositionPieComponent {
       tooltip: {
         trigger: 'item',
         formatter: function (params: any) {
-          return `<span style="display:inline-block;margin-right:5px;
-                  border-radius:50%;width:10px;height:10px;
-                  background-color:${params.color};"></span>
-                  ${params.name}: ${params.value}Kg (${params.percent}%)`;
+          return `
+          <h4 style="margin: 5px">
+            ${params.seriesName}
+          </h4>
+          <span
+            style="
+            display:inline-block;
+            margin-right:5px;
+            border-radius:50%;
+            width:10px;
+            height:10px;
+            background-color:${params.color};">
+          </span>
+          ${params.name}: ${params.value.toFixed(2)}Kg (${params.percent}%)
+          `;
         }
       },
       legend: {
@@ -53,7 +66,7 @@ export class CompositionPieComponent {
       },
       series: [
         {
-          name: 'Access From',
+          name: 'Composición Corporal ' + this.formula(),
           type: 'pie',
           radius: ['40%', '70%'],
           avoidLabelOverlap: false,
