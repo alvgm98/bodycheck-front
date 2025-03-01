@@ -90,10 +90,6 @@ export class BodyCompositionComponent {
     );
 
     this.mm = this.bodyCompositionService.calcMM(mme, this.mo.value);
-
-    console.log('Masa Grasa', this.mgDurninWomersley);
-    console.log('Masa Osea', this.mo);
-    console.log('Masa Musuclar-Esqueletica', this.mm);
   }
 
   /** Obtiene la edad del sujeto en el momento de la medición */
