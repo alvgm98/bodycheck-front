@@ -39,7 +39,7 @@ export class BodyCompositionService {
       .toNumber()
   }
 
-  /* CALCULAR MASA GRASA MEDIANTE PLIEGUES */
+  /* CALCULAR DENSIDAD GRASA */
   calcDurninWomersley(measurement: Measurement, gender: string, age: number) {
     if (!measurement.skinfold) return null;
 
@@ -192,12 +192,71 @@ export class BodyCompositionService {
       .toNumber();
   }
 
-  /* CALCULAR MASA GRASA MEDIANTE PERIMETROS */
-  calcWeltman(measurement: Measurement, gender: string) {
+  /* CALCULAR PORCENTAJE GRASO */
+  calcWeltmanMale(measurement: Measurement) {
+    if (!measurement.circumference || !measurement.circumference.waist) return null;
+
+    const waist = measurement.circumference.waist;
+    const weight = measurement.weight;
+
+    return new Decimal(0.32457)
+      .times(waist)
+      .minus(new Decimal(0.10969).times(weight))
+      .plus(10.8336)
+      .toNumber();
+  }
+  calcWeltmanFemale(measurement: Measurement, height: number) {
+    if (!measurement.circumference || !measurement.circumference.waist) return null;
+
+    const waist = measurement.circumference.waist;
+    const weight = measurement.weight;
+
+    return new Decimal(0.11071)
+      .times(waist)
+      .minus(new Decimal(0.17666).times(height))
+      .plus(new Decimal(0.14354).times(weight))
+      .plus(51.03301)
+      .toNumber();
+  }
+
+  calcNavyTapeMale(measurement: Measurement, height: number) {
+    if (!measurement.circumference) return null;
+
+    const { waist, neck } = measurement.circumference!;
+
+    // Compruebo que existen todos los datos necesarios
+    if (!waist || !neck) {
+      return null;
+    }
+
+    const logA = new Decimal(new Decimal(waist).minus(neck)).logarithm(10);
+    const logB = new Decimal(height).logarithm(10);
+
+    return new Decimal(86.010)
+      .times(logA)
+      .minus(new Decimal(70.041).times(logB))
+      .plus(36.76)
+      .toNumber();
 
   }
-  calcNavyTape(measurement: Measurement, gender: string) {
+  calcNavyTapeFemale(measurement: Measurement, height: number) {
+    if (!measurement.circumference) return null;
 
+    const { waist, neck, hip } = measurement.circumference!;
+
+    // Compruebo que existen todos los datos necesarios
+    if (!waist || !neck || !hip) {
+      return null;
+    }
+
+    const logA = new Decimal(new Decimal(waist).plus(hip).minus(neck)).logarithm(10);
+    const logB = new Decimal(height).logarithm(10);
+
+    return new Decimal(163.205)
+      .times(logA)
+      .minus(new Decimal(97.684).times(logB))
+      .minus(78.387)
+      .toNumber();
   }
 
   /* CALCULAR MASA OSEA */

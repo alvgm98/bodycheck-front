@@ -32,6 +32,8 @@ export class BodyCompositionComponent {
   mgDurninWomersley!: number;
   mgJacksonPollock7!: number;
   mgJacksonPollock3!: number;
+  mgWeltman!: number;
+  mgNavyTape!: number;
 
   // Masa Ósea
   mo!: { formula: string, value: number };
@@ -49,40 +51,51 @@ export class BodyCompositionComponent {
   }
 
   calcFormulas(customer: CustomerDetailed, measurementSelected: number): void {
-    const age = this.calcAge(new Date(customer.birthdate), new Date(customer.measurements![measurementSelected].date));
+    const measurement = customer.measurements![measurementSelected];
+    const age = this.calcAge(new Date(customer.birthdate), new Date(measurement.date));
 
-    this.mt = customer.measurements![measurementSelected].weight;
+    this.mt = measurement.weight;
 
     /* CÁLCULO DE INDICES DE SALUD */
-    const { waist, hip } = customer.measurements![measurementSelected].circumference!;
-    this.imc = this.bodyCompositionService.calcIMC(customer.measurements![measurementSelected].weight, customer.height);
+    const { waist, hip } = measurement.circumference!;
+    this.imc = this.bodyCompositionService.calcIMC(measurement.weight, customer.height);
     this.icc = this.bodyCompositionService.calcICC(waist, hip);
     this.ica = this.bodyCompositionService.calcICA(waist, customer.height)
 
     /* CÁLCULO DE MASA GRASA */
     // Calculo las densidades (m/L)
-    const dgDurninWomersley = this.bodyCompositionService.calcDurninWomersley(customer.measurements![measurementSelected], customer.gender.toString(), age);
-    const dgJacksonPollock7 = this.bodyCompositionService.calcJacksonPollock7(customer.measurements![measurementSelected], customer.gender.toString(), age);
+    const dgDurninWomersley = this.bodyCompositionService.calcDurninWomersley(measurement, customer.gender.toString(), age);
+    const dgJacksonPollock7 = this.bodyCompositionService.calcJacksonPollock7(measurement, customer.gender.toString(), age);
     const dgJacksonPollock3 = customer.gender.toString() === 'M'
-      ? this.bodyCompositionService.calcJacksonPollock3Male(customer.measurements![measurementSelected], age)
-      : this.bodyCompositionService.calcJacksonPollock3Female(customer.measurements![measurementSelected], age);
+      ? this.bodyCompositionService.calcJacksonPollock3Male(measurement, age)
+      : this.bodyCompositionService.calcJacksonPollock3Female(measurement, age);
 
     // Calculo los porcentajes con la formula de siri
     const pgDurninWomersley = dgDurninWomersley ? this.bodyCompositionService.calcSiri(dgDurninWomersley) : null;
     const pgJacksonPollock7 = dgJacksonPollock7 ? this.bodyCompositionService.calcSiri(dgJacksonPollock7) : null;
     const pgJacksonPollock3 = dgJacksonPollock3 ? this.bodyCompositionService.calcSiri(dgJacksonPollock3) : null;
+    const pgWeltman = customer.gender.toString() === 'M' ? this.bodyCompositionService.calcWeltmanMale(measurement) : this.bodyCompositionService.calcWeltmanFemale(measurement, customer.height);
+    const pgNavyTape = customer.gender.toString() === 'M' ? this.bodyCompositionService.calcNavyTapeMale(measurement, customer.height) : this.bodyCompositionService.calcNavyTapeFemale(measurement, customer.height);
+
+    console.log('pgDurninWomersley', pgDurninWomersley)
+    console.log('pgJacksonPollock7', pgJacksonPollock7)
+    console.log('pgJacksonPollock3', pgJacksonPollock3)
+    console.log('pgWeltman', pgWeltman)
+    console.log('pgNavyTape', pgNavyTape)
 
     // Calculo la masa absoluta de la grasa
     this.mgDurninWomersley = pgDurninWomersley ? (pgDurninWomersley / 100) * this.mt : 0;
     this.mgJacksonPollock7 = pgJacksonPollock7 ? (pgJacksonPollock7 / 100) * this.mt : 0;
     this.mgJacksonPollock3 = pgJacksonPollock3 ? (pgJacksonPollock3 / 100) * this.mt : 0;
+    this.mgWeltman = pgWeltman ? (pgWeltman / 100) * this.mt : 0;
+    this.mgNavyTape = pgNavyTape ? (pgNavyTape / 100) * this.mt : 0;
 
     /* CÁLCULO DE MASA ÓSEA */
     this.mo = this.calcMO(customer);
 
     /* CÁLCULO DE MASA MUSCULAR */
     const mme = this.bodyCompositionService.calcLee(
-      customer.measurements![measurementSelected],
+      measurement,
       customer.height,
       customer.gender.toString(),
       age,

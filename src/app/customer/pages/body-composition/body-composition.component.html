@@ -29,6 +29,14 @@
     <app-composition-pie [formula]="'Jackson-Pollock 3'" [mt]="mt" [mg]="mgJacksonPollock3!" [mo]="mo!" [mm]="mm!" />
   }
 
+  @if (mgWeltman) {
+    <app-composition-pie style="grid-column: 2 / 4;" [formula]="'Weltman'" [mt]="mt" [mg]="mgWeltman!" [mo]="mo!" [mm]="mm!" />
+  }
+
+  @if (mgNavyTape) {
+    <app-composition-pie style="grid-column: 4 / 6;" [formula]="'Navy Tape'" [mt]="mt" [mg]="mgNavyTape!" [mo]="mo!" [mm]="mm!" />
+  }
+
   <section id="formula-prioritization">
     <div id="formula-prioritization-title">
       <h3>¿Qué fórmula para el cálculo de masa grasa es la más adecuada?</h3>
@@ -75,6 +83,35 @@
         <strong>Recomendado para:</strong> Evaluaciones rápidas en el ámbito deportivo, cuando no se dispone del tiempo o recursos para una medición completa con 7 pliegues.
       </p>
     </div>
+
+    <div style="grid-column: 2 / 4;">
+      <h4>Weltman</h4>
+      <p>
+        <strong>Descripción:</strong> Método basado en el perímetro de la cintura para estimar la grasa visceral. Es útil para evaluar el riesgo metabólico y la salud cardiovascular.
+      </p>
+      <p>
+        <strong>Medidas utilizadas:</strong> Perímetro de cintura (cm), peso (kg).
+      </p>
+      <p>
+        <strong>Recomendado para:</strong> Personas con sobrepeso, obesidad o riesgo de enfermedades metabólicas como diabetes o síndrome metabólico.
+      </p>
+    </div>
+
+    <div style="grid-column: 4 / 6;">
+      <h4>Navy Tape</h4>
+      <p>
+        <strong>Descripción:</strong> Método utilizado por el ejército de EE.UU. para evaluar la composición corporal mediante mediciones de perímetros corporales.
+      </p>
+      <p>
+        <strong>Medidas utilizadas:</strong>
+        <br><strong>Hombres:</strong> Perímetro de cuello y cintura.
+        <br><strong>Mujeres:</strong> Perímetro de cuello, cintura y cadera.
+      </p>
+      <p>
+        <strong>Recomendado para:</strong> Evaluaciones prácticas en poblaciones generales y militares, especialmente cuando no se dispone de pliegues cutáneos.
+      </p>
+    </div>
   </section>
+
 
 </section>
