@@ -42,8 +42,8 @@ export class CompositionPieComponent {
         trigger: 'item',
         formatter: function (params: any) {
           return `
-          <h4 style="margin: 5px">
-            ${params.seriesName}
+          <h4 style="margin: 5px; font-size: 18px">
+            <span style="font-size: 14px">Formula: </span> ${params.seriesName}
           </h4>
           <span
             style="
@@ -60,16 +60,22 @@ export class CompositionPieComponent {
       },
       legend: {
         itemGap: 20,
+        padding: 20,
         orient: 'vertical',
         right: '5%',
-        top: 'center'
+        top: '20%'
       },
       series: [
         {
-          name: 'Composición Corporal ' + this.formula(),
+          name: this.formula(),
           type: 'pie',
           radius: ['40%', '70%'],
+          center: ['30%', '40%'],
           avoidLabelOverlap: false,
+          padAngle: 4,
+          itemStyle: {
+            borderRadius: 10
+          },
           label: {
             show: false,
             position: 'center'

@@ -193,7 +193,7 @@ export class BodyCompositionService {
   }
 
   /* CALCULAR MASA GRASA MEDIANTE PERIMETROS */
-  calcParrillo(measurement: Measurement, gender: string) {
+  calcWeltman(measurement: Measurement, gender: string) {
 
   }
   calcNavyTape(measurement: Measurement, gender: string) {

@@ -1,7 +1,8 @@
-<h2>Composición Corporal</h2>
 
 
 <section id="gauge-charts">
+  <h2>Indices de Salud</h2>
+
   <app-imc [imc]="imc" />
 
   @if (icc) {
@@ -13,6 +14,67 @@
   }
 </section>
 
-<section>
-  <app-composition-pie [formula]="'Durnin-Womersley'" [mt]="mt" [mg]="mgDurninWomersley!" [mo]="mo!" [mm]="mm!" />
+<section id="bc-charts">
+  <h2>Composicion Coporal</h2>
+
+  @if (mgDurninWomersley) {
+    <app-composition-pie [formula]="'Durnin-Womersley'" [mt]="mt" [mg]="mgDurninWomersley!" [mo]="mo!" [mm]="mm!" />
+  }
+
+  @if (mgJacksonPollock7) {
+    <app-composition-pie [formula]="'Jackson-Pollock 7'" [mt]="mt" [mg]="mgJacksonPollock7!" [mo]="mo!" [mm]="mm!" />
+  }
+
+  @if (mgJacksonPollock3) {
+    <app-composition-pie [formula]="'Jackson-Pollock 3'" [mt]="mt" [mg]="mgJacksonPollock3!" [mo]="mo!" [mm]="mm!" />
+  }
+
+  <section id="formula-prioritization">
+    <div id="formula-prioritization-title">
+      <h3>¿Qué fórmula para el cálculo de masa grasa es la más adecuada?</h3>
+      <p>Seleccionar la fórmula correcta depende del nivel de actividad física, el porcentaje graso y la precisión requerida en la medición.</p>
+    </div>
+
+    <div>
+      <h4>Durnin-Womersley + Siri</h4>
+      <p>
+        <strong>Descripción:</strong> Método ampliamente utilizado en cineantropometría, válido para toda la población. Es ideal para individuos con actividad física baja o moderada.
+      </p>
+      <p>
+        <strong>Pliegues utilizados (4 sitios):</strong> Tríceps, Bíceps, Subescapular, Suprailíaco.
+      </p>
+      <p>
+        <strong>Recomendado para:</strong> Evaluaciones generales en personas con un porcentaje graso superior al 20% (hombres) o 25% (mujeres).
+      </p>
+    </div>
+
+    <div>
+      <h4>Jackson-Pollock 7 Pliegues + Siri</h4>
+      <p>
+        <strong>Descripción:</strong> Método diseñado para deportistas y personas con una cantidad reducida de grasa corporal. Ofrece una mayor precisión en la estimación del porcentaje graso al incluir más puntos de medición.
+      </p>
+      <p>
+        <strong>Pliegues utilizados (7 sitios):</strong> Pectoral, Abdominal, Muslo, Tríceps, Subescapular, Suprailíaco, Axilar Media.
+      </p>
+      <p>
+        <strong>Recomendado para:</strong> Deportistas y personas con un porcentaje graso menor al 20% en hombres o 25% en mujeres.
+      </p>
+    </div>
+
+    <div>
+      <h4>Jackson-Pollock 3 Pliegues + Siri</h4>
+      <p>
+        <strong>Descripción:</strong> Variante simplificada del método Jackson-Pollock 7, con una menor cantidad de pliegues, pero conservando una buena precisión.
+      </p>
+      <p>
+        <strong>Pliegues utilizados (3 sitios):</strong>
+        <br><strong>Hombres:</strong> Pectoral, Abdominal, Muslo.
+        <br><strong>Mujeres:</strong> Tríceps, Suprailíaco, Muslo.
+      </p>
+      <p>
+        <strong>Recomendado para:</strong> Evaluaciones rápidas en el ámbito deportivo, cuando no se dispone del tiempo o recursos para una medición completa con 7 pliegues.
+      </p>
+    </div>
+  </section>
+
 </section>
