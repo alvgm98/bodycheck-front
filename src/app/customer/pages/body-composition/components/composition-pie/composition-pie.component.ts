@@ -37,13 +37,26 @@ export class CompositionPieComponent {
   renderChart(mt: number, mg: number, mo: number, mm: number) {
     let data = this.initData(mt, mg, mo, mm);
 
+    const moFormula = this.mo().formula;
+
     this.pieChart = {
       tooltip: {
         trigger: 'item',
         formatter: function (params: any) {
+          const formulaMap: { [key: string]: string } = {
+            'Masa Grasa': params.seriesName,
+            'Masa Muscular': 'Lee',
+            'Masa Muscular-Esqueletica': 'Lee',
+            'Masa Osea': moFormula,
+            'Masa Residual': 'Diferencia Total',
+            'Resto': 'Diferencia Total'
+          };
+
+          const formulaName = formulaMap[params.name] || '';
+
           return `
           <h4 style="margin: 5px; font-size: 18px">
-            <span style="font-size: 14px">Formula: </span> ${params.seriesName}
+            <span style="font-size: 14px">Formula: </span> ${formulaName}
           </h4>
           <span
             style="
