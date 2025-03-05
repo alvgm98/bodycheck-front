@@ -11,11 +11,12 @@ import { GenericObject } from '../../models/generic';
 import { ModalCustomerListComponent } from '../modal-customer-list/modal-customer-list.component';
 import { Customer } from '../../models/customer';
 import { customerRequiredValidator } from './validators/appointment.valitador';
+import { NgClass, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-appointment-form',
   standalone: true,
-  imports: [DatePickerComponent, CheckboxComponent, TextareaComponent, ModalCustomerListComponent, ReactiveFormsModule],
+  imports: [DatePickerComponent, CheckboxComponent, TextareaComponent, ModalCustomerListComponent, ReactiveFormsModule, NgStyle, NgClass],
   templateUrl: './appointment-form.component.html',
   styleUrl: './appointment-form.component.scss',
   animations: [
@@ -202,12 +203,21 @@ export class AppointmentFormComponent {
   }
 
   deleteAppointment() {
-    // TODO ask for confirm
+    if (!this.confirmDelete) {
+      this.confirmDelete = true;
+      return;
+    }
 
     this.appointmentService.deleteAppointment(this.appointment()!.id).subscribe({
       next: () => this.close(),
       error: (error) => console.log(error)
     })
+  }
+
+  cancelDelete() {
+    if (this.confirmDelete) {
+      this.confirmDelete = false;
+    }
   }
 
   createAppointment(appointment: AppointmentRequest) {

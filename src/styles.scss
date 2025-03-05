@@ -466,6 +466,11 @@ input[type=number] {
     color: $primary-color;
   }
 
+  .stroked-button {
+    background-color: transparent;
+    border-width: 3px;
+  }
+
   .form-row {
     width: 100%;
     display: flex;

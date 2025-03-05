@@ -101,21 +101,29 @@
 
   @if (appointment()) {
     <div class="btn-row action-btn-row">
-      @if (!confirmDelete) {
-        <div class="actions">
-          <button type="submit" class="btn flat-button">Editar Cita</button>
-          <button type="button" class="btn flat-button cancel-button" (click)="confirmDelete = true">Borrar Cita</button>
-        </div>
-      } @else {
-        <div class="confirm-delete">
-          <button type="button" class="confirm-btn cancel-delete-btn" (click)="confirmDelete = false">
-            <i class="fa-solid fa-arrow-rotate-left"></i>
+      <div class="actions">
+          <button
+            [type]="confirmDelete ? 'button' : 'submit'"
+            class="btn flat-button"
+            [ngClass]="confirmDelete ? 'stroked-button' : 'flat-button'"
+            [ngStyle]="{'width': confirmDelete ? '80px' : ''}"
+            (click)="cancelDelete()"
+          >
+          @if (!confirmDelete) {
+            Editar Cita
+          } @else {
+            <i class="fa-solid fa-left-long"></i>
+          }
           </button>
-          <button type="button" class="confirm-btn confirm-delete-btn" (click)="deleteAppointment()">
-            <i class="fa-solid fa-trash"></i>
+          <button
+            type="button"
+            class="btn flat-button cancel-button"
+            [ngStyle]="{'width': confirmDelete ? '50%' : ''}"
+            (click)="deleteAppointment()"
+          >
+            {{ confirmDelete ? 'Confirmar' : 'Borrar Cita'}}
           </button>
         </div>
-      }
       </div>
   } @else {
     <div class="btn-row">
