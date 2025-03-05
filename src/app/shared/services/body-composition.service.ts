@@ -43,10 +43,10 @@ export class BodyCompositionService {
   calcDurninWomersley(measurement: Measurement, gender: string, age: number) {
     if (!measurement.skinfold) return null;
 
-    const { biceps, triceps, subscapular, suprailiac } = measurement.skinfold!;
+    const { biceps, triceps, subscapular, iliacCrest } = measurement.skinfold!;
 
     // Compruebo que existen todos los datos necesarios
-    if (!biceps || !triceps || !subscapular || !suprailiac) {
+    if (!biceps || !triceps || !subscapular || !iliacCrest) {
       return null;
     }
 
@@ -54,10 +54,10 @@ export class BodyCompositionService {
     const bicepsDecimal = new Decimal(biceps);
     const tricepsDecimal = new Decimal(triceps);
     const subscapularDecimal = new Decimal(subscapular);
-    const suprailiacDecimal = new Decimal(suprailiac);
+    const iliacCrestDecimal = new Decimal(iliacCrest);
 
     // Calculo log10 de la suma de pliegues
-    const skinfoldSum = bicepsDecimal.plus(tricepsDecimal).plus(subscapularDecimal).plus(suprailiacDecimal);
+    const skinfoldSum = bicepsDecimal.plus(tricepsDecimal).plus(subscapularDecimal).plus(iliacCrestDecimal);
     const log10SkinfoldSum = skinfoldSum.logarithm(10);
 
     let density: Decimal;
