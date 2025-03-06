@@ -19,22 +19,56 @@
 
   @if (mgDurninWomersley) {
     <app-composition-pie [formula]="'Durnin-Womersley'" [mt]="mt" [mg]="mgDurninWomersley!" [mo]="mo!" [mm]="mm!" />
+  } @else {
+    <div class="formula-missed">
+      <h4>Durnin-Womersley</h4>
+      <p>No se ha podido realizar el calculo.</p>
+      <p><strong>Pliegues necesarios:</strong> Tríceps, Bíceps, Subescapular, Cresta Iliaca.</p>
+    </div>
   }
 
   @if (mgJacksonPollock7) {
     <app-composition-pie [formula]="'Jackson-Pollock 7'" [mt]="mt" [mg]="mgJacksonPollock7!" [mo]="mo!" [mm]="mm!" />
+  } @else {
+    <div class="formula-missed">
+      <h4>Jackson-Pollock 7</h4>
+      <p>No se ha podido realizar el calculo.</p>
+      <p><strong>Pliegues necesarios:</strong> Pectoral, Abdominal, Muslo, Tríceps, Subescapular, Suprailíaco, Axilar Media.</p>
+    </div>
   }
 
   @if (mgJacksonPollock3) {
     <app-composition-pie [formula]="'Jackson-Pollock 3'" [mt]="mt" [mg]="mgJacksonPollock3!" [mo]="mo!" [mm]="mm!" />
+  } @else {
+    <div class="formula-missed">
+      <h4>Jackson-Pollock 3</h4>
+      <p>No se ha podido realizar el calculo.</p>
+      <strong>Pliegues necesarios (3 sitios):</strong>
+        <p><strong>Hombres:</strong> Pectoral, Abdominal, Muslo.</p>
+        <p><strong>Mujeres:</strong> Tríceps, Suprailíaco, Muslo.</p>
+    </div>
   }
 
   @if (mgWeltman) {
     <app-composition-pie style="grid-column: 2 / 4;" [formula]="'Weltman'" [mt]="mt" [mg]="mgWeltman!" [mo]="mo!" [mm]="mm!" />
+  } @else {
+    <div class="formula-missed" style="grid-column: 2 / 4;">
+      <h4>Weltman</h4>
+      <p>No se ha podido realizar el calculo.</p>
+      <p><strong>Datos necesarios:</strong> Perímetro de cintura (cm), peso (kg).</p>
+    </div>
   }
 
   @if (mgNavyTape) {
     <app-composition-pie style="grid-column: 4 / 6;" [formula]="'Navy Tape'" [mt]="mt" [mg]="mgNavyTape!" [mo]="mo!" [mm]="mm!" />
+  } @else {
+    <div class="formula-missed" style="grid-column: 4 / 6;">
+      <h4>Navy Tape</h4>
+      <p>No se ha podido realizar el calculo.</p>
+      <strong>Medidas necesarias:</strong>
+        <p><strong>Hombres:</strong> Perímetro de cuello y cintura.</p>
+        <p><strong>Mujeres:</strong> Perímetro de cuello, cintura y cadera.</p>
+    </div>
   }
 
   <section id="formula-prioritization">

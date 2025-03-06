@@ -31,6 +31,24 @@ h2 {
   grid-column: span 6 !important;
 }
 
+.formula-missed {
+  margin-top: 32px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  * {
+    margin: 0;
+  }
+
+  h4 {
+    font-size: 20px
+  }
+}
+
 #formula-prioritization {
   border: 0;
   gap: 24px 50px;
