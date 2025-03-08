@@ -1,151 +1,174 @@
-
-
 <section id="gauge-charts">
   <h2>Indices de Salud</h2>
 
-  <app-imc [imc]="imc" />
+  @if (bodyComposition) {
 
-  @if (icc) {
-  <app-icc [icc]="icc!" [gender]="customer().gender.toString()" />
+    <app-imc [imc]="bodyComposition.imc!" />
+
+    @if (bodyComposition.icc) {
+    <app-icc [icc]="bodyComposition.icc!" [gender]="customer().gender.toString()" />
+    }
+
+    @if (bodyComposition.ica) {
+    <app-ica [ica]="bodyComposition.ica!" />
+    }
+
+  } @else {
+  <mat-spinner style="grid-column: 1 / -1; margin-block: 50px" />
   }
 
-  @if (ica) {
-  <app-ica [ica]="ica!" />
-  }
 </section>
 
 <section id="bc-charts">
   <h2>Composicion Coporal</h2>
-
-  @if (mgDurninWomersley) {
-    <app-composition-pie [formula]="'Durnin-Womersley'" [mt]="mt" [mg]="mgDurninWomersley!" [mo]="mo!" [mm]="mm!" />
-  } @else {
+  @if (bodyComposition) {
+    @if (bodyComposition.mgDurninWomersley) {
+    <app-composition-pie [formula]="'Durnin-Womersley'" [mt]="bodyComposition.mt" [mg]="bodyComposition.mgDurninWomersley"
+      [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
+    } @else {
     <div class="formula-missed">
       <h4>Durnin-Womersley</h4>
       <p>No se ha podido realizar el calculo.</p>
       <p><strong>Pliegues necesarios:</strong> Tríceps, Bíceps, Subescapular, Cresta Iliaca.</p>
     </div>
-  }
+    }
 
-  @if (mgJacksonPollock7) {
-    <app-composition-pie [formula]="'Jackson-Pollock 7'" [mt]="mt" [mg]="mgJacksonPollock7!" [mo]="mo!" [mm]="mm!" />
-  } @else {
+    @if (bodyComposition.mgJacksonPollock7) {
+    <app-composition-pie [formula]="'Jackson-Pollock 7'" [mt]="bodyComposition.mt"
+      [mg]="bodyComposition.mgJacksonPollock7" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
+    } @else {
     <div class="formula-missed">
       <h4>Jackson-Pollock 7</h4>
       <p>No se ha podido realizar el calculo.</p>
-      <p><strong>Pliegues necesarios:</strong> Pectoral, Abdominal, Muslo, Tríceps, Subescapular, Suprailíaco, Axilar Media.</p>
+      <p><strong>Pliegues necesarios:</strong> Pectoral, Abdominal, Muslo, Tríceps, Subescapular, Suprailíaco, Axilar
+        Media.</p>
     </div>
-  }
+    }
 
-  @if (mgJacksonPollock3) {
-    <app-composition-pie [formula]="'Jackson-Pollock 3'" [mt]="mt" [mg]="mgJacksonPollock3!" [mo]="mo!" [mm]="mm!" />
-  } @else {
+    @if (bodyComposition.mgJacksonPollock3) {
+    <app-composition-pie [formula]="'Jackson-Pollock 3'" [mt]="bodyComposition.mt"
+      [mg]="bodyComposition.mgJacksonPollock3" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
+    } @else {
     <div class="formula-missed">
       <h4>Jackson-Pollock 3</h4>
       <p>No se ha podido realizar el calculo.</p>
       <strong>Pliegues necesarios (3 sitios):</strong>
-        <p><strong>Hombres:</strong> Pectoral, Abdominal, Muslo.</p>
-        <p><strong>Mujeres:</strong> Tríceps, Suprailíaco, Muslo.</p>
+      <p><strong>Hombres:</strong> Pectoral, Abdominal, Muslo.</p>
+      <p><strong>Mujeres:</strong> Tríceps, Suprailíaco, Muslo.</p>
     </div>
-  }
+    }
 
-  @if (mgWeltman) {
-    <app-composition-pie style="grid-column: 2 / 4;" [formula]="'Weltman'" [mt]="mt" [mg]="mgWeltman!" [mo]="mo!" [mm]="mm!" />
-  } @else {
+    @if (bodyComposition.mgWeltman) {
+    <app-composition-pie style="grid-column: 2 / 4;" [formula]="'Weltman'" [mt]="bodyComposition.mt"
+      [mg]="bodyComposition.mgWeltman" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
+    } @else {
     <div class="formula-missed" style="grid-column: 2 / 4;">
       <h4>Weltman</h4>
       <p>No se ha podido realizar el calculo.</p>
       <p><strong>Datos necesarios:</strong> Perímetro de cintura (cm), peso (kg).</p>
     </div>
-  }
+    }
 
-  @if (mgNavyTape) {
-    <app-composition-pie style="grid-column: 4 / 6;" [formula]="'Navy Tape'" [mt]="mt" [mg]="mgNavyTape!" [mo]="mo!" [mm]="mm!" />
-  } @else {
+    @if (bodyComposition.mgNavyTape) {
+    <app-composition-pie style="grid-column: 4 / 6;" [formula]="'Navy Tape'" [mt]="bodyComposition.mt"
+      [mg]="bodyComposition.mgNavyTape" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
+    } @else {
     <div class="formula-missed" style="grid-column: 4 / 6;">
       <h4>Navy Tape</h4>
       <p>No se ha podido realizar el calculo.</p>
       <strong>Medidas necesarias:</strong>
-        <p><strong>Hombres:</strong> Perímetro de cuello y cintura.</p>
-        <p><strong>Mujeres:</strong> Perímetro de cuello, cintura y cadera.</p>
+      <p><strong>Hombres:</strong> Perímetro de cuello y cintura.</p>
+      <p><strong>Mujeres:</strong> Perímetro de cuello, cintura y cadera.</p>
     </div>
+    }
+
+    <section id="formula-prioritization">
+      <div id="formula-prioritization-title">
+        <h3>¿Qué fórmula para el cálculo de masa grasa es la más adecuada?</h3>
+        <p>Seleccionar la fórmula correcta depende del nivel de actividad física, el porcentaje graso y la precisión
+          requerida en la medición.</p>
+      </div>
+
+      <div>
+        <h4>Durnin-Womersley + Siri</h4>
+        <p>
+          <strong>Descripción:</strong> Método ampliamente utilizado en cineantropometría, válido para toda la población.
+          Es ideal para individuos con actividad física baja o moderada.
+        </p>
+        <p>
+          <strong>Pliegues utilizados (4 sitios):</strong> Tríceps, Bíceps, Subescapular, Cresta Iliaca.
+        </p>
+        <p>
+          <strong>Recomendado para:</strong> Evaluaciones generales en personas con un porcentaje graso superior al 20%
+          (hombres) o 25% (mujeres).
+        </p>
+      </div>
+
+      <div>
+        <h4>Jackson-Pollock 7 Pliegues + Siri</h4>
+        <p>
+          <strong>Descripción:</strong> Método diseñado para deportistas y personas con una cantidad reducida de grasa
+          corporal. Ofrece una mayor precisión en la estimación del porcentaje graso al incluir más puntos de medición.
+        </p>
+        <p>
+          <strong>Pliegues utilizados (7 sitios):</strong> Pectoral, Abdominal, Muslo, Tríceps, Subescapular, Suprailíaco,
+          Axilar Media.
+        </p>
+        <p>
+          <strong>Recomendado para:</strong> Deportistas y personas con un porcentaje graso menor al 20% en hombres o 25%
+          en mujeres.
+        </p>
+      </div>
+
+      <div>
+        <h4>Jackson-Pollock 3 Pliegues + Siri</h4>
+        <p>
+          <strong>Descripción:</strong> Variante simplificada del método Jackson-Pollock 7, con una menor cantidad de
+          pliegues, pero conservando una buena precisión.
+        </p>
+        <p>
+          <strong>Pliegues utilizados (3 sitios):</strong>
+          <br><strong>Hombres:</strong> Pectoral, Abdominal, Muslo.
+          <br><strong>Mujeres:</strong> Tríceps, Suprailíaco, Muslo.
+        </p>
+        <p>
+          <strong>Recomendado para:</strong> Evaluaciones rápidas en el ámbito deportivo, cuando no se dispone del tiempo
+          o recursos para una medición completa con 7 pliegues.
+        </p>
+      </div>
+
+      <div style="grid-column: 2 / 4;">
+        <h4>Weltman</h4>
+        <p>
+          <strong>Descripción:</strong> Método basado en el perímetro de la cintura para estimar la grasa visceral. Es
+          útil para evaluar el riesgo metabólico y la salud cardiovascular.
+        </p>
+        <p>
+          <strong>Medidas utilizadas:</strong> Perímetro de cintura (cm), peso (kg).
+        </p>
+        <p>
+          <strong>Recomendado para:</strong> Personas con sobrepeso, obesidad o riesgo de enfermedades metabólicas como
+          diabetes o síndrome metabólico.
+        </p>
+      </div>
+
+      <div style="grid-column: 4 / 6;">
+        <h4>Navy Tape</h4>
+        <p>
+          <strong>Descripción:</strong> Método utilizado por el ejército de EE.UU. para evaluar la composición corporal
+          mediante mediciones de perímetros corporales.
+        </p>
+        <p>
+          <strong>Medidas utilizadas:</strong>
+          <br><strong>Hombres:</strong> Perímetro de cuello y cintura.
+          <br><strong>Mujeres:</strong> Perímetro de cuello, cintura y cadera.
+        </p>
+        <p>
+          <strong>Recomendado para:</strong> Evaluaciones rapidas cuando no se dispone de pliegues cutaneos.
+        </p>
+      </div>
+    </section>
+  } @else {
+  <mat-spinner style="grid-column: 1 / -1; margin-block: 50px" />
   }
-
-  <section id="formula-prioritization">
-    <div id="formula-prioritization-title">
-      <h3>¿Qué fórmula para el cálculo de masa grasa es la más adecuada?</h3>
-      <p>Seleccionar la fórmula correcta depende del nivel de actividad física, el porcentaje graso y la precisión requerida en la medición.</p>
-    </div>
-
-    <div>
-      <h4>Durnin-Womersley + Siri</h4>
-      <p>
-        <strong>Descripción:</strong> Método ampliamente utilizado en cineantropometría, válido para toda la población. Es ideal para individuos con actividad física baja o moderada.
-      </p>
-      <p>
-        <strong>Pliegues utilizados (4 sitios):</strong> Tríceps, Bíceps, Subescapular, Cresta Iliaca.
-      </p>
-      <p>
-        <strong>Recomendado para:</strong> Evaluaciones generales en personas con un porcentaje graso superior al 20% (hombres) o 25% (mujeres).
-      </p>
-    </div>
-
-    <div>
-      <h4>Jackson-Pollock 7 Pliegues + Siri</h4>
-      <p>
-        <strong>Descripción:</strong> Método diseñado para deportistas y personas con una cantidad reducida de grasa corporal. Ofrece una mayor precisión en la estimación del porcentaje graso al incluir más puntos de medición.
-      </p>
-      <p>
-        <strong>Pliegues utilizados (7 sitios):</strong> Pectoral, Abdominal, Muslo, Tríceps, Subescapular, Suprailíaco, Axilar Media.
-      </p>
-      <p>
-        <strong>Recomendado para:</strong> Deportistas y personas con un porcentaje graso menor al 20% en hombres o 25% en mujeres.
-      </p>
-    </div>
-
-    <div>
-      <h4>Jackson-Pollock 3 Pliegues + Siri</h4>
-      <p>
-        <strong>Descripción:</strong> Variante simplificada del método Jackson-Pollock 7, con una menor cantidad de pliegues, pero conservando una buena precisión.
-      </p>
-      <p>
-        <strong>Pliegues utilizados (3 sitios):</strong>
-        <br><strong>Hombres:</strong> Pectoral, Abdominal, Muslo.
-        <br><strong>Mujeres:</strong> Tríceps, Suprailíaco, Muslo.
-      </p>
-      <p>
-        <strong>Recomendado para:</strong> Evaluaciones rápidas en el ámbito deportivo, cuando no se dispone del tiempo o recursos para una medición completa con 7 pliegues.
-      </p>
-    </div>
-
-    <div style="grid-column: 2 / 4;">
-      <h4>Weltman</h4>
-      <p>
-        <strong>Descripción:</strong> Método basado en el perímetro de la cintura para estimar la grasa visceral. Es útil para evaluar el riesgo metabólico y la salud cardiovascular.
-      </p>
-      <p>
-        <strong>Medidas utilizadas:</strong> Perímetro de cintura (cm), peso (kg).
-      </p>
-      <p>
-        <strong>Recomendado para:</strong> Personas con sobrepeso, obesidad o riesgo de enfermedades metabólicas como diabetes o síndrome metabólico.
-      </p>
-    </div>
-
-    <div style="grid-column: 4 / 6;">
-      <h4>Navy Tape</h4>
-      <p>
-        <strong>Descripción:</strong> Método utilizado por el ejército de EE.UU. para evaluar la composición corporal mediante mediciones de perímetros corporales.
-      </p>
-      <p>
-        <strong>Medidas utilizadas:</strong>
-        <br><strong>Hombres:</strong> Perímetro de cuello y cintura.
-        <br><strong>Mujeres:</strong> Perímetro de cuello, cintura y cadera.
-      </p>
-      <p>
-        <strong>Recomendado para:</strong> Evaluaciones rapidas cuando no se dispone de pliegues cutaneos.
-      </p>
-    </div>
-  </section>
-
-
 </section>

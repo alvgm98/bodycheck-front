@@ -1,11 +1,77 @@
 import { Injectable } from '@angular/core';
 import { Measurement } from '../models/measurement';
 import Decimal from 'decimal.js';
+import { CustomerDetailed } from '../models/customer';
+import { BodyComposition } from '../models/body-composition';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BodyCompositionService {
+  calcBodyComposition(customer: CustomerDetailed, measurementSelected: number): BodyComposition {
+    const measurement = customer.measurements![measurementSelected];
+    const age = this.calcAge(new Date(customer.birthdate), new Date(measurement.date));
+
+    const mt = measurement.weight;
+
+    /* CÁLCULO DE INDICES DE SALUD */
+    const { waist, hip } = measurement.circumference!;
+    const imc = this.calcIMC(measurement.weight, customer.height);
+    const icc = this.calcICC(waist, hip);
+    const ica = this.calcICA(waist, customer.height)
+
+    /* CÁLCULO DE MASA GRASA */
+    // Calculo las densidades (m/L)
+    const dgDurninWomersley = this.calcDurninWomersley(measurement, customer.gender.toString(), age);
+    const dgJacksonPollock7 = this.calcJacksonPollock7(measurement, customer.gender.toString(), age);
+    const dgJacksonPollock3 = customer.gender.toString() === 'M'
+      ? this.calcJacksonPollock3Male(measurement, age)
+      : this.calcJacksonPollock3Female(measurement, age);
+
+    // Calculo los porcentajes con la formula de siri
+    const pgDurninWomersley = dgDurninWomersley ? this.calcSiri(dgDurninWomersley) : null;
+    const pgJacksonPollock7 = dgJacksonPollock7 ? this.calcSiri(dgJacksonPollock7) : null;
+    const pgJacksonPollock3 = dgJacksonPollock3 ? this.calcSiri(dgJacksonPollock3) : null;
+    const pgWeltman = customer.gender.toString() === 'M' ? this.calcWeltmanMale(measurement) : this.calcWeltmanFemale(measurement, customer.height);
+    const pgNavyTape = customer.gender.toString() === 'M' ? this.calcNavyTapeMale(measurement, customer.height) : this.calcNavyTapeFemale(measurement, customer.height);
+
+    // Calculo la masa absoluta de la grasa
+    const mgDurninWomersley = pgDurninWomersley ? (pgDurninWomersley / 100) * mt : 0;
+    const mgJacksonPollock7 = pgJacksonPollock7 ? (pgJacksonPollock7 / 100) * mt : 0;
+    const mgJacksonPollock3 = pgJacksonPollock3 ? (pgJacksonPollock3 / 100) * mt : 0;
+    const mgWeltman = pgWeltman ? (pgWeltman / 100) * mt : 0;
+    const mgNavyTape = pgNavyTape ? (pgNavyTape / 100) * mt : 0;
+
+    /* CÁLCULO DE MASA ÓSEA */
+    const mo = this.calcMO(customer);
+
+    /* CÁLCULO DE MASA MUSCULAR */
+    const mme = this.calcLee(
+      measurement,
+      customer.height,
+      customer.gender.toString(),
+      age,
+      customer.ethnicity.toString()
+    );
+
+    const mm = this.calcMM(mme, mo.value);
+
+    return {
+      date: customer.measurements![measurementSelected].date,
+      imc: imc,
+      icc: icc,
+      ica: ica,
+      mt: mt,
+      mgDurninWomersley: mgDurninWomersley,
+      mgJacksonPollock7: mgJacksonPollock7,
+      mgJacksonPollock3: mgJacksonPollock3,
+      mgWeltman: mgWeltman,
+      mgNavyTape: mgNavyTape,
+      mo: mo,
+      mm: mm,
+    }
+  }
+
   calcIMC(weight: number, height: number) {
     return new Decimal(weight)
       .div(new Decimal(height / 100).pow(2))
@@ -360,5 +426,38 @@ export class BodyCompositionService {
   /* CALCULAR MASA MUSCULAR */
   calcMM(mme: number, mo: number) {
     return new Decimal(mme).minus(mo).toNumber();
+  }
+
+  /**
+ * Obtiene la Masa Ósea más actualizada hasta la fecha,
+ * Priorizando:
+ *    - 1: Actualidad
+ *    - 2: Formula Martin
+ *    - 3: Formula Rocha
+ */
+  private calcMO(customer: CustomerDetailed) {
+    // Itera las mediciones desde la más actualizada.
+    for (let i = customer.measurements!.length - 1; i >= 0; i--) {
+      const measurement = customer.measurements![i];
+
+      // Si no ha habido calculo de diametros salto a la siguiente sesión
+      if (!measurement.diameter) continue;
+
+      // Intentamos hacer el calculo de Martin que es el más exacto
+      const moMartin = this.calcMartin(measurement, customer.height);
+      if (moMartin) return { formula: "Martin", value: moMartin };
+
+      // Si falla Martin, intentamos Rocha
+      const moRocha = this.calcRocha(measurement, customer.height);
+      if (moRocha) return { formula: "Rocha", value: moRocha };
+    }
+    return { formula: "", value: 0 };
+  }
+
+  /** Obtiene la edad del sujeto en el momento de la medición */
+  private calcAge(birthdate: Date, measurementDate: Date): number {
+    const diff = measurementDate.getTime() - birthdate.getTime();
+    const ageDate = new Date(diff);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
 }

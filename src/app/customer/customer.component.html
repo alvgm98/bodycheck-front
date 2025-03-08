@@ -5,7 +5,7 @@
 } @else if (tabOpened === TABS.MEASUREMENTS) {
   <app-measurements-summary [customer]="customer!" />
 } @else if (tabOpened === TABS.CHARTS) {
-  <app-charts-summary />
+  <app-charts-summary [customer]="customer!" />
 } @else if (tabOpened === TABS.EXPORT) {
   <app-export-customer />
 }
