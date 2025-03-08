@@ -131,7 +131,7 @@ export class CompositionPieComponent {
       // Si tenemos todos los datos
       return [
         { value: mg, name: 'Masa Grasa', itemStyle: { color: '#FDDD60' } },
-        { value: mo, name: 'Masa Osea', itemStyle: { color: '#58D9F9' } },
+        { value: mo, name: 'Masa Osea', itemStyle: { color: '#21c3ef' } },
         { value: mm, name: 'Masa Muscular', itemStyle: { color: '#FF6E76' } },
         { value: mr, name: 'Masa Residual', itemStyle: { color: '#9E9E9E' } },
       ]
