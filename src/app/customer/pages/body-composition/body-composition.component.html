@@ -7,10 +7,20 @@
 
     @if (bodyComposition.icc) {
     <app-icc [icc]="bodyComposition.icc!" [gender]="customer().gender.toString()" />
+    } @else {
+    <div class="formula-missed">
+      <h4>Indice Cintura-Cadera</h4>
+      <p>Faltan datos.</p>
+    </div>
     }
 
     @if (bodyComposition.ica) {
     <app-ica [ica]="bodyComposition.ica!" />
+    } @else {
+    <div class="formula-missed">
+      <h4>Indice Cintura-Altura</h4>
+      <p>Faltan datos.</p>
+    </div>
     }
 
   } @else {
@@ -28,7 +38,7 @@
     } @else {
     <div class="formula-missed">
       <h4>Durnin-Womersley</h4>
-      <p>No se ha podido realizar el calculo.</p>
+      <p style="margin-bottom: 10px;">Faltan datos.</p>
       <p><strong>Pliegues necesarios:</strong> Tríceps, Bíceps, Subescapular, Cresta Iliaca.</p>
     </div>
     }
@@ -39,7 +49,7 @@
     } @else {
     <div class="formula-missed">
       <h4>Jackson-Pollock 7</h4>
-      <p>No se ha podido realizar el calculo.</p>
+      <p style="margin-bottom: 10px;">Faltan datos.</p>
       <p><strong>Pliegues necesarios:</strong> Pectoral, Abdominal, Muslo, Tríceps, Subescapular, Suprailíaco, Axilar
         Media.</p>
     </div>
@@ -51,7 +61,7 @@
     } @else {
     <div class="formula-missed">
       <h4>Jackson-Pollock 3</h4>
-      <p>No se ha podido realizar el calculo.</p>
+      <p style="margin-bottom: 10px;">Faltan datos.</p>
       <strong>Pliegues necesarios (3 sitios):</strong>
       <p><strong>Hombres:</strong> Pectoral, Abdominal, Muslo.</p>
       <p><strong>Mujeres:</strong> Tríceps, Suprailíaco, Muslo.</p>
@@ -64,8 +74,8 @@
     } @else {
     <div class="formula-missed" style="grid-column: 2 / 4;">
       <h4>Weltman</h4>
-      <p>No se ha podido realizar el calculo.</p>
-      <p><strong>Datos necesarios:</strong> Perímetro de cintura (cm), peso (kg).</p>
+      <p style="margin-bottom: 10px;">Faltan datos.</p>
+      <p><strong>Datos necesarios:</strong> Circunferencia de cintura (cm), peso (kg).</p>
     </div>
     }
 
@@ -75,10 +85,10 @@
     } @else {
     <div class="formula-missed" style="grid-column: 4 / 6;">
       <h4>Navy Tape</h4>
-      <p>No se ha podido realizar el calculo.</p>
+      <p style="margin-bottom: 10px;">Faltan datos.</p>
       <strong>Medidas necesarias:</strong>
-      <p><strong>Hombres:</strong> Perímetro de cuello y cintura.</p>
-      <p><strong>Mujeres:</strong> Perímetro de cuello, cintura y cadera.</p>
+      <p><strong>Hombres:</strong> Circunferencia de cuello y cintura.</p>
+      <p><strong>Mujeres:</strong> Circunferencia de cuello, cintura y cadera.</p>
     </div>
     }
 
@@ -144,7 +154,7 @@
           útil para evaluar el riesgo metabólico y la salud cardiovascular.
         </p>
         <p>
-          <strong>Medidas utilizadas:</strong> Perímetro de cintura (cm), peso (kg).
+          <strong>Medidas utilizadas:</strong> Circunferencia de cintura (cm), peso (kg).
         </p>
         <p>
           <strong>Recomendado para:</strong> Personas con sobrepeso, obesidad o riesgo de enfermedades metabólicas como
@@ -160,8 +170,8 @@
         </p>
         <p>
           <strong>Medidas utilizadas:</strong>
-          <br><strong>Hombres:</strong> Perímetro de cuello y cintura.
-          <br><strong>Mujeres:</strong> Perímetro de cuello, cintura y cadera.
+          <br><strong>Hombres:</strong> Circunferencia de cuello y cintura.
+          <br><strong>Mujeres:</strong> Circunferencia de cuello, cintura y cadera.
         </p>
         <p>
           <strong>Recomendado para:</strong> Evaluaciones rapidas cuando no se dispone de pliegues cutaneos.
