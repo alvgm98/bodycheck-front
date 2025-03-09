@@ -8,6 +8,10 @@ import { BodyComposition } from '../models/body-composition';
   providedIn: 'root'
 })
 export class BodyCompositionService {
+  getBodyCompositionList(customer: CustomerDetailed): BodyComposition[] {
+    return customer.measurements!.map((_, index) => this.calcBodyComposition(customer, index));
+  }
+
   calcBodyComposition(customer: CustomerDetailed, measurementSelected: number): BodyComposition {
     const measurement = customer.measurements![measurementSelected];
     const age = this.calcAge(new Date(customer.birthdate), new Date(measurement.date));
