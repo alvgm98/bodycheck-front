@@ -1,2 +1,9 @@
 <div id="line-pie-dataset-chart" style="height: 100%; width: 100%;"></div>
 
+<app-select-input
+  id="line-pie-select-formula"
+  [title]="'Selecciona Formula'"
+  [options]="formulas"
+  [inputSelected]="formulas[0].key"
+  (selectEvent)="onSelectFormula($event)"
+/>

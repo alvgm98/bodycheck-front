@@ -543,7 +543,8 @@ input[type=number] {
 
 /* SOBREESCRIBIR ESTILOS SELECT-INPUT EN EXPORT */
 
-#export-customer app-select-input {
+#export-customer app-select-input,
+#charts app-select-input {
   border: 2px solid $primary-color !important;
 }
 

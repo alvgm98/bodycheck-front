@@ -3,10 +3,12 @@ import * as echarts from 'echarts';
 import { BodyComposition } from '../../../../../shared/models/body-composition';
 import moment from 'moment';
 import { FORMULAS } from '../../../../../shared/models/constants/formulas.constants';
+import { SelectInputComponent } from '../../../../../shared/ui/select-input/select-input.component';
 
 @Component({
   selector: 'app-line-pie-dataset-chart',
   standalone: true,
+  imports: [SelectInputComponent],
   templateUrl: './line-pie-dataset-chart.component.html',
   styleUrls: ['./line-pie-dataset-chart.component.scss'],
 })
@@ -17,9 +19,23 @@ export class LinePieDatasetChartComponent implements OnDestroy {
   private moBool!: boolean; // Se encarga de comprobar si la masa osea ha sido calculada
   private mmBool!: boolean; // Se encarga de comprobar si la masa muscular ha sido calculada
 
-  mgFormulaSelected: string = FORMULAS.DURNIN_WOMERSLEY;
+  bodyCompositionList = input<BodyComposition[]>(); // Listado de medidas de composición corporal
 
-  bodyCompositionList = input<BodyComposition[]>();
+  // Opciones del select y valor predeterminado
+  mgFormulaSelected: string = FORMULAS.DURNIN_WOMERSLEY;
+  formulas = [
+    { key: FORMULAS.DURNIN_WOMERSLEY, value: FORMULAS.DURNIN_WOMERSLEY },
+    { key: FORMULAS.JACKSON_POLLOCK_7, value: FORMULAS.JACKSON_POLLOCK_7 },
+    { key: FORMULAS.JACKSON_POLLOCK_3, value: FORMULAS.JACKSON_POLLOCK_3 },
+    { key: FORMULAS.WELTMAN, value: FORMULAS.WELTMAN },
+    { key: FORMULAS.NAVY_TAPE, value: FORMULAS.NAVY_TAPE }
+  ];
+
+  onSelectFormula(value: string): void {
+    this.mgFormulaSelected = value;
+    this.initSource(this.bodyCompositionList()!);
+    this.initChart();
+  }
 
   constructor(private el: ElementRef) {
     effect(() => {
@@ -92,7 +108,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
 
   private selectData(index: number) {
     if (this.source[2][index] === null) {
-      return [{value: this.source[1][index], name: this.source[1][0], itemStyle: {color: '#109d8a'}}];
+      return [{ value: this.source[1][index], name: this.source[1][0], itemStyle: { color: '#109d8a' } }];
     }
 
     if (this.mmBool && !this.moBool) {
@@ -178,7 +194,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
           type: 'pie',
           id: 'pie',
           radius: ['16%', '33%'],
-          center: ['50%', '25%'],
+          center: ['70%', '25%'],
           padAngle: 4,
           itemStyle: {
             borderRadius: 5
