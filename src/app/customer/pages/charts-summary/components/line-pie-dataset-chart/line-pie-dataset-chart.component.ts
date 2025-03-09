@@ -18,7 +18,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
       const data = this.bodyCompositionList();
 
       const source = [
-        ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
+        ['Composicion Corporal', '2012', '2013', '2014', '2015', '2016', '2017'],
         ['Masa Grasa', 40.1, 62.2, 69.5, 36.4, 45.2, 32.5],
         ['Masa Osea', 51.1, 51.4, 55.1, 53.3, 73.8, 68.7],
         ['Masa Muscular', 56.5, 82.1, 88.7, 70.1, 53.4, 85.1],
