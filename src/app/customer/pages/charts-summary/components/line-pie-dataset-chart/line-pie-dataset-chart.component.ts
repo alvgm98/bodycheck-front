@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, ElementRef, input, effect } from '@angular/core';
+import { Component, OnDestroy, ElementRef, input, effect } from '@angular/core';
 import * as echarts from 'echarts';
 import { BodyComposition } from '../../../../../shared/models/body-composition';
+import moment from 'moment';
 
 @Component({
   selector: 'app-line-pie-dataset-chart',
@@ -59,7 +60,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
       // Calculo la masa residual
       const mr = mt - (mg + mo + mm);
 
-      source[0].push(date.toString());
+      source[0].push(moment(date).locale('es').format('DD MMM YYYY'));
       source[1].push(mt.toFixed(2));
       source[2].push(mg ? mg.toFixed(2) : null);
       source[3].push(mo ? mo.toFixed(2) : null);
@@ -88,7 +89,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
 
   private selectData(index: number) {
     if (this.source[2][index] === null) {
-      return [{value: 0, name: 'No hay datos', itemStyle: {color: '#109d8a'}}];
+      return [{value: this.source[1][index], name: this.source[1][0], itemStyle: {color: '#109d8a'}}];
     }
 
     if (this.mmBool && !this.moBool) {
@@ -183,12 +184,12 @@ export class LinePieDatasetChartComponent implements OnDestroy {
             focus: 'self'
           },
           label: {
-            formatter: '{b}: {@2012} ({d}%)'
+            formatter: '{b}: {@1}Kg ({d}%)'
           },
           encode: {
-            itemName: 'product',
-            value: '2012',
-            tooltip: '2012'
+            itemName: 'Composicion Corporal',
+            value: '1',
+            tooltip: '1'
           },
           data: this.selectData(1)
         }
@@ -203,7 +204,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
           series: {
             id: 'pie',
             label: {
-              formatter: `{b}: {@[${dimension}]} ({d}%)`
+              formatter: `{b}: {@[${dimension}]}Kg ({d}%)`
             },
             encode: {
               value: dimension,
