@@ -10,25 +10,21 @@ import { BodyComposition } from '../../../../../shared/models/body-composition';
 })
 export class LinePieDatasetChartComponent implements OnDestroy {
   private myChart: any;
+  private source!: any[][];
 
-  bodyCompositionList = input<BodyComposition[]>([]);
+  private moBool!: boolean; // Se encarga de comprobar si la masa osea ha sido calculada
+  private mmBool!: boolean; // Se encarga de comprobar si la masa muscular ha sido calculada
+
+  bodyCompositionList = input<BodyComposition[]>();
 
   constructor(private el: ElementRef) {
     effect(() => {
       const data = this.bodyCompositionList();
 
-      this.initSource(data);
-
-      const source = [
-        ['Composicion Corporal', '2012', '2013', '2014', '2015', '2016', '2017'],
-        ['Peso', 100, 90, 89, 106, 94, 82],
-        ['Masa Grasa', 40.1, 62.2, 69.5, 36.4, 45.2, 32.5],
-        ['Masa Osea', 51.1, 51.4, 55.1, 53.3, 73.8, 68.7],
-        ['Masa Muscular', 56.5, 82.1, 88.7, 70.1, 53.4, 85.1],
-        ['Masa Residual', 25.2, 37.1, 41.2, 18, 33.9, 49.1],
-      ];
-
-      this.initChart(source);
+      if (data) {
+        this.initSource(data);
+        this.initChart();
+      }
     })
   }
 
@@ -38,10 +34,10 @@ export class LinePieDatasetChartComponent implements OnDestroy {
     }
   }
 
-  private initSource(data: BodyComposition[]): any {
+  private initSource(data: BodyComposition[]): void {
     console.log(data)
 
-    const source = [
+    const source: any[][] = [
       ['Composicion Corporal'],
       ['Peso'],
       ['Masa Grasa'],
@@ -50,9 +46,73 @@ export class LinePieDatasetChartComponent implements OnDestroy {
       ['Masa Residual'],
     ];
 
+    for (let i = 0; i < data.length; i++) {
+      const measurement = data[i];
+
+      // Extraigo las variables
+      const date = measurement.date;
+      const mt = measurement.mt;
+      const mg = measurement.mgDurninWomersley;
+      const mo = measurement.mo.value;
+      const mm = measurement.mm;
+
+      // Calculo la masa residual
+      const mr = mt - (mg + mo + mm);
+
+      source[0].push(date.toString());
+      source[1].push(mt.toFixed(2));
+      source[2].push(mg ? mg.toFixed(2) : null);
+      source[3].push(mo ? mo.toFixed(2) : null);
+      source[4].push(mm && mm > 0 ? mm.toFixed(2) : null);
+      source[5].push(mr !== mt ? mr.toFixed(2) : null);
+    }
+
+    // Compruebo que la masa muscular haya sido calculada al menos una vez
+    this.mmBool = data.find((measurement) => measurement.mm !== 0) !== undefined;
+    // Compruebo que la masa osea haya sido calculada
+    this.moBool = data[0].mo.formula !== '';
+
+    // Añado las columnas de masa osea y masa muscular según corresponda
+    if (this.mmBool && !this.moBool) {
+      source[4][0] = 'Masa Muscular-Esqueletica';
+      source.splice(3, 1);
+    } else if (!this.mmBool && !this.moBool) {
+      source.splice(3, 1);
+      source.splice(4, 1);
+    }
+
+    this.source = source;
+
+    console.log(source)
   }
 
-  private initChart(source: any): void {
+  private selectData(index: number) {
+    if (this.source[2][index] === null) {
+      return [{value: 0, name: 'No hay datos', itemStyle: {color: '#109d8a'}}];
+    }
+
+    if (this.mmBool && !this.moBool) {
+      return [
+        { value: this.source[2][index], name: this.source[2][0], itemStyle: { color: "#FDDD60" } },
+        { value: this.source[3][index], name: this.source[4][0], itemStyle: { color: "#FF6E76" } },
+        { value: this.source[4][index], name: this.source[5][0], itemStyle: { color: "#9E9E9E" } }
+      ]
+    } else if (this.mmBool && this.moBool) {
+      return [
+        { value: this.source[2][index], name: this.source[2][0], itemStyle: { color: "#FDDD60" } },
+        { value: this.source[3][index], name: this.source[3][0], itemStyle: { color: "#21c3ef" } },
+        { value: this.source[4][index], name: this.source[4][0], itemStyle: { color: "#FF6E76" } },
+        { value: this.source[5][index], name: this.source[5][0], itemStyle: { color: "#9E9E9E" } }
+      ]
+    } else {
+      return [
+        { value: this.source[2][index], name: this.source[2][0], itemStyle: { color: "#FDDD60" } },
+        { value: this.source[3][index], name: this.source[5][0], itemStyle: { color: "#9E9E9E" } }
+      ]
+    }
+  }
+
+  private initChart(): void {
     const chartDom = this.el.nativeElement.querySelector('#line-pie-dataset-chart');
 
     this.myChart = echarts.init(chartDom, null, { renderer: 'svg' });
@@ -69,7 +129,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
         showContent: false
       },
       dataset: {
-        source: source
+        source: this.source
       },
       xAxis: { type: 'category' },
       yAxis: { gridIndex: 0 },
@@ -130,12 +190,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
             value: '2012',
             tooltip: '2012'
           },
-          data: [
-            { value: source[2][1], name: source[2][0], itemStyle: { color: "#FDDD60" } },
-            { value: source[3][1], name: source[3][0], itemStyle: { color: "#21c3ef" } },
-            { value: source[4][1], name: source[4][0], itemStyle: { color: "#FF6E76" } },
-            { value: source[5][1], name: source[5][0], itemStyle: { color: "#9E9E9E" } }
-          ]
+          data: this.selectData(1)
         }
       ]
     };
@@ -154,12 +209,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
               value: dimension,
               tooltip: dimension
             },
-            data: [
-              { value: source[2][event.dataIndex + 1], name: source[2][0], itemStyle: { color: "#FDDD60" } },
-              { value: source[3][event.dataIndex + 1], name: source[3][0], itemStyle: { color: "#21c3ef" } },
-              { value: source[4][event.dataIndex + 1], name: source[4][0], itemStyle: { color: "#FF6E76" } },
-              { value: source[5][event.dataIndex + 1], name: source[5][0], itemStyle: { color: "#9E9E9E" } }
-            ]
+            data: this.selectData(event.dataIndex + 1)
           }
         });
       }
