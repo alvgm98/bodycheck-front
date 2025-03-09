@@ -17,14 +17,16 @@ export class LinePieDatasetChartComponent implements OnDestroy {
     effect(() => {
       const data = this.bodyCompositionList();
 
+      this.initSource(data);
+
       const source = [
         ['Composicion Corporal', '2012', '2013', '2014', '2015', '2016', '2017'],
+        ['Peso', 100, 90, 89, 106, 94, 82],
         ['Masa Grasa', 40.1, 62.2, 69.5, 36.4, 45.2, 32.5],
         ['Masa Osea', 51.1, 51.4, 55.1, 53.3, 73.8, 68.7],
         ['Masa Muscular', 56.5, 82.1, 88.7, 70.1, 53.4, 85.1],
         ['Masa Residual', 25.2, 37.1, 41.2, 18, 33.9, 49.1],
       ];
-
 
       this.initChart(source);
     })
@@ -34,6 +36,20 @@ export class LinePieDatasetChartComponent implements OnDestroy {
     if (this.myChart) {
       this.myChart.dispose();
     }
+  }
+
+  private initSource(data: BodyComposition[]): any {
+    console.log(data)
+
+    const source = [
+      ['Composicion Corporal'],
+      ['Peso'],
+      ['Masa Grasa'],
+      ['Masa Osea'],
+      ['Masa Muscular'],
+      ['Masa Residual'],
+    ];
+
   }
 
   private initChart(source: any): void {
@@ -46,7 +62,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
         itemGap: 20,
         orient: 'vertical',
         right: '2.5%',
-        bottom: '20%'
+        bottom: '15.4%'
       },
       tooltip: {
         trigger: 'axis',
@@ -59,6 +75,13 @@ export class LinePieDatasetChartComponent implements OnDestroy {
       yAxis: { gridIndex: 0 },
       grid: { top: '55%' },
       series: [
+        {
+          type: 'line',
+          smooth: true,
+          seriesLayoutBy: 'row',
+          emphasis: { focus: 'series' },
+          color: "#109d8a"
+        },
         {
           type: 'line',
           smooth: true,
@@ -108,18 +131,16 @@ export class LinePieDatasetChartComponent implements OnDestroy {
             tooltip: '2012'
           },
           data: [
-            { value: source[1][1], name: source[1][0], itemStyle: { color: "#FDDD60" } },
-            { value: source[2][1], name: source[2][0], itemStyle: { color: "#21c3ef" } },
-            { value: source[3][1], name: source[3][0], itemStyle: { color: "#FF6E76" } },
-            { value: source[4][1], name: source[4][0], itemStyle: { color: "#9E9E9E" } }
+            { value: source[2][1], name: source[2][0], itemStyle: { color: "#FDDD60" } },
+            { value: source[3][1], name: source[3][0], itemStyle: { color: "#21c3ef" } },
+            { value: source[4][1], name: source[4][0], itemStyle: { color: "#FF6E76" } },
+            { value: source[5][1], name: source[5][0], itemStyle: { color: "#9E9E9E" } }
           ]
         }
       ]
     };
 
     this.myChart.on('updateAxisPointer', (event: any) => {
-      console.log(event)
-
       const xAxisInfo = event.axesInfo[0];
       if (xAxisInfo) {
         const dimension = xAxisInfo.value + 1;
@@ -134,10 +155,10 @@ export class LinePieDatasetChartComponent implements OnDestroy {
               tooltip: dimension
             },
             data: [
-              { value: source[1][event.dataIndex + 1], name: source[1][0], itemStyle: { color: "#FDDD60" } },
-              { value: source[2][event.dataIndex + 1], name: source[2][0], itemStyle: { color: "#21c3ef" } },
-              { value: source[3][event.dataIndex + 1], name: source[3][0], itemStyle: { color: "#FF6E76" } },
-              { value: source[4][event.dataIndex + 1], name: source[4][0], itemStyle: { color: "#9E9E9E" } }
+              { value: source[2][event.dataIndex + 1], name: source[2][0], itemStyle: { color: "#FDDD60" } },
+              { value: source[3][event.dataIndex + 1], name: source[3][0], itemStyle: { color: "#21c3ef" } },
+              { value: source[4][event.dataIndex + 1], name: source[4][0], itemStyle: { color: "#FF6E76" } },
+              { value: source[5][event.dataIndex + 1], name: source[5][0], itemStyle: { color: "#9E9E9E" } }
             ]
           }
         });
