@@ -3,6 +3,7 @@ import { Measurement } from '../models/measurement';
 import Decimal from 'decimal.js';
 import { CustomerDetailed } from '../models/customer';
 import { BodyComposition } from '../models/body-composition';
+import { FORMULAS } from '../models/constants/formulas.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -66,11 +67,13 @@ export class BodyCompositionService {
       icc: icc,
       ica: ica,
       mt: mt,
-      mgDurninWomersley: mgDurninWomersley,
-      mgJacksonPollock7: mgJacksonPollock7,
-      mgJacksonPollock3: mgJacksonPollock3,
-      mgWeltman: mgWeltman,
-      mgNavyTape: mgNavyTape,
+      mg: [
+        { formula: FORMULAS.DURNIN_WOMERSLEY, value: mgDurninWomersley },
+        { formula: FORMULAS.JACKSON_POLLOCK_7, value: mgJacksonPollock7 },
+        { formula: FORMULAS.JACKSON_POLLOCK_3, value: mgJacksonPollock3 },
+        { formula: FORMULAS.WELTMAN, value: mgWeltman },
+        { formula: FORMULAS.NAVY_TAPE, value: mgNavyTape },
+      ],
       mo: mo,
       mm: mm,
     }

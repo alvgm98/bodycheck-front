@@ -7,12 +7,8 @@ export interface BodyComposition {
   // Masa Total
   mt: number,
 
-  // Porcentaje Graso
-  mgDurninWomersley: number,
-  mgJacksonPollock7: number,
-  mgJacksonPollock3: number,
-  mgWeltman: number,
-  mgNavyTape: number,
+  // Masa Grasa: Durnin-Womersley, Jackson-Pollock 7, Jackson-Pollock 3, Weltman, Navy Tape
+  mg: Array<{ formula: string, value: number }>,
 
   // Masa Ósea
   mo: { formula: string, value: number },

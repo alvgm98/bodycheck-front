@@ -2,6 +2,7 @@ import { Component, OnDestroy, ElementRef, input, effect } from '@angular/core';
 import * as echarts from 'echarts';
 import { BodyComposition } from '../../../../../shared/models/body-composition';
 import moment from 'moment';
+import { FORMULAS } from '../../../../../shared/models/constants/formulas.constants';
 
 @Component({
   selector: 'app-line-pie-dataset-chart',
@@ -15,6 +16,8 @@ export class LinePieDatasetChartComponent implements OnDestroy {
 
   private moBool!: boolean; // Se encarga de comprobar si la masa osea ha sido calculada
   private mmBool!: boolean; // Se encarga de comprobar si la masa muscular ha sido calculada
+
+  mgFormulaSelected: string = FORMULAS.DURNIN_WOMERSLEY;
 
   bodyCompositionList = input<BodyComposition[]>();
 
@@ -53,7 +56,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
       // Extraigo las variables
       const date = measurement.date;
       const mt = measurement.mt;
-      const mg = measurement.mgDurninWomersley;
+      const mg = measurement.mg.find((mg) => mg.formula === this.mgFormulaSelected)!.value;
       const mo = measurement.mo.value;
       const mm = measurement.mm;
 

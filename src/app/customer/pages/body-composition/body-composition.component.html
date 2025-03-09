@@ -32,8 +32,8 @@
 <section id="bc-charts">
   <h2>Composicion Coporal</h2>
   @if (bodyComposition) {
-    @if (bodyComposition.mgDurninWomersley) {
-    <app-composition-pie [formula]="'Durnin-Womersley'" [mt]="bodyComposition.mt" [mg]="bodyComposition.mgDurninWomersley"
+    @if (mgDurninWomersley) {
+    <app-composition-pie [formula]="'Durnin-Womersley'" [mt]="bodyComposition.mt" [mg]="mgDurninWomersley"
       [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
     } @else {
     <div class="formula-missed">
@@ -43,9 +43,9 @@
     </div>
     }
 
-    @if (bodyComposition.mgJacksonPollock7) {
+    @if (mgJacksonPollock7) {
     <app-composition-pie [formula]="'Jackson-Pollock 7'" [mt]="bodyComposition.mt"
-      [mg]="bodyComposition.mgJacksonPollock7" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
+      [mg]="mgJacksonPollock7" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
     } @else {
     <div class="formula-missed">
       <h4>Jackson-Pollock 7</h4>
@@ -55,9 +55,9 @@
     </div>
     }
 
-    @if (bodyComposition.mgJacksonPollock3) {
+    @if (mgJacksonPollock3) {
     <app-composition-pie [formula]="'Jackson-Pollock 3'" [mt]="bodyComposition.mt"
-      [mg]="bodyComposition.mgJacksonPollock3" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
+      [mg]="mgJacksonPollock3" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
     } @else {
     <div class="formula-missed">
       <h4>Jackson-Pollock 3</h4>
@@ -68,9 +68,9 @@
     </div>
     }
 
-    @if (bodyComposition.mgWeltman) {
+    @if (mgWeltman) {
     <app-composition-pie style="grid-column: 2 / 4;" [formula]="'Weltman'" [mt]="bodyComposition.mt"
-      [mg]="bodyComposition.mgWeltman" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
+      [mg]="mgWeltman" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
     } @else {
     <div class="formula-missed" style="grid-column: 2 / 4;">
       <h4>Weltman</h4>
@@ -79,9 +79,9 @@
     </div>
     }
 
-    @if (bodyComposition.mgNavyTape) {
+    @if (mgNavyTape) {
     <app-composition-pie style="grid-column: 4 / 6;" [formula]="'Navy Tape'" [mt]="bodyComposition.mt"
-      [mg]="bodyComposition.mgNavyTape" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
+      [mg]="mgNavyTape" [mo]="bodyComposition.mo" [mm]="bodyComposition.mm" />
     } @else {
     <div class="formula-missed" style="grid-column: 4 / 6;">
       <h4>Navy Tape</h4>

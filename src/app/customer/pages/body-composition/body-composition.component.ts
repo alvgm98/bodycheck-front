@@ -24,6 +24,13 @@ export class BodyCompositionComponent {
 
   bodyComposition!: BodyComposition;
 
+  // Masas Grasas
+  mgDurninWomersley!: number;
+  mgJacksonPollock7!: number;
+  mgJacksonPollock3!: number;
+  mgWeltman!: number;
+  mgNavyTape!: number;
+
   constructor(
     private bodyCompositionService: BodyCompositionService
   ) {
@@ -34,6 +41,13 @@ export class BodyCompositionComponent {
   }
 
   calcBodyComposition(customer: CustomerDetailed, measurementSelected: number) {
-    this.bodyComposition = this.bodyCompositionService.calcBodyComposition(customer, measurementSelected)
+    const bodyComposition = this.bodyCompositionService.calcBodyComposition(customer, measurementSelected)
+
+    this.bodyComposition = bodyComposition;
+    this.mgDurninWomersley = bodyComposition.mg.find((mg) => mg.formula === 'Durnin-Womersley')!.value;
+    this.mgJacksonPollock7 = bodyComposition.mg.find((mg) => mg.formula === 'Jackson-Pollock 7')!.value;
+    this.mgJacksonPollock3 = bodyComposition.mg.find((mg) => mg.formula === 'Jackson-Pollock 3')!.value;
+    this.mgWeltman = bodyComposition.mg.find((mg) => mg.formula === 'Weltman')!.value;
+    this.mgNavyTape = bodyComposition.mg.find((mg) => mg.formula === 'Navy Tape')!.value;
   }
 }
