@@ -1,0 +1,219 @@
+<div class="hero">
+  <h3>Guía para seleccionar tu método de medición</h3>
+  <p>Seleccionar el método correcta depende del nivel de actividad física, el porcentaje graso y la precisión
+    requerida en la medición.</p>
+</div>
+
+<!-- TABS -->
+<div id="formulas-info-tabs">
+  <div class="formula-tab" [ngClass]="{'tab-active': tabSelected === FORMULAS.DURNIN_WOMERSLEY}" (click)="selectTab(FORMULAS.DURNIN_WOMERSLEY)">Durnin-Womersley</div>
+  <div class="formula-tab" [ngClass]="{'tab-active': tabSelected === FORMULAS.JACKSON_POLLOCK_7}" (click)="selectTab(FORMULAS.JACKSON_POLLOCK_7)">Jackson-Pollock 7</div>
+  <div class="formula-tab" [ngClass]="{'tab-active': tabSelected === FORMULAS.JACKSON_POLLOCK_3}" (click)="selectTab(FORMULAS.JACKSON_POLLOCK_3)">Jackson-Pollock 3</div>
+  <div class="formula-tab" [ngClass]="{'tab-active': tabSelected === FORMULAS.WELTMAN}" (click)="selectTab(FORMULAS.WELTMAN)">Weltman</div>
+  <div class="formula-tab" [ngClass]="{'tab-active': tabSelected === FORMULAS.NAVY_TAPE}" (click)="selectTab(FORMULAS.NAVY_TAPE)">Navy Tape</div>
+</div>
+
+<section id="formula-info">
+  @if (tabSelected === FORMULAS.DURNIN_WOMERSLEY) {
+  <article class="formula-info-hero">
+    <div class="title">
+      <h4>Durnin-Womersley + Siri</h4>
+      <span>Clásico</span>
+    </div>
+    <p>Método ampliamente utilizado en cineantropometría, válido para toda la población.</p>
+  </article>
+
+  <article class="formula-info-body">
+    <div class="carac">
+      <h5>Características</h5>
+      <ul>
+        <li>Es ideal para personas con poca actividad física, baja o moderada.</li>
+        <li>Utiliza 4 pliegues para el cálculo.</li>
+        <li>Precisión moderada en población general.</li>
+      </ul>
+    </div>
+
+    <div class="measurements">
+      <h5>Pliegues utilizados (4 sitios)</h5>
+      <div>
+        <span>Tríceps</span>
+        <span>Bíceps</span>
+        <span>Subescapular</span>
+        <span>Cresta Iliaca</span>
+      </div>
+    </div>
+
+    <div class="recommended">
+      <h5>Recomendado para</h5>
+      <p>Evaluaciones generales a cualquier persona,
+        en especial aquellas con un porcentaje graso superior al 20% (hombres) o 25% (mujeres).
+      </p>
+    </div>
+  </article>
+  }
+
+  @if (tabSelected === FORMULAS.JACKSON_POLLOCK_7) {
+  <article class="formula-info-hero">
+    <div class="title">
+      <h4>Jackson-Pollock 7 Pliegues + Siri</h4>
+      <span>Deportistas</span>
+    </div>
+    <p>Método diseñado para deportistas y personas con una cantidad reducida de grasa corporal. Ofrece una mayor
+      precisión en la estimación del porcentaje graso al incluir más puntos de medición.</p>
+  </article>
+
+  <article class="formula-info-body">
+    <div class="carac">
+      <h5>Características</h5>
+      <ul>
+        <li>Mayor precisión para personas atléticas.</li>
+        <li>Utiliza 7 puntos de medición para un cálculo más detallado.</li>
+        <li>Ideal para seguimiento de composición corporal en deportistas, atletas y personas con actividad física.</li>
+      </ul>
+    </div>
+
+    <div class="measurements">
+      <h5>Pliegues utilizados (4 sitios)</h5>
+      <div>
+        <span>Pectoral</span>
+        <span>Abdominal</span>
+        <span>Muslo</span>
+        <span>Tríceps</span>
+        <span>Subescapular</span>
+        <span>Suprailíaco</span>
+        <span>Axilar Media</span>
+      </div>
+    </div>
+
+    <div class="recommended">
+      <h5>Recomendado para</h5>
+      <p>Deportistas y personas con un porcentaje graso menor al 20% en hombres o 25% en mujeres.
+      </p>
+    </div>
+  </article>
+  }
+
+  @if (tabSelected === FORMULAS.JACKSON_POLLOCK_3) {
+  <article class="formula-info-hero">
+    <div class="title">
+      <h4>Jackson-Pollock 3 Pliegues + Siri</h4>
+      <span>Simplificado</span>
+    </div>
+    <p>Variante simplificada del método Jackson-Pollock 7, con una menor cantidad de pliegues, pero conservando una
+      buena precisión.</p>
+  </article>
+
+  <article class="formula-info-body">
+    <div class="carac">
+      <h5>Características</h5>
+      <ul>
+        <li>Equilibrio entre precisión y practicidad.</li>
+        <li>Más rápido de aplicar que la versión de 7 pliegues.</li>
+        <li>Buena correlación con métodos más complejos.</li>
+      </ul>
+    </div>
+
+    <div class="measurements">
+      <h5>Pliegues utilizados (3 sitios)</h5>
+      <p>Hombres:</p>
+      <div>
+        <span>Pectoral</span>
+        <span>Abdominal</span>
+        <span>Muslo</span>
+      </div>
+      <p>Mujeres:</p>
+      <div>
+        <span>Tríceps</span>
+        <span>Suprailíaco</span>
+        <span>Muslo</span>
+      </div>
+    </div>
+
+    <div class="recommended">
+      <h5>Recomendado para</h5>
+      <p>Evaluaciones rápidas en el ámbito deportivo, cuando no se dispone del tiempo o recursos para una medición
+        completa con 7 pliegues.
+      </p>
+    </div>
+  </article>
+  }
+
+  @if (tabSelected === FORMULAS.WELTMAN) {
+  <article class="formula-info-hero">
+    <div class="title">
+      <h4>Weltman</h4>
+      <span>Obesos</span>
+    </div>
+    <p>Método basado en la medición del perímetro de la cintura para estimar el porcentaje de grasa corporal. Es
+      especialmente útil en personas con sobrepeso en quienes la medición de pliegues cutáneos no es viable.</p>
+  </article>
+
+  <article class="formula-info-body">
+    <div class="carac">
+      <h5>Características</h5>
+      <ul>
+        <li>No requiere medición de pliegues cutáneos.</li>
+        <li>Enfocado en la distribución de grasa abdominal.</li>
+        <li>Ayuda a predecir el riesgo cardiovascular.</li>
+      </ul>
+    </div>
+
+    <div class="measurements">
+      <h5>Medidas utilizadas</h5>
+      <div>
+        <span>Circunferencia de cintura</span>
+        <span>Peso</span>
+      </div>
+    </div>
+
+    <div class="recommended">
+      <h5>Recomendado para</h5>
+      <p>Personas con sobrepeso, obesidad o riesgo de enfermedades metabólicas como diabetes o síndrome metabólico.
+      </p>
+    </div>
+  </article>
+  }
+
+  @if (tabSelected === FORMULAS.NAVY_TAPE) {
+  <article class="formula-info-hero">
+    <div class="title">
+      <h4>Navy Tape</h4>
+      <span>Perímetros</span>
+    </div>
+    <p>Método utilizado por el ejército de EE.UU. para evaluar la composición corporal mediante mediciones de perímetros
+      corporales.</p>
+  </article>
+
+  <article class="formula-info-body">
+    <div class="carac">
+      <h5>Características</h5>
+      <ul>
+        <li>Método rápido y sencillo de aplicar.</li>
+        <li>No requiere equipamiento especializado.</li>
+        <li>Buena precisión para evaluaciones de campo.</li>
+      </ul>
+    </div>
+
+    <div class="measurements">
+      <h5>Circunferencias utilizadas</h5>
+      <p>Hombres:</p>
+      <div>
+        <span>Cuello</span>
+        <span>Cintura</span>
+      </div>
+      <p>Mujeres:</p>
+      <div>
+        <span>Cuello</span>
+        <span>Cintura</span>
+        <span>Cadera</span>
+      </div>
+    </div>
+
+    <div class="recommended">
+      <h5>Recomendado para</h5>
+      <p>Evaluaciones rápidas cuando no se dispone de pliegues cutáneos.
+      </p>
+    </div>
+  </article>
+  }
+</section>

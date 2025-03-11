@@ -7,11 +7,12 @@ import { IcaComponent } from './components/ica/ica.component';
 import { CompositionPieComponent } from './components/composition-pie/composition-pie.component';
 import { BodyComposition } from '../../../shared/models/body-composition';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { FormulasInfoComponent } from './components/formulas-info/formulas-info.component';
 
 @Component({
   selector: 'app-body-composition',
   standalone: true,
-  imports: [ImcComponent, IccComponent, IcaComponent, CompositionPieComponent, MatProgressSpinner],
+  imports: [ImcComponent, IccComponent, IcaComponent, CompositionPieComponent, FormulasInfoComponent, MatProgressSpinner],
   templateUrl: './body-composition.component.html',
   styleUrl: './body-composition.component.scss'
 })
