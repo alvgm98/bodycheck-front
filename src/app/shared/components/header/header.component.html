@@ -14,11 +14,11 @@
     </div>
   } @else {
     <div class="auth">
-      <button class="btn">
-        <i class="fa-solid fa-bars header-settings" (click)="toggleShowSettings()"></i>
+      <button class="btn" (click)="toggleShowSettings()">
+        <i class="fa-solid fa-bars header-settings"></i>
       </button>
       @if (showSettings) {
-        <app-settings id="settings" />
+        <app-settings id="settings" (logoutEvent)="logout()" />
       }
     </div>
   }

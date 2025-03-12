@@ -32,6 +32,7 @@ export class HeaderComponent {
   }
 
   logout() {
+    this.showSettings = false;
     this.authService.logout();
   }
 
