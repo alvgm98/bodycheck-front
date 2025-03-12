@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, model } from '@angular/core';
 import { TABS } from '../../../shared/models/constants/tabs.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-tabs',
@@ -17,8 +18,14 @@ export class CustomerTabsComponent {
   TABS = TABS;
   tabOpened = model<string>(TABS.SUMMARY);
 
+  constructor(private router: Router) { }
+
   /** Establece la página a mostrar */
   changeTab(tab: string) {
     this.tabOpened.set(tab);
+  }
+
+  backToDashboard() {
+    this.router.navigateByUrl("app");
   }
 }
