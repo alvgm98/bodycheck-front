@@ -47,11 +47,43 @@ header {
 }
 
 .header-settings {
-  color: $primary-color;
-  font-size: 24px;
-  transition: 300ms;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  span {
+    border-radius: 10px;
+    width: 30px;
+    height: 3px;
+    background-color: $primary-color;
+    transition: 300ms;
+  }
 
   &:hover {
-    color: $primary-color-700;
+    span {
+      background-color: $primary-color-700;
+    }
+
+    span:nth-child(2) {
+      transform: translateX(10px);
+    }
+  }
+}
+
+.header-settings-x {
+  transform: translateX(6px);
+  span:nth-child(1) {
+    transform: rotateZ(35deg) translateY(11px);
+  }
+
+  span:nth-child(3) {
+    transform: rotateZ(-35deg) translateY(-11px);
+  }
+
+  span:nth-child(2) {
+    transform: translateX(800px) !important;
+    visibility: hidden;
   }
 }

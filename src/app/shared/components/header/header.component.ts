@@ -3,12 +3,13 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { LoginComponent } from '../../../auth/components/login/login.component';
 import { Router } from '@angular/router';
 import { SettingsComponent } from './settings/settings.component';
+import { NgClass } from '@angular/common';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [LoginComponent, SettingsComponent],
+  imports: [LoginComponent, SettingsComponent, NgClass],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

@@ -14,8 +14,10 @@
     </div>
   } @else {
     <div class="auth">
-      <button class="btn" (click)="toggleShowSettings()">
-        <i class="fa-solid fa-bars header-settings"></i>
+      <button class="btn header-settings" [ngClass]="{'header-settings-x': showSettings}" (click)="toggleShowSettings()">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
       @if (showSettings) {
         <app-settings id="settings" (logoutEvent)="logout()" />
