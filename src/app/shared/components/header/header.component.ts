@@ -2,12 +2,13 @@ import { Component, effect, ElementRef, output, Renderer2 } from '@angular/core'
 import { AuthService } from '../../../auth/services/auth.service';
 import { LoginComponent } from '../../../auth/components/login/login.component';
 import { Router } from '@angular/router';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [LoginComponent],
+  imports: [LoginComponent, SettingsComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -15,6 +16,7 @@ export class HeaderComponent {
 
   showLogin: boolean = false;
   showRegister: boolean = false;
+  showSettings: boolean = false;
   isUserLogged: boolean = false;
 
   scrollToTop = output<void>();
@@ -58,6 +60,14 @@ export class HeaderComponent {
     }
     this.authService.showRegister.set(true);
   }
+  toggleShowSettings() {
+    if (this.showSettings) {
+      this.closeSettings();
+      return;
+    }
+
+    this.showSettings = true;
+  }
 
   closeLogin() {
     const modalCorner = this.el.nativeElement.querySelector(".modal-corner");
@@ -75,6 +85,16 @@ export class HeaderComponent {
     if (this.showRegister) {
       this.authService.showRegister.set(false);
     }
+  }
+
+  closeSettings() {
+    const settingsModal = this.el.nativeElement.querySelector("#settings");
+    this.renderer.removeClass(settingsModal, 'pop-in-settings');
+    this.renderer.addClass(settingsModal, 'pop-out-settings');
+
+    setTimeout(() => {
+      this.showSettings = false;
+    }, 300);
   }
 
   clickTitle() {

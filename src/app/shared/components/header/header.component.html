@@ -14,8 +14,12 @@
     </div>
   } @else {
     <div class="auth">
-      <button class="btn stroked-button" (click)="logout()">Cerrar Sesión</button>
+      <button class="btn">
+        <i class="fa-solid fa-bars header-settings" (click)="toggleShowSettings()"></i>
+      </button>
+      @if (showSettings) {
+        <app-settings id="settings" />
+      }
     </div>
   }
-
 </header>
