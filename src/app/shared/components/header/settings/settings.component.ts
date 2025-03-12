@@ -24,9 +24,10 @@ export class SettingsComponent {
 
   backToDashboard() {
     this.router.navigateByUrl("app");
+    this.closeSettings();
   }
 
   logout() {
-    this.logoutEvent.emit()
+    this.logoutEvent.emit();
   }
 }
