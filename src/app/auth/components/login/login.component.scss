@@ -49,22 +49,6 @@
   background-color: $modal-background-color;
 
   transform: rotate(45deg);
-
-}
-
-.x-button {
-  position: absolute;
-  top: 0;
-  left: calc(100% - 50px);
-
-  border: 0;
-  width: 50px;
-
-  background-color: transparent;
-  font-family: "Satoshi-Bold", sans-serif;
-  font-size: 20px;
-  color: $primary-color;
-
 }
 
 .login-password {
