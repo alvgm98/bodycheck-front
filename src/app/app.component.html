@@ -9,3 +9,6 @@
 @for (successMessage of successMessages; track $index) {
   <app-message-modal (closeEvent)="closeSuccessMessage($index)" [message]="successMessage" [messageType]="'success'" />
 }
+@for (infoMessage of infoMessages; track $index) {
+  <app-message-modal (closeEvent)="closeInfoMessage($index)" [message]="infoMessage" [messageType]="'info'" />
+}

@@ -66,4 +66,9 @@ export class CustomerService {
         )
       );
   }
+
+  /* Vincular Cita con Cliente */
+  linkAppointmentWithCustomer(customerId: number, appointmentId: number) {
+    return this.http.post<void>(`${environment.apiCustomerUrl}/link-appointment/${customerId}/${appointmentId}`, null);
+  }
 }

@@ -5,7 +5,7 @@ import { Component, HostBinding, input, output } from '@angular/core';
   selector: 'app-message-modal',
   standalone: true,
   imports: [],
-  template: `{{message()}}`,
+  template: `<pre>{{message()}}</pre>`,
   styleUrl: './message-modal.component.scss',
   animations: [
     trigger('message-animation', [

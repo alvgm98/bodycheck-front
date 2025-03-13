@@ -22,4 +22,10 @@ export interface CustomerDetailed extends Customer {
   appointments?: Appointment[];
 }
 
+export interface NoRegisteredCustomer {
+  name: string,
+  phone: string,
+  appointmentId: number
+}
+
 export type CustomerKey = keyof Customer;

@@ -10,7 +10,7 @@ export class MessageService {
 
   errorMessage = signal<string>("");
   successMessage = signal<string>("");
-  // infoMessage = signal<string>("");
+  infoMessage = signal<string>("");
 
   emitError(message: string) {
     this.errorMessage.set(message);
@@ -22,8 +22,8 @@ export class MessageService {
     setTimeout(() => this.successMessage.set(''), 500) // Dejamos un retardo corto para resetear el mensaje
   }
 
-  /* emitInfo(message: string) {
+  emitInfo(message: string) {
     this.infoMessage.set(message);
     setTimeout(() => this.infoMessage.set(''), 500)
-  } */
+  }
 }

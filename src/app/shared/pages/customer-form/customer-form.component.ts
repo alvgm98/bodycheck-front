@@ -7,7 +7,7 @@ import { TextareaComponent } from '../../ui/textarea/textarea.component';
 import { ETHNICITY_OPTIONS, stringToEthnicity } from '../../models/enums/ethnicity.enum';
 import { GENDER_OPTIONS, stringToGender } from '../../models/enums/gender.enum';
 import { CustomerService } from '../../services/customer.service';
-import { Customer } from '../../models/customer';
+import { Customer, NoRegisteredCustomer } from '../../models/customer';
 import { ModalService } from '../modal.service';
 import { MessageService } from '../../../message-modal/message.service';
 
@@ -41,6 +41,8 @@ export class CustomerFormComponent implements OnInit {
 
   customer = input<Customer>();
 
+  appointmentId: number | null = null; // Sirve para vincular el ID de la cita con cliente no registrado, al cliente ahora registrado
+
   public ETHNICITY_OPTIONS = ETHNICITY_OPTIONS;
   public GENDER_OPTIONS = GENDER_OPTIONS;
 
@@ -51,6 +53,7 @@ export class CustomerFormComponent implements OnInit {
     private messageService: MessageService
   ) {
     effect(() => this.animationState = modalService.showOverlay() ? 'open' : 'closed')
+    effect(() => this.modalService.noRegisteredCustomer().appointmentId && this.patchNoRegisteredCustomer(this.modalService.noRegisteredCustomer()) )
   }
 
   /**
@@ -75,6 +78,19 @@ export class CustomerFormComponent implements OnInit {
         observations: customer.observations
       });
     }
+  }
+
+  patchNoRegisteredCustomer(customer: NoRegisteredCustomer) {
+    const firstName = customer.name.split(" ")[0];
+    const lastName = customer.name.replace(firstName, "").trim();
+
+    this.appointmentId = customer.appointmentId; // Guardo el ID de la cita para vincularlo al cliente registrado en el submit
+
+    this.customerForm.patchValue({
+      firstName: firstName,
+      lastName: lastName,
+      phone: customer.phone
+    })
   }
 
   /**
@@ -141,8 +157,14 @@ export class CustomerFormComponent implements OnInit {
     const customer: Customer = this.formToCustomer();
 
     this.customerService.addCustomer(customer).subscribe({
-      complete: () => {
+      next: (data) => {
         this.messageService.emitSuccess("Cliente creado con exito")
+
+        // Vinculamos la cita con el cliente no registrado al cliente registrado
+        if (this.appointmentId) {
+          this.customerService.linkAppointmentWithCustomer(data.id!, this.appointmentId).subscribe();
+        }
+
         this.close();
       }
     });

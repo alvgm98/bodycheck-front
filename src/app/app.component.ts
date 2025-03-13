@@ -15,6 +15,7 @@ export class AppComponent {
 
   errorMessages: string[] = [];
   successMessages: string[] = [];
+  infoMessages: string[] = [];
 
   constructor(
     private messageService: MessageService
@@ -23,6 +24,9 @@ export class AppComponent {
     effect(() => messageService.errorMessage() && this.addErrorMessage(messageService.errorMessage()));
     effect(() => {
       messageService.successMessage() && this.addSuccessMessage(messageService.successMessage())
+    })
+    effect(() => {
+      messageService.infoMessage() && this.addInfoMessage(messageService.infoMessage())
     })
   }
 
@@ -39,6 +43,13 @@ export class AppComponent {
   }
   closeSuccessMessage(index: number) {
     this.successMessages.splice(index);
+  }
+
+  addInfoMessage(message: string) {
+    this.infoMessages.push(message);
+  }
+  closeInfoMessage(index: number) {
+    this.infoMessages.splice(index);
   }
 
   scrollToTop() {

@@ -2,6 +2,8 @@ import { Component, input, OnChanges, output } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { Appointment } from '../../../shared/models/appointment';
 import { Router } from '@angular/router';
+import { MessageService } from '../../../message-modal/message.service';
+import { ModalService } from '../../../shared/pages/modal.service';
 
 @Component({
   selector: 'app-agenda-appointment',
@@ -27,7 +29,9 @@ export class AgendaAppointmentComponent implements OnChanges {
   timelineHeight: number = 0;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private messageService: MessageService,
+    private modalService: ModalService
   ) { }
 
   ngOnChanges(): void {
@@ -45,7 +49,12 @@ export class AgendaAppointmentComponent implements OnChanges {
     if (this.appointment().customer) {
       this.router.navigateByUrl('app/customer/' + this.appointment().customer!.id);
     } else {
-      // TODO abrir formulario para crear cliente
+      this.messageService.emitInfo("  El cliente no se encuentra registrado.  \n  Por favor, registre al cliente primero.  ")
+      this.modalService.openCustomerFromForRegister({
+        name: this.appointment().customerName!,
+        phone: this.appointment().customerPhone!,
+        appointmentId: this.appointment().id
+      });
     }
   }
 }
