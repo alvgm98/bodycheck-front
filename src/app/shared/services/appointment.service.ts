@@ -37,41 +37,23 @@ export class AppointmentService {
     return this.http.post<Appointment>(environment.apiAppointmentUrl, appointment)
       .pipe(
         /* Añadimos la cita a la lista de citas si la fecha seleccionada es la misma que la de creación */
-        tap(data => {
-          const f = new Date(data.date); // Al ser en el backend tipo Date, viene en formato "yyyy-MM-dd" en string
-          const auxSelectedDate = new Date(this.selectedDate()); // Creamos esta constante ya que 'this.selectedDate()' puede llegar como un objeto del tipo Moment, usando diferentes funciones
-
-          if (
-            f.getDay() == auxSelectedDate.getDay()
-            && f.getMonth() == auxSelectedDate.getMonth()
-            && f.getFullYear() == auxSelectedDate.getFullYear()
-          ) {
-            this.agendaAppointments.set(this.dateUtil.initializeAppointments([...this.agendaAppointments(), data]))
-          }
-        })
+        tap(data => this.addAppointmentToList(data))
       )
   }
 
   updateAppointment(appointment: AppointmentRequest) {
     return this.http.put<Appointment>(`${environment.apiAppointmentUrl}/${appointment.id}`, appointment)
       .pipe(
-        tap(data => {
-          // Eliminamos la cita anterior para que se borre del layout
-          this.deleteFromAppointments(data.id);
-
-          // Añadimos la cita a la lista de citas si la fecha seleccionada es la misma que la de creación
-          const f = new Date(data.date); // Al ser en el backend tipo Date, viene en formato "yyyy-MM-dd" en string
-          const auxSelectedDate = new Date(this.selectedDate()); // Creamos esta constante ya que 'this.selectedDate()' puede llegar como un objeto del tipo Moment, usando diferentes funciones
-
-          if (
-            f.getDay() == auxSelectedDate.getDay()
-            && f.getMonth() == auxSelectedDate.getMonth()
-            && f.getFullYear() == auxSelectedDate.getFullYear()
-          ) {
-            this.agendaAppointments.set(this.dateUtil.initializeAppointments([...this.agendaAppointments(), data]))
-          }
-        })
+        tap(data => this.updateAppointmentList(data))
       )
+  }
+
+  /* Vincular Cita con Cliente */
+  linkAppointmentWithCustomer(customerId: number, appointmentId: number) {
+    return this.http.post<Appointment>(`${environment.apiAppointmentUrl}/link-appointment/${customerId}/${appointmentId}`, null)
+      .pipe(
+        tap(data => this.updateAppointmentList(data))
+      );
   }
 
   deleteAppointment(id: number) {
@@ -87,6 +69,27 @@ export class AppointmentService {
           throw err;
         })
       )
+  }
+
+  updateAppointmentList(appointment: Appointment) {
+    // Eliminamos la cita anterior para que se borre del layout
+    this.deleteFromAppointments(appointment.id);
+    // La volvemos a añadir si sigue siendo del mismo día que el seleccionado
+    this.addAppointmentToList(appointment);
+  }
+
+  addAppointmentToList(appointment: Appointment) {
+    // Añadimos la cita a la lista de citas si la fecha seleccionada es la misma que la de creación
+    const f = new Date(appointment.date); // Al ser en el backend tipo Date, viene en formato "yyyy-MM-dd" en string
+    const auxSelectedDate = new Date(this.selectedDate()); // Creamos esta constante ya que 'this.selectedDate()' puede llegar como un objeto del tipo Moment, usando diferentes funciones
+
+    if (
+      f.getDay() == auxSelectedDate.getDay()
+      && f.getMonth() == auxSelectedDate.getMonth()
+      && f.getFullYear() == auxSelectedDate.getFullYear()
+    ) {
+      this.agendaAppointments.set(this.dateUtil.initializeAppointments([...this.agendaAppointments(), appointment]))
+    }
   }
 
   private deleteFromAppointments(id: number) {

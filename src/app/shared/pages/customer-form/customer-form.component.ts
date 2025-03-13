@@ -10,6 +10,7 @@ import { CustomerService } from '../../services/customer.service';
 import { Customer, NoRegisteredCustomer } from '../../models/customer';
 import { ModalService } from '../modal.service';
 import { MessageService } from '../../../message-modal/message.service';
+import { AppointmentService } from '../../services/appointment.service';
 
 @Component({
   selector: 'app-customer-form',
@@ -49,6 +50,7 @@ export class CustomerFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private customerService: CustomerService,
+    private appointmentService: AppointmentService,
     private modalService: ModalService,
     private messageService: MessageService
   ) {
@@ -162,7 +164,7 @@ export class CustomerFormComponent implements OnInit {
 
         // Vinculamos la cita con el cliente no registrado al cliente registrado
         if (this.appointmentId) {
-          this.customerService.linkAppointmentWithCustomer(data.id!, this.appointmentId).subscribe();
+          this.appointmentService.linkAppointmentWithCustomer(data.id!, this.appointmentId).subscribe();
         }
 
         this.close();
