@@ -210,7 +210,7 @@ export class LinePieDatasetChartComponent implements OnDestroy {
             value: '1',
             tooltip: '1'
           },
-          data: this.selectData(1)
+          data: this.selectData(this.source[0].length - 1)
         }
       ]
     };
