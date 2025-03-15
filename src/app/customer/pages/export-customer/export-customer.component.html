@@ -9,9 +9,15 @@
     (selectEvent)="selectFormat($event)"
   />
 
-  <button class="btn flat-button" (click)="export()">
-    <i class="fa-solid fa-cloud-arrow-down"></i>
-    Exportar Datos
-  </button>
+  @if (!loading) {
+    <button class="btn flat-button" (click)="export()">
+      <i class="fa-solid fa-cloud-arrow-down"></i>
+      Exportar Datos
+    </button>
+  } @else {
+    <div style="display: flex; align-items: center; justify-content: center; margin-top: 25px;">
+      <mat-spinner [diameter]="50" style="margin-bottom: -10px;"></mat-spinner>
+    </div>
+  }
 
 </article>
