@@ -154,7 +154,22 @@ export class LinePieDatasetChartService {
 
     const myChart = echarts.init(chartContainer, null, { renderer: 'svg' });
 
-    myChart.setOption(this.getOption());
+    const option = this.getOption();
+    (option as any).graphic = [
+      {
+        type: 'text',
+        left: '20%',
+        top: '23%',
+        style: {
+          text: mgFormulaSelected,
+          textAlign: 'center',
+          fill: '#109d8a',
+          font: '900 24px sans-serif'
+        }
+      }
+    ]
+
+    myChart.setOption(option);
 
     return new Promise((resolve) => {
       setTimeout(() => {

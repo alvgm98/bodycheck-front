@@ -52,7 +52,6 @@ export class ExportCustomerComponent {
       case "JSON":
         this.exportJSON();
         break;
-      /* EXPORTACIÓN */
     }
   }
 
