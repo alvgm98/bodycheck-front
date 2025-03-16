@@ -5,6 +5,8 @@ import { BodyCompositionService } from '../../../shared/services/body-compositio
 import { CustomerDetailed } from '../../../shared/models/customer';
 import { FORMULAS } from '../../../shared/models/constants/formulas.constants';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { PdfService } from './pdf.service';
+import { PdfRequest } from '../../../shared/models/pdf-request';
 
 @Component({
   selector: 'app-export-customer',
@@ -31,7 +33,8 @@ export class ExportCustomerComponent {
 
   constructor(
     private bcService: BodyCompositionService,
-    private lpService: LinePieDatasetChartService
+    private lpService: LinePieDatasetChartService,
+    private pdfService: PdfService
   ) { }
 
   selectFormat(format: string) {
@@ -55,14 +58,38 @@ export class ExportCustomerComponent {
     }
   }
 
-  exportPDF() {
-    this.loading = true;
+    exportPDF() {
+    this.loading = true; // Muestro spinner de carga
+
+    // Calculo todas las formulas de composicion corporal
     const bcList = this.bcService.getBodyCompositionList(this.customer());
 
-    const p = this.lpService.exportChartAsPNG(bcList, FORMULAS.DURNIN_WOMERSLEY);
-    p.then((imageBase64) => {
+    // Obtengo las graficas de cada formula
+    const imagePromises = [
+      this.lpService.exportChartAsPNG(bcList, FORMULAS.DURNIN_WOMERSLEY),
+      // TODO generar el resto de graficas
+    ];
+
+    Promise.all(imagePromises).then((imagesBase64) => {
+      console.log(imagesBase64)
+
+      const pdfRequest: PdfRequest = {
+        customerId: this.customer().id!,
+        durninWomersleyBase64Image: (imagesBase64[0] as string).split('base64,')[1],
+        // TODO resto de graficas
+      }
+
+      this.pdfService.downloadPdf(pdfRequest).subscribe((blob) => {
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `${this.customer().firstName}_${this.customer().lastName.replace(" ", "_")}.pdf`;
+        link.click();
+
+        this.loading = false;
+      });
+    }).catch((error) => {
+      console.error("Error generating images: ", error);
       this.loading = false;
-      console.log(imageBase64);
     });
   }
 

@@ -152,7 +152,7 @@ export class LinePieDatasetChartService {
     chartContainer.style.width = '1400px';
     chartContainer.style.height = '600px';
 
-    const myChart = echarts.init(chartContainer, null, { renderer: 'svg' });
+    const myChart = echarts.init(chartContainer, null, { renderer: 'canvas' });
 
     const option = this.getOption();
     (option as any).graphic = [

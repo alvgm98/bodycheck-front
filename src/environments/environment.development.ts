@@ -12,4 +12,5 @@ export const environment = {
   apiCustomerUrl: API_BASE_URL + 'api/customers',
   apiMeasurementUrl: API_BASE_URL + 'api/measurements',
   apiAppointmentUrl: API_BASE_URL + 'api/appointments',
+  apiPdf: API_BASE_URL + 'api/pdf',
 };
