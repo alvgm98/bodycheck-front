@@ -5,7 +5,6 @@ import { catchError, tap } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { DateUtilService } from './util/date-util.service';
 import { Appointment, AppointmentRequest } from '../models/appointment';
-import { error } from 'node:console';
 
 @Injectable({
   providedIn: 'root'
