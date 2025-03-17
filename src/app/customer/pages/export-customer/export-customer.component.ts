@@ -67,16 +67,20 @@ export class ExportCustomerComponent {
     // Obtengo las graficas de cada formula
     const imagePromises = [
       this.lpService.exportChartAsPNG(bcList, FORMULAS.DURNIN_WOMERSLEY),
-      // TODO generar el resto de graficas
+      this.lpService.exportChartAsPNG(bcList, FORMULAS.JACKSON_POLLOCK_7),
+      this.lpService.exportChartAsPNG(bcList, FORMULAS.JACKSON_POLLOCK_3),
+      this.lpService.exportChartAsPNG(bcList, FORMULAS.WELTMAN),
+      this.lpService.exportChartAsPNG(bcList, FORMULAS.NAVY_TAPE),
     ];
 
     Promise.all(imagePromises).then((imagesBase64) => {
-      console.log(imagesBase64)
-
       const pdfRequest: PdfRequest = {
         customerId: this.customer().id!,
         durninWomersleyBase64Image: (imagesBase64[0] as string).split('base64,')[1],
-        // TODO resto de graficas
+        jacksonPollock7Base64Image: (imagesBase64[1] as string).split('base64,')[1],
+        jacksonPollock3Base64Image: (imagesBase64[2] as string).split('base64,')[1],
+        weltmanBase64Image: (imagesBase64[3] as string).split('base64,')[1],
+        navyTapeBase64Image: (imagesBase64[4] as string).split('base64,')[1],
       }
 
       this.pdfService.downloadPdf(pdfRequest).subscribe((blob) => {
