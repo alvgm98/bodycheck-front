@@ -1,0 +1,255 @@
+@import 'colors';
+
+:host {
+  position: relative;
+  width: 100%;
+  padding: 100px 0;
+  background-color: $background-color;
+  overflow: hidden;
+
+  .container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  // Encabezado de sección
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+
+    h2 {
+      color: $primary-color;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: $black;
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+
+  // Tabs de navegación
+  .formulas-tabs {
+    .tabs-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba($primary-color, 0.2);
+
+      .tab-button {
+        background: none;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: 600;
+        color: $black;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s ease;
+
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: -1px;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background-color: $primary-color;
+          transform: scaleX(0);
+          transition: transform 0.3s ease;
+        }
+
+        &:hover {
+          color: $primary-color;
+        }
+
+        &.active {
+          color: $primary-color;
+
+          &:after {
+            transform: scaleX(1);
+          }
+        }
+      }
+    }
+
+    .tabs-content {
+      .tab-panel {
+        display: none;
+
+        &.active {
+          display: block;
+        }
+      }
+    }
+  }
+
+  // Grid de fórmulas
+  .formulas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  // Tarjeta de fórmula
+  .formula-card {
+    grid-column: span 2;
+
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .formula-header {
+      padding: 20px;
+      background: linear-gradient(to right, rgba($primary-color, 0.05), rgba($primary-color, 0.1));
+      position: relative;
+
+      h3 {
+        color: $primary-color;
+        font-size: 18px;
+        font-weight: 700;
+        margin: 10px 0 5px;
+      }
+
+      .formula-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 4px;
+      }
+    }
+
+    .formula-body {
+      padding: 20px;
+      flex-grow: 1;
+
+      p {
+        color: #4a5568;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+      }
+
+      .formula-math {
+        .formula-step {
+          margin-bottom: 15px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .step-label {
+            display: block;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 14px;
+            margin-bottom: 5px;
+          }
+
+          .math-equation {
+            background-color: #f7fafc;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid $primary-color;
+
+            span {
+              font-family: 'Courier New', monospace;
+              font-size: 14px;
+              color: #2d3748;
+            }
+          }
+
+          .formula-note {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 5px;
+            font-style: italic;
+          }
+        }
+      }
+    }
+
+    .formula-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #f0f0f0;
+
+      .formula-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .tag {
+          display: inline-block;
+          padding: 4px 8px;
+          background-color: #f0f0f0;
+          color: #4a5568;
+          font-size: 12px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  #navy-tape-card {
+    grid-column: span 2;
+  }
+  #lee-card {
+    grid-column: span 2;
+  }
+
+  @media (min-width: 768px) {
+    #weltman-card,
+    #rocha-card,
+    #martin-card {
+      grid-column: span 2;
+    }
+
+    #navy-tape-card,
+    #lee-card {
+      grid-column: 2/4;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    #weltman-card,
+    #rocha-card {
+      grid-column: 2/4;
+    }
+
+    #navy-tape-card,
+    #martin-card {
+      grid-column: 4/6;
+    }
+
+    #lee-card {
+      grid-column: 3/5;
+    }
+  }
+}

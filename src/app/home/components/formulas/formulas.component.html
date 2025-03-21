@@ -1,0 +1,291 @@
+<div class="container">
+  <div class="section-header">
+    <h2>Fórmulas Antropométricas</h2>
+    <p>Utilizamos las fórmulas más precisas y validadas científicamente para calcular la composición corporal de tus
+      clientes</p>
+  </div>
+
+  <div class="formulas-tabs">
+    <div class="tabs-header">
+      <button class="tab-button active" data-target="masa-grasa">Masa Grasa</button>
+      <button class="tab-button" data-target="masa-muscular">Masa Muscular</button>
+      <button class="tab-button" data-target="masa-osea">Masa Ósea</button>
+    </div>
+
+    <div class="tabs-content">
+      <!-- Masa Grasa -->
+      <div class="tab-panel active" id="masa-grasa">
+        <div class="formulas-grid">
+          <!-- Durnin-Womersley + Siri -->
+          <div class="formula-card">
+            <div class="formula-header">
+              <h3>Durnin-Womersley + Siri</h3>
+              <span class="formula-badge">Clásico</span>
+            </div>
+            <div class="formula-body">
+              <p>Método ampliamente utilizado en cineantropometría, válido para toda la población. Utiliza 4 pliegues
+                para el cálculo.</p>
+              <div class="formula-math">
+                <div class="formula-step">
+                  <span class="step-label">Paso 1: Densidad corporal</span>
+                  <div class="math-equation">
+                    <span>D = c - [m × log<sub>10</sub>(Σ 4 pliegues)]</span>
+                  </div>
+                  <div class="formula-note">
+                    Donde Σ 4 pliegues = tríceps + bíceps + subescapular + cresta ilíaca
+                  </div>
+                </div>
+                <div class="formula-step">
+                  <span class="step-label">Paso 2: Porcentaje de grasa (Siri)</span>
+                  <div class="math-equation">
+                    <span>% Grasa = [(4.95 / D) - 4.5] × 100</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formula-footer">
+              <div class="formula-tags">
+                <span class="tag">4 pliegues</span>
+                <span class="tag">Precisión moderada</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jackson-Pollock 7 + Siri -->
+          <div class="formula-card">
+            <div class="formula-header">
+              <h3>Jackson-Pollock 7 + Siri</h3>
+              <span class="formula-badge">Deportistas</span>
+            </div>
+            <div class="formula-body">
+              <p>Método diseñado para deportistas y personas con una cantidad reducida de grasa corporal. Ofrece mayor
+                precisión al incluir más puntos de medición.</p>
+              <div class="formula-math">
+                <div class="formula-step">
+                  <span class="step-label">Paso 1: Densidad corporal</span>
+                  <div class="math-equation">
+                    <span>D = 1.112 - 0.00043499(Σ 7 pliegues) + 0.00000055(Σ 7 pliegues)<sup>2</sup> -
+                      0.00028826(Edad)</span>
+                  </div>
+                  <div class="formula-note">
+                    Donde Σ 7 pliegues = pectoral + axilar + tríceps + subescapular + abdominal + suprailiaco + muslo
+                  </div>
+                </div>
+                <div class="formula-step">
+                  <span class="step-label">Paso 2: Porcentaje de grasa (Siri)</span>
+                  <div class="math-equation">
+                    <span>% Grasa = [(4.95 / D) - 4.5] × 100</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formula-footer">
+              <div class="formula-tags">
+                <span class="tag">7 pliegues</span>
+                <span class="tag">Alta precisión</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Jackson-Pollock 3 + Siri -->
+          <div class="formula-card">
+            <div class="formula-header">
+              <h3>Jackson-Pollock 3 + Siri</h3>
+              <span class="formula-badge">Simplificado</span>
+            </div>
+            <div class="formula-body">
+              <p>Variante simplificada del método Jackson-Pollock 7, con una menor cantidad de pliegues, pero
+                conservando una buena precisión.</p>
+              <div class="formula-math">
+                <div class="formula-step">
+                  <span class="step-label">Paso 1: Densidad corporal</span>
+                  <div class="math-equation">
+                    <span>D = 1.10938 - 0.0008267(Σ 3 pliegues) + 0.0000016(Σ 3 pliegues)<sup>2</sup> -
+                      0.0002574(Edad)</span>
+                  </div>
+                  <div class="formula-note">
+                    Donde Σ 3 pliegues = pectoral + abdominal + muslo
+                  </div>
+                </div>
+                <div class="formula-step">
+                  <span class="step-label">Paso 2: Porcentaje de grasa (Siri)</span>
+                  <div class="math-equation">
+                    <span>% Grasa = [(4.95 / D) - 4.5] × 100</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formula-footer">
+              <div class="formula-tags">
+                <span class="tag">3 pliegues</span>
+                <span class="tag">Rápido</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weltman -->
+          <div id="weltman-card" class="formula-card">
+            <div class="formula-header">
+              <h3>Weltman</h3>
+              <span class="formula-badge">Perímetros</span>
+            </div>
+            <div class="formula-body">
+              <p>Método basado en el perímetro de la cintura para estimar la grasa visceral. Es útil para evaluar el
+                riesgo metabólico y la salud cardiovascular.</p>
+              <div class="formula-math">
+                <div class="formula-step">
+                  <span class="step-label">Hombres</span>
+                  <div class="math-equation">
+                    <span>% Grasa = 0.31457(Cintura) - 0.10969(Peso) + 10.8336</span>
+                  </div>
+                </div>
+                <div class="formula-step">
+                  <span class="step-label">Mujeres</span>
+                  <div class="math-equation">
+                    <span>% Grasa = 0.11077(Cintura) - 0.17666(Talla) + 0.14354(Peso) + 51.03301</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formula-footer">
+              <div class="formula-tags">
+                <span class="tag">Sin pliegues</span>
+                <span class="tag">Riesgo metabólico</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navy Tape -->
+          <div id="navy-tape-card" class="formula-card">
+            <div class="formula-header">
+              <h3>Navy Tape</h3>
+              <span class="formula-badge">Militar</span>
+            </div>
+            <div class="formula-body">
+              <p>Método utilizado por el ejército de EE.UU. para evaluar la composición corporal mediante mediciones
+                de perímetros corporales.</p>
+              <div class="formula-math">
+                <div class="formula-step">
+                  <span class="step-label">Hombres</span>
+                  <div class="math-equation">
+                    <span>% Grasa = 86.010 × log<sub>10</sub>(Cintura - Cuello) - 70.041 × log<sub>10</sub>(Talla) +
+                      36.76</span>
+                  </div>
+                </div>
+                <div class="formula-step">
+                  <span class="step-label">Mujeres</span>
+                  <div class="math-equation">
+                    <span>% Grasa = 163.205 × log<sub>10</sub>(Cintura + Cadera - Cuello) - 97.684 ×
+                      log<sub>10</sub>(Talla) - 78.387</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formula-footer">
+              <div class="formula-tags">
+                <span class="tag">Perímetros</span>
+                <span class="tag">Evaluación rápida</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Masa Muscular -->
+      <div class="tab-panel" id="masa-muscular">
+        <div class="formulas-grid">
+          <!-- Lee -->
+          <div id="lee-card" class="formula-card">
+            <div class="formula-header">
+              <h3>Lee</h3>
+              <span class="formula-badge">Estándar</span>
+            </div>
+            <div class="formula-body">
+              <p>Método validado para estimar la masa muscular esquelética total a partir de medidas antropométricas
+                simples.</p>
+              <div class="formula-math">
+                <div class="formula-step">
+                  <span class="step-label">Masa Muscular Esquelética (MME)</span>
+                  <div class="math-equation">
+                    <span>MME (kg) = 0.244 × PC + 7.8 × Talla + 6.6 × Sexo - 0.098 × Edad + Etnia - 3.3</span>
+                  </div>
+                  <div class="formula-note">
+                    Donde: PC = Peso corporal (kg), Talla (m), Sexo (1=hombre, 0=mujer), Etnia (0=caucásico,
+                    1.4=asiático, -1.2=afroamericano)
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formula-footer">
+              <div class="formula-tags">
+                <span class="tag">Validado</span>
+                <span class="tag">Medidas simples</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Masa Ósea -->
+      <div class="tab-panel" id="masa-osea">
+        <div class="formulas-grid">
+          <!-- Rocha -->
+          <div id="rocha-card" class="formula-card">
+            <div class="formula-header">
+              <h3>Rocha</h3>
+              <span class="formula-badge">Clásico</span>
+            </div>
+            <div class="formula-body">
+              <p>Método para estimar la masa ósea basado en el peso corporal y la talla.</p>
+              <div class="formula-math">
+                <div class="formula-step">
+                  <span class="step-label">Masa Ósea</span>
+                  <div class="math-equation">
+                    <span>MO (kg) = 3.02 × (Talla<sup>2</sup> × DM × DF × 400)<sup>0.712</sup></span>
+                  </div>
+                  <div class="formula-note">
+                    Donde: Talla (m), DM = Diámetro de muñeca (m), DF = Diámetro del fémur (m)
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formula-footer">
+              <div class="formula-tags">
+                <span class="tag">Diámetros óseos</span>
+                <span class="tag">Antropometría</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Martin -->
+          <div id="martin-card" class="formula-card">
+            <div class="formula-header">
+              <h3>Martin</h3>
+              <span class="formula-badge">Alternativo</span>
+            </div>
+            <div class="formula-body">
+              <p>Método alternativo para el cálculo de la masa ósea que utiliza múltiples diámetros óseos.</p>
+              <div class="formula-math">
+                <div class="formula-step">
+                  <span class="step-label">Masa Ósea</span>
+                  <div class="math-equation">
+                    <span>MO (kg) = 0.00006 × Talla × (Suma diámetros)<sup>2</sup></span>
+                  </div>
+                  <div class="formula-note">
+                    Donde: Talla (cm), Suma diámetros = biacromial + biiliocrestal + fémur + muñeca (cm)
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="formula-footer">
+              <div class="formula-tags">
+                <span class="tag">Múltiples diámetros</span>
+                <span class="tag">Precisión alta</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
