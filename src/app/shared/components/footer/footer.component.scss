@@ -2,21 +2,276 @@
 
 :host {
   width: 100%;
+  border-top: 1px solid $primary-color;
 }
 
-footer {
-  box-sizing: border-box;
-  border-top: 1px solid $primary-color;
+.app-footer {
+  position: relative;
+  background-color: #f8fafa;
+  color: #4a5568;
+  font-size: 14px;
 
-  height: 60px;
-  background-color: $white;
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .footer-content {
+    padding: 60px 0 40px;
+  }
 
-  h4 {
-    font-size: 20px;
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 992px) {
+      grid-template-columns: 2fr 1fr 1fr 2fr;
+    }
+  }
+
+  .footer-column {
+    h4 {
+      color: $primary-color;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      position: relative;
+      width: min-content;
+      white-space: nowrap;
+
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background-color: rgba($primary-color, 0.3);
+        transition: 300ms;
+      }
+
+      &:hover {
+        &:after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .brand-column {
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .logo-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+
+        .icon {
+          width: 24px;
+          height: 24px;
+          color: white;
+        }
+      }
+
+      .logo-text {
+        h3 {
+          color: $primary-color;
+          font-size: 20px;
+          font-weight: 700;
+          margin: 0;
+        }
+
+        p {
+          color: #718096;
+          font-size: 12px;
+          margin: 0;
+        }
+      }
+    }
+
+    .brand-description {
+      color: #718096;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+
+      .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background-color: #f0f0f0;
+        border-radius: 50%;
+        color: #718096;
+        text-decoration: none;
+        font-size: 18px;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: $background-color;
+          color: white;
+          transform: translateY(-3px);
+        }
+      }
+    }
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
     margin: 0;
+
+    li {
+      margin-bottom: 12px;
+
+      a {
+        color: #718096;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        display: inline-block;
+        position: relative;
+
+        &:before {
+          content: '›';
+          margin-right: 6px;
+          color: $primary-color;
+          opacity: 0;
+          transform: translateX(-5px);
+          display: inline-block;
+          transition: all 0.3s ease;
+        }
+
+        &:hover {
+          color: $primary-color;
+
+          &:before {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      }
+    }
+  }
+
+  .newsletter-text {
+    color: #718096;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .newsletter-form {
+    margin-bottom: 20px;
+
+    .form-group {
+      display: flex;
+
+      .newsletter-input {
+        flex: 1;
+        height: 42px;
+        padding: 0 15px;
+        border: 1px solid #e2e8f0;
+        border-radius: 4px 0 0 4px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          border-color: $primary-color;
+        }
+      }
+
+      .newsletter-button {
+        height: 42px;
+        padding: 0 15px;
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: darken($primary-color, 10%);
+        }
+      }
+    }
+  }
+
+  .contact-info {
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 10px;
+
+      i {
+        color: $primary-color;
+      }
+
+      span {
+        color: #718096;
+      }
+    }
+  }
+
+  .footer-bottom {
+    background-color: #f0f5f5;
+    padding: 20px 0;
+    border-top: 1px solid rgba($primary-color, 0.1);
+
+    .footer-bottom-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      @media (min-width: 768px) {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .copyright {
+        color: #718096;
+        margin: 0 0 10px 0;
+
+        @media (min-width: 768px) {
+          margin: 0;
+        }
+      }
+
+      .footer-bottom-links {
+        display: flex;
+        gap: 20px;
+
+        a {
+          color: #718096;
+          text-decoration: none;
+          font-size: 13px;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+      }
+    }
   }
 }
