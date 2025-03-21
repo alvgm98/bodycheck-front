@@ -60,6 +60,7 @@ export class HeaderComponent {
     if (this.showLogin) {
       this.closeLogin();
     }
+    this.scrollToTop.emit();
     this.authService.showRegister.set(true);
   }
   toggleShowSettings() {
