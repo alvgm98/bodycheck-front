@@ -79,11 +79,21 @@
     }
 
     .tabs-content {
+      position: relative;
+      overflow: hidden; // Importante para contener las animaciones
+      min-height: 400px; // Altura mínima para evitar saltos
+
       .tab-panel {
         display: none;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        will-change: transform; // Optimización para animaciones
 
         &.active {
           display: block;
+          position: relative; // Restablecer posición para el panel activo
         }
       }
     }
@@ -117,6 +127,17 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+
+    // Añadir animación de entrada para las tarjetas
+    animation: card-fade-in 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
 
     &:hover {
       transform: translateY(-5px);
@@ -253,3 +274,16 @@
     }
   }
 }
+
+// Keyframes para la animación de entrada de las tarjetas
+@keyframes card-fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
