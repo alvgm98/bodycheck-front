@@ -4,11 +4,12 @@ import { BenefitsComponent } from './components/benefits/benefits.component';
 import { WaveDividerComponent } from './components/wave-divider/wave-divider.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { FormulasComponent } from './components/formulas/formulas.component';
+import { MacrosComponent } from './components/macros/macros.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeroComponent, WaveDividerComponent, BenefitsComponent, FormulasComponent, FooterComponent],
+  imports: [HeroComponent, WaveDividerComponent, BenefitsComponent, FormulasComponent, MacrosComponent, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

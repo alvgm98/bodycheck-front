@@ -1,0 +1,378 @@
+@import 'colors';
+
+:host {
+  position: relative;
+  width: 100%;
+  padding: 100px 0;
+  // background-color: #f0f9f8;
+  background: linear-gradient(to bottom, $background-color, #f0faf8 43%);
+  overflow: hidden;
+
+  .container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  // Encabezado de sección
+  .section-header {
+    text-align: center;
+    margin-bottom: 80px;
+
+    h2 {
+      color: $primary-color;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #4a5568;
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+
+  // Introducción a los macros
+  .macros-intro {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    gap: 50px;
+
+    @media (min-width: 1349px) {
+      gap: 150px;
+    }
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .intro-text {
+      flex: 1;
+
+      h3 {
+        color: $primary-color;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      p {
+        color: #4a5568;
+        font-size: 16px;
+        line-height: 1.6;
+        text-align: justify;
+      }
+    }
+
+    .macros-chart {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .chart-container {
+        display: flex;
+        width: 100%;
+        height: 60px;
+        background-color: transparent;
+
+        .chart-segment {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          transition: all 0.3s ease;
+
+          &:hover {
+            transform: translateY(-5px);
+          }
+
+          span {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: white;
+          }
+
+          .percentage {
+            font-size: 18px;
+            color: white;
+          }
+
+          &.protein {
+            border-radius: 10px 0 0 10px;
+            background-color: #e53e3e;
+            width: 25%;
+          }
+
+          &.carbs {
+            background-color: #38a169;
+            width: 45%;
+          }
+
+          &.fats {
+            border-radius: 0 10px 10px 0;
+            background-color: #3182ce;
+            width: 30%;
+          }
+        }
+      }
+
+      .chart-caption {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #718096;
+        font-style: italic;
+      }
+    }
+  }
+
+  // Grid de macros
+  .macros-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+
+    @media (min-width: 917px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  // Tarjeta de macro
+  .macro-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .macro-header {
+      padding: 20px;
+      background: linear-gradient(to right, rgba($primary-color, 0.05), rgba($primary-color, 0.1));
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .macro-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 18px;
+        margin-right: 15px;
+
+        &.protein-icon {
+          background-color: rgba(#e53e3e, 0.2);
+          color: #e53e3e;
+        }
+
+        &.carbs-icon {
+          background-color: rgba(#38a169, 0.2);
+          color: #38a169;
+        }
+
+        &.fats-icon {
+          background-color: rgba(#3182ce, 0.2);
+          color: #3182ce;
+        }
+      }
+
+      h3 {
+        color: $primary-color;
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .macro-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        background-color: rgba($primary-color, 0.1);
+        color: $primary-color;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 4px;
+        margin-left: auto;
+      }
+    }
+
+    .macro-body {
+      padding: 20px;
+      flex-grow: 1;
+
+      p {
+        color: #4a5568;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+      }
+
+      .formula-math {
+        .formula-step {
+          margin-bottom: 15px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          .step-label {
+            display: block;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 14px;
+            margin-bottom: 5px;
+          }
+
+          .math-equation {
+            background-color: #f7fafc;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 3px solid $primary-color;
+
+            span {
+              font-family: 'Courier New', monospace;
+              font-size: 14px;
+              color: #2d3748;
+              display: block;
+            }
+          }
+
+          .formula-note {
+            font-size: 12px;
+            color: #718096;
+            margin-top: 5px;
+            font-style: italic;
+          }
+        }
+      }
+    }
+
+    .macro-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #f0f0f0;
+
+      .macro-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .tag {
+          display: inline-block;
+          padding: 4px 8px;
+          background-color: #f0f0f0;
+          color: #4a5568;
+          font-size: 12px;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  // Sección de calculadora
+  .calculator-section {
+    margin-top: 50px;
+
+    h3 {
+      color: $primary-color;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+
+      @media (min-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .objective-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .objective-header {
+        padding: 15px 20px;
+        background: linear-gradient(to right, rgba($primary-color, 0.1), rgba($primary-color, 0.2));
+
+        h4 {
+          color: $primary-color;
+          font-size: 18px;
+          font-weight: 700;
+          margin: 0;
+        }
+      }
+
+      .objective-body {
+        padding: 20px;
+
+        .formula-math {
+          .formula-step {
+            margin-bottom: 15px;
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+
+            .step-label {
+              display: block;
+              font-weight: 600;
+              color: #2d3748;
+              font-size: 14px;
+              margin-bottom: 5px;
+            }
+
+            .math-equation {
+              background-color: #f7fafc;
+              padding: 12px;
+              border-radius: 6px;
+              border-left: 3px solid $primary-color;
+              margin-bottom: 8px;
+
+              span {
+                font-family: 'Courier New', monospace;
+                font-size: 14px;
+                color: #2d3748;
+                display: block;
+              }
+            }
+
+            .formula-note {
+              font-size: 12px;
+              color: #718096;
+              margin-top: 5px;
+              font-style: italic;
+            }
+          }
+        }
+      }
+    }
+  }
+}
