@@ -81,7 +81,7 @@
     .tabs-content {
       position: relative;
       overflow: hidden; // Importante para contener las animaciones
-      min-height: 400px; // Altura mínima para evitar saltos
+      min-height: 500px; // Altura mínima para evitar saltos
 
       .tab-panel {
         display: none;
@@ -133,6 +133,7 @@
     opacity: 0;
     transform: translateY(20px);
 
+    /* Añade una animacion de retardo a las cards cada vez mayor */
     @for $i from 1 through 10 {
       &:nth-child(#{$i}) {
         animation-delay: #{$i * 0.1}s;
