@@ -38,9 +38,8 @@
       box-sizing: border-box;
       position: relative;
       border-bottom: 1px solid $primary-color;
-      padding-inline: 40px;
-      height: 180px;
-      max-height: 180px;
+      padding: 40px;
+      min-height: 200px;
 
       display: flex;
       flex-direction: column;
@@ -70,6 +69,7 @@
     }
 
     .image-container {
+      height: 100%;
       background: linear-gradient(to bottom, $background-color, #f0faf8);
       padding: 20px;
       display: flex;
@@ -110,50 +110,33 @@
   }
 
   #hero-card {
-    grid-column: 1 / -1;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-bottom: 40px;
 
     .content {
       border: 0;
+      padding-top: 50px;
+      width: 40%;
+      text-align: center;
+
+      h3 {
+        font-size: 28px;
+      }
     }
 
     .image-container {
       background: linear-gradient(to right, $background-color, #f0faf8);
-    }
-
-    @media (min-width: 768px) {
-      flex-direction: row;
-
-      .content {
-        padding-top: 50px;
-        width: 40%;
-        text-align: center;
-      }
-
-      .image-container {
-        width: 60%;
-      }
-    }
-
-    .content {
-      h3 {
-        font-size: 28px;
-      }
+      width: 60%;
     }
   }
 
   // Grid de características
   .features-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 40px;
     margin-bottom: 40px;
-
-    @media (min-width: 768px) {
-      grid-template-columns: 1fr 1fr;
-    }
 
     .feature-card {
       display: flex;
@@ -167,23 +150,49 @@
   }
 }
 
-// Responsive para pantallas pequeñas
 @media (max-width: 767px) {
-  article {
-    .content {
-      padding: 20px;
+  :host {
+    padding-block: 150px;
 
-      h3 {
-        font-size: 20px;
+    article {
+      .content {
+        padding: 25px;
+        min-height: 220px;
+
+        h3 {
+          font-size: 20px;
+        }
+
+        i {
+          font-size: 22px;
+        }
+
+        p {
+          text-align: justify;
+        }
       }
     }
-  }
 
-  #hero-card {
-    .content {
-      h3 {
-        font-size: 24px;
+    #hero-card {
+      flex-direction: column;
+
+      .content {
+        width: 100%;
+        // margin-bottom: 20px;
+        border-bottom: 1px solid $primary-color;
+
+        h3 {
+          font-size: 24px;
+        }
       }
+
+      .image-container {
+        width: 100%;
+      }
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
     }
   }
 }

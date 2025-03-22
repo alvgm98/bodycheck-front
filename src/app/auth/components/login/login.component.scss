@@ -66,3 +66,25 @@
 .invalid-field {
   margin-bottom: -10px;
 }
+
+@media (width < 1240px) {
+  #login-modal {
+    left: 0;
+  }
+
+  .modal-corner {
+    left: 62%;
+  }
+}
+
+@media (width < 700px) {
+  #login-modal {
+    left: -180%;
+  }
+
+  .modal-corner {
+    left: 76%;
+    width: 45px;
+    height: 45px;
+  }
+}

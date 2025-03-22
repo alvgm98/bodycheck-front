@@ -4,7 +4,6 @@
   position: relative;
   width: 100%;
   padding: 100px 0;
-  // background-color: #f0f9f8;
   background: linear-gradient(to bottom, $background-color, #f0faf8 43%);
   overflow: hidden;
 
@@ -37,18 +36,10 @@
   // Introducción a los macros
   .macros-intro {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-bottom: 50px;
-    gap: 50px;
-
-    @media (min-width: 1349px) {
-      gap: 150px;
-    }
-
-    @media (min-width: 768px) {
-      flex-direction: row;
-      align-items: center;
-    }
+    gap: 150px;
+    align-items: center;
 
     .intro-text {
       flex: 1;
@@ -134,13 +125,9 @@
   // Grid de macros
   .macros-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     margin-bottom: 50px;
-
-    @media (min-width: 917px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
   }
 
   // Tarjeta de macro
@@ -298,12 +285,8 @@
 
     .calculator-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 30px;
-
-      @media (min-width: 768px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
 
     .objective-card {
@@ -372,6 +355,43 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+@media (width < 1349px) {
+  :host {
+    padding-top: 0;
+
+    .macros-intro {
+      gap: 50px;
+    }
+  }
+}
+
+@media (width < 917px) {
+  :host {
+    .macros-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (width < 768px) {
+  :host {
+    .macros-intro {
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .macros-chart {
+      width: 80dvw;
+    }
+
+    .calculator-section {
+      .calculator-grid {
+        grid-template-columns: 1fr;
       }
     }
   }

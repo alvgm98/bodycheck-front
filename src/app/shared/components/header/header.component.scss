@@ -90,17 +90,31 @@ header {
 }
 
 @media (width < 700px) {
+  header {
+    height: 60px;
+    justify-content: space-between;
+    padding-inline: 20px;
+  }
+
   .title {
     h2 {
       display: none;
     }
 
     img {
-      height: 50px;
+      height: 40px;
     }
   }
 
-  .auth .flat-button {
-    display: none;
+  .auth {
+    .flat-button {
+      display: none;
+    }
+
+    .stroked-button {
+      font-size: 14px;
+      height: 40px;
+      padding-inline: 10px;
+    }
   }
 }
