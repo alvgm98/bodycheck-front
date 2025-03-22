@@ -4,7 +4,7 @@ import { catchError, tap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import { AuthReponse } from '../models/auth-reponse';
 import { RegisterRequest } from '../models/register-request';
 

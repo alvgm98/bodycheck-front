@@ -1,5 +1,5 @@
 import { HttpInterceptorFn } from '@angular/common/http';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { inject } from '@angular/core';
 

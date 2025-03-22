@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import { tap } from 'rxjs';
 import { DateUtilService } from './util/date-util.service';
 import { Customer, CustomerDetailed } from '../models/customer';
