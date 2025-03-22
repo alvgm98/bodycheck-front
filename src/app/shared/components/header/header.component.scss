@@ -74,6 +74,7 @@ header {
 
 .header-settings-x {
   transform: translateX(6px);
+
   span:nth-child(1) {
     transform: rotateZ(35deg) translateY(11px);
   }
@@ -85,5 +86,21 @@ header {
   span:nth-child(2) {
     transform: translateX(25dvw) !important;
     visibility: hidden;
+  }
+}
+
+@media (width < 700px) {
+  .title {
+    h2 {
+      display: none;
+    }
+
+    img {
+      height: 50px;
+    }
+  }
+
+  .auth .flat-button {
+    display: none;
   }
 }

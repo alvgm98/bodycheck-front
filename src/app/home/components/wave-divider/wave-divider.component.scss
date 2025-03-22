@@ -96,3 +96,9 @@
     transform: translateX(0);
   }
 }
+
+@media (width < 800px) {
+  .waves {
+    width: 200%;
+  }
+}
