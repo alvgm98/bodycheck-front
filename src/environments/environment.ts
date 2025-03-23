@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env['APP_API_BASE_URL'];
+const API_BASE_URL = 'https://agile-fulfillment-production.up.railway.app/';
 
 export const environment = {
   production: true,
