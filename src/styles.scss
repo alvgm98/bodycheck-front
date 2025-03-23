@@ -340,6 +340,8 @@ input[type=number] {
 
 .invalid-field {
   margin-top: 5px;
+  font-size: 13.28px;
+  font-weight: bold;
   color: $error-color;
 }
 
@@ -486,6 +488,10 @@ input[type=number] {
 
     display: grid;
     gap: 40px;
+
+    .invalid-field {
+      margin-bottom: -17px;
+    }
 
     #datepicker span {
       font-size: 15px !important;

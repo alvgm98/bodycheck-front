@@ -3,7 +3,7 @@
   <h3>Registro</h3>
   <!-- <p>Crear una nueva cuenta</p> -->
   <form [formGroup]="registerForm" (submit)="register()">
-    <div class="form-row">
+    <div class="form-row" id="name">
       <!-- First Name -->
       <div class="input-border-group">
         <input formControlName="firstName" placeholder=" " type="text" />
@@ -62,6 +62,8 @@
       @if (password.invalid && (password.dirty || password.touched)) {
         @if (password.errors?.['required']) {
           <div class="invalid-field">Introduce la contraseña.</div>
+        } @else if (password.errors != null) {
+          <div class="invalid-field insecure-password-field">Contraseña Insegura</div>
         }
       }
     </div>
