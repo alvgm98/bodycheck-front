@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://13.60.81.49/';
+const API_BASE_URL = 'https://api.bodycheck.es/';
 
 export const environment = {
   production: true,
