@@ -38,12 +38,7 @@
   }
 
   .short-reason {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    margin: 0;
-    font-size: 14px;
+    display: none;
   }
 
   .phone {
