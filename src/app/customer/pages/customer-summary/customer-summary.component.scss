@@ -76,3 +76,18 @@
   grid-area: measurements;
   overflow: hidden;
 }
+
+@media (width < 1550px) {
+  :host {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "card"
+      "appointments"
+      "measurements";
+    gap: 40px;
+
+    article {
+      min-height: 400px;
+    }
+  }
+}
