@@ -48,3 +48,13 @@ h2 {
     font-size: 20px
   }
 }
+
+
+@media (width < 1650px) {
+  section {
+    display: block;
+    h2 {
+      margin-bottom: 20px;
+    }
+  }
+}

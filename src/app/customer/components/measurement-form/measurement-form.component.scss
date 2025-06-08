@@ -78,3 +78,19 @@ form {
 mat-spinner {
   height: 45px !important;
 }
+
+@media (width < 1350px) {
+  .main-data {
+    flex-direction: column;
+    gap: 20px;
+
+    .col {
+      width: 100%;
+    }
+  }
+
+  #mediciones {
+    flex-direction: column;
+  }
+
+}
