@@ -63,13 +63,17 @@ app-root {
 main {
   flex: 1;
   margin-top: 80px;
+
+  @media (width < 700px) {
+    margin-top: 60px;
+  }
+
   box-sizing: border-box;
   width: 100%;
 
   display: flex;
   justify-content: center;
 }
-
 /********** SCROLL BAR **********/
 ::-webkit-scrollbar {
   width: 12px;

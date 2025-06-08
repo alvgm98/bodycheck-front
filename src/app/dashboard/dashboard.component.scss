@@ -8,3 +8,18 @@
   display: flex;
   justify-content: center;
 }
+
+@media (width < 1100px) {
+  :host {
+    min-height: calc(140dvh - 80px);
+    height: unset;
+    max-height: unset;
+    flex-direction: column;
+  }
+}
+
+@media (width < 700px) {
+  :host {
+    min-height: calc(200dvh - 60px);
+  }
+}
